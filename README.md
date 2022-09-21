@@ -2,6 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+Add a .env.local file with a single var. EG:
+NEXT_PUBLIC_ALCHEMY_HTTPS_KEY=https://eth-goerli.g.alchemy.com/v2/SOMESTRINGOFCHARS
+
 First, run the development server:
 
 ```bash
