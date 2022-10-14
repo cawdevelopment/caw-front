@@ -1,0 +1,117 @@
+{
+  "demo": {
+    "title": "English",
+    "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+  },
+  "prepos": {
+    "by": "por",
+    "in": "en",
+    "on": "en",
+    "at": "en",
+    "to": "para",
+    "from": "de",
+    "with": "con",
+    "for": "para"
+  },
+  "pronous": {
+    "i": "yo",
+    "you": "tú",
+    "he": "él",
+    "she": "ella",
+    "it": "eso",
+    "we": "nosotros",
+    "they": "ellos"
+  },
+  "verbs": {
+    "build": "construir",
+    "create": "crear",
+    "built": "construido",
+    "read": "leer",
+    "explore": "explorar",
+    "find_out": "descubrir",
+    "mint": "crear"
+  },
+  "buttons": {
+    "go_home": "Inicio",
+    "btn_caw_tooltip": "Publica tu mensaje",
+    "btn_report": "Reportar",
+    "btn_delete": "Eliminar",
+    "btn_scan": "Escanear"
+  },
+  "labels": {
+    "more": "más",
+    "search_caw": "Buscar Caw",
+    "add_photo": "Añadir foto",
+    "add_gif": "Añadir gif",
+    "add_video": "Añadir video",
+    "add_link": "Añadir enlace principal",
+    "loading": "Cargando...",
+    "new_post_plh": "¿Qué estás pensando?",
+    "likes": "Me gusta",
+    "dislikes": "No me gusta",
+    "comments": "Comentarios",
+    "sharing": "Interesante y compartido",
+    "language": "Idioma",
+    "select_lang": "Selecciona tu idioma preferido",
+    "mode": "Modo",
+    "color_presets": "Tema",
+    "direction": "Dirección",
+    "layout": "Diseño",
+    "fullscreen": "Pantalla completa",
+    "exit_fullscreen": "Salir de pantalla completa",
+    "add_long_caw": "CAW largo"
+  },
+  "sidebar_menu": {
+    "home": "Inicio",
+    "explore": "Explorar",
+    "notifications": "Notificaciones",
+    "messages": "Mensajes",
+    "bookmarks": "Marcadores",
+    "lists": "Listas",
+    "profile": "Mi Perfil",
+    "more": "Más opciones",
+    "chakra_test": "Chakra UI"
+  },
+  "home": {
+    "page_title": "Cámara de compensación social descentralizada",
+    "decentralized": "Descentralizado",
+    "social": "Social",
+    "caw_is": "CAW ES",
+    "btn_mint": "Crea el tuyo",
+    "btn_mint_tooltip": "Acuñar un NTF es la nueva forma de entrar al nuevo y revolucionario mundo. ¡Únase a nosotros!",
+    "censorship_title": "Un protocolo resistente a la censura, distribuido por todo el mundo!",
+    "blockchain_title": "Tecnología Blockchain",
+    "blockchain_label": "Blockchain es una base de datos distribuida a tráves de una red de sistemas informáticos en todo el mundo. Ayuda a garantizar que ninguna entidad controle la base de datos.",
+    "ethereum_title": "Respaldado por Ethereum",
+    "ethereum_label": "Contrato construido sobre uno de los ecosistemas más innovadores y escalables del mundo.",
+    "community_title": "Impulsado por la comunidad",
+    "community_label": "El CAW es por diseño sin diseño, y corresponde a la CAWMmunidad dar forma al CAW.",
+    "social_eco": "Economía Social",
+    "social_eco_label_1": "Obtenga recompensas",
+    "social_eco_label_2": "al compartir y crear contenido.",
+    "social_eco_label_3": "Tecnología financiera basada en libros de contables distribuidos de forma segura.",
+    "social_eco_label_4": "Quemas activas y recompensas para todos los usuarios."
+  },
+  "maintenance": {
+    "title": "Sitio web actualmente en mantenimiento",
+    "description": "Estamos trabajando en el sitio web, por favor, regrese más tarde."
+  },
+  "500": {
+    "title": "Error interno del servidor",
+    "description": "Lo sentimos, algo salió mal. Por favor, inténtelo de nuevo más tarde."
+  },
+  "404": {
+    "title": "Página no encontrada",
+    "description": "Lo sentimos, la página que estás buscando no existe."
+  },
+  "app_home": {
+    "page_title": "Actividad de la Comunidad",
+    "wall_title": "Inicio"
+  },
+  "settings": {
+    "title": "Configuración",
+    "display": "Apariencia",
+    "display_description": "Personaliza la apariencia de visualización en tú perfil",
+    "language_description": "Idiomas que puedes usar"
+  }
+}

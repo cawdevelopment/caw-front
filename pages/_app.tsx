@@ -1,9 +1,11 @@
 import '../styles/globals.css'
+import '../locales/i18n';
 
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from 'react';
 import App, { AppProps, AppContext } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react'
+
 
 import theme from '../theme'
 import Head from "next/head";
@@ -29,6 +31,7 @@ export default function MyApp(props: MyAppProps) {
       </Head>
       <ChakraProvider
         theme={theme}
+        resetCSS
       >
         {/* This allows us to use diferent layouts for each type of pages (i.e dashboard, landing page, etc) */}
         {getLayout(<Component {...pageProps} />)}

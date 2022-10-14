@@ -6,7 +6,6 @@ const Wrapper = styled('header', {
         m: 5,
         lineHeight: 0,
         width: '100%',
-        position: 'absolute',
     }
 });
 

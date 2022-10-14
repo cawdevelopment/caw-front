@@ -17,8 +17,7 @@ const Logo = forwardRef<any, Props>(({ disabledLink = false, sx }, ref) => {
       sx={{
         cursor: 'pointer',
       }}
-    >
-    </Image>
+    />
   );
 
   if (disabledLink) {

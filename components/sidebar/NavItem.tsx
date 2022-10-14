@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Link, Text, useColorModeValue } from '@chakra-ui/react';
+import { Flex, FlexProps, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import Iconify from 'components/icons/Iconify';
 import { useRouter } from "next/router";
 
@@ -12,10 +12,12 @@ export function NavItem({ icon, link, name, ...rest }: NavItemProps) {
 
     const { pathname } = useRouter();
     const selected = pathname === link;
-    const bg = useColorModeValue('caw.100', 'caw.800');
+    const [ iconColor ] = useToken('colors', [ 'caw.600' ]);
+    const bg = useColorModeValue('cawAlpha.100', 'cawAlpha.300');
     const hoverBg = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
     const bgSel = useColorModeValue('caw.400', 'caw.900');
     const textColor = useColorModeValue('gray.700', 'gray.50');
+    const textColorSelected = useColorModeValue('caw.600', 'caw.800');
 
     return (
         <Link href={link} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
@@ -34,9 +36,9 @@ export function NavItem({ icon, link, name, ...rest }: NavItemProps) {
                 }}
                 {...rest}
             >
-                <Iconify icon={icon} width={24} height={24} />
+                <Iconify icon={icon} width={24} height={24} color={selected ? iconColor : undefined} />
                 <Text
-                    color={textColor}
+                    color={selected ? textColorSelected : textColor}
                     fontWeight={selected ? 'bold' : 'normal'}
                 >
                     {name}

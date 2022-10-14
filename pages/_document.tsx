@@ -24,7 +24,6 @@ export default class MyDocument extends Document {
                     />
                     <meta name="keywords" content="social,community,decentralized,ethereum,blockchain,web3,rewards" />
                     <meta name="author" content="Teh CAWMmunity" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 </Head>
                 <body>
                     {/* 👇 Here's the script */}

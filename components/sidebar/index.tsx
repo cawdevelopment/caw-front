@@ -8,18 +8,19 @@ export const DASHBOARD_WIDTH = 280;
 export default function SimpleSidebar({ children }: { children: ReactNode; }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const borderRightColor = useColorModeValue('gray.400', 'gray.700');
 
     return (
         <Box
             id="sidebar"
             minH="100vh"
-            bg={useColorModeValue('gray.100', 'gray.900')}
+            bg={useColorModeValue('gray.50', 'gray.900')}
         >
             <SidebarContent
                 id="sidebar-content"
                 onClose={() => onClose}
                 display={{ base: 'none', md: 'block' }}
-                borderRightColor={useColorModeValue('gray.400', 'gray.700')}
+                borderRightColor={borderRightColor}
                 borderRightStyle="dashed"
                 style={{ width: `${DASHBOARD_WIDTH}px` }}
             />

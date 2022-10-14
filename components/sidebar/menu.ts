@@ -1,4 +1,3 @@
-
 import { PATH_DASHBOARD } from 'routes/paths';
 
 export interface LinkItemProps {
