@@ -3,7 +3,7 @@ import { Box, Heading, HStack, Input, InputGroup, InputRightElement, StackDivide
 import { useTranslation } from "react-i18next";
 
 import PageWrapper, { Layout } from 'components/wrappers/Page';
-import WallPost from 'templates/wall';
+import WallPost from 'sections/wall';
 import Iconify from "components/icons/Iconify";
 import React from "react";
 

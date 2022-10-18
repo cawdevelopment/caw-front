@@ -1,4 +1,4 @@
-import { extendTheme } from '@chakra-ui/react'
+import { extendTheme, StyleFunctionProps } from '@chakra-ui/react'
 import { StyleConfig } from "@chakra-ui/theme-tools";
 import foundations from './foundations'
 
@@ -9,6 +9,7 @@ const config = {
   initialColorMode: 'light',
   cssVarPrefix: 'chakra',
   colorSchema: 'caw',
+  theme: 'caw'
 }
 
 export const alpha = (color: string, value: number) => {
@@ -39,6 +40,22 @@ const components: Record<string, StyleConfig> = {
     baseStyle: ({ colorMode }) => ({
       color: colorMode === "dark" ? "gray.50" : "gray.800",
     }),
+    variants: {
+      'with-shadow': {
+        bg: 'red.400',
+        boxShadow: '0 0 2px 2px #efdfde',
+      },
+      // 4. We can override existing variants
+      solid: (props: StyleFunctionProps) => ({
+        bg: props.colorMode === 'dark' ? 'red.300' : 'red.500',
+      }),
+      // 5. We can add responsive variants
+      sm: {
+        bg: 'teal.500',
+        fontSize: 'md',
+      },
+    },
+
   },
   // Textarea: {
   //   baseStyle: ({ colorMode }) => ({
@@ -98,7 +115,17 @@ const components: Record<string, StyleConfig> = {
     baseStyle: ({ colorMode, colorScheme }) => ({
       borderRadius: "md",
     }),
-  }
+  },
+  MenuList: {
+    baseStyle: ({ colorMode }) => ({
+      borderRadius: 10,
+    }),
+  },
+  MenuItem: {
+    baseStyle: ({ colorMode }) => ({
+      borderRadius: 10,
+    }),
+  },
 };
 
 export const theme = {

@@ -1,7 +1,7 @@
 import { Box, CloseButton, Flex, useColorModeValue, BoxProps } from '@chakra-ui/react';
 
 import Logo from 'components/Logo';
-import ColorModeToggle from "components/buttons/ToogleMode";
+import ColorModeToggle from "components/settings/ToogleMode";
 import { LinkItems } from "./menu";
 import { NavItem } from "./NavItem";
 

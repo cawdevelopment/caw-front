@@ -9,12 +9,13 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const borderRightColor = useColorModeValue('gray.400', 'gray.700');
+    const bg = useColorModeValue('gray.50', 'gray.900');
 
     return (
         <Box
             id="sidebar"
             minH="100vh"
-            bg={useColorModeValue('gray.50', 'gray.900')}
+            bg={bg}
         >
             <SidebarContent
                 id="sidebar-content"

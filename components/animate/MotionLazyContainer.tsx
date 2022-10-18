@@ -14,13 +14,4 @@ export default function MotionLazyContainer({ children }: Props) {
       {children}
     </LazyMotion>
   );
-
-  // return (
-  //   <Motion.div
-  //     initial={{ opacity: 1 }}
-  //     animate={{ opacity: 1 }}
-  //   >
-  //     {children}
-  //   </Motion.div>
-  // );
 }

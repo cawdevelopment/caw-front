@@ -2,10 +2,11 @@ import { ReactNode } from 'react';
 
 import DashboardLayout from './DashboardLayout';
 import LogoOnlyLayout from './LogoOnlyLayout';
+import LandinLayout from './LandingLayout';
 
 type Props = {
   children: ReactNode;
-  variant: 'dashboard' | 'logoOnly';
+  variant: 'dashboard' | 'logoOnly' | 'landing';
 };
 
 export default function Layout({ variant = 'dashboard', children }: Props) {
@@ -15,6 +16,14 @@ export default function Layout({ variant = 'dashboard', children }: Props) {
       <DashboardLayout>
         {children}
       </DashboardLayout>
+    );
+  }
+
+  if (variant === 'landing') {
+    return (
+      <LandinLayout>
+        {children}
+      </LandinLayout>
     );
   }
 

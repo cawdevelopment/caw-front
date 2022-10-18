@@ -1,5 +1,9 @@
 import { Colors } from '@chakra-ui/react'
 
+export function alpha(color: string, alpha: number) {
+	return `rgba(${color}, ${alpha})`
+}
+
 const colors: Colors = {
 	transparent: 'transparent',
 	current: 'currentColor',
@@ -232,6 +236,11 @@ const colors: Colors = {
 		700: '#d69c08',
 		800: '#be8a07',
 		900: '#8c6606',
+		lighter: '#FFF7CD',
+		light: '#FFE16A',
+		main: '#f7c034',
+		dark: '#B66816',
+		darker: '#793908',
 	},
 	cawAlpha: {
 		50: 'rgba(247, 192, 52, 0.04)',
