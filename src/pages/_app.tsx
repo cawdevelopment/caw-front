@@ -1,4 +1,5 @@
 import 'src/styles/globals.css'
+import "@rainbow-me/rainbowkit/styles.css";
 import '../locales/i18n';
 
 import { ReactElement, ReactNode } from 'react';
@@ -6,9 +7,32 @@ import App, { AppProps, AppContext } from 'next/app';
 import { NextPage } from "next";
 import Head from "next/head";
 import { ChakraProvider } from '@chakra-ui/react'
-import { SnackbarProvider } from 'notistack';
+
+//Web3
+import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
+import { chain, configureChains, createClient, WagmiConfig } from "wagmi";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
+
 
 import theme from '../theme'
+
+//* Web3 connector and layer
+const { chains, provider } = configureChains(
+  [ chain.goerli, chain.mainnet, chain.polygon, chain.optimism, chain.arbitrum ],
+  [ alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY }), publicProvider() ]
+);
+
+const { connectors } = getDefaultWallets({
+  appName: "Caw names",
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 
 
 type NextPageWithLayout = NextPage & {
@@ -33,10 +57,12 @@ export default function MyApp(props: MyAppProps) {
         theme={theme}
         resetCSS
       >
-        <SnackbarProvider maxSnack={3}>
-          {/* This allows us to use diferent layouts for each type of pages (i.e dashboard, landing page, etc) */}
-          {getLayout(<Component {...pageProps} />)}
-        </SnackbarProvider>
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            {/* This allows us to use diferent layouts for each type of pages (i.e dashboard, landing page, etc) */}
+            {getLayout(<Component {...pageProps} />)}
+          </RainbowKitProvider>
+        </WagmiConfig>
       </ChakraProvider>
     </>
   );

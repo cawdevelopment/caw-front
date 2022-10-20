@@ -3,6 +3,7 @@ import { chakra, Box, CloseButton, Flex, useColorModeValue, BoxProps, Spacer } f
 
 import Logo from 'src/components/Logo';
 import ColorModeToggle from "src/components/settings/ToogleMode";
+import ConnectWalletButton from "src/components/buttons/ConnectWalletButton";
 import { LinkItems } from "./menu";
 import { NavItem } from "./NavItem";
 import UserAccount from './NavbarAccount';
@@ -51,6 +52,10 @@ export function SidebarContent({ onClose, addUserAccount, ...rest }: SidebarProp
                     bottom={0}
                     textAlign="center"
                 >
+                    <ConnectWalletButton
+                        connectWalletPressedProp={false}
+                        walletAddressProp={''}
+                    />
                     <UserAccount isCollapse={false} />
                 </chakra.div>
             )}
