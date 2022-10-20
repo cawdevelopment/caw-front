@@ -1,11 +1,11 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-import Block from "src/components/Block";
-import SettingColorPresets from "src/components/settings/SettingColorPresets";
-import SettingDirection from "src/components/settings/SettingDirection";
-import SettingFullscreen from "src/components/settings/SettingFullscreen";
-import SettingMode from "src/components/settings/SettingMode";
+import Block from "components/Block";
+import { SettingMode } from "./SettingMode";
+import { SettingDirection } from "./SettingDirection";
+import { SettingColorPresets } from "./SettingColorPresets";
+import { SettingFullscreen } from "./SettingFullscreen";
 
 export default function DisplaySettings() {
     const { t } = useTranslation();
@@ -16,7 +16,7 @@ export default function DisplaySettings() {
         >
             <Stack
                 id="display-settings"
-                direction={{ xs: 'column', sm: 'row' }}
+                direction={{ base: 'column', sm: 'row' }}
                 justifyContent="space-around"
                 alignItems="baseline"
                 spacing={5}
@@ -24,29 +24,29 @@ export default function DisplaySettings() {
             >
                 <Stack spacing={1} sx={{ width: '-webkit-fill-available' }} >
                     <div>
-                        <Typography variant="subtitle2">
+                        <Text as="b">
                             {t('labels.mode')}
-                        </Typography>
+                        </Text>
                         <SettingMode />
                     </div>
                     <div>
-                        <Typography variant="subtitle2">
+                        <Text as="b">
                             {t('labels.direction')}
-                        </Typography>
+                        </Text>
                         <SettingDirection />
                     </div>
                 </Stack>
                 <Stack spacing={1} sx={{ width: '-webkit-fill-available' }} >
                     <div>
-                        <Typography variant="subtitle2">
+                        <Text as="b">
                             {t('labels.color_presets')}
-                        </Typography>
+                        </Text>
                         <SettingColorPresets />
                     </div>
                     <div>
-                        <Typography variant="subtitle2">
+                        <Text as="b">
                             {t('labels.layout')}
-                        </Typography>
+                        </Text>
                         <SettingFullscreen />
                     </div>
                 </Stack>

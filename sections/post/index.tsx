@@ -14,6 +14,7 @@ type Props = {
 
 export default function Post({ post }: Props) {
 
+    // const { enqueueSnackbar } = useSnackbar();
     const [ htLight, htDark ] = useToken('colors', [ 'caw.800', 'caw.600' ]);
     const [ mtLight, mtDark ] = useToken('colors', [ 'red.600', 'red.500' ]);
     const [ urlLight, urlDark ] = useToken('colors', [ 'blue.600', 'blue.500' ]);
@@ -21,7 +22,6 @@ export default function Post({ post }: Props) {
     const mtColor = useColorModeValue(mtLight, mtDark);
     const urlColor = useColorModeValue(urlLight, urlDark);
 
-    // const { enqueueSnackbar } = useSnackbar();
     const { id, content, likes, votes, commentsCount, transactionHash, date, author } = post;
 
     const handleHashTagClicked = useCallback((ht: string, type: TagType, element: any) => {

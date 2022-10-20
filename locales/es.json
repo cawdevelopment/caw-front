@@ -34,9 +34,11 @@
   "buttons": {
     "go_home": "Inicio",
     "btn_caw_tooltip": "Publica tu mensaje",
+    "btn_connect_wallet": "Conectar billetera",
     "btn_report": "Reportar",
     "btn_delete": "Eliminar",
-    "btn_scan": "Escanear"
+    "btn_scan": "Escanear",
+    "btn_access": "Acceder"
   },
   "labels": {
     "more": "más",
@@ -69,8 +71,7 @@
     "bookmarks": "Marcadores",
     "lists": "Listas",
     "profile": "Mi Perfil",
-    "more": "Más opciones",
-    "chakra_test": "Chakra UI"
+    "more": "Más opciones"
   },
   "home": {
     "page_title": "Cámara de compensación social descentralizada",
@@ -89,7 +90,7 @@
     "social_eco": "Economía Social",
     "social_eco_label_1": "Obtenga recompensas",
     "social_eco_label_2": "al compartir y crear contenido.",
-    "social_eco_label_3": "Tecnología financiera basada en libros de contables distribuidos de forma segura.",
+    "social_eco_label_3": "Tecnología financiera basada en libros contables distribuidos de forma segura.",
     "social_eco_label_4": "Quemas activas y recompensas para todos los usuarios."
   },
   "maintenance": {
@@ -113,5 +114,12 @@
     "display": "Apariencia",
     "display_description": "Personaliza la apariencia de visualización en tú perfil",
     "language_description": "Idiomas que puedes usar"
+  },
+  "access_page": {
+    "message": "Necesitas acuñar tu nombre de usuario como NFT antes unirte a la revolución."
+  },
+  "minting_page": {
+    "message": "Acuñar tu NFT y únete a la revolución.",
+    "already_minted": "¿Ya tienes un NFT?"
   }
 }

@@ -12,12 +12,12 @@ export function NavItem({ icon, link, name, ...rest }: NavItemProps) {
 
     const { pathname } = useRouter();
     const selected = pathname === link;
-    const [ iconColor ] = useToken('colors', [ 'caw.600' ]);
-    const bg = useColorModeValue('cawAlpha.100', 'cawAlpha.300');
+    const [ iconColor ] = useToken('colors', [ 'caw.600' ]);    
+    const bg = useColorModeValue('cawAlpha.400', 'cawAlpha.300');
     const hoverBg = useColorModeValue('blackAlpha.50', 'whiteAlpha.50');
     const bgSel = useColorModeValue('caw.400', 'caw.900');
     const textColor = useColorModeValue('gray.700', 'gray.50');
-    const textColorSelected = useColorModeValue('caw.600', 'caw.800');
+    const textColorSelected = useColorModeValue('gray.600', 'caw.800');
 
     return (
         <Link href={link} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>

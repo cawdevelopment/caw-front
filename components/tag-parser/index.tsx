@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { uuidv4 } from 'utils/uuidv4';
+import { uuidv4 } from 'utils/helper';
 import { parse, TagType, ActionTagEvent } from "./parser";
 
 export type { TagType, ActionTagEvent };

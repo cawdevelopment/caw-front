@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Divider, HStack, IconButton, Stack, Textarea, Tooltip, useColorModeValue, useToken } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, Tooltip, useColorModeValue, useToken } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-import MyAvatar from 'components/avatar/Avatar';
+import MyAvatar from 'components/avatar/MyAvatar';
 import CircularProgress from 'components/CircularProgress';
 import Iconify from 'components/icons/Iconify';
 
@@ -12,7 +12,7 @@ const defaultText = 'The next #censor would be whoever is looking at the text, s
 export default function NewPost() {
 
     const { t } = useTranslation();
-    const [ light, dark ] = useToken('colors', [ 'caw.400', 'caw.500' ]);
+    const [ light, dark ] = useToken('colors', [ 'gray.900', 'caw.500' ]);
     const iconColor = useColorModeValue(light, dark);
     const okColor = useColorModeValue('caw.500', 'caw.600');
     const warningColor = useColorModeValue('orange.500', 'orange.400');
@@ -27,10 +27,11 @@ export default function NewPost() {
 
 
     const progressColor = progress < 90 ? okColor : progress < 96 ? warningColor : progress < 100 ? errorColor : errorColor;
+
     return (
         <Box sx={{ m: 2, py: 2 }}>
             <Stack direction={{ xs: 'column', sm: 'row' }} gap={4}>
-                <MyAvatar />
+                <MyAvatar sx={{ display: { base: 'none', sm: 'block' } }} />
                 <Textarea
                     defaultValue={defaultText}
                     resize="none"
@@ -40,8 +41,22 @@ export default function NewPost() {
                     height={110}
                     onChange={(e) => setCharacters(e.target.value.length)}
                 />
-            </Stack>
-            <HStack alignItems="center" ml="14" mt={"2"} >
+            </Stack>            
+            <Progress
+                ml={0}
+                mt="2"
+                size="xs"
+                colorScheme="caw"
+                borderRadius="full"
+                display={{ base: 'flex', sm: 'none' }}
+                value={progress}
+            />
+            <HStack
+                alignItems="center"
+                ml={{ base: 0, sm: 14 }}
+                mt="2"
+                alignContent="space-between"
+            >
                 <Tooltip
                     hasArrow
                     label={t('labels.add_photo')}
@@ -79,11 +94,16 @@ export default function NewPost() {
                     </IconButton>
                 </Tooltip>
                 <Box sx={{ flexGrow: 1 }} />
+                <Stack
+                    direction={{ base: 'column', sm: 'row' }}
+                    alignItems={{ base: 'flex-start', sm: 'center' }}
+                >
                 <CircularProgress
                     capIsRound
                     color={progressColor}
                     value={progress}
-                    text={`${Math.round(progress || 0)}%`}
+                        text={`${Math.round(progress || 0)}%`}
+                        display={{ base: 'none', sm: 'flex' }}
                 />
                 <Tooltip
                     hasArrow
@@ -97,7 +117,8 @@ export default function NewPost() {
                     >
                         CAW
                     </Button>
-                </Tooltip>
+                    </Tooltip>
+                </Stack>
             </HStack>
             <Divider m={2} />
         </Box>

@@ -13,7 +13,7 @@ interface Props extends BoxProps {
 export default function Iconify({ icon, sx, rotate = 180, width = 24, height = 24, color, ...others }: Props) {
 
   const { colorMode } = useColorMode();
-  const [ light, dark ] = useToken('colors', [ 'gray.900', 'gray.200' ]);
+  const [ light, dark ] = useToken('colors', [ 'gray.600', 'gray.500' ]);
 
   return (
     <Box
@@ -24,7 +24,7 @@ export default function Iconify({ icon, sx, rotate = 180, width = 24, height = 2
         rotate={rotate}
         width={width}
         height={height}
-        color={color ? color : colorMode === 'light' ? light : dark}
+        color={color ? color : (colorMode === 'light' ? light : dark)}
       />
     </Box>
   );

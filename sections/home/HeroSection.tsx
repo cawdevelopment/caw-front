@@ -98,15 +98,23 @@ export default function HeroSection() {
                         <m.div variants={varFade().inRight}>
                             <HStack>
                                 <Spacer />
-                                <Image
-                                    src="assets/images/cawnet.png"
-                                    alt="caw-image"
-                                    opacity={mode.colorMode === 'dark' ? 0.5 : 1}
-                                    boxSize='400px'
-                                    objectFit='cover'
-                                    borderRadius={10}
-                                    display={{ base: 'none', md: 'flex' }}
-                                />
+                                <m.div
+                                    whileHover={{
+                                        scale: 1.5,
+                                        rotate: -90,
+                                        borderRadius: "100%"
+                                    }}
+                                >
+                                    <Image
+                                        src="assets/images/cawnet.png"
+                                        alt="caw-image"
+                                        opacity={mode.colorMode === 'dark' ? 0.4 : 1}
+                                        boxSize='400px'
+                                        objectFit='cover'
+                                        borderRadius="100%"
+                                        display={{ base: 'none', md: 'flex' }}
+                                    />
+                                </m.div>
                             </HStack>
                         </m.div>
                     </Box>

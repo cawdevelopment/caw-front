@@ -1,7 +1,11 @@
 import { Text, HStack, Button, Menu, MenuButton, MenuItem, MenuList, Image, useColorModeValue } from "@chakra-ui/react";
 import useLocales from "hooks/useLocale";
 
-export default function LanguagePopover() {
+type LanguagePopoverProps = {
+    bgIPopover?: string;
+}
+
+export default function LanguagePopover({ bgIPopover }: LanguagePopoverProps) {
 
     const { allLang, currentLang, onChangeLang } = useLocales();
     const bgMenuItemHover = useColorModeValue('gray.200', 'gray.600');
@@ -26,7 +30,7 @@ export default function LanguagePopover() {
             >
                 <Image src={currentLang.icon} alt={currentLang.label} />
             </MenuButton>
-            <MenuList borderRadius={10} bg={bgMenuList}>
+            <MenuList borderRadius={10} bg={bgIPopover || bgMenuList}>
                 {allLang.map((lang) => (
                     <MenuItem
                         key={lang.value}

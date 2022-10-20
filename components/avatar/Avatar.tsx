@@ -1,7 +1,7 @@
 import { Avatar, SystemStyleObject } from '@chakra-ui/react'
 import { MediaType } from 'types/community-feed'
 
-type Props = {
+export type Props = {
     size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' | '2xs'
     src?: string
     name?: string

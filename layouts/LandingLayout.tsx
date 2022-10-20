@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Box, Spacer, useColorModeValue, Tooltip, Flex, Center } from '@chakra-ui/react';
 import { useTranslation } from "react-i18next";
+import NextLink from 'next/link';
 
 import Logo from 'components/Logo';
 import Button from 'components/buttons/Button';
 import LanguagePopover from "components/settings/LanguagePopover";
 import ColorModeToggle from "components/settings/ToogleMode";
+import { PATH_AUTH } from "routes/paths";
 
 type Props = {
     children?: React.ReactNode;
@@ -61,12 +63,16 @@ export default function LandingLayout({ children }: Props) {
                             aria-label={t('home.btn_mint_tooltip')}
                         >
                             <div>
-                                <Button
-                                    aria-label="change language"
-                                    sx={{ textTransform: 'none' }}
-                                >
-                                    {t('home.btn_mint')}
-                                </Button>
+                                <NextLink href={PATH_AUTH.mint} passHref>
+                                    <div>
+                                        <Button
+                                            aria-label="change language"
+                                            sx={{ textTransform: 'none' }}
+                                        >
+                                            {t('home.btn_mint')}
+                                        </Button>
+                                    </div>
+                                </NextLink>
                             </div>
                         </Tooltip>
                         <LanguagePopover />

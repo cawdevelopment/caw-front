@@ -14,9 +14,11 @@ export default function PoweredCardInfo({ icon, title, description, index }: Pro
     const mdSize = useToken('breakpoints', 'md');
     const [ isMd ] = useMediaQuery(`(min-width: ${mdSize})`)
     const iconColor = useColorModeValue('gray.900', 'gray.50');
-    const bgCardColor = useColorModeValue('white', 'gray.800');
+    const pairCardColor = useColorModeValue('white', 'gray.800');
+    const oddCardColor = useColorModeValue('gray.200', 'whiteAlpha.50');
     const titleColor = useColorModeValue('gray.700', 'gray.50');
     const subTitleColor = useColorModeValue('gray.600', 'gray.50');
+    const bgCardColor = index % 2 === 0 ? oddCardColor : pairCardColor;
 
     return (
         <Center py={isMd ? (index == 1 ? 12 : 24) : 6}>

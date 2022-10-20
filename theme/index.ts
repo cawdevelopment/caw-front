@@ -7,15 +7,15 @@ const direction = 'ltr'
 const config = {
   useSystemColorMode: true,
   initialColorMode: 'light',
-  cssVarPrefix: 'chakra',
+  cssVarPrefix: 'teh',
   colorSchema: 'caw',
   theme: 'caw'
 }
 
-export const alpha = (color: string, value: number) => {
-  const [ r, g, b ] = color.match(/\d+/g) || []
-  return `rgba(${r}, ${g}, ${b}, ${value})`
-}
+// export const alpha = (color: string, value: number) => {
+//   const [ r, g, b ] = color.match(/\d+/g) || []
+//   return `rgba(${r}, ${g}, ${b}, ${value})`
+// }
 
 const components: Record<string, StyleConfig> = {
   CustomBadge: {

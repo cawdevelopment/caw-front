@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import { Button, useColorModeValue, useToken } from '@chakra-ui/react';
 import { useTranslation } from "react-i18next";
 
 import Iconify from 'components/icons/Iconify';
@@ -13,6 +13,8 @@ export type Props = {
 export function PostMenu({ postId, txId, onDelete }: Props) {
 
     const { t } = useTranslation();
+    const [ light, dark ] = useToken('colors', [ 'gray.600', 'gray.300' ]);
+    const iconColor = useColorModeValue(light, dark);
 
     const handleReport = () => {
         console.log('report');
@@ -31,7 +33,7 @@ export function PostMenu({ postId, txId, onDelete }: Props) {
             <Button
                 w="194px"
                 variant="ghost"
-                leftIcon={<Iconify icon="eva:trash-fill" />}
+                leftIcon={<Iconify icon="eva:trash-fill" color={iconColor} />}
                 justifyContent="left"
                 fontWeight="normal"
                 fontSize="sm"
@@ -42,7 +44,7 @@ export function PostMenu({ postId, txId, onDelete }: Props) {
             <Button
                 w="194px"
                 variant="ghost"
-                leftIcon={<Iconify icon="ic:baseline-report" />}
+                leftIcon={<Iconify icon="ic:baseline-report" color={iconColor} />}
                 justifyContent="left"
                 fontWeight="normal"
                 fontSize="sm"
@@ -53,7 +55,7 @@ export function PostMenu({ postId, txId, onDelete }: Props) {
             <Button
                 w="194px"
                 variant="ghost"
-                leftIcon={<Iconify icon="simple-icons:ethereum" />}
+                leftIcon={<Iconify icon="simple-icons:ethereum" color={iconColor} />}
                 justifyContent="left"
                 fontWeight="normal"
                 fontSize="sm"

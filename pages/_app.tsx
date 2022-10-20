@@ -1,14 +1,15 @@
 import '../styles/globals.css'
 import '../locales/i18n';
 
-import { NextPage } from "next";
 import { ReactElement, ReactNode } from 'react';
 import App, { AppProps, AppContext } from 'next/app';
+import { NextPage } from "next";
+import Head from "next/head";
 import { ChakraProvider } from '@chakra-ui/react'
+import { SnackbarProvider } from 'notistack';
 
 
 import theme from '../theme'
-import Head from "next/head";
 
 
 type NextPageWithLayout = NextPage & {
@@ -33,8 +34,10 @@ export default function MyApp(props: MyAppProps) {
         theme={theme}
         resetCSS
       >
+        <SnackbarProvider maxSnack={3}>
         {/* This allows us to use diferent layouts for each type of pages (i.e dashboard, landing page, etc) */}
-        {getLayout(<Component {...pageProps} />)}
+          {getLayout(<Component {...pageProps} />)}
+        </SnackbarProvider>
       </ChakraProvider>
     </>
   );

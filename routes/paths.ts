@@ -10,8 +10,8 @@ const ROOTS_USER = '/user';
 
 export const PATH_AUTH = {
     root: ROOTS_AUTH,
-    login: path(ROOTS_AUTH, '/login'),
-    register: path(ROOTS_AUTH, '/register')
+    connect: path(ROOTS_AUTH, '/connect'),
+    mint: path(ROOTS_AUTH, '/mint')
 };
 
 export const PATH_PAGE = {

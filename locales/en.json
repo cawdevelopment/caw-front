@@ -32,11 +32,13 @@
     "mint": "mint"
   },
   "buttons": {
-    "go_home": "Go Home",
+    "go_home": "Home",
     "btn_caw_tooltip": "Post your message",
+    "btn_connect_wallet": "Connect Wallet",
     "btn_report": "Report",
     "btn_delete": "Delete",
-    "btn_scan": "Block scan"
+    "btn_scan": "Block scan",
+    "btn_access": "Access"
   },
   "labels": {
     "more": "more",
@@ -113,5 +115,12 @@
     "display": "Display",
     "display_description": "Customize the display of your account",
     "language_description": "Languages you may know"
+  },
+  "access_page": {
+    "message": "You need to mint your username as a NFT before joining the revolution."
+  },
+  "minting_page": {
+    "message": "Mint your username and join the revolution",
+    "already_minted": "Already have your?"
   }
 }

@@ -1,21 +1,26 @@
-import { Box, CloseButton, Flex, useColorModeValue, BoxProps } from '@chakra-ui/react';
+import { chakra, Box, CloseButton, Flex, useColorModeValue, BoxProps, Spacer } from '@chakra-ui/react';
 
 import Logo from 'components/Logo';
 import ColorModeToggle from "components/settings/ToogleMode";
 import { LinkItems } from "./menu";
 import { NavItem } from "./NavItem";
+import UserAccount from './NavbarAccount';
 
 export interface SidebarProps extends BoxProps {
     onClose: () => void;
+    addUserAccount: boolean;
 }
 
-export function SidebarContent({ onClose, ...rest }: SidebarProps) {
+export function SidebarContent({ onClose, addUserAccount, ...rest }: SidebarProps) {
+
+    const bg = useColorModeValue('white', 'gray.900');
+    const borderColor = useColorModeValue('gray.200', 'gray.700');
 
     return (
         <Box
-            bg={useColorModeValue('white', 'gray.900')}
+            bg={bg}
             borderRight="1px"
-            borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+            borderRightColor={borderColor}
             w={{ base: 'full', md: 60 }}
             pos="fixed"
             h="full"
@@ -23,6 +28,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
         >
             <Flex h="20" alignItems="center" mx="4" justifyContent="space-between">
                 <Logo disabledLink={false} />
+                <Spacer />
                 <ColorModeToggle />
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
@@ -34,6 +40,19 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                     link={link.link}
                 />
             ))}
+
+            {addUserAccount && (
+                <chakra.div
+                    position="fixed"
+                    width="inherit"
+                    left={0}
+                    bottom={0}
+                    textAlign="center"
+                >
+                    <UserAccount isCollapse={false} />
+                </chakra.div>
+            )}
         </Box>
+
     );
 }

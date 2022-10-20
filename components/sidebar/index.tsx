@@ -23,6 +23,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                 display={{ base: 'none', md: 'block' }}
                 borderRightColor={borderRightColor}
                 borderRightStyle="dashed"
+                addUserAccount={true}
                 style={{ width: `${DASHBOARD_WIDTH}px` }}
             />
             <Drawer
@@ -35,8 +36,8 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                 size="full"
             >
                 <DrawerContent>
-                    <SidebarContent onClose={onClose} />
-                </DrawerContent>
+                    <SidebarContent onClose={onClose} addUserAccount={true} />
+                </DrawerContent>               
             </Drawer>
 
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
@@ -46,7 +47,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                 pt={{ base: 16, md: 8 }}
                 p="4"
             >
-                {children}
+                {children}                
             </Box>
         </Box>
     );
