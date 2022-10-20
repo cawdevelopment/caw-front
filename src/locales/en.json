@@ -1,0 +1,125 @@
+{
+  "demo": {
+    "title": "English",
+    "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+  },
+  "prepos": {
+    "by": "by",
+    "in": "in",
+    "on": "on",
+    "at": "at",
+    "to": "to",
+    "from": "from",
+    "with": "with",
+    "for": "for"
+  },
+  "pronous": {
+    "i": "I",
+    "you": "you",
+    "he": "he",
+    "she": "she",
+    "it": "it",
+    "we": "we",
+    "they": "they"
+  },
+  "verbs": {
+    "build": "build",
+    "create": "create",
+    "built": "built",
+    "read": "read",
+    "explore": "explore",
+    "find_out": "find out",
+    "mint": "mint"
+  },
+  "buttons": {
+    "go_home": "Home",
+    "btn_caw_tooltip": "Post your message",
+    "btn_connect_wallet": "Connect Wallet",
+    "btn_report": "Report",
+    "btn_delete": "Delete",
+    "btn_scan": "Block scan",
+    "btn_access": "Access"
+  },
+  "labels": {
+    "more": "more",
+    "search_caw": "Search CAW",
+    "add_photo": "Add a Photo",
+    "add_gif": "Add an animated GIF",
+    "add_video": "Add a Video",
+    "add_link": "Add a main link",
+    "loading": "Loading...",
+    "new_post_plh": "What's happening?",
+    "likes": "Likes",
+    "dislikes": "Dislikes",
+    "comments": "Comments",
+    "sharing": "Interesting and shared",
+    "language": "Language",
+    "select_lang": "Select your preferred language",
+    "mode": "Mode",
+    "color_presets": "Theme",
+    "direction": "Direction",
+    "layout": "Layout",
+    "fullscreen": "Fullscreen",
+    "exit_fullscreen": "Exit fullscreen",
+    "add_long_caw": "Add long CAW"
+  },
+  "sidebar_menu": {
+    "home": "Home",
+    "explore": "Explore",
+    "notifications": "Notifications",
+    "messages": "Messages",
+    "bookmarks": "Bookmarks",
+    "lists": "Lists",
+    "profile": "Profile",
+    "more": "Settings"
+  },
+  "home": {
+    "page_title": "Decentralized Social Clearing House",
+    "decentralized": "Decentralized",
+    "social": "Social",
+    "caw_is": "CAW IS",
+    "btn_mint": "Mint your",
+    "btn_mint_tooltip": "Minting an NTF is the new way to enter to a revolutionary world. Join us!",
+    "censorship_title": "Censorship resistance protocol across the world!",
+    "blockchain_title": "Blockchain Technology",
+    "blockchain_label": "The blockchain is a distributed database across the entire network of computer systems all over the world. It helping to ensure that no single entity controls the database.",
+    "ethereum_title": "Powered by Ethereum",
+    "ethereum_label": "Contract built on one of the most groundbreaking and scalable ecosystems in the world.",
+    "community_title": "Community Driven",
+    "community_label": "CAW is by design without design, and it is up the CAWMmunity to shape CAW.",
+    "social_eco": "Social Economy",
+    "social_eco_label_1": "Get rewarded",
+    "social_eco_label_2": "while interacting",
+    "social_eco_label_3": "Financial technology based on secure distributed ledgers.",
+    "social_eco_label_4": "Active burns and rewards for all users."
+  },
+  "maintenance": {
+    "title": "Website currently under maintenance.",
+    "description": "We are currently working hard on this page! Please come back later."
+  },
+  "500": {
+    "title": "Internal Server Error",
+    "description": "The server encountered an internal error or misconfiguration and was unable to complete your request."
+  },
+  "404": {
+    "title": "Page not found",
+    "description": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+  },
+  "app_home": {
+    "page_title": "Community Feed",
+    "wall_title": "Home"
+  },
+  "settings": {
+    "title": "Settings",
+    "display": "Display",
+    "display_description": "Customize the display of your account",
+    "language_description": "Languages you may know"
+  },
+  "access_page": {
+    "message": "You need to mint your username as a NFT before joining the revolution."
+  },
+  "minting_page": {
+    "message": "Mint your username and join the revolution",
+    "already_minted": "Already have your?"
+  }
+}
