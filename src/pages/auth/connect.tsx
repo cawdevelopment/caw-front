@@ -23,7 +23,6 @@ export default function LoginPage() {
 
     const { t } = useTranslation();
     const { replace } = useRouter();
-    const { enqueueSnackbar } = useSnackbar();
 
 
     const handleLogin = async () => {
@@ -31,7 +30,7 @@ export default function LoginPage() {
             replace(PATH_DASHBOARD.app.home);
         }
         catch (error: any) {
-            enqueueSnackbar(error.message || 'Something went wrong', { variant: 'error' });
+            console.log(error);
         }
     }
 
