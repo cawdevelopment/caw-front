@@ -8,7 +8,7 @@ export default function ExplorePage() {
     return (
         <PageWrapper title="Explore">
             <div>
-                <h1>Explore page</h1>
+                <h1>Explore page</h1>                
             </div>
         </PageWrapper>
     );

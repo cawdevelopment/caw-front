@@ -4,6 +4,26 @@ export function alpha(color: string, alpha: number) {
 	return `rgba(${color}, ${alpha})`
 }
 
+export const schemes = [
+	'gray',
+	'blue',
+	'cyan',
+	'green',
+	'orange',
+	'pink',
+	'purple',
+	'red',
+	'teal',
+	'yellow',
+	'whatsapp',
+	'twitter',
+	'facebook',
+	'messenger',
+	'linkedin',
+	'telegram',
+	'caw'
+] as const
+
 const colors: Colors = {
 	transparent: 'transparent',
 	current: 'currentColor',

@@ -17,25 +17,20 @@ const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: P
             openAccountModal,
             openChainModal,
             openConnectModal,
-            // authenticationStatus,
             mounted,
-        }) => {
-            // Note: If your app doesn't use authentication, you
-            // can remove all 'authenticationStatus' checks
+        }) => {            
             const ready = String(mounted) !== "loading";
-            // const ready = mounted && authenticationStatus !== "loading";
             const connected = ready && account && chain;
-            // && (!authenticationStatus || authenticationStatus === "authenticated");
-
             return (
                 <Box>
                     {(() => {
+
                         if (!connected) {
                             return (
                                 <Button
                                     width="10vw"
                                     variant="outline"
-                                    // bgGradient="linear(to-l, brand.100, brand.200)"
+                                    bgGradient="linear(to-l, brand.100, brand.200)"
                                     onClick={openConnectModal}
                                 >
                                     Connect Wallet
@@ -48,7 +43,7 @@ const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: P
                                 <Button
                                     width="10vw"
                                     variant="outline"
-                                    // bgGradient="linear(to-l, brand.100, brand.200)"
+                                    bgGradient="linear(to-l, brand.100, brand.200)"
                                     onClick={openChainModal}
                                 >
                                     Wrong network
@@ -95,7 +90,7 @@ const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: P
                                                 />{" "}
                                                 {account.displayBalance
                                                     ? ` (${account.displayBalance})`
-                                                    : ""}
+                                                    : "********"}
                                             </PopoverHeader>
                                             <PopoverCloseButton />
                                             <PopoverBody>
@@ -119,7 +114,7 @@ const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: P
                                     onClick={openChainModal}
                                     width="15vw"
                                     variant="outline"
-                                // bgGradient="linear(to-l, brand.100, brand.200)"
+                                    bgGradient="linear(to-l, brand.100, brand.200)"
                                 >
                                     {chain.hasIcon && (
                                         <Box

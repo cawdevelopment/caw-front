@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Text, useToken, chakra, useColorModeValue } from "@chakra-ui/react";
-import { m, AnimatePresence } from "framer-motion";
+import { Text, useToken, chakra } from "@chakra-ui/react";
+import { m } from "framer-motion";
 
 const items = [
     {
@@ -15,11 +15,10 @@ const items = [
     },
 ];
 
-export function FlippingText() {
+export function FlippingText({ textColor }: { textColor: string }) {
 
     const [ index, setIndex ] = useState(0);
     const color = useToken('colors', 'caw.dark');
-    const textColor = useColorModeValue('gray.900', 'gray.100');
 
     useEffect(() => {
 
@@ -35,9 +34,17 @@ export function FlippingText() {
     }, []);
 
     return (
-        <Text fontSize="2xl" as='b' sx={{ color: 'gray.50' }}>
-            <div style={{ position: 'relative', display: 'flex' }}>
-                <AnimatePresence>
+        <Text
+            id="flipping-text"
+            fontSize="2xl"
+            as='b'
+        >
+            <chakra.div
+                id="flipping-text-wrapper"
+                position='relative'
+                display='flex'
+            // paddingLeft={{ base: 0, md: '35%' }}
+            >
                     <chakra.span color={textColor}>BUILT</chakra.span>
                     <m.div
                         key={items[ index ].id}
@@ -50,10 +57,9 @@ export function FlippingText() {
                         <chakra.span color={color} pl={items[ index ].pl}>
                             {`${items[ index ].content}`}
                         </chakra.span>
-                    </m.div>
-                </AnimatePresence>
-                <chakra.span color={textColor} pl={20}>TEH PPL</chakra.span>
-            </div>
+                </m.div>
+                <chakra.span color={textColor} pl={20}>{`TEH  PPL`}</chakra.span>
+            </chakra.div>
         </Text>
     );
 }

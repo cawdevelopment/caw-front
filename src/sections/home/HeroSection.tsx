@@ -1,16 +1,11 @@
 import React from "react";
-import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center } from "@chakra-ui/react";
-import NextLink from 'next/link';
-import { useTranslation } from "react-i18next";
+import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center, useColorModeValue } from "@chakra-ui/react";
 import { m } from "framer-motion";
 
-import Button from "src/components/buttons/Button";
-import Iconify from "src/components/icons/Iconify";
 import { MotionContainer, varFade } from "src/components/animate";
-import { PATH_DASHBOARD } from "src/routes/paths";
 import { FlippingText } from "./FlippingText";
 
-const DecentralizedTextStyle = styled('span', {
+export const DecentralizedTextStyle = styled('span', {
     baseStyle: (prop: any) => ({
         background: `linear-gradient(to right, ${prop?.theme.colors.caw[ `dark` ]} 0%, ${prop?.theme.colors.caw[ `darker` ]}  13%, ${prop?.theme.colors.caw[ `main` ]}  100%)`,
         WebkitTextFillColor: 'transparent',
@@ -22,7 +17,7 @@ type ContentAlignPops = {
     children: React.ReactNode;
 }
 
-const ContentAlign = React.forwardRef(({ children }: ContentAlignPops, ref: any) => {
+export const ContentAlign = React.forwardRef(({ children }: ContentAlignPops, ref: any) => {
 
     const mdSize = useToken('breakpoints', 'md');
     const [ isMd ] = useMediaQuery(`(min-width: ${mdSize})`)
@@ -39,8 +34,8 @@ const ContentAlign = React.forwardRef(({ children }: ContentAlignPops, ref: any)
 
 export default function HeroSection() {
 
-    const { t } = useTranslation();
     const mode = useColorMode();
+    const textColor = useColorModeValue('gray.700', 'gray.100');
     const mdSize = useToken('breakpoints', 'md');
     const [ isMd ] = useMediaQuery(`(min-width: ${mdSize})`)
 
@@ -77,10 +72,10 @@ export default function HeroSection() {
                         <br />
                         <m.div variants={varFade().in}>
                             <ContentAlign>
-                                <FlippingText />
+                                <FlippingText textColor={textColor} />
                             </ContentAlign>
                         </m.div>
-                        <Spacer h={20} />
+                        {/* <Spacer h={20} />
                         <m.div variants={varFade().inDown}>
                             <ContentAlign>
                                 <NextLink href={PATH_DASHBOARD.app.home} passHref>
@@ -92,7 +87,7 @@ export default function HeroSection() {
                                     </Button>
                                 </NextLink>
                             </ContentAlign>
-                        </m.div>
+                        </m.div> */}
                     </Box>
                     <Box w='100%' alignSelf="center">
                         <m.div variants={varFade().inRight}>

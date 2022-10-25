@@ -22,7 +22,7 @@ export default function HomePage() {
         alignContent="baseline"
         divider={<StackDivider borderColor={borderRightColor} borderRightStyle="dashed" display={{ xl: 'inherit', base: 'none' }} />}
       >
-        <Box w={{ base: '100%', xl: '85%' }}>
+        <Box w={{ base: '100%', xl: '85%' }}>          
           <Heading
             as='h4'
             size='xl'
