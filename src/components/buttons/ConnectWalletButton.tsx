@@ -27,6 +27,7 @@ import { useState } from "react";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { AllNFTNames } from "src/components/userName/AllNFTNames";
+import { MintNFTName } from "src/components/userName/MintNFTName";
 
 type Props = {
   connectWalletPressedProp: any;
@@ -129,14 +130,16 @@ const ConnectWalletButton = ({
                         <PopoverCloseButton />
                         <PopoverBody>
                           <AllNFTNames setUserName={setUserName} />
-
+                          <Box m={5} />
                           <Button onClick={onOpen}>Mint Username</Button>
                           <Modal isOpen={isOpen} onClose={onClose}>
                             <ModalOverlay />
                             <ModalContent>
                               <ModalHeader>Mint Username</ModalHeader>
                               <ModalCloseButton />
-                              <ModalBody>{/* <MintNFT /> */}</ModalBody>
+                              <ModalBody>
+                                <MintNFTName />
+                              </ModalBody>
 
                               <ModalFooter />
                             </ModalContent>
