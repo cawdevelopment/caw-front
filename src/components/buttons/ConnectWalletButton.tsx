@@ -33,10 +33,7 @@ type Props = {
   connectWalletPressedProp: any;
   walletAddressProp: string;
 };
-const ConnectWalletButton = ({
-  connectWalletPressedProp,
-  walletAddressProp,
-}) => {
+const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [userName, setUserName] = useState("");
 
@@ -53,7 +50,7 @@ const ConnectWalletButton = ({
       }) => {
         // Note: If your app doesn't use authentication, you
         // can remove all 'authenticationStatus' checks
-        const ready = mounted !== "loading";
+        const ready = (mounted || '').toString() !== "loading";
         // const ready = mounted && authenticationStatus !== "loading";
         const connected = ready && account && chain;
         // && (!authenticationStatus || authenticationStatus === "authenticated");

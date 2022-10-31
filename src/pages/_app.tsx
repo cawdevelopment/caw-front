@@ -18,7 +18,7 @@ import { publicProvider } from "wagmi/providers/public";
 import theme from '../theme'
 
 //* Web3 connector and layer
-const { chains, provider, webSocketProvider } = configureChains(
+const { chains, provider } = configureChains(
   [
     chain.goerli,
     chain.mainnet,
