@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useSnackbar } from 'notistack'
 import { Button, Container, Stack, Text, keyframes, Center } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
