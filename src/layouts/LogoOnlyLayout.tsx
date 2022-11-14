@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Center, Flex, Spacer, useColorModeValue } from '@chakra-ui/react';
 
 import LanguagePopover from "src/components/settings/LanguagePopover";
+import ColorModeToggle from "src/components/settings/ToogleMode";
 import Logo from 'src/components/Logo';
 
 type Props = {
@@ -51,6 +52,7 @@ export default function LogoOnlyLayout({ children }: Props) {
                     <Logo />
                     <Spacer />
                     <LanguagePopover />
+                    <ColorModeToggle />
                 </Flex>
             </Center>
             {children}

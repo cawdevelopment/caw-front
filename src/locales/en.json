@@ -35,10 +35,15 @@
     "go_home": "Home",
     "btn_caw_tooltip": "Post your message",
     "btn_connect_wallet": "Connect Wallet",
+    "btn_wrong_network": "Wrong Network",
+    "btn_explore_tx": "See transaction",
     "btn_report": "Report",
     "btn_delete": "Delete",
     "btn_scan": "Block scan",
-    "btn_access": "Access"
+    "btn_access": "Access",
+    "btn_mint": "Mint",
+    "btn_back": "Back",
+    "btn_next": "Next"
   },
   "labels": {
     "more": "more",
@@ -120,6 +125,9 @@
   },
   "minting_page": {
     "message": "Mint your username and join the revolution",
-    "already_minted": "Already have your?"
+    "step_title": "First step is to connect your",
+    "step_title_wallet": "wallet",
+    "step_description": "Minting an NTF is the new way to enter to a revolutionary world.",
+    "already_minted": "Already have your CAW-NFT?"
   }
 }

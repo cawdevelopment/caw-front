@@ -1,17 +1,23 @@
 
 ## Getting Started
 
-First, add a .env.local file with a single var. EG:
+```bash
+git clone
+cd
+npm install
+```
+
+Add the .env file (be aware that this file is not tracked by git) and add the following:
 
 ```bash
-ALCHEMY_API_KEY = SOME-STRING-OF-CHARS
-CAW_SM_ADDRESS = CAW-CONTRACT-ADDRESS
-CAWNAMES_SM_ADDRESS = CAW-NAMES-CONTRACT-ADDRESS
+ALCHEMY_API_KEY=SOME-STRING-OF-CHARS
+INFURA_API_KEY=SOME-STRING-OF-CHARS
 ```
 Then, run the development server:
 
 ```bash
-npm run dev
-# or
-yarn dev
+npm start dev
 ```
+
+
+## Contributing

@@ -16,6 +16,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import theme from '../theme'
+import { WalletProvider } from 'src/context/WalletConnectContext'
 
 //* Web3 connector and layer
 const { chains, provider } = configureChains(
@@ -65,8 +66,10 @@ export default function MyApp(props: MyAppProps) {
       <ChakraProvider theme={theme} resetCSS>
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
+            <WalletProvider>
             {/* This allows us to use diferent layouts for each type of pages (i.e dashboard, landing page, etc) */}
-            {getLayout(<Component {...pageProps} />)}
+              {getLayout(<Component {...pageProps} />)}
+            </WalletProvider>
           </RainbowKitProvider>
         </WagmiConfig>
       </ChakraProvider>

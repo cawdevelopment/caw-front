@@ -35,10 +35,15 @@
     "go_home": "Inicio",
     "btn_caw_tooltip": "Publica tu mensaje",
     "btn_connect_wallet": "Conectar billetera",
+    "btn_wrong_network": "Red no soportada",
+    "btn_explore_tx": "Ver transacion",
     "btn_report": "Reportar",
     "btn_delete": "Eliminar",
     "btn_scan": "Escanear",
-    "btn_access": "Acceder"
+    "btn_access": "Acceder",
+    "btn_mint": "Crear",
+    "btn_back": "Atras",
+    "btn_next": "Siguiente"
   },
   "labels": {
     "more": "más",
@@ -120,6 +125,9 @@
   },
   "minting_page": {
     "message": "Acuñar tu NFT y únete a la revolución.",
-    "already_minted": "¿Ya tienes un NFT?"
+    "step_title": "El primer paso es conectar tu",
+    "step_title_wallet": "billetera",
+    "step_description": "Acuñar un NTF es la nueva forma de entrar al nuevo y revolucionario mundo.",
+    "already_minted": "¿Ya tienes un CAW-NFT?"
   }
 }
