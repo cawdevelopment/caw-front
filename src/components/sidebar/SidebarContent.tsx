@@ -3,17 +3,17 @@ import { chakra, Box, CloseButton, Flex, useColorModeValue, BoxProps, Spacer } f
 
 import Logo from 'src/components/Logo';
 import ColorModeToggle from "src/components/settings/ToogleMode";
-import ConnectWalletButton from "src/components/buttons/ConnectWalletButton";
+// import ConnectWalletButton from "src/components/buttons/ConnectWalletButton";
+import ConnectWalletButton from "src/components/buttons/ConnectWalletButton2";
 import { LinkItems } from "./menu";
 import { NavItem } from "./NavItem";
 import UserAccount from './NavbarAccount';
 
 export interface SidebarProps extends BoxProps {
     onClose: () => void;
-    addUserAccount: boolean;
 }
 
-export function SidebarContent({ onClose, addUserAccount, ...rest }: SidebarProps) {
+export function SidebarContent({ onClose, ...rest }: SidebarProps) {
 
     const { t } = useTranslation();
     const bg = useColorModeValue('white', 'gray.900');
@@ -43,22 +43,16 @@ export function SidebarContent({ onClose, addUserAccount, ...rest }: SidebarProp
                     link={link.link}
                 />
             ))}
-
-            {addUserAccount && (
-                <chakra.div
-                    position="fixed"
-                    width="inherit"
-                    left={0}
-                    bottom={0}
-                    textAlign="center"
-                >
-                    <ConnectWalletButton
-                        connectWalletPressedProp={false}
-                        walletAddressProp={''}
-                    />
-                    <UserAccount isCollapse={false} />
-                </chakra.div>
-            )}
+            <chakra.div
+                position="fixed"
+                width="inherit"
+                left={0}
+                bottom={0}
+                textAlign="center"
+            >
+                <ConnectWalletButton />
+                <UserAccount />
+            </chakra.div>
         </Box>
 
     );

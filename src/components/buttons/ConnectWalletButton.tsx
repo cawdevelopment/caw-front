@@ -25,7 +25,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { ConnectButton, useConnectModal, useAccountModal, useChainModal, } from "@rainbow-me/rainbowkit";
 import { AllNFTNames } from "src/components/userName/AllNFTNames";
 import { MintNFTName } from "src/components/userName/MintNFTName";
 
@@ -34,8 +34,13 @@ type Props = {
   walletAddressProp: string;
 };
 const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: Props) => {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [userName, setUserName] = useState("");
+  const [ userName, setUserName ] = useState("");
+
+  const { openConnectModal } = useConnectModal();
+  const { openAccountModal } = useAccountModal();
+  const { openChainModal } = useChainModal();
 
   return (
     <ConnectButton.Custom>

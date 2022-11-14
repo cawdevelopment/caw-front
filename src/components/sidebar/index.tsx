@@ -23,7 +23,6 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                 display={{ base: 'none', md: 'block' }}
                 borderRightColor={borderRightColor}
                 borderRightStyle="dashed"
-                addUserAccount={true}
                 style={{ width: `${DASHBOARD_WIDTH}px` }}
             />
             <Drawer
@@ -36,7 +35,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                 size="full"
             >
                 <DrawerContent>
-                    <SidebarContent onClose={onClose} addUserAccount={true} />
+                    <SidebarContent onClose={onClose} />
                 </DrawerContent>               
             </Drawer>
 
