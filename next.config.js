@@ -6,9 +6,13 @@ const nextConfig = {
     domains: [ 'images.unsplash.com', 'https://pbs.twimg.com', 'https://picsum.photos', ],
   },
   env: {
+    NETWORK: process.env.NETWORK,
+    INFURA_API_KEY: process.env.INFURA_API_KEY,
     ALCHEMY_API_KEY: process.env.ALCHEMY_API_KEY,
-    CAW: process.env.CAW_SM_ADDRESS,
-    CAW_NAMES: process.env.CAWNAMES_SM_ADDRESS,
+    CAW_CONTRACT: process.env.CAW_CONTRACT,
+    CAW_NAME_CONTRACT: process.env.CAW_NAME_CONTRACT,
+    CAW_NAME_MINTER_CONTRACT: process.env.CAW_NAME_MINTER_CONTRACT,
+    MINTABLE_CAW_CONTRACT: process.env.MINTABLE_CAW_CONTRACT,
   },
 }
 
