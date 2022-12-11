@@ -81,26 +81,24 @@ const WalletProvider = ({ children }: Props) => {
                 openChainModal,
                 openConnectModal,
                 mounted,
-            }) => {
-                return (
-                    <WalletContext.Provider value={{
-                        address: address || '0x0000000000000000000000000000000000000000',
-                        shortenAddress: shortenAddress(address || '0x000...0000'),
-                        status,
-                        cawName: 'No Name',
-                        cawNames: [],
-                        account,
-                        chain,
-                        connected: (mounted || '').toString() !== "loading" && account?.address && chain?.id && !chain?.unsupported ? true : false,
-                        mounted,
-                        openAccountModal,
-                        openChainModal,
-                        openConnectModal,
-                    }}>
-                        {children}
-                    </WalletContext.Provider>
-                );
-            }}
+            }) => (
+                <WalletContext.Provider value={{
+                    address: address || '0x0000000000000000000000000000000000000000',
+                    shortenAddress: shortenAddress(address || '0x000...0000'),
+                    status,
+                    cawName: 'No Name',
+                    cawNames: [],
+                    account,
+                    chain,
+                    connected: (mounted || '').toString() !== "loading" && account?.address && chain?.id && !chain?.unsupported ? true : false,
+                    mounted,
+                    openAccountModal,
+                    openChainModal,
+                    openConnectModal,
+                }}>
+                    {children}
+                </WalletContext.Provider>
+            )}
         </ConnectButton.Custom>
     );
 }

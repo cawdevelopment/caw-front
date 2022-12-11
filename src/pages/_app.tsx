@@ -22,23 +22,16 @@ import { WalletProvider } from 'src/context/WalletConnectContext'
 const { chains, provider } = configureChains(
   [
     chain.goerli,
-    chain.mainnet,
-    // chain.polygon, chain.optimism, chain.arbitrum
+    chain.mainnet
   ],
   [
-    infuraProvider({
-      apiKey: process.env.INFURA_API_KEY,
-      priority: 0,
-    }),
+    infuraProvider({ apiKey: process.env.INFURA_API_KEY, priority: 0, }),
     alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY, priority: 1 }),
     publicProvider({ priority: 2 }),
   ]
 );
 
-const { connectors } = getDefaultWallets({
-  appName: "Caw names",
-  chains,
-});
+const { connectors } = getDefaultWallets({ appName: "Caw names", chains });
 
 const wagmiClient = createClient({
   autoConnect: true,
