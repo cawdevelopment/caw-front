@@ -17,17 +17,17 @@ export default function Page500() {
   const bg = useColorModeValue('gray.50', 'gray.900');
 
   return (
-    <PageWrapper title={t('500.title')}>
+    <PageWrapper title={t('500_page.title')}>
       <Container w="full" maxW={"container.xl"} h="container.lg" p={10} bg={bg}>
         <MotionLazyContainer>
           <Box sx={{ maxWidth: 480, margin: 'auto', textAlign: 'center' }}>
             <m.div variants={varBounce().in}>
               <Heading variant="h3" p={3}>
-                {t('500.title')}
+                {t('500_page.title')}
               </Heading>
             </m.div>
             <Text color='gray.600' p={3}>
-              {t('500.description')}
+              {t('500_page.description')}
             </Text>
             <m.div variants={varBounce().in}>
               <SeverErrorIllustration height={260} my={{ base: 5, sm: 10 }} />

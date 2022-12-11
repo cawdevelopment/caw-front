@@ -12,7 +12,7 @@ export default function LanguajeSettings() {
     return (
         <Block
             title={t('labels.language')}
-            subtitle={t('settings.language_description')}
+            subtitle={t('settings_page.language_description')}
         >
             <Stack direction="row" alignItems="center" spacing={0}>
                 <Text as="b">

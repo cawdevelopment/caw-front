@@ -11,11 +11,11 @@ const LANGS = [
         value: 'es',
         icon: '/icons/ic_flag_es.svg',
     },
-    {
-        label: 'Deutsch',
-        value: 'de',
-        icon: '/icons/ic_flag_de.svg',
-    },
+    // {
+    //     label: 'Deutsch',
+    //     value: 'de',
+    //     icon: '/icons/ic_flag_de.svg',
+    // },
 ];
 
 export default function useLocales() {

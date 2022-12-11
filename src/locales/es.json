@@ -3,25 +3,6 @@
     "title": "English",
     "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
   },
-  "prepos": {
-    "by": "por",
-    "in": "en",
-    "on": "en",
-    "at": "en",
-    "to": "para",
-    "from": "de",
-    "with": "con",
-    "for": "para"
-  },
-  "pronous": {
-    "i": "yo",
-    "you": "tú",
-    "he": "él",
-    "she": "ella",
-    "it": "eso",
-    "we": "nosotros",
-    "they": "ellos"
-  },
   "verbs": {
     "build": "construir",
     "create": "crear",
@@ -43,9 +24,14 @@
     "btn_access": "Acceder",
     "btn_mint": "Crear",
     "btn_back": "Atras",
-    "btn_next": "Siguiente"
+    "btn_next": "Siguiente",
+    "btn_start_over": "Comenzar de nuevo"
+  },
+  "errors": {
+    "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su billetera similar."
   },
   "labels": {
+    "the": "El",
     "more": "más",
     "search_caw": "Buscar Caw",
     "add_photo": "Añadir foto",
@@ -66,7 +52,12 @@
     "layout": "Diseño",
     "fullscreen": "Pantalla completa",
     "exit_fullscreen": "Salir de pantalla completa",
-    "add_long_caw": "CAW largo"
+    "add_long_caw": "CAW largo",
+    "cost": "Costo",
+    "minting": "Creando...",
+    "block_explorer": "Explorador de bloques",
+    "check_ntf_on": "Compruebe tu NFT en",
+    "its_magic": "✨Genial✨"
   },
   "sidebar_menu": {
     "home": "Inicio",
@@ -98,15 +89,15 @@
     "social_eco_label_3": "Tecnología financiera basada en libros contables distribuidos de forma segura.",
     "social_eco_label_4": "Quemas activas y recompensas para todos los usuarios."
   },
-  "maintenance": {
+  "maintenance_page": {
     "title": "Sitio web actualmente en mantenimiento",
     "description": "Estamos trabajando en el sitio web, por favor, regrese más tarde."
   },
-  "500": {
+  "500_page": {
     "title": "Error interno del servidor",
     "description": "Lo sentimos, algo salió mal. Por favor, inténtelo de nuevo más tarde."
   },
-  "404": {
+  "404_page": {
     "title": "Página no encontrada",
     "description": "Lo sentimos, la página que estás buscando no existe."
   },
@@ -114,7 +105,7 @@
     "page_title": "Actividad de la Comunidad",
     "wall_title": "Inicio"
   },
-  "settings": {
+  "settings_page": {
     "title": "Configuración",
     "display": "Apariencia",
     "display_description": "Personaliza la apariencia de visualización en tú perfil",
@@ -124,10 +115,41 @@
     "message": "Necesitas acuñar tu nombre de usuario como NFT antes unirte a la revolución."
   },
   "minting_page": {
+    "title": "Acuña tu nombre de usuario",
     "message": "Acuñar tu NFT y únete a la revolución.",
     "step_title": "El primer paso es conectar tu",
     "step_title_wallet": "billetera",
     "step_description": "Acuñar un NTF es la nueva forma de entrar al nuevo y revolucionario mundo.",
-    "already_minted": "¿Ya tienes un CAW-NFT?"
+    "already_minted": "¿Ya tienes un CAW-NFT?",
+    "username_already_taken": "ya está tomado",
+    "username_invalid": "Nombre de usuario debe ser : alfanumérico, minúsculas, sin espacios, sin caracteres especiales",
+    "username_available": "esta disponible",
+    "username_label": "Tu nombre de usuario es",
+    "owneraddress_label": "Será propiedad de esta dirección",
+    "press_bnt_action_label": "Presiona el botón para acuñar",
+    "label_cost_the": "Entre",
+    "label_cost_sort": "mas corto",
+    "label_cost_username": "el nombre de usuario, mas",
+    "label_cost_exp": "caro",
+    "label_cost_willbe": "será.",
+    "wizard_step1_lb1": "Toda la actividad del usuario, social y financiera fluye a través de su nombre de usuario NFT",
+    "wizard_step1_lb2": "Así que por el bien de todos, no te pases de listo y no intentes dañar estos mecanismos",
+    "wizard_step1_lb3": "Puedes acuñar tantos como puedas permitirte",
+    "upding_balance": "Actualizando balance...",
+    "main_balance": "Balance principal",
+    "caw_balance_req_lb": "Necesitas tener suficiente CAW para acuñar un nombre de usuario. Puedes cambiar ETH por mCAW aquí.",
+    "enter_ntf_input_lb": "Ingresa tu nuevo nombre de usuario NTF",
+    "user_acceptance_title": "Antes de continuar, debe conocer y aceptar lo siguiente",
+    "user_acceptance_mchk_1": "Esta es una",
+    "user_acceptance_mchk_dapp": "aplicación descentralizada",
+    "user_acceptance_mchk_2": ", por lo tanto, acepto que:",
+    "user_acceptance_warn_1": "Soy responsable de mis propios fondos",
+    "user_acceptance_warn_2": "Soy responsable de mi nombre de usuario y de sus acciones",
+    "user_acceptance_warn_3": "No podré cambiar mi nombre de usuario después",
+    "user_acceptance_warn_4": "Estamos dejando de utilizar el correo electrónico y el teléfono para identificar a los usuarios.",
+    "user_acceptance_warn_5": "El poder que se me ha dado, con un gran poder viene una gran responsabilidad"
+  },
+  "minted_page": {
+    "title": "¡Felicidades! Tu NFT ha sido acuñado"
   }
 }

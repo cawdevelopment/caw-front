@@ -11,8 +11,8 @@ export default function DisplaySettings() {
     const { t } = useTranslation();
     return (
         <Block
-            title={t('settings.display')}
-            subtitle={t('settings.display_description')}
+            title={t('settings_page.display')}
+            subtitle={t('settings_page.display_description')}
         >
             <Stack
                 id="display-settings"

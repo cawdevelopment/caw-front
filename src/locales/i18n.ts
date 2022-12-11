@@ -19,8 +19,8 @@ i18n
   .init({
     resources: {
       en: { translations: enLocales },
-      de: { translations: deLocales },
-      es: { translations: esLocales }
+      es: { translations: esLocales },
+      de: { translations: deLocales }
     },
     lng,
     fallbackLng: 'en',

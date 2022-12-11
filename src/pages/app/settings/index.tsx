@@ -12,9 +12,9 @@ SettingsPage.getLayout = function getLayout(page: React.ReactElement) {
 export default function SettingsPage() {
     const { t } = useTranslation();
     return (
-        <PageWrapper title={t('settings.title')}>
+        <PageWrapper title={t('settings_page.title')}>
             <Heading variant="h3">
-                {t('settings.title')}
+                {t('settings_page.title')}
             </Heading>
             <Stack spacing={10} m={4}>
                 <DisplaySettings />

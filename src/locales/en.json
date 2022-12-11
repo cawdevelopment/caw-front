@@ -43,9 +43,14 @@
     "btn_access": "Access",
     "btn_mint": "Mint",
     "btn_back": "Back",
-    "btn_next": "Next"
+    "btn_next": "Next",
+    "btn_start_over": "Start over"
+  },
+  "errors": {
+    "install_wallet": "No ethereum provider found, please install metamask or similar"
   },
   "labels": {
+    "the": "The",
     "more": "more",
     "search_caw": "Search CAW",
     "add_photo": "Add a Photo",
@@ -66,7 +71,12 @@
     "layout": "Layout",
     "fullscreen": "Fullscreen",
     "exit_fullscreen": "Exit fullscreen",
-    "add_long_caw": "Add long CAW"
+    "add_long_caw": "Add long CAW",
+    "cost": "Cost",
+    "minting": "Minting...",
+    "block_explorer": "Block Explorer",
+    "check_ntf_on": "Check your NFT on",
+    "its_magic": "✨It's magic✨"
   },
   "sidebar_menu": {
     "home": "Home",
@@ -98,15 +108,15 @@
     "social_eco_label_3": "Financial technology based on secure distributed ledgers.",
     "social_eco_label_4": "Active burns and rewards for all users."
   },
-  "maintenance": {
+  "maintenance_page": {
     "title": "Website currently under maintenance.",
     "description": "We are currently working hard on this page! Please come back later."
   },
-  "500": {
+  "500_page": {
     "title": "Internal Server Error",
     "description": "The server encountered an internal error or misconfiguration and was unable to complete your request."
   },
-  "404": {
+  "404_page": {
     "title": "Page not found",
     "description": "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
   },
@@ -114,7 +124,7 @@
     "page_title": "Community Feed",
     "wall_title": "Home"
   },
-  "settings": {
+  "settings_page": {
     "title": "Settings",
     "display": "Display",
     "display_description": "Customize the display of your account",
@@ -124,10 +134,41 @@
     "message": "You need to mint your username as a NFT before joining the revolution."
   },
   "minting_page": {
+    "title": "Mint your username",
     "message": "Mint your username and join the revolution",
     "step_title": "First step is to connect your",
     "step_title_wallet": "wallet",
     "step_description": "Minting an NTF is the new way to enter to a revolutionary world.",
-    "already_minted": "Already have your CAW-NFT?"
+    "already_minted": "Already have your CAW-NFT?",
+    "username_already_taken": "already taken",
+    "username_invalid": "username must be : alphanumeric, lowercase, no spaces, non special characters",
+    "username_available": "is available",
+    "username_label": "Your username is",
+    "owneraddress_label": "Will be owned by this address",
+    "press_bnt_action_label": "Press the button below to mint your NFT",
+    "label_cost_the": "The",
+    "label_cost_sort": "shorter",
+    "label_cost_username": "the username, the more",
+    "label_cost_exp": "expensive",
+    "label_cost_willbe": "it will be.",
+    "wizard_step1_lb1": "All user activity, social and financial flows through your NFT username",
+    "wizard_step1_lb2": "So for all sake, don't get smart and don't try to hack these mechanisms",
+    "wizard_step1_lb3": "You can mint as many as you can afford it",
+    "upding_balance": "Updating balance...",
+    "main_balance": "Main balance",
+    "caw_balance_req_lb": "You need to have enough CAW to mint a username. You can swap ETH for mCAW here.",
+    "enter_ntf_input_lb": "Enter your new NTF-Username",
+    "user_acceptance_title": "Before continuing, you should know and accept the following",
+    "user_acceptance_mchk_1": "This is a",
+    "user_acceptance_mchk_dapp": "decentralized application",
+    "user_acceptance_mchk_2": ", therefore, I agree to that",
+    "user_acceptance_warn_1": "I am responsible for my own funds",
+    "user_acceptance_warn_2": "I am responsible for my username and its actions",
+    "user_acceptance_warn_3": "I will not be able to change my username later",
+    "user_acceptance_warn_5": "Power given to me, with great power comes great responsibility",
+    "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users"
+  },
+  "minted_page": {
+    "title": "Your NFT-Username is minted"
   }
 }

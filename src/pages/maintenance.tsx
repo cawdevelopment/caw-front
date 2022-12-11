@@ -15,14 +15,14 @@ export default function Maintenance() {
   const bg = useColorModeValue('gray.50', 'gray.900');
 
   return (
-    <PageWrapper title={t('maintenance.title')}>
+    <PageWrapper title={t('maintenance_page.title')}>
       <Container w="full" maxW={"container.xl"} h="container.lg" p={10} bg={bg}>
         <Container sx={{ textAlign: 'center' }}>
           <Heading variant="h3" p={3}>
-            {t('maintenance.title')}
+            {t('maintenance_page.title')}
           </Heading>
           <Text color='gray.600' p={3}>
-            {t('maintenance.description')}
+            {t('maintenance_page.description')}
           </Text>
           <MaintenanceIllustration height={240} my={{ base: 5, sm: 10 }} />
           <NextLink href="/">
