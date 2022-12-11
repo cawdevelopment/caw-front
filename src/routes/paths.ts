@@ -11,7 +11,8 @@ const ROOTS_USER = '/user';
 export const PATH_AUTH = {
     root: ROOTS_AUTH,
     connect: path(ROOTS_AUTH, '/connect'),
-    mint: path(ROOTS_AUTH, '/mint')
+    mint: path(ROOTS_AUTH, '/mint'),
+    minted: path(ROOTS_AUTH, '/minted/:username/:tx')
 };
 
 export const PATH_PAGE = {
