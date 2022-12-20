@@ -37,5 +37,8 @@ export const PATH_DASHBOARD = {
     },
     user: {
         profile: path(ROOTS_USER, '/profile/:username'),
+    },
+    swap: {
+        mcaw: path(ROOTS_DASHBOARD, '/swap/mcaw'),
     }
 };

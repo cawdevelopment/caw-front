@@ -100,3 +100,12 @@ export function getEthPriceInUsd() {
 export function getCawPriceInUsd() {
     return getTokenPriceInUSD("a-hunters-dream");
 }
+
+export const getBlockChainErrMsg = (error: any) => {
+
+    let { message, code } = error;
+    message = message ? message.split("(")[ 0 ] : "";
+    code = code ? code : '0';
+
+    return { message, code };
+}
