@@ -25,9 +25,9 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 
-import { useWallet } from 'src/context/WalletConnectContext'
-import { AllNFTNames } from "src/components/userName/AllNFTNames";
-import { MintNFTName } from "src/components/userName/MintNFTName";
+import { useCawProvider } from 'src/context/WalletConnectContext'
+import AllNFTNames from "src/components/userName/AllNFTNames";
+import MintNFTName from "src/components/userName/MintNFTName";
 import { useTranslation } from "react-i18next";
 
 
@@ -35,7 +35,7 @@ const ConnectWalletButton2 = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ userName, setUserName ] = useState("");
-  const { account, chain, status, openAccountModal, openChainModal, openConnectModal } = useWallet();
+  const { account, chain, status, openAccountModal, openChainModal, openConnectModal } = useCawProvider();
   const { t } = useTranslation();
 
   if (status === 'disconnected') {
@@ -81,7 +81,7 @@ const ConnectWalletButton2 = () => {
                 />
                 <VStack spacing={1}>
                   <Text as="b" noOfLines={1}>
-                    {userName}
+                    {userName || 'The user'}
                   </Text>
                 </VStack>
               </HStack>

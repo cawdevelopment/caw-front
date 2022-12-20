@@ -27,14 +27,14 @@ import { useState } from "react";
 
 // import { useConnectModal, useAccountModal, useChainModal, } from "@rainbow-me/rainbowkit";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { AllNFTNames } from "src/components/userName/AllNFTNames";
-import { MintNFTName } from "src/components/userName/MintNFTName";
+import AllNFTNames from "src/components/userName/AllNFTNames";
+import MintNFTName from "src/components/userName/MintNFTName";
 
 type Props = {
   connectWalletPressedProp: any;
   walletAddressProp: string;
 };
-const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: Props) => {
+const ConnectWalletButton = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [ userName, setUserName ] = useState("");
@@ -113,7 +113,7 @@ const ConnectWalletButton = ({ connectWalletPressedProp, walletAddressProp, }: P
                             src="https://bit.ly/dan-abramov"
                           />
                           <VStack spacing={1}>
-                            <Text as="b" noOfLines={1}>
+                            <Text as="b" noOfLines={1} color="red.500">
                               {userName}
                             </Text>
                           </VStack>

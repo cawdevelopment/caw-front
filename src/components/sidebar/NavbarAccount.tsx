@@ -1,9 +1,19 @@
 import React from "react";
-import { Box, Text, HStack, VStack, useColorModeValue, Image } from '@chakra-ui/react';
+import {
+  Box, Text, HStack, VStack, useColorModeValue, Image,
+  Popover,
+  PopoverTrigger,
+  PopoverFooter,
+  PopoverContent,
+  PopoverArrow,
+  PopoverHeader,
+  PopoverCloseButton,
+  PopoverBody,
+} from '@chakra-ui/react';
 
-import Avatar from 'src/components/avatar/Avatar';
-import ConnectWalletButton from "../buttons/ConnectWalletButton2";
-import { useWallet } from "src/context/WalletConnectContext";
+import { useCawProvider } from "src/context/WalletConnectContext";
+import AnimatedAvatar from "src/components/avatar/AnimatedAvatar";
+import ConnectWalletButton from "src/components/buttons/ConnectWalletButton2";
 
 type Props = {
   displayAddressMode?: 'full' | 'shorten'
@@ -11,7 +21,7 @@ type Props = {
 export default function NavbarAccount({ displayAddressMode = 'shorten' }: Props) {
 
   const bgColor = useColorModeValue('gray.200', 'gray.800');
-  const { shortenAddress, address, cawName, chain, connected, openChainModal, openAccountModal } = useWallet();
+  const { shortenAddress, address, cawAccount, chain, connected, openChainModal, openAccountModal } = useCawProvider();
 
   return (
     <Box
@@ -20,18 +30,63 @@ export default function NavbarAccount({ displayAddressMode = 'shorten' }: Props)
       bg={bgColor}
       borderRadius="lg"
     >
+      {/* <ConnectWalletButtonOld /> */}
       {connected ?
         <HStack>
-          <Avatar
-            name={cawName}
-            size="md"
-            color="white"
-            src={cawName}
-            type={"ntf"}
-          />
+          <Popover>
+            <PopoverTrigger>
+              <AnimatedAvatar src={cawAccount?.avatar || ''} alt={cawAccount?.userName || ''} />
+            </PopoverTrigger>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverHeader>
+                <AnimatedAvatar src={cawAccount?.avatar || ''} alt={cawAccount?.userName || ''} />
+              </PopoverHeader>
+              <PopoverCloseButton />
+              <PopoverBody>
+                <VStack alignItems="flex-start" p={0} m={0} >
+                  <Text noOfLines={1} as="b">
+                    {cawAccount?.userName || ''}
+                  </Text>
+                  <HStack>
+                    <Box
+                      style={{
+                        background: chain?.iconBackground,
+                        width: 12,
+                        height: 12,
+                        borderRadius: 999,
+                        overflow: "hidden",
+                        marginRight: 4,
+                      }}
+                    >
+                      {chain?.iconUrl && (
+                        <Image
+                          alt={chain.name ?? "Chain icon"}
+                        />
+                      )}
+                    </Box>
+                    <Text
+                      noOfLines={1}
+                      fontSize="sm"
+                      color="gray.500"
+                    >
+                      {chain?.name || ''}
+                    </Text>
+                  </HStack>
+                  <Text
+                    noOfLines={1}
+                    fontSize="sm"
+                    color="gray.600"
+                  >
+                    {address}
+                  </Text>
+                </VStack>
+              </PopoverBody>
+            </PopoverContent>
+          </Popover>
           <VStack alignItems="flex-start" p={0} m={0} >
             <Text noOfLines={1} as="b">
-              {cawName || ''}
+              {cawAccount?.userName || ''}
             </Text>
             <HStack>
               <Box
