@@ -6,13 +6,15 @@ import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
 import { getContract, getSignerContract } from "./contractHelper";
 import useAppConfigurations from './useAppConfigurations';
 
+//* Contract name :  MintableCAW
+//* Swap ETH to mCAW
 export default function useMintableCAWContract() {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const [ processig, setProcessing ] = useState(false);
-    const { keys: { INFURA_API_KEY }, network, contracts: { MINTABLE_CAW } } = useAppConfigurations();
+    const { keys: { INFURA_API_KEY }, network, contracts: { MINTABLE_CAW, CAW_NAME_MINTER } } = useAppConfigurations();
     const { address, abi } = MINTABLE_CAW;
+    const { address: spenderAddress } = CAW_NAME_MINTER;
 
     useEffect(() => {
         const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY });
@@ -69,25 +71,23 @@ export default function useMintableCAWContract() {
     }
 
 
-    const mint = async (walletAddress: string, price: number) => {
+    const mint = async (userAddress: string, amount: number) => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-
-        setProcessing(true);
-        const tx = await contract.mint(walletAddress, utils.parseEther(price.toString()));
+        const contractWithSigner = await _getSignerContract(userAddress);
+        const tx = await contractWithSigner.mint(userAddress, utils.parseEther(amount.toString()));
         const receipt = await tx.wait();
-        setProcessing(false);
         return { tx, receipt };
     }
 
-    const approve = async (spender: string, amount: number) => {
+    const approve = async (userAddress: string, amount: number) => {
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        //* pass the contract address to the spender field
-        const contractWithSigner = await _getSignerContract(address);
-        const tx = await contractWithSigner.approve(spender, utils.parseEther(amount.toString()));
+        const contractWithSigner = await _getSignerContract(userAddress);
+        const tx = await contractWithSigner.approve(spenderAddress, utils.parseEther(amount.toString()));
         const receipt = await tx.wait();
         return { tx, receipt };
     }
@@ -112,7 +112,6 @@ export default function useMintableCAWContract() {
 
     return {
         initialized: !!contract,
-        processig,
         getDecimals,
         getSymbol,
         getName,
