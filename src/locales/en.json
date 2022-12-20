@@ -11,7 +11,8 @@
     "to": "to",
     "from": "from",
     "with": "with",
-    "for": "for"
+    "for": "for",
+    "or": "or"
   },
   "pronous": {
     "i": "I",
@@ -29,7 +30,11 @@
     "read": "read",
     "explore": "explore",
     "find_out": "find out",
-    "mint": "mint"
+    "mint": "mint",
+    "cancel": "cancel",
+    "confirm": "confirm",
+    "swap": "swap",
+    "get": "get"
   },
   "buttons": {
     "go_home": "Home",
@@ -40,11 +45,13 @@
     "btn_report": "Report",
     "btn_delete": "Delete",
     "btn_scan": "Block scan",
-    "btn_access": "Access",
+    "btn_access": "Connect",
     "btn_mint": "Mint",
     "btn_back": "Back",
     "btn_next": "Next",
-    "btn_start_over": "Start over"
+    "btn_start_over": "Start over",
+    "btn_swap": "Swap",
+    "btn_approve": "Approve"
   },
   "errors": {
     "install_wallet": "No ethereum provider found, please install metamask or similar"
@@ -74,9 +81,18 @@
     "add_long_caw": "Add long CAW",
     "cost": "Cost",
     "minting": "Minting...",
+    "minted": "Minted",
+    "minted_success": "Minted successfully!",
+    "approving": "Approving...",
+    "approved": "Approved",
     "block_explorer": "Block Explorer",
     "check_ntf_on": "Check your NFT on",
-    "its_magic": "✨It's magic✨"
+    "its_magic": "✨It's magic✨",
+    "balance": "Balance",
+    "enter_amount": "Enter an amount"
+  },
+  "common": {
+    "amountgtzero": "Amount must be greater than zero"
   },
   "sidebar_menu": {
     "home": "Home",
@@ -124,6 +140,10 @@
     "page_title": "Community Feed",
     "wall_title": "Home"
   },
+  "layout_page": {
+    "text_1": "Please bear in mind this DAPP is under development and may not work as expected.",
+    "text_2": "In addition, there are some filler texts and images."
+  },
   "settings_page": {
     "title": "Settings",
     "display": "Display",
@@ -135,7 +155,7 @@
   },
   "minting_page": {
     "title": "Mint your username",
-    "message": "Mint your username and join the revolution",
+    "message": "Mint your username and join the revølution",
     "step_title": "First step is to connect your",
     "step_title_wallet": "wallet",
     "step_description": "Minting an NTF is the new way to enter to a revolutionary world.",
@@ -156,7 +176,7 @@
     "wizard_step1_lb3": "You can mint as many as you can afford it",
     "upding_balance": "Updating balance...",
     "main_balance": "Main balance",
-    "caw_balance_req_lb": "You need to have enough CAW to mint a username. You can swap ETH for mCAW here.",
+    "caw_balance_req_lb": "You need to have enough mCAW to mint a username. You can swap ETH for mCAW here.",
     "enter_ntf_input_lb": "Enter your new NTF-Username",
     "user_acceptance_title": "Before continuing, you should know and accept the following",
     "user_acceptance_mchk_1": "This is a",
@@ -170,5 +190,12 @@
   },
   "minted_page": {
     "title": "Your NFT-Username is minted"
+  },
+  "swap_page": {
+    "title": "Mintable CAW",
+    "goerli_msg": "You need to set up Goerli testnet in your wallet before minting mCAW",
+    "get_goerli": "Retrieve some Goerli ETH from a fauce, i.g.,",
+    "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens,otherwise your funds will be locked in the contract.",
+    "alert_cf_mint": "Do you want to mint {$0} mCAW?"
   }
 }
