@@ -7,14 +7,14 @@ import NextLink from 'next/link';
 import { PATH_AUTH } from "src/routes/paths";
 import { WrapperFadeAnimation } from 'src/components/animate'
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import { useWallet } from "src/context/WalletConnectContext";
+import { useCawProvider } from "src/context/WalletConnectContext";
 import { getExplorerUrl, getOpenSeaUrl } from 'src/hooks/contractHelper'
-import useCawNamesContract from "src/hooks/useCawNames";
+import useCawNamesContract from "src/hooks/useCawNamesContract";
 import useAppConfigurations from "src/hooks/useAppConfigurations";
 import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
 
-import { LoaderCard } from "./LoaderCard";
-import { NtfNameCard } from "./NtfNameCard";
+import LoaderCard from "./LoaderCard";
+import NtfNameCard from "./NtfNameCard";
 
 MintedUserNamePage.getLayout = function getLayout(page: React.ReactElement) {
     return <Layout variant="logoOnly">{page}</Layout>;
@@ -39,7 +39,7 @@ export default function MintedUserNamePage() {
     const [ userId, setUserId ] = useState(0);
     const [ image, setImage ] = useState('');
     const [ error, setError ] = useState('');
-    const { chain } = useWallet();
+    const { chain } = useCawProvider();
     const { t } = useTranslation();
 
 

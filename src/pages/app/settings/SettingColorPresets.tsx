@@ -1,7 +1,7 @@
 import { HStack, useToken } from "@chakra-ui/react";
-import { BoxMask } from "./BoxMask";
+import BoxMask from "./BoxMask";
 
-export function SettingColorPresets() {
+export default function SettingColorPresets() {
 
     const [ cawColor, blueColor ] = useToken('colors', [ 'caw.500', 'blue.500' ]);
 

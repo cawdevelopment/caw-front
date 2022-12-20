@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Box, HStack } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-import { BoxMask } from "./BoxMask";
+import BoxMask from "./BoxMask";
 
-export function SettingFullscreen() {
+export default function SettingFullscreen() {
 
     const { t } = useTranslation();
     const [ fullscreen, setFullscreen ] = useState(false);

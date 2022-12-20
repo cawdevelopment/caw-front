@@ -1,7 +1,7 @@
 import { HStack, useColorMode, useToken } from "@chakra-ui/react";
-import { BoxMask } from "./BoxMask";
+import BoxMask from "./BoxMask";
 
-export function SettingMode() {
+export default function SettingMode() {
 
     const [ icColorLight, icColorDark ] = useToken('colors', [ 'caw.500', 'gray.100' ]);
     const [ bgLight, bgDark ] = useToken('colors', [ 'gray.50', 'gray.800' ]);

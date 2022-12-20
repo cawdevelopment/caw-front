@@ -3,12 +3,12 @@ import { InfoIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 
 import NavbarAccount from 'src/components/sidebar/NavbarAccount';
-import { useWallet } from "src/context/WalletConnectContext";
+import { useCawProvider } from "src/context/WalletConnectContext";
 
-export function WalletConnection() {
+export default function WalletConnection() {
 
     const { t } = useTranslation();
-    const { connected } = useWallet();
+    const { connected } = useCawProvider();
 
     return (
         <Stack spacing={8}>

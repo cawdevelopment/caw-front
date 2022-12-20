@@ -3,7 +3,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 import { Props } from "./[tx]";
 
-export function NtfNameCard({ userName, image, blockExplorerUrl, openSeaUrl }: Props) {
+export default function NtfNameCard({ userName, image, blockExplorerUrl, openSeaUrl }: Props) {
 
     const bgBox = useColorModeValue('white', 'gray.800');
     const { t } = useTranslation();

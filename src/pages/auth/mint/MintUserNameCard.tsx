@@ -6,10 +6,10 @@ import { useFormContext } from "react-hook-form";
 
 import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
 import { isValidUsername as validateUserNameLocally } from "src/utils/helper";
-import { MintingCost } from "./MintingCost";
+import MintingCost from "./MintingCost";
 
 
-export function MintUserNameCard() {
+export default function MintUserNameCard() {
 
     const { t } = useTranslation();
     const { register, setValue, watch } = useFormContext();

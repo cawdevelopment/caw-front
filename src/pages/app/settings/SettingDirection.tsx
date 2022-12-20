@@ -1,8 +1,7 @@
 import { HStack } from "@chakra-ui/react";
-import { BoxMask } from "./BoxMask";
+import BoxMask from "./BoxMask";
 
-
-export function SettingDirection() {
+export default function SettingDirection() {
 
     return (
         <HStack

@@ -1,6 +1,6 @@
 import { Center, Box, Skeleton, SkeletonText } from "@chakra-ui/react";
 
-export function LoaderCard() {
+export default function LoaderCard() {
     return (
         <Center py={12}>
             <Box padding='6' boxShadow='lg' bg='white' w={'full'} maxW={'330px'}>

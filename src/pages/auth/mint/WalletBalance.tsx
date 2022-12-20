@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useBalance } from "wagmi";
+import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, HStack, VStack, Text, Divider, Heading, useColorModeValue, Spacer } from "@chakra-ui/react";
+import { Avatar, Box, HStack, VStack, Text, Divider, Heading, useColorModeValue, Spacer, Button, Stack } from "@chakra-ui/react";
 
-import { useWallet } from "src/context/WalletConnectContext";
+import { useCawProvider } from "src/context/WalletConnectContext";
 import useAppConfigurations from "src/hooks/useAppConfigurations";
 import { WalletBalanceModel } from "src/types/dtos";
 import { fDecimal, kFormatter } from "src/utils/formatNumber";
 import { BILLION } from 'src/utils/constants';
-
-// import SwapCaw from './SwapCaw';
+import { PATH_DASHBOARD } from "src/routes/paths";
 
 const defaultBalance: WalletBalanceModel[] = [
     {
@@ -29,10 +29,33 @@ const defaultBalance: WalletBalanceModel[] = [
     }
 ];
 
+function AssetItem({ balance }: { balance: WalletBalanceModel }) {
+
+    const { symbol, name, amount } = balance;
+    const symbolForeColor = useColorModeValue('gray.500', 'gray.400');
+
+    return (
+        <Box>
+            <HStack p={2}>
+                <Avatar size="sm" name={name} src={`/assets/tokens/${symbol.toLowerCase()}.png`} />
+                <Text textAlign={"left"}>
+                    <b>{`${name} `}</b>
+                    <Text as="span" color={symbolForeColor}>
+                        {symbol}
+                    </Text>
+                </Text>
+                <VStack alignItems={"flex-end"}>
+                    <Text>{`${fDecimal(amount)} ${amount >= BILLION ? ` | ${kFormatter(amount)}` : ''}`}</Text>
+                </VStack>
+            </HStack>
+            <Divider />
+        </Box>
+    );
+}
 
 export default function WalletBalanceCard() {
 
-    const { address, chain } = useWallet();
+    const { address, chain } = useCawProvider();
     const { contracts: { CAW, MINTABLE_CAW } } = useAppConfigurations();
     const [ assets, setAssets ] = useState<WalletBalanceModel[]>(defaultBalance);
     const { t } = useTranslation();
@@ -74,39 +97,20 @@ export default function WalletBalanceCard() {
             <Spacer h={10} />
             {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} />)}
             <Spacer h={10} />
-            <Text fontSize="sm" color="gray.500">
-                {t('minting_page.caw_balance_req_lb')}
-            </Text>
-
-            {/* <SwapCaw
-                swapAmount={swapAmount}
-                onChange={value => setValue('swapAmount', value)}
-            /> */}
-
-        </Box>
-    );
-}
-
-function AssetItem({ balance }: { balance: WalletBalanceModel }) {
-
-    const { symbol, name, amount } = balance;
-    const symbolForeColor = useColorModeValue('gray.500', 'gray.400');
-
-    return (
-        <Box>
-            <HStack p={2}>
-                <Avatar size="sm" name={name} src={`/assets/tokens/${symbol.toLowerCase()}.png`} />
-                <Text textAlign={"left"}>
-                    <b>{`${name} `}</b>
-                    <Text as="span" color={symbolForeColor}>
-                        {symbol}
-                    </Text>
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={2} align="center" justify="center" >
+                <Text fontSize="sm" color="gray.500">
+                    {t('minting_page.caw_balance_req_lb')}
                 </Text>
-                <VStack alignItems={"flex-end"}>
-                    <Text>{`${fDecimal(amount)} ${amount >= BILLION ? ` | ${kFormatter(amount)}` : ''}`}</Text>
-                </VStack>
-            </HStack>
-            <Divider />
+                <NextLink href={PATH_DASHBOARD.swap.mcaw} target="_blank" passHref >
+                    <Button
+                        variant="link"
+                        colorScheme="gray"
+                    >
+                        {t('buttons.btn_swap')}
+                    </Button>
+                </NextLink>
+            </Stack>
         </Box>
     );
 }
+

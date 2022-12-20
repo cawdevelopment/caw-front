@@ -1,7 +1,7 @@
 import { Text, useColorModeValue, Link } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-export function NftPriceLegend() {
+export default function NftPriceLegend() {
     const color = useColorModeValue('gray.800', 'gray.200');
     const { t } = useTranslation();
     return (
