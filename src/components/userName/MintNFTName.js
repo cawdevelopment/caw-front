@@ -8,10 +8,10 @@ import {
 import { Box, Button, Link, Input, Text } from "@chakra-ui/react";
 
 import { useDebounce } from "use-debounce";
-import { parseBytes32String } from "ethers/lib/utils";
 
-export function MintNFTName() {
-  const [value, setValue] = React.useState();
+export default function MintNFTName() {
+
+  const [ value, setValue ] = React.useState();
   const handleChange = (event) => setValue(event.target.value);
   const [debouncedValue] = useDebounce(value, 500);
 

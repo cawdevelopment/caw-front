@@ -7,7 +7,8 @@ import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
 import { getCawPriceInUsd, getContract, getSignerContract, getEthPriceInUsd } from "./contractHelper";
 import useAppConfigurations from './useAppConfigurations';
 
-
+//* Contract name :  CawNameMinter
+//* Get the cost of a name, validate the name, and mint a username
 export default function useCawNameMinterContract() {
 
     const { t } = useTranslation();
@@ -82,12 +83,9 @@ export default function useCawNameMinterContract() {
 
             setMinting(true);
             const tx = await contractWithSigner.mint(username);
-            console.log(`🐛  -> 🔥 :  mint 🔥 :  tx`, tx);
             setTx(tx);
             const receipt = await tx.wait();
             setMinting(false);
-
-            console.log(`🐛  -> 🔥 :  mint 🔥 :  receipt`, receipt);
             return {
                 tx,
                 receipt

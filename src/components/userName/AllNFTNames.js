@@ -1,33 +1,24 @@
 import React, { useEffect } from "react";
+import { useContractRead, useAccount } from "wagmi";
+import { Button, Text, HStack } from "@chakra-ui/react";
 
-import {
-  usePrepareContractWrite,
-  useContractWrite,
-  useWaitForTransaction,
-  useContractRead,
-  useAccount,
-} from "wagmi";
+import { CAW_NAMES_ABI } from 'src/config/ABIs';
 
-import { Box, Button, Link, Input, Text, HStack } from "@chakra-ui/react";
-
-import CAW_NAME_ABI from "src/ABIs/CAW_NAME.json";
-
-export function AllNFTNames(props) {
+export default function AllNFTNames(props) {
   const { address } = useAccount();
   const { setUserName } = props;
 
   const { data, isError, isLoading } = useContractRead({
     addressOrName: "0x3F63Ad5E6309135a9D5fD3540270b93f56FD9CD9",
-    contractInterface: CAW_NAME_ABI,
+    contractInterface: CAW_NAMES_ABI,
     functionName: "tokens",
     args: address,
   });
 
   useEffect(() => {
     setUserName("");
-  }, [address]);
+  }, [ setUserName ]);
 
-  console.log("data", data);
 
   if (isError) {
     return <Text>Error</Text>;
