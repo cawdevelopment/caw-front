@@ -27,7 +27,7 @@ NETWORK="goerli"
 Then, run the development server:
 
 ```bash
-npm install
+yarn install
 npm start dev
 ```
 

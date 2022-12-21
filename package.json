@@ -15,6 +15,14 @@
     "lint": "next lint",
     "lint:es": "eslint --ext .ts,.tsx ."
   },
+  "resolutions": {
+    "ethereumjs-abi": "https://registry.npmjs.org/ethereumjs-abi/-/ethereumjs-abi-0.6.8.tgz"
+  },
+  "pnpm": {
+    "overrides": {
+      "ethereumjs-abi": "https://registry.npmjs.org/ethereumjs-abi/-/ethereumjs-abi-0.6.8.tgz"
+    }
+  },
   "dependencies": {
     "@alch/alchemy-web3": "^1.4.6",
     "@chakra-ui/icons": "^2.0.14",
