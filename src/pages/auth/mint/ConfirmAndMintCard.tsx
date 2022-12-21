@@ -21,7 +21,7 @@ export default function ConfirmAndMintCard() {
             <Text as="b">
                 {t('minting_page.owneraddress_label')} : <br />
             </Text>
-            <NavbarAccount displayAddressMode="full" />
+            <NavbarAccount displayAddressMode="full" displaMode="carousel" showFooter={false} />
             <Divider />
             <Stack spacing={1}>
                 <UserAcceptance />

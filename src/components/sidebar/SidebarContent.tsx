@@ -48,7 +48,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                 bottom={0}
                 textAlign="center"
             >
-                <NavbarAccount />
+                <NavbarAccount displaMode="carousel" showFooter={true} />
             </chakra.div>
         </Box>
 

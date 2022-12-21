@@ -30,7 +30,7 @@ export default function WalletConnection() {
                     <Code colorScheme="teal" children={t('minting_page.wizard_step1_lb3')} />
                 </Stack>
                 <Spacer h={10} />
-                <NavbarAccount displayAddressMode="full" />
+                <NavbarAccount displayAddressMode="full" displaMode="carousel" showFooter={false} />
             </Box>
         </Stack>
     );

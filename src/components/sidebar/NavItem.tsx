@@ -1,6 +1,6 @@
+import { useRouter } from "next/router";
 import { Flex, FlexProps, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import Iconify from 'src/components/icons/Iconify';
-import { useRouter } from "next/router";
 
 export interface NavItemProps extends FlexProps {
     icon: string;
