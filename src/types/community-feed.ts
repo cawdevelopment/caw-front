@@ -54,14 +54,14 @@ export type AuthUser = {
 }
 
 export const name_eateregg = 'cawfee';
-export const avatar_eateregg = 'https://pbs.twimg.com/profile_images/1576311533382078466/jfOC1m_E_400x400.jpg';
+export const avatar_eateregg_ = 'https://pbs.twimg.com/profile_images/1576311533382078466/jfOC1m_E_400x400.jpg';
 
 export const user: AuthUser = {
     id: uuidv4(),
     username: name_eateregg,
     wallet: '0x0000000000000000000000000000000000000000',
     avatar: {
-        src: avatar_eateregg,
+        src: avatar_eateregg_,
         width: 100,
         height: 100,
         id: uuidv4(),

@@ -9,7 +9,7 @@ export default function UserProfilePage() {
     return (
         <PageWrapper title="My profile">
             <div>
-                <h1>My profile</h1>
+                <h1>My accounts</h1>
                 <Avatars />
             </div>
         </PageWrapper>

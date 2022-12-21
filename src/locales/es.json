@@ -3,6 +3,17 @@
     "title": "English",
     "introduction": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
   },
+  "prepos": {
+    "by": "por",
+    "in": "en",
+    "on": "en",
+    "at": "en",
+    "to": "a",
+    "from": "desde",
+    "with": "con",
+    "for": "para",
+    "or": "o"
+  },
   "verbs": {
     "build": "construir",
     "create": "crear",
@@ -10,25 +21,31 @@
     "read": "leer",
     "explore": "explorar",
     "find_out": "descubrir",
-    "mint": "crear"
+    "mint": "acuñar",
+    "cancel": "cancelar",
+    "confirm": "confirmar",
+    "swap": "intercambiar",
+    "get": "obtener"
   },
   "buttons": {
     "go_home": "Inicio",
     "btn_caw_tooltip": "Publica tu mensaje",
-    "btn_connect_wallet": "Conectar billetera",
+    "btn_connect_wallet": "Conectar monedero",
     "btn_wrong_network": "Red no soportada",
     "btn_explore_tx": "Ver transacion",
     "btn_report": "Reportar",
     "btn_delete": "Eliminar",
     "btn_scan": "Escanear",
     "btn_access": "Acceder",
-    "btn_mint": "Crear",
+    "btn_mint": "Acuñar",
     "btn_back": "Atras",
     "btn_next": "Siguiente",
-    "btn_start_over": "Comenzar de nuevo"
+    "btn_start_over": "Comenzar de nuevo",
+    "btn_swap": "Intercambiar",
+    "btn_approve": "Aprobar"
   },
   "errors": {
-    "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su billetera similar."
+    "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar."
   },
   "labels": {
     "the": "El",
@@ -54,10 +71,28 @@
     "exit_fullscreen": "Salir de pantalla completa",
     "add_long_caw": "CAW largo",
     "cost": "Costo",
-    "minting": "Creando...",
+    "minting": "Acuñando...",
+    "minted": "Acuñado",
+    "minted_success": "¡Acuñado con éxito!",
+    "approving": "Aprobando...",
+    "approved": "Aprobado",
     "block_explorer": "Explorador de bloques",
     "check_ntf_on": "Compruebe tu NFT en",
-    "its_magic": "✨Genial✨"
+    "its_magic": "✨Es fantástico✨",
+    "balance": "Balance",
+    "enter_amount": "Introduzca la cantidad",
+    "viewall": "Ver todo",
+    "manage_accounts": "Administrar cuentas",
+    "connectedto": "Conectado con",
+    "accounts": "Cuentas",
+    "options": "Opciones",
+    "quickmint": "Acuñación simple",
+    "mintuser": "Acuñar nombre de usuario",
+    "entery_user": "Introduzca el nombre de usuario",
+    "quickmintlabel": "Acuñar de manera profesional, con más opciones, aprendiendo y paso a paso."
+  },
+  "common": {
+    "amountgtzero": "La cantidad debe ser mayor que cero"
   },
   "sidebar_menu": {
     "home": "Inicio",
@@ -82,7 +117,7 @@
     "ethereum_title": "Respaldado por Ethereum",
     "ethereum_label": "Contrato construido sobre uno de los ecosistemas más innovadores y escalables del mundo.",
     "community_title": "Impulsado por la comunidad",
-    "community_label": "El CAW es por diseño sin diseño, y corresponde a la CAWMmunidad dar forma al CAW.",
+    "community_label": "El CAW es por diseño sin diseño, y corresponde a la CAWMmunidad darle forma.",
     "social_eco": "Economía Social",
     "social_eco_label_1": "Obtenga recompensas",
     "social_eco_label_2": "al compartir y crear contenido.",
@@ -105,6 +140,10 @@
     "page_title": "Actividad de la Comunidad",
     "wall_title": "Inicio"
   },
+  "layout_page": {
+    "text_1": "Por favor, tenga en cuenta que esta DAPP está en desarrollo y algunas funcionalidades puede no funcionen como se espera.",
+    "text_2": "Además, hay algunos textos e imágenes de relleno."
+  },
   "settings_page": {
     "title": "Configuración",
     "display": "Apariencia",
@@ -116,9 +155,9 @@
   },
   "minting_page": {
     "title": "Acuña tu nombre de usuario",
-    "message": "Acuñar tu NFT y únete a la revolución.",
+    "message": "Acuñar tu NFT y únete a la revølución.",
     "step_title": "El primer paso es conectar tu",
-    "step_title_wallet": "billetera",
+    "step_title_wallet": "monedero",
     "step_description": "Acuñar un NTF es la nueva forma de entrar al nuevo y revolucionario mundo.",
     "already_minted": "¿Ya tienes un CAW-NFT?",
     "username_already_taken": "ya está tomado",
@@ -137,7 +176,7 @@
     "wizard_step1_lb3": "Puedes acuñar tantos como puedas permitirte",
     "upding_balance": "Actualizando balance...",
     "main_balance": "Balance principal",
-    "caw_balance_req_lb": "Necesitas tener suficiente CAW para acuñar un nombre de usuario. Puedes cambiar ETH por mCAW aquí.",
+    "caw_balance_req_lb": "Necesitas tener suficiente mCAW para acuñar un nombre de usuario. Puedes cambiar ETH por mCAW aquí.",
     "enter_ntf_input_lb": "Ingresa tu nuevo nombre de usuario NTF",
     "user_acceptance_title": "Antes de continuar, debe conocer y aceptar lo siguiente",
     "user_acceptance_mchk_1": "Esta es una",
@@ -151,5 +190,12 @@
   },
   "minted_page": {
     "title": "¡Felicidades! Tu NFT ha sido acuñado"
+  },
+  "swap_page": {
+    "title": "Mintable CAW",
+    "goerli_msg": "Debe configurar Goerli testnet en su monedero antes de acuñar mCAW",
+    "get_goerli": "Solicitar Goerli ETH de una faucet, por ejemplo,",
+    "approve_req_msg": "Una vez que acuñado, debe que aprobar la transacción para transferir sus tokens CAW, de lo contrario sus fondos quedarán bloqueados en el contrato.",
+    "alert_cf_mint": "¿Desea acuñar {$0} mCAW?"
   }
 }

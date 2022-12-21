@@ -1,7 +1,5 @@
 
-import CAW_NAMES_ABI from 'src/ABIs/CAW_NAME.json';
-import MINTABLE_CAW_ABI from 'src/ABIs/MINTABLE_CAW.json';
-import CAW_NAME_MINTER_ABI from 'src/ABIs/CAW_NAME_MINTER.json';
+import { CAW_NAMES_ABI, MINTABLE_CAW_ABI, CAW_NAME_MINTER_ABI } from 'src/config/ABIs';
 
 export default function useAppConfigurations() {
 

@@ -8,7 +8,7 @@ export interface BoxMaskProps extends BoxProps {
     text?: string;
 }
 
-export function BoxMask({ icon, text, bg, iconColor, ...others }: BoxMaskProps) {
+export default function BoxMask({ icon, text, bg, iconColor, ...others }: BoxMaskProps) {
 
     const color = useColorModeValue('gray.50', 'whiteAlpha.50');
     const [ bgLight, bgDark ] = useToken('colors', [ 'gray.500', 'gray.50' ]);

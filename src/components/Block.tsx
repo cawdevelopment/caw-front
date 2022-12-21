@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-
 import { Box, SystemStyleObject, Text, useColorModeValue } from '@chakra-ui/react';
 
 export type BlockProps = {

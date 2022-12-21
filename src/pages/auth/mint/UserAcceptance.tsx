@@ -12,7 +12,7 @@ export const warnings = [
     'user_acceptance_warn_5'
 ]
 
-export function UserAcceptance() {
+export default function UserAcceptance() {
 
     const { t } = useTranslation();
     const { setValue, getValues } = useFormContext();

@@ -3,10 +3,10 @@ import { useFormContext } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import NavbarAccount from 'src/components/sidebar/NavbarAccount';
-import { MintingCost } from "./MintingCost";
-import { UserAcceptance } from "./UserAcceptance";
+import MintingCost from "./MintingCost";
+import UserAcceptance from "./UserAcceptance";
 
-export function ConfirmAndMintCard() {
+export default function ConfirmAndMintCard() {
 
     const { t } = useTranslation();
     const { getValues } = useFormContext();
@@ -21,7 +21,7 @@ export function ConfirmAndMintCard() {
             <Text as="b">
                 {t('minting_page.owneraddress_label')} : <br />
             </Text>
-            <NavbarAccount displayAddressMode="full" />
+            <NavbarAccount displayAddressMode="full" displaMode="carousel" showFooter={false} />
             <Divider />
             <Stack spacing={1}>
                 <UserAcceptance />

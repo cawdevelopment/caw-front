@@ -1,11 +1,13 @@
+# 🌙 CAW Frontend 
+<p align="center">
+  <a href="https://caw.is">
+      <img src="public/assets/tokens/caw.png" height="128">
+  </a>  
+<br>
+<br>
+</p>
 
 ## Getting Started
-
-```bash
-git clone
-cd
-npm install
-```
 
 Add the .env file (be aware that this file is not tracked by git) and add the following:
 
@@ -20,13 +22,26 @@ NETWORK="goerli"
 
 ```
 
-INFURA_API_KEY : Make sure to create a WEB3 API (Formely Ethereum) project on Infura and add the API key here.
+> INFURA_API_KEY : Make sure to create a WEB3 API (Formely Ethereum) project on Infura and add the API key here.
 
 Then, run the development server:
 
 ```bash
+npm install
 npm start dev
 ```
 
 
 ## Contributing
+Would you like to contribute to this project?
+
+This project is open source and welcomes contributions. We focus layer on the CAW Manifesto. We are in the early stages of a Social Clearing house; read more about it [here](https://caw.is/).
+
+We are looking for people who want to contribute to the project, not just the code. Join us on [Telegram](https://t.me/cawbuilders)
+
+
+Regarding the code, we invite you to read this project's [CONTRIBUTING](docs/CONTRIBUTING.md) guidelines.
+
+## Next Steps
+- [ ] Add more documentation
+- [ ] Add other guidelines

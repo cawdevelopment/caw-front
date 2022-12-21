@@ -1,17 +1,19 @@
 import React from "react";
 import { Box, Text, HStack, VStack, useColorModeValue, Image } from '@chakra-ui/react';
 
-import Avatar from 'src/components/avatar/Avatar';
-import ConnectWalletButton from "../buttons/ConnectWalletButton2";
-import { useWallet } from "src/context/WalletConnectContext";
+import { useCawProvider } from "src/context/WalletConnectContext";
+import ConnectWalletButton from "src/sections/compronents/contract/ConnectWalletButton";
+import PopoverAccount, { PopoverAccountProps } from "src/sections/compronents/contract/PopoverAccount";
 
-type Props = {
-  displayAddressMode?: 'full' | 'shorten'
+interface Props extends PopoverAccountProps {
+  displayAddressMode?: 'full' | 'shorten',
 }
-export default function NavbarAccount({ displayAddressMode = 'shorten' }: Props) {
+
+export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter }: Props) {
 
   const bgColor = useColorModeValue('gray.200', 'gray.800');
-  const { shortenAddress, address, cawName, chain, connected, openChainModal, openAccountModal } = useWallet();
+  const { shortenAddress, address, cawAccount, chain, openChainModal, openAccountModal } = useCawProvider();
+  const { connected } = useCawProvider();
 
   return (
     <Box
@@ -22,16 +24,10 @@ export default function NavbarAccount({ displayAddressMode = 'shorten' }: Props)
     >
       {connected ?
         <HStack>
-          <Avatar
-            name={cawName}
-            size="md"
-            color="white"
-            src={cawName}
-            type={"ntf"}
-          />
-          <VStack alignItems="flex-start" p={0} m={0} >
+          <PopoverAccount displaMode="carousel" showFooter={showFooter} />
+          <VStack textAlign="left" alignItems="flex-start">
             <Text noOfLines={1} as="b">
-              {cawName || ''}
+              {cawAccount?.userName || '🌙'}
             </Text>
             <HStack>
               <Box
@@ -67,6 +63,8 @@ export default function NavbarAccount({ displayAddressMode = 'shorten' }: Props)
               fontSize="sm"
               color="gray.600"
               cursor={'pointer'}
+              wordBreak="break-all"
+              as="p"
               onClick={openAccountModal}
             >
               {displayAddressMode === 'shorten' ? shortenAddress : address}

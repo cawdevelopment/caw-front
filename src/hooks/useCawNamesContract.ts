@@ -1,17 +1,14 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ethers } from "ethers";
+import { BigNumber, ethers } from "ethers";
 
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
+import { CawUserName } from 'src/types/dtos';
 import { getContract, getSignerContract } from "./contractHelper";
 import useAppConfigurations from './useAppConfigurations';
 
-export type UserTokenModel = {
-    id: number;
-    name: string;
-    balance: number;
-}
 
+//* Contract name :  CawName
 export default function useCawNamesContract() {
 
     const { t } = useTranslation();
@@ -48,18 +45,35 @@ export default function useCawNamesContract() {
         return { name, description, image };
     }
 
-    const getTokens = (address: string): UserTokenModel[] => {
+    const getTokens = async (address: string, fetchAvatar: boolean): Promise<CawUserName[]> => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        const tokens = contract.tokens(address);
+        const tokens = await contract.tokens(address);
 
-        const tokensArray: UserTokenModel[] = tokens.map((token: any) => ({
-            id: token[ 0 ],
-            balance: token[ 1 ],
-            name: token[ 2 ],
-        }));
+        const tokensArray: CawUserName[] = tokens.map((token: any) => {
+
+            const _u: CawUserName = {
+                id: parseInt(BigNumber.from(token.tokenId).toString()),
+                balance: BigNumber.from(token.balance).toNumber(),
+                userName: (token.username || ''),
+                avatar: '',
+            };
+
+            return _u;
+        });
+
+
+        if (fetchAvatar) {
+            const ids = tokensArray.map((t: CawUserName) => t.id);
+            const promises = ids.map((id: number) => getTokenURI(id));
+            const results = await Promise.all(promises);
+
+            tokensArray.forEach((t: CawUserName, i: number) => {
+                t.avatar = results[ i ].image;
+            });
+        }
 
         return tokensArray;
     }

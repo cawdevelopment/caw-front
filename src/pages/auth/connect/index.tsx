@@ -56,7 +56,7 @@ export default function LoginPage() {
                             size="lg"
                             onClick={handleLogin}
                         >
-                            {t('buttons.btn_connect_wallet')}
+                            {t('buttons.btn_access')}
                         </Button>
                         <NextLink href={PATH_AUTH.mint} passHref>
                             <Button

@@ -31,3 +31,5 @@ export const isValidUsername = (username: string) => {
     const regex = /^[a-z0-9]+$/;
     return regex.test(username);
 }
+
+export const sentenceCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);

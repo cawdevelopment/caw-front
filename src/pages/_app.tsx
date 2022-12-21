@@ -3,7 +3,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import "../locales/i18n";
 
 import { ReactElement, ReactNode } from "react";
-import App, { AppProps, AppContext } from "next/app";
+import { AppProps } from "next/app";
 import { NextPage } from "next";
 import Head from "next/head";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -16,7 +16,7 @@ import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
 import theme from '../theme'
-import { WalletProvider } from 'src/context/WalletConnectContext'
+import { CAWProvider } from 'src/context/WalletConnectContext'
 
 //* Web3 connector and layer
 const { chains, provider } = configureChains(
@@ -59,10 +59,10 @@ export default function MyApp(props: MyAppProps) {
       <ChakraProvider theme={theme} resetCSS>
         <WagmiConfig client={wagmiClient}>
           <RainbowKitProvider chains={chains}>
-            <WalletProvider>
+            <CAWProvider>
             {/* This allows us to use diferent layouts for each type of pages (i.e dashboard, landing page, etc) */}
               {getLayout(<Component {...pageProps} />)}
-            </WalletProvider>
+            </CAWProvider>
           </RainbowKitProvider>
         </WagmiConfig>
       </ChakraProvider>
@@ -70,10 +70,10 @@ export default function MyApp(props: MyAppProps) {
   );
 }
 
-MyApp.getInitialProps = async (context: AppContext) => {
-  const appProps = await App.getInitialProps(context);
+// MyApp.getInitialProps = async (context: AppContext) => {
+//   const appProps = await App.getInitialProps(context);
 
-  return {
-    ...appProps,
-  };
-};
+//   return {
+//     ...appProps,
+//   };
+// };

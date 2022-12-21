@@ -2,7 +2,7 @@ import { Container } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import { FormStepper } from "./FormStepper";
+import FormStepper from "./FormStepper";
 
 RegisterPage.getLayout = function getLayout(page: React.ReactElement) {
     return <Layout variant="logoOnly">{page}</Layout>;

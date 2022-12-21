@@ -132,6 +132,7 @@ export default function CardParallaxSection() {
                                                                 size={'lg'}
                                                                 bg={buttonBg}
                                                                 color={buttonColor}
+                                                                colorScheme={'blackAlpha'}
                                                                 textTransform={'uppercase'}
                                                                 leftIcon={<Iconify icon={'eva:flash-fill'} width={20} height={20} color={"white"} />}
                                                             >

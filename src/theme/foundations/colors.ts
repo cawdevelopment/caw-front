@@ -27,7 +27,7 @@ export const schemes = [
 const colors: Colors = {
 	transparent: 'transparent',
 	current: 'currentColor',
-	black: '#000000',
+	black: '#000000',	
 	white: '#FFFFFF',
 	whiteAlpha: {
 		50: 'rgba(255, 255, 255, 0.04)',
@@ -261,6 +261,7 @@ const colors: Colors = {
 		main: '#f7c034',
 		dark: '#B66816',
 		darker: '#793908',
+		border: '#151417',
 	},
 	cawAlpha: {
 		50: 'rgba(247, 192, 52, 0.04)',
