@@ -8,7 +8,7 @@ import {
 
 import AlertDialog from "src/components/dialogs/AlertDialog";
 import Block from "src/components/Block";
-import ConnectWalletButton from "src/components/buttons/ConnectWalletButton2";
+import ConnectWalletButton from "src/sections/compronents/contract/ConnectWalletButton";
 import AlertMessage from "src/components/AlertMessage";
 
 import { useCawProvider } from "src/context/WalletConnectContext";
