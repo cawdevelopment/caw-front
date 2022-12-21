@@ -80,7 +80,16 @@
     "check_ntf_on": "Compruebe tu NFT en",
     "its_magic": "✨Es fantástico✨",
     "balance": "Balance",
-    "enter_amount": "Introduzca la cantidad"
+    "enter_amount": "Introduzca la cantidad",
+    "viewall": "Ver todo",
+    "manage_accounts": "Administrar cuentas",
+    "connectedto": "Conectado con",
+    "accounts": "Cuentas",
+    "options": "Opciones",
+    "quickmint": "Acuñación simple",
+    "mintuser": "Acuñar nombre de usuario",
+    "entery_user": "Introduzca el nombre de usuario",
+    "quickmintlabel": "Acuñar de manera profesional, con más opciones, aprendiendo y paso a paso."
   },
   "common": {
     "amountgtzero": "La cantidad debe ser mayor que cero"
@@ -132,7 +141,7 @@
     "wall_title": "Inicio"
   },
   "layout_page": {
-    "text_1": "Por favor, ten en cuenta que esta DAPP está en desarrollo y puede no funcionar como se espera.",
+    "text_1": "Por favor, tenga en cuenta que esta DAPP está en desarrollo y algunas funcionalidades puede no funcionen como se espera.",
     "text_2": "Además, hay algunos textos e imágenes de relleno."
   },
   "settings_page": {

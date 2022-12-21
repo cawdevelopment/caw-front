@@ -89,7 +89,16 @@
     "check_ntf_on": "Check your NFT on",
     "its_magic": "✨It's magic✨",
     "balance": "Balance",
-    "enter_amount": "Enter an amount"
+    "enter_amount": "Enter an amount",
+    "viewall": "View all",
+    "manage_accounts": "Manage your accounts",
+    "connectedto": "Connected to",
+    "accounts": "Accounts",
+    "options": "Options",
+    "quickmint": "Quick Mint",
+    "mintuser": "Mint Username",
+    "entery_user": "Enter your username",
+    "quickmintlabel": "Mint professionally, with more options, learning it, and step-by-step."
   },
   "common": {
     "amountgtzero": "Amount must be greater than zero"
@@ -141,7 +150,7 @@
     "wall_title": "Home"
   },
   "layout_page": {
-    "text_1": "Please bear in mind this DAPP is under development and may not work as expected.",
+    "text_1": "Please bear in mind this DAPP is under development, and some features may not work as expected.",
     "text_2": "In addition, there are some filler texts and images."
   },
   "settings_page": {
@@ -186,7 +195,8 @@
     "user_acceptance_warn_2": "I am responsible for my username and its actions",
     "user_acceptance_warn_3": "I will not be able to change my username later",
     "user_acceptance_warn_5": "Power given to me, with great power comes great responsibility",
-    "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users"
+    "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users",
+    "confirm_mnt": "Are you sure you want to mint the name : {0}?"
   },
   "minted_page": {
     "title": "Your NFT-Username is minted"
