@@ -87,7 +87,7 @@ const CAWProvider = ({ children }: Props) => {
             return;
 
         //* Validate if the user is the owner of the username
-        const _userName = userNames.find((user) => user.userName !== cawAccount.userName);
+        const _userName = userNames.find((user) => user.userName === cawAccount.userName);
         if (!_userName)
             throw new Error('You are not the owner of this username');
 
@@ -109,21 +109,36 @@ const CAWProvider = ({ children }: Props) => {
             if (getTokenFetched)
                 return;
 
-            const _userNames = await getTokens(address);
+            const _userNames = await getTokens(address, true);
             setUserNames(_userNames);
             setGetTokenFetched(true);
         }
         catch (error) {
             console.error("effect getting usernames :", error);
         }
-    }, [ address, getTokens, getTokenFetched ]);
-
+    }, [ address, getTokenFetched, getTokens ]);
 
     useEffect(() => {
 
-        //* Set the first username as the default
-        (userNames?.length > 0 && !userName) && handleCawAccount(userNames[ 0 ]);
-    }, [ userNames, userName, handleCawAccount ]);
+        //* Reset the state when the address changes
+        setGetTokenFetched(false);
+        setUserName(null);
+        setUserNames([]);
+    }, [ address ]);
+
+    useEffect(() => {
+
+        //* Set the first username as the default when the userNames changes and current username is null
+        if (!Boolean(userName) && userNames?.length > 0)
+            handleCawAccount(userNames[ 0 ]);
+
+    }, [ userName, userNames, handleCawAccount ]);
+
+    // useEffect(() => {
+
+    //     //* Set the first username as the default
+    //     (userNames?.length > 0 && !userName) && handleCawAccount(userNames[ 0 ]);
+    // }, [ userNames, userName, handleCawAccount ]);
 
     useEffect(() => {
 
