@@ -1,10 +1,11 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { useTranslation } from "react-i18next";
+import { Box, CloseButton, Slide } from "@chakra-ui/react";
 
+import { useLocalStorage } from "src/hooks";
 import DashboardLayout from './DashboardLayout';
 import LogoOnlyLayout from './LogoOnlyLayout';
 import LandinLayout from './LandingLayout';
-import { Box, CloseButton, Slide } from "@chakra-ui/react";
 
 type Props = {
   children: ReactNode;
@@ -13,15 +14,13 @@ type Props = {
 
 function WarningSlide() {
 
-  const [ open, setOpen ] = useState(true);
   const { t } = useTranslation();
+  const [ noticedClose, setNotice ] = useLocalStorage<boolean>("developmentNotice", false);
 
-  const handleClose = () => {
-    setOpen(false);
-  }
+  const handleClose = () => setNotice(true);
 
   return (
-    <Slide direction='bottom' in={open} style={{ zIndex: 10 }}>
+    <Slide direction='bottom' in={!noticedClose} style={{ zIndex: 10 }}>
       <Box
         p='40px'
         color='white'

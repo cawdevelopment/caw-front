@@ -45,7 +45,7 @@ export default function useCawNamesContract() {
         return { name, description, image };
     }
 
-    const getTokens = async (address: string): Promise<CawUserName[]> => {
+    const getTokens = async (address: string, fetchAvatar: boolean): Promise<CawUserName[]> => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
@@ -63,6 +63,17 @@ export default function useCawNamesContract() {
 
             return _u;
         });
+
+
+        if (fetchAvatar) {
+            const ids = tokensArray.map((t: CawUserName) => t.id);
+            const promises = ids.map((id: number) => getTokenURI(id));
+            const results = await Promise.all(promises);
+
+            tokensArray.forEach((t: CawUserName, i: number) => {
+                t.avatar = results[ i ].image;
+            });
+        }
 
         return tokensArray;
     }
