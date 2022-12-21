@@ -1,9 +1,10 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Stack, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useColorModeValue } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
-import { useFormContext } from "react-hook-form";
+import { useDebounce } from "use-debounce";
 
+import { useMintingPageContext } from ".";
 import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
 import { isValidUsername as validateUserNameLocally } from "src/utils/helper";
 import MintingCost from "./MintingCost";
@@ -12,81 +13,91 @@ import MintingCost from "./MintingCost";
 export default function MintUserNameCard() {
 
     const { t } = useTranslation();
-    const { register, setValue, watch } = useFormContext();
-    const { userName, isValid, message } = watch();
+    const { userName, isValid, message, onSetValue } = useMintingPageContext();
     const { getCostOfName, isValidUsername, getIdByUserName } = useCawNameMinterContract();
     const errorColor = useColorModeValue('red.500', 'red.600');
     const successColor = useColorModeValue('green.500', 'green.600');
 
+    const [ value, setValue ] = useState<string>();
+    const [ debouncedValue ] = useDebounce(value, 500);
+
+    useEffect(() => {
+        setValue(userName);
+    }, [ userName ]);
+
+    useEffect(() => {
+        onSetValue('userName', debouncedValue);
+    }, [ debouncedValue, onSetValue ])
+
     const handleChange = (event: any) => {
         checkUsername(event.target.value);
         getCost(event.target.value);
+        setValue(event.target.value);
     }
 
     const checkUsername = useCallback((async (userName: string) => {
         try {
 
             if (!(validateUserNameLocally(userName))) {
-
-                setValue('isValid', false);
-                setValue('message', userName ? t('minting_page.username_invalid') : '');
-                setValue('onChainValidated', false);
+                onSetValue('isValid', false);
+                onSetValue('message', userName ? t('minting_page.username_invalid') : '');
+                onSetValue('onChainValidated', false);
                 return;
             }
 
             const [ isValid, id ] = await Promise.all([ isValidUsername(userName), getIdByUserName(userName) ]);
 
             if (id > 0) {
-                setValue('isValid', false);
-                setValue('message', `${userName} ${t('minting_page.username_already_taken')}`);
-                setValue('onChainValidated', true);
+                onSetValue('isValid', false);
+                onSetValue('message', `${userName} ${t('minting_page.username_already_taken')}`);
+                onSetValue('onChainValidated', true);
                 return;
             }
 
             if (!isValid) {
-                setValue('isValid', false);
-                setValue('message', t('minting_page.username_invalid'));
-                setValue('onChainValidated', true);
+                onSetValue('isValid', false);
+                onSetValue('message', t('minting_page.username_invalid'));
+                onSetValue('onChainValidated', true);
                 return;
             }
 
-            setValue('isValid', true);
-            setValue('message', `${userName} ${t('minting_page.username_available')}`);
-            setValue('onChainValidated', true);
+            onSetValue('isValid', true);
+            onSetValue('message', `${userName} ${t('minting_page.username_available')}`);
+            onSetValue('onChainValidated', true);
         }
         catch (error) {
-            setValue('isValid', false);
-            setValue('message', 'An error occured');
-            setValue('onChainValidated', true);
+            onSetValue('isValid', false);
+            onSetValue('message', 'An error occured');
+            onSetValue('onChainValidated', true);
         }
-    }), [ t, isValidUsername, getIdByUserName, setValue ]);
+    }), [ t, isValidUsername, getIdByUserName, onSetValue ]);
 
     const getCost = useCallback((async (userName: string) => {
         try {
 
             if (!validateUserNameLocally(userName)) {
-                setValue('costVerified', false);
-                setValue('costUSD', 0);
-                setValue('costETH', 0);
-                setValue('costCAW', 0);
+                onSetValue('costVerified', false);
+                onSetValue('costUSD', 0);
+                onSetValue('costETH', 0);
+                onSetValue('costCAW', 0);
                 return;
             }
 
             const cost = await getCostOfName(userName);
 
-            setValue('costUSD', cost.constInUsd);
-            setValue('costETH', cost.costInEth);
-            setValue('costCAW', cost.cost);
-            setValue('costVerified', true);
+            onSetValue('costUSD', cost.constInUsd);
+            onSetValue('costETH', cost.costInEth);
+            onSetValue('costCAW', cost.cost);
+            onSetValue('costVerified', true);
 
         } catch (error) {
-            setValue('message', 'An error occured while getting the cost');
-            setValue('costVerified', false);
-            setValue('costUSD', 0);
-            setValue('costETH', 0);
-            setValue('costCAW', 0);
+            onSetValue('message', 'An error occured while getting the cost');
+            onSetValue('costVerified', false);
+            onSetValue('costUSD', 0);
+            onSetValue('costETH', 0);
+            onSetValue('costCAW', 0);
         }
-    }), [ getCostOfName, setValue ]);
+    }), [ getCostOfName, onSetValue ]);
 
     return (
         <Stack spacing={4}>
@@ -94,7 +105,7 @@ export default function MintUserNameCard() {
                 <FormLabel>{t('minting_page.enter_ntf_input_lb') + ':'}</FormLabel>
                 <InputGroup>
                     <Input
-                        {...register('userName', { required: true })}
+                        value={value}
                         size='lg'
                         variant='filled'
                         type="text"

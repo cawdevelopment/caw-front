@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "npm run lint:es && next dev -p 8082",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8082",
     "lint": "next lint",
     "lint:es": "eslint --ext .ts,.tsx ."
   },

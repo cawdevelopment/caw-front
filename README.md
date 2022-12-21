@@ -28,7 +28,8 @@ Then, run the development server:
 
 ```bash
 yarn install
-npm start dev
+yarn dev
+yarn build
 ```
 
 

@@ -1,11 +1,11 @@
 import { Text, As } from "@chakra-ui/react";
-import { useFormContext } from "react-hook-form";
+
+import { useMintingPageContext } from ".";
 import { fDecimal } from "src/utils/formatNumber";
 
 export default function MintingCost({ title = 'Cost:', renderComp = 'b' }: { title?: string; renderComp?: As; }) {
 
-    const { watch } = useFormContext();
-    const { costVerified, costUSD, costETH, costCAW } = watch();
+    const { costVerified, costUSD, costETH, costCAW } = useMintingPageContext();
 
     return (
         <>

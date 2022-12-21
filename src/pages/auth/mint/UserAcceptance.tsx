@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
-import { Stack, Text, Checkbox, Link, chakra } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { Stack, Text, Checkbox, Link, chakra } from "@chakra-ui/react";
+
+import { useMintingPageContext } from ".";
 
 //* Codes come from src/locales/[lang.json] minting_page section
 export const warnings = [
@@ -15,15 +16,14 @@ export const warnings = [
 export default function UserAcceptance() {
 
     const { t } = useTranslation();
-    const { setValue, getValues } = useFormContext();
-    const termsAccepted = getValues('termsAccepted');
+    const { termsAccepted, onSetValue } = useMintingPageContext();
     const [ checkedItems, setCheckedItems ] = useState(warnings.map(c => termsAccepted));
     const allChecked = checkedItems.every(Boolean);
     const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
     useEffect(() => {
-        setValue('termsAccepted', allChecked);
-    }, [ allChecked, setValue ]);
+        onSetValue('termsAccepted', allChecked);
+    }, [ allChecked, onSetValue ]);
 
     return (
         <chakra.div pt={5}>
