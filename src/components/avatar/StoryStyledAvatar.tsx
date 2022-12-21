@@ -1,8 +1,12 @@
 import { motion } from 'framer-motion';
 import { useColorModeValue, useToken } from "@chakra-ui/react";
+
 type Props = {
     src: string,
     alt: string,
+    height?: string,
+    width?: string,
+    onClick?: () => void,
 }
 
 const item = {
@@ -11,7 +15,7 @@ const item = {
 };
 
 
-export default function AnimatedAvatar({ src, alt }: Props) {
+export default function StoryStyledAvatar({ src, alt, height = '3.125rem', width = '3.125rem', onClick }: Props) {
 
     const [ PRIMARY_MAIN, PRIMARY_DARKER, BORDER_LOGO ] = useToken('colors', [ 'caw.main', 'caw.darker', 'caw.border' ]);
     const bg = useColorModeValue('cawAlpha.400', 'cawAlpha.50');
@@ -29,8 +33,8 @@ export default function AnimatedAvatar({ src, alt }: Props) {
             <div
                 style={{
                     background: `linear-gradient(90deg, ${hoverBg} 0%,${PRIMARY_DARKER} 105%)`,
-                    height: '50px',
-                    width: '50px',
+                    height: height,
+                    width: width,
                     borderRadius: '50%',
                     border: `3px solid ${bg}`,
                     display: 'flex',
@@ -40,12 +44,18 @@ export default function AnimatedAvatar({ src, alt }: Props) {
                     fontSize: '38px',
                 }}
             >
-                <img src={src} alt={alt} role="img"
+                <img
+                    src={src}
+                    alt={alt}
+                    role="img"
                     style={{
                         paddingRight: 0,
                         borderRadius: '50%',
                         padding: '0.2rem',
-                    }} />
+                        cursor: 'pointer',
+                    }}
+                    onClick={onClick}
+                />
             </div>
         </motion.div>
     );
