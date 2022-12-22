@@ -58,6 +58,9 @@ export default function MintedUserNamePage() {
         if (!cMinterInitialized)
             return;
 
+        if (!userName)
+            return;
+
         const cb = async () => {
             try {
                 setLoading(true)
@@ -100,8 +103,6 @@ export default function MintedUserNamePage() {
                     return;
 
                 const uri = await getTokenURI(userId);
-                console.log("uri : ", uri);
-
                 if (!active)
                     return;
 
@@ -109,7 +110,6 @@ export default function MintedUserNamePage() {
                 setLoading(false);
             }
             catch (error: any) {
-                console.error("error : ", error);
                 if (!active)
                     return;
 
@@ -126,7 +126,7 @@ export default function MintedUserNamePage() {
 
     return (
         <PageWrapper title={t('minted_page.title')}>
-            <Container w="container.lg" maxW={"container.xl"} h="container.lg" pt={10}>
+            <Container maxW={"container.xl"} h="container.lg" pt={10}>
                 <WrapperFadeAnimation show={Boolean(error)} >
                     <Center>
                         <Text fontSize="xl" fontWeight="bold" color="tomato">

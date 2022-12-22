@@ -7,14 +7,15 @@ import UserAcceptance from "./UserAcceptance";
 
 type Props = {
     userName: string;
+    width: number;
 }
 
-export default function ConfirmAndMintCard({ userName }: Props) {
+export default function ConfirmAndMintCard({ userName, width }: Props) {
 
     const { t } = useTranslation();
 
     return (
-        <Stack spacing={4}>
+        <Stack spacing={4} width={width <= 0 ? 'full' : width}>
             <Text fontSize={'lg'} >
                 {t('minting_page.username_label')} : <b>{userName}</b>
             </Text>

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useMintingPageContext } from ".";
 import WalletConnection from "./WalletConnection";
 import ConfirmAndMintCard from "./ConfirmAndMintCard";
@@ -12,16 +13,21 @@ type Props = {
 export default function Steps({ step }: Props) {
 
     const { userName } = useMintingPageContext();
+    const [ width, setWidth ] = useState(0);
+
+    const onInitilizedBox = (width: number) => {
+        setWidth(width);
+    }
 
     switch (step) {
         case 1:
-            return <WalletConnection />;
+            return <WalletConnection onInitilizedBox={onInitilizedBox} />;
         case 2:
-            return <WalletBalanceCard />;
+            return <WalletBalanceCard width={width} />;
         case 3:
-            return <MintUserNameCard />;
+            return <MintUserNameCard width={width} />;
         case 4:
-            return <ConfirmAndMintCard userName={userName} />;
+            return <ConfirmAndMintCard width={width} userName={userName} />;
         default:
             return null;
     }

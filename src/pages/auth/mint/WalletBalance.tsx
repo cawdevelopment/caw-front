@@ -45,7 +45,7 @@ function AssetItem({ balance }: { balance: WalletBalanceModel }) {
                     </Text>
                 </Text>
                 <VStack alignItems={"flex-end"}>
-                    <Text>{`${fDecimal(amount)} ${amount >= BILLION ? ` | ${kFormatter(amount)}` : ''}`}</Text>
+                    <Text lineHeight={1} wordBreak="break-all" >{`${fDecimal(amount)} ${amount >= BILLION ? ` | ${kFormatter(amount)}` : ''}`}</Text>
                 </VStack>
             </HStack>
             <Divider />
@@ -53,7 +53,7 @@ function AssetItem({ balance }: { balance: WalletBalanceModel }) {
     );
 }
 
-export default function WalletBalanceCard() {
+export default function WalletBalanceCard({ width }: { width: number }) {
 
     const { address, chain } = useCawProvider();
     const { contracts: { CAW, MINTABLE_CAW } } = useAppConfigurations();
@@ -90,7 +90,7 @@ export default function WalletBalanceCard() {
 
     const sortedByAmount = assets.sort((a, b) => b.amount - a.amount);
     return (
-        <Box width={"-webkit-fit-content"} maxWidth={"container.md"} >
+        <Box width={width <= 0 ? 'full' : width} maxWidth={"container.md"}  >
             <Heading size="md" mb={2}>
                 {(fetchingETH || fetcinghCAW || fetchingMCAW) ? t('minting_page.upding_balance') : t('minting_page.main_balance')}
             </Heading>
@@ -102,7 +102,7 @@ export default function WalletBalanceCard() {
                     {t('minting_page.caw_balance_req_lb')}
                 </Text>
                 <Box p={5}>
-                    <NextLink href={PATH_DASHBOARD.swap.mcaw} target="_blank" passHref>
+                    <NextLink href={PATH_DASHBOARD.swap.mcaw} target="_blank" rel="noopener noreferrer" passHref>
                         <Button
                             variant="link"
                             colorScheme="blue"

@@ -62,6 +62,7 @@ export default function NtfNameCard({ userName, image, blockExplorerUrl, openSea
                         <Spacer h={5} />
                         <Stack direction={'column'} align={'center'}>
                             <Link
+                                isExternal
                                 color={'blue.400'}
                                 target="_blank"
                                 href={blockExplorerUrl}
@@ -72,7 +73,7 @@ export default function NtfNameCard({ userName, image, blockExplorerUrl, openSea
                             <Link
                                 isExternal
                                 color={'blue.400'}
-                                target="_blank"
+                                target="_blank"                                
                                 href={openSeaUrl}
                             >
                                 <b>OpenSea</b> <ExternalLinkIcon mx='2px' />
