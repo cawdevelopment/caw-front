@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NextLink from 'next/link';
-import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup, Code } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { m, AnimatePresence } from "framer-motion";
 
@@ -39,6 +39,11 @@ export default function FormStepper(props: Props) {
     const { t } = useTranslation();
     const { connected } = useCawProvider();
 
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.screenY = 0;
+    }, [ step ]);
+
     return (
         <MotionContainer>
             <div>
@@ -63,6 +68,9 @@ export default function FormStepper(props: Props) {
                                 {t('minting_page.message')}
                             </Text>
                             <NftPriceLegend />
+                            <Code colorScheme='red'>
+                                <b>{t('labels.testnet_msg')}</b>
+                            </Code>
                         </Stack>
                         <Progress
                             value={progress}

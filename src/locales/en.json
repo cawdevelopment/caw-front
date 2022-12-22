@@ -54,7 +54,8 @@
     "btn_approve": "Approve"
   },
   "errors": {
-    "install_wallet": "No ethereum provider found, please install metamask or similar"
+    "install_wallet": "No ethereum provider found, please install metamask or similar",
+    "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network"
   },
   "labels": {
     "the": "The",
@@ -100,7 +101,8 @@
     "entery_user": "Enter your username",
     "quickmintlabel": "Mint professionally, with more options, learning it, and step-by-step.",
     "getmcaw": "Get mCAW",
-    "getmcawlarge": "Get MintableCAW"
+    "getmcawlarge": "Get MintableCAW",
+    "testnet_msg": "Connect to goerli testnet to test the process"
   },
   "common": {
     "amountgtzero": "Amount must be greater than zero"
@@ -209,7 +211,7 @@
   "swap_page": {
     "title": "Mintable CAW",
     "goerli_msg": "You need to set up Goerli testnet in your wallet before minting mCAW",
-    "get_goerli": "Retrieve some Goerli ETH from a fauce, i.g. : ",
+    "get_goerli": "Retrieve some Goerli ETH from a faucet, i.g. : ",
     "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens,otherwise your funds will be locked in the contract.",
     "alert_cf_mint": "Do you want to mint {$0} mCAW?"
   }

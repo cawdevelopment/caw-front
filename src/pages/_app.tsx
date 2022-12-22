@@ -21,8 +21,7 @@ import { CAWProvider } from 'src/context/WalletConnectContext'
 //* Web3 connector and layer
 const { chains, provider } = configureChains(
   [
-    chain.goerli,
-    chain.mainnet
+    chain.goerli
   ],
   [
     infuraProvider({ apiKey: process.env.INFURA_API_KEY, priority: 0, }),

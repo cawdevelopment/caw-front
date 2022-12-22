@@ -7,10 +7,10 @@ import {
 } from "@chakra-ui/react";
 
 import AlertDialog from "src/components/dialogs/AlertDialog";
-import ConnectWalletButton from "src/sections/compronents/contract/ConnectWalletButton";
 import AlertMessage from "src/components/AlertMessage";
-
 import { useCawProvider } from "src/context/WalletConnectContext";
+import NavbarAccount from 'src/components/sidebar/NavbarAccount';
+
 import { MILLION } from 'src/utils/constants';
 import { fDecimal, kFormatter } from 'src/utils/formatNumber';
 import { sentenceCase, shortenAddress } from "src/utils/helper";
@@ -23,7 +23,7 @@ export default function SwapMCAWForm() {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { address, connected, chain } = useCawProvider();
     const bg = useColorModeValue("gray.50", "gray.800");
-    const brColor = useColorModeValue("gray.200", "gray.50");
+    const brColor = useColorModeValue("gray.400", "gray.50");
     const colorText = useColorModeValue("gray.900", "gray.50");
     const { balance } = useETHBalance(address);
     const { initialized, mint, approve } = useMintableCAWContract();
@@ -267,7 +267,7 @@ export default function SwapMCAWForm() {
                         :
                         <VStack pt={10}>
                             <Divider />
-                            <ConnectWalletButton />
+                            <NavbarAccount displaMode="carousel" showFooter={false} displayAddressMode="full" />
                         </VStack>
                     }
                 </FormControl>

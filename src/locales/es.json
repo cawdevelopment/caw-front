@@ -45,7 +45,8 @@
     "btn_approve": "Aprobar"
   },
   "errors": {
-    "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar."
+    "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar.",
+    "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas."
   },
   "labels": {
     "the": "El",
@@ -91,7 +92,8 @@
     "entery_user": "Introduzca el nombre de usuario",
     "quickmintlabel": "Acuñar de manera profesional, con más opciones, aprendiendo y paso a paso.",
     "getmcaw": "Obtener mCAW",
-    "getmcawlarge" : "Obtener MintableCAW"
+    "getmcawlarge": "Obtener MintableCAW",
+    "testnet_msg": "Conectarse a la testnet de Goerli para continuar con el proceso"
   },
   "common": {
     "amountgtzero": "La cantidad debe ser mayor que cero"

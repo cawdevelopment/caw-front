@@ -41,7 +41,7 @@ export default function HeroSection() {
 
     return (
         <MotionContainer id="home-hero-section" >
-            <chakra.div minH={"container.lg"}>
+            <chakra.div h={"container.md"}>
                 <Image
                     src="assets/images/cawnet.png"
                     alt="caw-image"
@@ -57,7 +57,7 @@ export default function HeroSection() {
                         <m.div variants={varFade().inDown}>
                             <ContentAlign>
                                 <Text
-                                    fontSize="6xl"
+                                    fontSize="4xl"
                                     fontWeight="bold"
                                     textAlign={isMd ? 'left' : 'center'}
                                 >
