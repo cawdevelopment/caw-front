@@ -32,12 +32,14 @@ export default function SwapMintableCAW() {
                         {t('swap_page.get_goerli')}
                     </Text>
                     <Link
+                        isExternal
                         color={'blue.400'}
                         href="https://goerlifaucet.com/"
                         target="_blank">
                         Goerli Faucet
                     </Link>
                     <Link
+                        isExternal
                         color={'blue.400'}
                         href="https://faucets.chain.link/"
                         target="_blank">
@@ -51,11 +53,11 @@ export default function SwapMintableCAW() {
                     <SwapMCAWForm />
                 </Block>
                 <Flex p={3} direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
-                    <NextLink href={PATH_AUTH.mint} passHref>
+                    <NextLink href={PATH_AUTH.mint} passHref rel="noopener noreferrer">
                         <Link color={'blue.400'}><b>{t('home.btn_mint')}</b></Link>
                     </NextLink>
                     <Spacer />
-                    <NextLink href={PATH_AUTH.connect} passHref>
+                    <NextLink href={PATH_AUTH.connect} passHref rel="noopener noreferrer">
                         <Link color={'blue.400'}>{t('minting_page.already_minted')}</Link>
                     </NextLink>
                 </Flex>

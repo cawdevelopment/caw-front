@@ -22,7 +22,7 @@ function Card({ data }: { data: DataModel }) {
     return (
         <m.div
             initial={{ opacity: 0.3 }}
-            whileHover={{ opacity: 0.8 }}
+            whileHover={{ opacity: 0.6 }}
         >
             <Tag
                 minWidth={CARD_WIDTH}
@@ -127,7 +127,7 @@ export default function CardParallaxSection() {
                                                 </m.div>
                                                 <m.div variants={varFade().inDown}>
                                                     <ContentAlign>
-                                                        <NextLink href={PATH_DASHBOARD.app.home} passHref>
+                                                        <NextLink href={PATH_DASHBOARD.app.home} passHref rel="noopener noreferrer" >
                                                             <Button
                                                                 size={'lg'}
                                                                 bg={buttonBg}

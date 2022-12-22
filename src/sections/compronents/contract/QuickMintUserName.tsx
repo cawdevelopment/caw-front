@@ -141,7 +141,7 @@ export default function QuickMintingUserName() {
                         <MintNFTNameForm />
                     </ModalBody>
                     <ModalFooter alignItems="center">
-                        <NextLink href={PATH_AUTH.mint} target="_blank" passHref>
+                        <NextLink href={PATH_AUTH.mint} target="_blank" rel="noopener noreferrer" passHref>
                             <Link color={'blue.400'} textDecoration="none">
                                 {t('labels.quickmintlabel')}
                             </Link>
