@@ -2,6 +2,7 @@ import { Container, Heading, Highlight, Stack, Link, Text, Center, Flex, Spacer 
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 
+import Block from "src/components/Block";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import SwapMCAWForm from 'src/views/MintableCawForm';
 import { PATH_AUTH } from "src/routes/paths";
@@ -14,9 +15,9 @@ export default function SwapMintableCAW() {
     const { t } = useTranslation();
     return (
         <PageWrapper title={t('swap_page.title')}>
-            <Container w="full" maxW={"container.xl"} h="container.lg" p={0}>
+            <Container w="full" maxW={"container.xl"} h="container.lg" p={2}>
                 <Center>
-                    <Heading lineHeight='short' fontSize='xl'>
+                    <Heading lineHeight='short' fontSize='xl' p={1}>
                         <Highlight
                             query='Goerli testnet'
                             styles={{ px: '2', py: '1', rounded: 'full', bg: 'red.100' }}
@@ -26,32 +27,32 @@ export default function SwapMintableCAW() {
                     </Heading>
                 </Center>
                 <br />
-                <Center>
-                    <Stack direction={{ base: 'column', md: 'row' }} spacing={0.5} p={1} align='center' alignItems="baseline">
-                        <Text fontSize='xl'>
-                            {t('swap_page.get_goerli')}
-                        </Text>
-                        <Link
-                            color={'blue.400'}
-                            href="https://goerlifaucet.com/"
-                            target="_blank">
-                            Goerli Faucet
-                        </Link>
-                        <Text fontSize='xl'>
-                            {t('prepos.or')}
-                        </Text>
-                        <Link
-                            color={'blue.400'}
-                            href="https://faucets.chain.link/"
-                            target="_blank">
-                            Faucets Chain
-                        </Link>
-                    </Stack>
-                </Center>
-                <SwapMCAWForm />
-                <Flex p={3}>
+                <Stack id="stack-goerli" direction={{ base: 'column', md: 'column' }} spacing={2} p={1} alignItems="center">
+                    <Text fontSize='xl' textAlign="center">
+                        {t('swap_page.get_goerli')}
+                    </Text>
+                    <Link
+                        color={'blue.400'}
+                        href="https://goerlifaucet.com/"
+                        target="_blank">
+                        Goerli Faucet
+                    </Link>
+                    <Link
+                        color={'blue.400'}
+                        href="https://faucets.chain.link/"
+                        target="_blank">
+                        Faucets Chain
+                    </Link>
+                </Stack>
+                <Block
+                    sx={{ p: 1 }}
+                    sxContainer={{ p: 1 }}
+                >
+                    <SwapMCAWForm />
+                </Block>
+                <Flex p={3} direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
                     <NextLink href={PATH_AUTH.mint} passHref>
-                        <Link color={'blue.400'}>{t('home.btn_mint')}</Link>
+                        <Link color={'blue.400'}><b>{t('home.btn_mint')}</b></Link>
                     </NextLink>
                     <Spacer />
                     <NextLink href={PATH_AUTH.connect} passHref>

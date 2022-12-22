@@ -6,10 +6,11 @@ export type BlockProps = {
     subtitle?: string;
     children: ReactNode;
     sx?: SystemStyleObject
+    sxContainer?: SystemStyleObject
 };
 
 
-export default function Block({ title, subtitle, sx, children }: BlockProps) {
+export default function Block({ title, subtitle, sxContainer = { p: 8 }, sx = { p: 5 }, children }: BlockProps) {
 
     const bg = useColorModeValue('gray.200', 'whiteAlpha.50');
     const textColor = useColorModeValue('gray.600', 'gray.50');
@@ -23,7 +24,9 @@ export default function Block({ title, subtitle, sx, children }: BlockProps) {
             borderStyle={'solid'}
             borderColor={borderColor}
             bg={bg}
-            p={8}
+            sx={{
+                ...sxContainer,
+            }}
         >
             {title && <Box
                 mt='1'
@@ -43,7 +46,6 @@ export default function Block({ title, subtitle, sx, children }: BlockProps) {
             <Box
                 sx={{
                     ...sx,
-                    p: 5,
                     minHeight: 180,
                     display: 'flex',
                     flexWrap: 'wrap',

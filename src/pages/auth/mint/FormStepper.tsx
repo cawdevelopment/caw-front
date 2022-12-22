@@ -33,9 +33,9 @@ export default function FormStepper(props: Props) {
     const { termsAccepted, isLoading, minting, isValid, userName, error } = useMintingPageContext();
 
     const bg = useColorModeValue('gray.50', 'gray.800');
-    const boxBg = useColorModeValue('white', 'gray.700');    
-    const [ step, setStep ] = useState(1);
-    const [ progress, setProgress ] = useState(getProgress(step));
+    const boxBg = useColorModeValue('white', 'gray.700');
+    const [step, setStep] = useState(1);
+    const [progress, setProgress] = useState(getProgress(step));
     const { t } = useTranslation();
     const { connected } = useCawProvider();
 
@@ -133,9 +133,9 @@ export default function FormStepper(props: Props) {
                             </ButtonGroup>
                         </Box>
                         <Spacer />
-                        <Flex>
+                        <Flex direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
                             <NextLink href={PATH_DASHBOARD.swap.mcaw} passHref>
-                                <Link color={'blue.400'}>{t('buttons.btn_swap')}</Link>
+                                <Link color={'blue.400'}> <b>{t('labels.getmcaw')}</b></Link>
                             </NextLink>
                             <Spacer />
                             <NextLink href={PATH_AUTH.connect} passHref>

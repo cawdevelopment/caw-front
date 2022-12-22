@@ -57,12 +57,12 @@ export default function WalletBalanceCard() {
 
     const { address, chain } = useCawProvider();
     const { contracts: { CAW, MINTABLE_CAW } } = useAppConfigurations();
-    const [ assets, setAssets ] = useState<WalletBalanceModel[]>(defaultBalance);
+    const [assets, setAssets] = useState<WalletBalanceModel[]>(defaultBalance);
     const { t } = useTranslation();
 
     const { isFetching: fetchingETH } = useBalance({
         addressOrName: address, chainId: chain?.id, watch: false,
-        onSuccess(data) { updateBalance(data, 'ETH', 'Ethereum'); },
+        onSuccess(data) { updateBalance(data, 'ETH', 'Ethereum'); }
     });
 
     const { isFetching: fetcinghCAW } = useBalance({
@@ -84,31 +84,33 @@ export default function WalletBalanceCard() {
                 return prev;
             }
 
-            return [ ...prev, { symbol: symbol, name: name, amount: Number(data?.formatted || 0) } ];
+            return [...prev, { symbol: symbol, name: name, amount: Number(data?.formatted || 0) }];
         });
     }
 
     const sortedByAmount = assets.sort((a, b) => b.amount - a.amount);
     return (
-        <Box width={"container.md"} >
+        <Box width={"-webkit-fit-content"} maxWidth={"container.md"} >
             <Heading size="md" mb={2}>
                 {(fetchingETH || fetcinghCAW || fetchingMCAW) ? t('minting_page.upding_balance') : t('minting_page.main_balance')}
             </Heading>
             <Spacer h={10} />
             {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} />)}
             <Spacer h={10} />
-            <Stack direction={{ base: 'column', md: 'row' }} spacing={2} align="center" justify="center" >
+            <Stack direction={{ base: 'column', md: 'column' }} spacing={2} align="center" justify="center" >
                 <Text fontSize="sm" color="gray.500">
                     {t('minting_page.caw_balance_req_lb')}
                 </Text>
-                <NextLink href={PATH_DASHBOARD.swap.mcaw} target="_blank" passHref >
-                    <Button
-                        variant="link"
-                        colorScheme="gray"
-                    >
-                        {t('buttons.btn_swap')}
-                    </Button>
-                </NextLink>
+                <Box p={5}>
+                    <NextLink href={PATH_DASHBOARD.swap.mcaw} target="_blank" passHref>
+                        <Button
+                            variant="link"
+                            colorScheme="blue"
+                        >
+                            {t('labels.getmcaw')}
+                        </Button>
+                    </NextLink>
+                </Box>
             </Stack>
         </Box>
     );

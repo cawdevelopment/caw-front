@@ -1,14 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { Stack, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useColorModeValue } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
-import { useDebounce } from "use-debounce";
 
 import { useMintingPageContext } from ".";
 import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
 import { isValidUsername as validateUserNameLocally } from "src/utils/helper";
 import MintingCost from "./MintingCost";
-
 
 export default function MintUserNameCard() {
 
@@ -18,21 +16,23 @@ export default function MintUserNameCard() {
     const errorColor = useColorModeValue('red.500', 'red.600');
     const successColor = useColorModeValue('green.500', 'green.600');
 
-    const [ value, setValue ] = useState<string>();
-    const [ debouncedValue ] = useDebounce(value, 500);
+    const [value, setValue] = useState<string>(userName);
+    // const [debouncedValue] = useDebounce(value, 500);
 
-    useEffect(() => {
-        setValue(userName);
-    }, [ userName ]);
+    // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(Number(e.target.value));
 
-    useEffect(() => {
-        onSetValue('userName', debouncedValue);
-    }, [ debouncedValue, onSetValue ])
+    // useEffect(() => {
+    //     setValue(userName);
+    // }, [ userName ]);
 
-    const handleChange = (event: any) => {
+    // useEffect(() => {
+    //     onSetValue('userName', debouncedValue);
+    // }, [debouncedValue, onSetValue])
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setValue(event.target.value);
         checkUsername(event.target.value);
         getCost(event.target.value);
-        setValue(event.target.value);
     }
 
     const checkUsername = useCallback((async (userName: string) => {
@@ -45,7 +45,7 @@ export default function MintUserNameCard() {
                 return;
             }
 
-            const [ isValid, id ] = await Promise.all([ isValidUsername(userName), getIdByUserName(userName) ]);
+            const [isValid, id] = await Promise.all([isValidUsername(userName), getIdByUserName(userName)]);
 
             if (id > 0) {
                 onSetValue('isValid', false);
@@ -70,7 +70,7 @@ export default function MintUserNameCard() {
             onSetValue('message', 'An error occured');
             onSetValue('onChainValidated', true);
         }
-    }), [ t, isValidUsername, getIdByUserName, onSetValue ]);
+    }), [t, isValidUsername, getIdByUserName, onSetValue]);
 
     const getCost = useCallback((async (userName: string) => {
         try {
@@ -97,7 +97,7 @@ export default function MintUserNameCard() {
             onSetValue('costETH', 0);
             onSetValue('costCAW', 0);
         }
-    }), [ getCostOfName, onSetValue ]);
+    }), [getCostOfName, onSetValue]);
 
     return (
         <Stack spacing={4}>
