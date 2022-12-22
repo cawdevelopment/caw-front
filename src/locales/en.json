@@ -98,7 +98,9 @@
     "quickmint": "Quick Mint",
     "mintuser": "Mint Username",
     "entery_user": "Enter your username",
-    "quickmintlabel": "Mint professionally, with more options, learning it, and step-by-step."
+    "quickmintlabel": "Mint professionally, with more options, learning it, and step-by-step.",
+    "getmcaw": "Get mCAW",
+    "getmcawlarge": "Get MintableCAW"
   },
   "common": {
     "amountgtzero": "Amount must be greater than zero"
@@ -119,10 +121,10 @@
     "social": "Social",
     "caw_is": "CAW IS",
     "btn_mint": "Mint your",
-    "btn_mint_tooltip": "Minting an NTF is the new way to enter to a revolutionary world. Join us!",
-    "censorship_title": "Censorship resistance protocol across the world!",
+    "btn_mint_tooltip": "Minting an NTF-Username is the new way to enter to a revolutionary world. Join us!",
+    "censorship_title": "A censorship-resistant, decentralized messaging protocol",
     "blockchain_title": "Blockchain Technology",
-    "blockchain_label": "The blockchain is a distributed database across the entire network of computer systems all over the world. It helping to ensure that no single entity controls the database.",
+    "blockchain_label": "Blockchain is a shared, immutable ledger that facilitates the process of recording transactions and tracking assets in a business network. It helping to ensure that no single entity controls the database.",
     "ethereum_title": "Powered by Ethereum",
     "ethereum_label": "Contract built on one of the most groundbreaking and scalable ecosystems in the world.",
     "community_title": "Community Driven",
@@ -131,7 +133,7 @@
     "social_eco_label_1": "Get rewarded",
     "social_eco_label_2": "while interacting",
     "social_eco_label_3": "Financial technology based on secure distributed ledgers.",
-    "social_eco_label_4": "Active burns and rewards for all users."
+    "social_eco_label_4": "Active burns and rewards for all caw's stackers"
   },
   "maintenance_page": {
     "title": "Website currently under maintenance.",
@@ -167,7 +169,10 @@
     "message": "Mint your username and join the revølution",
     "step_title": "First step is to connect your",
     "step_title_wallet": "wallet",
-    "step_description": "Minting an NTF is the new way to enter to a revolutionary world.",
+    "step_description": "Minting an NTF username is the new way to enter to a revolutionary world.",
+    "ntf_state_q": "What is an NTF?",
+    "ntf_state_a": "NTF refers to a Non-Fungible Token and is a digital asset that is unique and stored on a blockchain that allows for the secure transfer of ownership of digital assets.",
+    "ntf_state_ai": "Ownership of an NTF username will provide access to the associated account.",
     "already_minted": "Already have your CAW-NFT?",
     "username_already_taken": "already taken",
     "username_invalid": "username must be : alphanumeric, lowercase, no spaces, non special characters",
@@ -185,7 +190,7 @@
     "wizard_step1_lb3": "You can mint as many as you can afford it",
     "upding_balance": "Updating balance...",
     "main_balance": "Main balance",
-    "caw_balance_req_lb": "You need to have enough mCAW to mint a username. You can swap ETH for mCAW here.",
+    "caw_balance_req_lb": "You need to have enough mCAW to mint a username. You can mint mCAW here : ",
     "enter_ntf_input_lb": "Enter your new NTF-Username",
     "user_acceptance_title": "Before continuing, you should know and accept the following",
     "user_acceptance_mchk_1": "This is a",
@@ -204,7 +209,7 @@
   "swap_page": {
     "title": "Mintable CAW",
     "goerli_msg": "You need to set up Goerli testnet in your wallet before minting mCAW",
-    "get_goerli": "Retrieve some Goerli ETH from a fauce, i.g.,",
+    "get_goerli": "Retrieve some Goerli ETH from a fauce, i.g. : ",
     "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens,otherwise your funds will be locked in the contract.",
     "alert_cf_mint": "Do you want to mint {$0} mCAW?"
   }
