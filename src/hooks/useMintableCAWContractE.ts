@@ -12,7 +12,7 @@ export default function useMintableCAWContract() {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const { keys: { INFURA_API_KEY }, network, contracts: { MINTABLE_CAW, CAW_NAME_MINTER } } = useAppConfigurations();
+    const { allowMainnet, keys: { INFURA_API_KEY }, network, contracts: { MINTABLE_CAW, CAW_NAME_MINTER } } = useAppConfigurations();
     const { address, abi } = MINTABLE_CAW;
     const { address: spenderAddress } = CAW_NAME_MINTER;
 
@@ -66,6 +66,9 @@ export default function useMintableCAWContract() {
 
         if (!window || !window.ethereum)
             throw new Error((t('errors.install_wallet')));
+
+        if (!allowMainnet)
+            throw new Error((t('errors.mainnet_not_allowed')));
 
         return getSignerContract(contract, walletAddress);
     }

@@ -13,7 +13,7 @@ export default function useCawNamesContract() {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const { keys: { INFURA_API_KEY }, network, contracts: { CAW_NAME } } = useAppConfigurations();
+    const { allowMainnet, keys: { INFURA_API_KEY }, network, contracts: { CAW_NAME } } = useAppConfigurations();
     const { address, abi } = CAW_NAME;
 
     useEffect(() => {
@@ -29,6 +29,9 @@ export default function useCawNamesContract() {
 
         if (!window || !window.ethereum)
             throw new Error((t('errors.install_wallet')));
+
+        if (!allowMainnet)
+            throw new Error((t('errors.mainnet_not_allowed')));
 
         return getSignerContract(contract, walletAddress);
     }

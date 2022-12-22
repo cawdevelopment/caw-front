@@ -13,7 +13,7 @@ export default function useCawNameMinterContract() {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const { network, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
+    const { allowMainnet, network, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
     const { address, abi } = CAW_NAME_MINTER;
     const [ minting, setMinting ] = useState(false);
 
@@ -71,6 +71,9 @@ export default function useCawNameMinterContract() {
 
         if (!window || !window.ethereum)
             throw new Error((t('errors.install_wallet')));
+
+        if (!allowMainnet)
+            throw new Error((t('errors.mainnet_not_allowed')));
 
         return getSignerContract(contract, walletAddress);
     }

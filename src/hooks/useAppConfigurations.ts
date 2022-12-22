@@ -1,15 +1,19 @@
 
 import { CAW_NAMES_ABI, MINTABLE_CAW_ABI, CAW_NAME_MINTER_ABI } from 'src/config/ABIs';
+import { useNetwork } from "wagmi";
 
 export default function useAppConfigurations() {
 
-    const NETWORK = String(process.env.NETWORK);
+    const { chain } = useNetwork()
+
+    const NETWORK = String(process.env.NETWORK || '').toLowerCase();
     const INFURA_API_KEY = String(process.env.INFURA_API_KEY);
     const ALCHEMY_API_KEY = String(process.env.ALCHEMY_API_KEY);
     const CAW_CONTRACT = String(process.env.CAW_CONTRACT);
     const CAW_NAME_CONTRACT = String(process.env.CAW_NAME_CONTRACT);
     const CAW_NAME_MINTER_CONTRACT = String(process.env.CAW_NAME_MINTER_CONTRACT);
     const MINTABLE_CAW_CONTRACT = String(process.env.MINTABLE_CAW_CONTRACT);
+    const ENVIRONMENT = String(process.env.ENVIRONMENT || '').toLowerCase();
 
     return {
         keys: {
@@ -17,6 +21,8 @@ export default function useAppConfigurations() {
             ALCHEMY_API_KEY,
         },
         network: NETWORK,
+        environment: ENVIRONMENT,
+        allowMainnet: ((chain?.id || 0) === 1) ? (ENVIRONMENT === 'production' || ENVIRONMENT === 'live') && (NETWORK === 'mainnet') : true,
         contracts: {
             CAW: {
                 address: CAW_CONTRACT,
