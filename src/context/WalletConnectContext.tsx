@@ -134,12 +134,6 @@ const CAWProvider = ({ children }: Props) => {
 
     }, [ userName, userNames, handleCawAccount ]);
 
-    // useEffect(() => {
-
-    //     //* Set the first username as the default
-    //     (userNames?.length > 0 && !userName) && handleCawAccount(userNames[ 0 ]);
-    // }, [ userNames, userName, handleCawAccount ]);
-
     useEffect(() => {
 
 
