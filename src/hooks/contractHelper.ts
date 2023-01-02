@@ -1,4 +1,5 @@
 import { ethers } from "ethers";
+import detectEthereumProvider from '@metamask/detect-provider'
 
 type ContractParams = {
     address: string;
@@ -23,10 +24,26 @@ export const getSignerContract = async (contract: ethers.Contract, walletAddress
     // const signer = new ethers.Wallet("WALLET_PRIVATE_KEY", provider);
 
     //* Wallet Provider
-    const provider = new ethers.providers.Web3Provider(window.ethereum as any);
-    const signer = provider.getSigner(walletAddress)
-    const contractWithSigner = contract.connect(signer);
-    return contractWithSigner;
+    if (window.ethereum) {
+        const provider = new ethers.providers.Web3Provider(window.ethereum as any);
+        const signer = provider.getSigner(walletAddress)
+        // const signature = await signer.signMessage(walletAddress);
+        // console.log(`signature`, signature);
+
+        const contractWithSigner = contract.connect(signer);
+        return contractWithSigner;
+    }
+    else {
+        const autoProvider = await detectEthereumProvider({ mustBeMetaMask: false, silent: true });
+        if (autoProvider) {
+            const provider = new ethers.providers.Web3Provider(autoProvider as any);
+            const signer = provider.getSigner(walletAddress)
+            const contractWithSigner = contract.connect(signer);
+            return contractWithSigner;
+        }
+        else
+            throw new Error('No provider found');
+    }
 }
 
 export function getExplorerUrl({ network, addressOrTx, type }: { network: string | number; addressOrTx: string; type: 'address' | 'tx'; }) {
