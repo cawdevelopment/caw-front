@@ -1,6 +1,7 @@
+'use client';
 import { Container, useToast } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useState, createContext, useContext } from "react";
+import { useRouter } from 'next/navigation';
+import { useState, createContext, useContext, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -47,9 +48,11 @@ export default function RegisterPage() {
     const { t } = useTranslation();
     const { mint, isLoading, minting } = useCawNameMinterContract();
     const { address, connected } = useCawProvider();
-    const { replace } = useRouter();
+    const router = useRouter();
     const [ error, setError ] = useState<string | null>(null);
     const toast = useToast();
+
+    const [ url, setUrl ] = useState<string | null>(null);
 
     const methods = useForm({
         defaultValues: {
@@ -65,6 +68,15 @@ export default function RegisterPage() {
             swapAmount: 0,
         }
     });
+
+    useEffect(() => {
+
+        //When url is set, navigate to the url
+        if (url) {
+            router.replace(url, { forceOptimisticNavigation: true });
+        }
+
+    }, [ router, url ]);
 
     const { termsAccepted, userName, message, onChainValidated, costVerified, costCAW, costETH, costUSD, swapAmount, isValid } = methods.watch();
 
@@ -93,10 +105,10 @@ export default function RegisterPage() {
 
             const { receipt } = await mint(userName, address);
 
-            const url = PATH_AUTH.minted.replace(':username', userName).replace(':tx', receipt?.transactionHash || 'xxx');
-            replace(url);
-
-        } catch (error: any) {
+            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
+            setUrl(url);
+        }
+        catch (error: any) {
             const { message, code } = getBlockChainErrMsg(error);
             setError(message ? message + ' : ' + code : 'Something went wrong');
         }

@@ -32,7 +32,7 @@ export default function Page500() {
             <m.div variants={varBounce().in}>
               <SeverErrorIllustration height={260} my={{ base: 5, sm: 10 }} />
             </m.div>
-            <NextLink href="/">
+            <NextLink href="/" passHref>
               <Button
                 size="lg"
                 variant="solid"

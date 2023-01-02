@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Container, Center, HStack, Button, Divider, Spacer, Box, Text } from "@chakra-ui/react";
+import { Container, Center, Stack, Button, Divider, Spacer, Box, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import NextLink from 'next/link';
 
 import { PATH_AUTH } from "src/routes/paths";
@@ -21,6 +21,7 @@ MintedUserNamePage.getLayout = function getLayout(page: React.ReactElement) {
 };
 
 export type Props = {
+    userId: number;
     userName: string;
     image: string;
     blockExplorerUrl: string;
@@ -32,8 +33,9 @@ export default function MintedUserNamePage() {
     const { contracts: { CAW_NAME: { address: cawNamesAddress } } } = useAppConfigurations();
     const { initialized: cMinterInitialized, getIdByUserName } = useCawNameMinterContract();
     const { initialized: cNamesInitialized, read: { getTokenURI } } = useCawNamesContract();
-    const router = useRouter();
-    const { username: userName, tx: transactionHash } = router.query || {};
+    const searchParams = useSearchParams();
+    const userName = searchParams.get('username');
+    const transactionHash = searchParams.get('tx');
 
     const [ loading, setLoading ] = useState(true);
     const [ userId, setUserId ] = useState(0);
@@ -143,23 +145,28 @@ export default function MintedUserNamePage() {
                             blockExplorerUrl={explorerUrl}
                             openSeaUrl={ntfURL}
                             image={image}
+                            userId={userId}
                             userName={userName as string}
                         />
                         <Divider />
                         <Spacer h={10} />
                         <Center>
-                            <HStack spacing={2}>
+                            <Stack
+                                spacing={5}
+                                direction={[ 'column', 'row' ]}
+                                w={{ base: "-webkit-fill-available", md: 'inherit' }}
+                            >
                                 <NextLink href={PATH_AUTH.mint} passHref>
-                                    <Button colorScheme='caw'>
-                                        {t('buttons.btn_start_over')}
+                                    <Button colorScheme='caw' w='-webkit-fill-available'>
+                                        {t('buttons.btn_mint_again')}
                                     </Button>
                                 </NextLink>
                                 <NextLink href={PATH_AUTH.connect} passHref>
-                                    <Button colorScheme='caw' variant="outline">
+                                    <Button colorScheme='caw' variant="outline" w='-webkit-fill-available'>
                                         {t('buttons.btn_access')}
                                     </Button>
                                 </NextLink>
-                            </HStack>
+                            </Stack>
                         </Center>
                     </Box>
                 </WrapperFadeAnimation>

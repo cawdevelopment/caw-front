@@ -1,8 +1,12 @@
 import React from "react";
-import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center, useColorModeValue } from "@chakra-ui/react";
+import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center, useColorModeValue, Button } from "@chakra-ui/react";
 import { m } from "framer-motion";
+import NextLink from 'next/link';
+import { useTranslation } from "react-i18next";
 
 import { MotionContainer, varFade } from "src/components/animate";
+import { PATH_DASHBOARD } from "src/routes/paths";
+import Iconify from "src/components/icons/Iconify";
 import { FlippingText } from "./FlippingText";
 
 export const DecentralizedTextStyle = styled('span', {
@@ -36,8 +40,12 @@ export default function HeroSection() {
 
     const mode = useColorMode();
     const textColor = useColorModeValue('gray.700', 'gray.100');
+    const buttonColor = useColorModeValue('gray.50', 'gray.50');
+    const buttonBg = useColorModeValue('blackAlpha.600', 'whiteAlpha.300');
+    const buttonBgHover = useColorModeValue('blackAlpha.700', 'whiteAlpha.400');
     const mdSize = useToken('breakpoints', 'md');
-    const [ isMd ] = useMediaQuery(`(min-width: ${mdSize})`)
+    const [ isMd ] = useMediaQuery(`(min-width: ${mdSize})`);
+    const { t } = useTranslation();
 
     return (
         <MotionContainer id="home-hero-section" >
@@ -75,19 +83,24 @@ export default function HeroSection() {
                                 <FlippingText textColor={textColor} />
                             </ContentAlign>
                         </m.div>
-                        {/* <Spacer h={20} />
+                        <Spacer h={20} />
                         <m.div variants={varFade().inDown}>
                             <ContentAlign>
                                 <NextLink href={PATH_DASHBOARD.app.home} passHref>
                                     <Button
                                         size={'lg'}
-                                        leftIcon={<Iconify icon={'eva:flash-fill'} width={20} height={20} color={"black"} />}
+                                        bg={buttonBg}
+                                        _hover={{ bg: buttonBgHover }}
+                                        color={buttonColor}
+                                        colorScheme={'blackAlpha'}
+                                        textTransform={'uppercase'}
+                                        leftIcon={<Iconify icon={'eva:flash-fill'} width={20} height={20} color={"white"} />}
                                     >
                                         {t('verbs.explore')}
                                     </Button>
                                 </NextLink>
                             </ContentAlign>
-                        </m.div> */}
+                        </m.div>
                     </Box>
                     <Box w='100%' alignSelf="center">
                         <m.div variants={varFade().inRight}>

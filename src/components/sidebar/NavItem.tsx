@@ -1,4 +1,4 @@
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { Flex, FlexProps, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
 import Iconify from 'src/components/icons/Iconify';
 
@@ -10,7 +10,7 @@ export interface NavItemProps extends FlexProps {
 
 export function NavItem({ icon, link, name, ...rest }: NavItemProps) {
 
-    const { pathname } = useRouter();
+    const pathname = usePathname();
     const selected = pathname === link;
     const [ iconColor ] = useToken('colors', [ 'caw.600' ]);
     const bg = useColorModeValue('cawAlpha.400', 'cawAlpha.300');
