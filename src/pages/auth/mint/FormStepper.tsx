@@ -143,7 +143,9 @@ export default function FormStepper(props: Props) {
                         <Spacer />
                         <Flex direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
                             <NextLink href={PATH_DASHBOARD.swap.mcaw} passHref>
-                                <Link color={'blue.400'}> <b>{t('labels.getmcaw')}</b></Link>
+                                <Link color={'blue.400'}>
+                                    <b>{t('labels.getmcaw')}</b>
+                                </Link>
                             </NextLink>
                             <Spacer />
                             <NextLink href={PATH_AUTH.connect} passHref>

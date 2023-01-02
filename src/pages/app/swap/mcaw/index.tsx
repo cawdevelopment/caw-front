@@ -54,11 +54,15 @@ export default function SwapMintableCAW() {
                 </Block>
                 <Flex p={3} direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
                     <NextLink href={PATH_AUTH.mint} passHref rel="noopener noreferrer">
-                        <Link color={'blue.400'}><b>{t('home.btn_mint')}</b></Link>
+                        <Link color={'blue.400'}>
+                            <b>{t('home.btn_mint')}</b>
+                        </Link>
                     </NextLink>
                     <Spacer />
                     <NextLink href={PATH_AUTH.connect} passHref rel="noopener noreferrer">
-                        <Link color={'blue.400'}>{t('minting_page.already_minted')}</Link>
+                        <Link color={'blue.400'}>
+                            {t('minting_page.already_minted')}
+                        </Link>
                     </NextLink>
                 </Flex>
             </Container>

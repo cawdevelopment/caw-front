@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Button, Container, Stack, Text, keyframes, Center } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
@@ -21,12 +21,12 @@ export const animation = `${animationKeyframes} 1s cubic-bezier(0.5, 1, 0.5, 1) 
 export default function LoginPage() {
 
     const { t } = useTranslation();
-    const { replace } = useRouter();
+    const router = useRouter();
 
 
     const handleLogin = async () => {
         try {
-            replace(PATH_DASHBOARD.app.home);
+            router.push(PATH_DASHBOARD.app.home);    
         }
         catch (error: any) {
             console.log(error);

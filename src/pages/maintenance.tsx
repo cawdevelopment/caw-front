@@ -25,7 +25,7 @@ export default function Maintenance() {
             {t('maintenance_page.description')}
           </Text>
           <MaintenanceIllustration height={240} my={{ base: 5, sm: 10 }} />
-          <NextLink href="/">
+          <NextLink href="/" passHref>
             <Button
               size="lg"
               variant="solid"

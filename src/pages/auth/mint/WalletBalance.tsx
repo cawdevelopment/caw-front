@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useBalance } from "wagmi";
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, HStack, VStack, Text, Divider, Heading, useColorModeValue, Spacer, Button, Stack } from "@chakra-ui/react";
+import { Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer, Stack } from "@chakra-ui/react";
 
 import { useCawProvider } from "src/context/WalletConnectContext";
 import useAppConfigurations from "src/hooks/useAppConfigurations";
@@ -102,14 +102,11 @@ export default function WalletBalanceCard({ width }: { width: number }) {
                     {t('minting_page.caw_balance_req_lb')}
                 </Text>
                 <Box p={5}>
-                    <NextLink href={PATH_DASHBOARD.swap.mcaw} target="_blank" rel="noopener noreferrer" passHref>
-                        <Button
-                            variant="link"
-                            colorScheme="blue"
-                        >
-                            {t('labels.getmcaw')}
-                        </Button>
-                    </NextLink>
+                    <NextLink href={PATH_DASHBOARD.swap.mcaw} passHref>
+                        <Link color={'blue.400'}>
+                            <b>{t('labels.getmcaw')}</b>
+                        </Link>
+                    </NextLink>                    
                 </Box>
             </Stack>
         </Box>

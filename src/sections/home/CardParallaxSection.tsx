@@ -1,13 +1,9 @@
 
 import React from "react";
-import NextLink from 'next/link';
-import { useTranslation } from "react-i18next";
-import { Box, chakra, Flex, Heading, Stack, VStack, Text, Button, useBreakpointValue, Spacer, useColorModeValue, Tag, TagLabel } from "@chakra-ui/react";
+import { Box, chakra, Flex, Heading, Stack, VStack, Text, useBreakpointValue, Spacer, useColorModeValue, Tag, TagLabel } from "@chakra-ui/react";
 import { m, AnimatePresence } from "framer-motion";
 
 import { ParallaxText, ParallaxItemWrapper } from "src/components/animate/ParallaxText";
-import { PATH_DASHBOARD } from "src/routes/paths";
-import Iconify from "src/components/icons/Iconify";
 import { varFade } from "src/components/animate";
 
 import { FlippingText } from "./FlippingText";
@@ -53,9 +49,6 @@ export default function CardParallaxSection() {
     const isMd = useBreakpointValue({ base: false, md: true });
     const px = useBreakpointValue({ base: 4, md: 8 });
     const textColor = useColorModeValue('gray.700', 'gray.100');
-    const buttonColor = useColorModeValue('gray.50', 'gray.50');
-    const buttonBg = useColorModeValue('blackAlpha.700', 'whiteAlpha.400');
-    const { t } = useTranslation();
 
     return (
         <>
@@ -67,11 +60,11 @@ export default function CardParallaxSection() {
                         transition={{ duration: 0.5, delay: 4 }}
                     >
                         <chakra.div
-                            id="title-and-text-about-social-issues"
+                            id="title-and-text-about-caw-manifesto"
                             position={"absolute"}
                             w={"full"}
                             p={2}
-                            textAlign={"center"}
+                            textAlign={"center"}                            
                         >
                             <Flex
                                 w={'full'}
@@ -106,10 +99,12 @@ export default function CardParallaxSection() {
                                                 <m.div variants={varFade().inUp}>
                                                     <ContentAlign>
                                                         <Text
+                                                            id="decentralized-social-clearing-house"
                                                             color={textColor}
                                                             fontSize="6xl"
                                                             fontWeight="bold"
                                                             textAlign={'center'}
+                                                            zIndex={7}
                                                         >
                                                             A
                                                             <br />
@@ -118,29 +113,14 @@ export default function CardParallaxSection() {
                                                             SOCIAL CLEARING HOUSE
                                                         </Text>
                                                     </ContentAlign>
-                                                </m.div>
+                                                </m.div>                                                
                                                 <Spacer h={10} />
                                                 <m.div variants={varFade().in}>
-                                                    <chakra.div paddingLeft={{ base: 0, md: '35%' }} >
+                                                    <chakra.div paddingLeft={{ base: 0, md: '30%' }} >
                                                         <FlippingText textColor={textColor} />
                                                     </chakra.div>
                                                 </m.div>
-                                                <m.div variants={varFade().inDown}>
-                                                    <ContentAlign>
-                                                        <NextLink href={PATH_DASHBOARD.app.home} passHref rel="noopener noreferrer" >
-                                                            <Button
-                                                                size={'lg'}
-                                                                bg={buttonBg}
-                                                                color={buttonColor}
-                                                                colorScheme={'blackAlpha'}
-                                                                textTransform={'uppercase'}
-                                                                leftIcon={<Iconify icon={'eva:flash-fill'} width={20} height={20} color={"white"} />}
-                                                            >
-                                                                {t('verbs.explore')}
-                                                            </Button>
-                                                        </NextLink>
-                                                    </ContentAlign>
-                                                </m.div>
+                                                <br />
                                             </Box>
                                         </Heading>
                                     </Stack>

@@ -59,7 +59,7 @@ const ConnectWalletButton = () => {
               )}
             </Box>
           )}
-          {chain?.name}
+          {chain?.name || 'Not supported'}
         </Button>
       </VStack>
     </Box>
