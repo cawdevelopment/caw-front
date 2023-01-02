@@ -65,6 +65,7 @@ export default function WalletConnection({ onInitilizedBox }: Props) {
                 <Spacer h={10} />
                 <Stack direction='column' textAlign={"left"}>
                     <Code colorScheme='yellow' children={t('minting_page.wizard_step1_lb1')} />
+                    <Code colorScheme='blue' children={t('minting_page.wizard_step1_lb2')} />
                     <Code colorScheme="teal" children={t('minting_page.wizard_step1_lb3')} />
                 </Stack>
                 <Spacer h={10} />

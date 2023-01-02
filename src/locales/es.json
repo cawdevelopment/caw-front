@@ -41,6 +41,7 @@
     "btn_back": "Atras",
     "btn_next": "Siguiente",
     "btn_start_over": "Comenzar de nuevo",
+    "btn_mint_again": "Acuñar otro",
     "btn_swap": "Intercambiar",
     "btn_approve": "Aprobar"
   },
@@ -179,7 +180,7 @@
     "label_cost_exp": "caro",
     "label_cost_willbe": "será.",
     "wizard_step1_lb1": "Toda la actividad del usuario, social y financiera fluye a través de su nombre de usuario NFT",
-    "wizard_step1_lb2": "Así que por el bien de todos, no te pases de listo y no intentes dañar estos mecanismos",
+    "wizard_step1_lb2": "Un monedero puede ser poseer varios nombres de usuario",
     "wizard_step1_lb3": "Puedes acuñar tantos como puedas permitirte",
     "upding_balance": "Actualizando balance...",
     "main_balance": "Balance principal",

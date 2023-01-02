@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
-import { Stack, FormControl, FormLabel, Input, InputGroup, InputRightElement, Text, useColorModeValue } from "@chakra-ui/react";
+import { Stack, FormControl, FormLabel, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 import debounce from 'lodash.debounce';
@@ -8,14 +8,14 @@ import { useMintingPageContext } from ".";
 import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
 import { isValidUsername as validateUserNameLocally } from "src/utils/helper";
 import MintingCost from "./MintingCost";
+import { WrapperFadeAnimation } from "src/components/animate";
+import AlertMessage from "src/components/AlertMessage";
 
 export default function MintUserNameCard({ width }: { width: number }) {
 
     const { t } = useTranslation();
     const { userName, isValid, message, onSetValue } = useMintingPageContext();
     const { getCostOfName, isValidUsername, getIdByUserName } = useCawNameMinterContract();
-    const errorColor = useColorModeValue('red.500', 'red.600');
-    const successColor = useColorModeValue('green.500', 'green.600');
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -40,7 +40,7 @@ export default function MintUserNameCard({ width }: { width: number }) {
 
             if (id > 0) {
                 onSetValue('isValid', false);
-                onSetValue('message', `${userName} ${t('minting_page.username_already_taken')}`);
+                onSetValue('message', `${userName} : ${t('minting_page.username_already_taken')}`);
                 onSetValue('onChainValidated', true);
                 return;
             }
@@ -53,7 +53,7 @@ export default function MintUserNameCard({ width }: { width: number }) {
             }
 
             onSetValue('isValid', true);
-            onSetValue('message', `${userName} ${t('minting_page.username_available')}`);
+            onSetValue('message', `${userName} : ${t('minting_page.username_available')}`);
             onSetValue('onChainValidated', true);
         }
         catch (error: any) {
@@ -118,7 +118,14 @@ export default function MintUserNameCard({ width }: { width: number }) {
                     <InputRightElement alignItems={"center"} children={userName ? (isValid ? <CheckIcon color='green.500' /> : <CloseIcon color='red.500' />) : null} />
                 </InputGroup>
             </FormControl>
-            <Text color={isValid ? successColor : errorColor} as="b">{message}</Text>
+            <WrapperFadeAnimation show={Boolean(message)} exitDuration={0.5}>
+                <AlertMessage
+                    type={isValid ? 'success' : 'warning'}
+                    variant="subtle"
+                    showIcon={isValid}
+                    message={message}
+                />
+            </WrapperFadeAnimation>
             <MintingCost title={t('labels.cost') + ':'} />
         </Stack>
     );

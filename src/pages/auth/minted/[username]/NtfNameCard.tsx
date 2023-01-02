@@ -1,9 +1,9 @@
-import { Text, Link, Center, Heading, VStack, Stack, Image, Box, useColorModeValue, Spacer } from "@chakra-ui/react";
+import { Link, Center, Heading, VStack, Stack, Image, Box, useColorModeValue, Spacer, Code } from "@chakra-ui/react";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 import { Props } from "./[tx]";
 
-export default function NtfNameCard({ userName, image, blockExplorerUrl, openSeaUrl }: Props) {
+export default function NtfNameCard({ userId, userName, image, blockExplorerUrl, openSeaUrl }: Props) {
 
     const bgBox = useColorModeValue('white', 'gray.800');
     const { t } = useTranslation();
@@ -11,6 +11,7 @@ export default function NtfNameCard({ userName, image, blockExplorerUrl, openSea
     return (
         <Center py={12}>
             <VStack spacing={8}>
+                <Heading size="sm">{t('labels.minted_success')}</Heading>
                 <Heading size="md">{t('labels.its_magic')}</Heading>
                 <Box
                     role={'group'}
@@ -53,9 +54,7 @@ export default function NtfNameCard({ userName, image, blockExplorerUrl, openSea
                             src={image} />
                     </Box>
                     <Stack pt={10} align={'center'}>
-                        <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-                            {userName}
-                        </Text>
+                        <Code p={2}>{`#${userId}`}</Code>
                         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
                             {t('labels.check_ntf_on')}
                         </Heading>
