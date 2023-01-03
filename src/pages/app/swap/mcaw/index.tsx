@@ -1,4 +1,4 @@
-import { Container, Heading, Highlight, Stack, Link, Text, Center, Flex, Spacer } from "@chakra-ui/react";
+import { chakra, Container, Stack, Link, Text, Flex, Spacer } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 
@@ -16,18 +16,17 @@ export default function SwapMintableCAW() {
     return (
         <PageWrapper title={t('swap_page.title')}>
             <Container w="full" maxW={"container.xl"} h="container.lg" p={2}>
-                <Center>
-                    <Heading lineHeight='short' fontSize='xl' p={1}>
-                        <Highlight
-                            query='Goerli testnet'
-                            styles={{ px: '2', py: '1', rounded: 'full', bg: 'red.100' }}
-                        >
-                            {t('swap_page.goerli_msg')}
-                        </Highlight>
-                    </Heading>
-                </Center>
                 <br />
-                <Stack id="stack-goerli" direction={{ base: 'column', md: 'column' }} spacing={2} p={1} alignItems="center">
+                <chakra.div
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"baseline"}
+                    textAlign={"center"}
+                >                    
+                    {`${t('swap_page.goerli_msg_1')} Goerli testnet ${t('swap_page.goerli_msg_2')}`}
+                </chakra.div>                
+                <br />
+                <Stack id="stack-goerli" direction={{ base: 'column', md: 'column' }} spacing={2} p={1} alignItems="center">                    
                     <Text fontSize='xl' textAlign="center">
                         {t('swap_page.get_goerli')}
                     </Text>

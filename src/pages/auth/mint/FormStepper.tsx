@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import NextLink from 'next/link';
-import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup, Code } from "@chakra-ui/react";
+import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { m, AnimatePresence } from "framer-motion";
+import { m } from "framer-motion";
 
 import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 import { MotionContainer } from "src/components/animate";
@@ -31,10 +31,9 @@ type Props = {
 export default function FormStepper(props: Props) {
 
     const { termsAccepted, isLoading, minting, isValid, userName, error } = useMintingPageContext();
-
     const bg = useColorModeValue('gray.50', 'gray.800');
     const boxBg = useColorModeValue('white', 'gray.700');
-    const [step, setStep] = useState(1);
+    const [ step, setStep ] = useState(1);
     const [progress, setProgress] = useState(getProgress(step));
     const { t } = useTranslation();
     const { connected } = useCawProvider();
@@ -67,10 +66,14 @@ export default function FormStepper(props: Props) {
                             >
                                 {t('minting_page.message')}
                             </Text>
-                            <NftPriceLegend />
-                            <Code colorScheme='red'>
-                                <b>{t('labels.testnet_msg')}</b>
-                            </Code>
+                            <NftPriceLegend />                            
+                            <AlertMessage
+                                type="info"
+                                variant="solid"
+                                title={t('labels.under_dev')}
+                                message={t('labels.testnet_msg')}
+                                showCloseButton={true}
+                            />
                         </Stack>
                         <Progress
                             value={progress}
@@ -86,12 +89,10 @@ export default function FormStepper(props: Props) {
                             boxShadow={'2xl'}
                             p={8}
                         >
-                            <AnimatePresence>
                                 <Steps
                                     userName={userName}
                                     step={step}
-                                />
-                            </AnimatePresence>
+                            />
                             {error && (<AlertMessage type="warning" message={error} />)}
                             <ButtonGroup mt="5%" w="100%">
                                 <Flex w="100%" justifyContent="space-between">
@@ -99,7 +100,7 @@ export default function FormStepper(props: Props) {
                                         isDisabled={step === 1}
                                         colorScheme="caw"
                                         variant="solid"
-                                        w="7rem"
+                                        w="8rem"
                                         mr="5%"
                                         onClick={() => {
                                             const newStep = step - 1;
@@ -111,7 +112,7 @@ export default function FormStepper(props: Props) {
                                     </Button>
                                     {step !== maxSteps && (
                                         <Button
-                                            w="7rem"
+                                            w="8rem"
                                             onClick={() => {
                                                 const newStep = step + 1;
                                                 setStep(newStep);
@@ -127,7 +128,7 @@ export default function FormStepper(props: Props) {
                                     {step === maxSteps && (
                                         <Button
                                             type="submit"
-                                            w="7rem"
+                                            w="8rem"
                                             colorScheme="green"
                                             variant="solid"
                                             isLoading={isLoading || minting}

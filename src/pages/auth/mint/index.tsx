@@ -1,7 +1,6 @@
 'use client';
 import { Container, useToast } from "@chakra-ui/react";
-import { useRouter } from 'next/navigation';
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
@@ -48,11 +47,8 @@ export default function RegisterPage() {
     const { t } = useTranslation();
     const { mint, isLoading, minting } = useCawNameMinterContract();
     const { address, connected } = useCawProvider();
-    const router = useRouter();
     const [ error, setError ] = useState<string | null>(null);
     const toast = useToast();
-
-    const [ url, setUrl ] = useState<string | null>(null);
 
     const methods = useForm({
         defaultValues: {
@@ -68,15 +64,6 @@ export default function RegisterPage() {
             swapAmount: 0,
         }
     });
-
-    useEffect(() => {
-
-        //When url is set, navigate to the url
-        if (url) {
-            router.replace(url, { forceOptimisticNavigation: true });
-        }
-
-    }, [ router, url ]);
 
     const { termsAccepted, userName, message, onChainValidated, costVerified, costCAW, costETH, costUSD, swapAmount, isValid } = methods.watch();
 
@@ -106,7 +93,9 @@ export default function RegisterPage() {
             const { receipt } = await mint(userName, address);
 
             const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
-            setUrl(url);
+
+            // window.open(url, '_blank');
+            window.location.assign(url);
         }
         catch (error: any) {
             const { message, code } = getBlockChainErrMsg(error);
@@ -120,7 +109,7 @@ export default function RegisterPage() {
 
     return (
         <PageWrapper title={t('minting_page.title')}>
-            <Container w="full" maxW={"container.xl"} h="container.lg" p={0}>
+            <Container w="full" maxW={"container.xl"} p={0}>
                 <MintingPageContext.Provider
                     value={{
                         userName,

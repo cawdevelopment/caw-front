@@ -50,8 +50,12 @@
     "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas."
   },
   "labels": {
+    "under_dev": "En desarrollo",
     "the": "El",
     "more": "más",
+    "wallet": "Monedero",
+    "network": "Red",
+    "disconnect": "Desconectar",
     "search_caw": "Buscar Caw",
     "add_photo": "Añadir foto",
     "add_gif": "Añadir gif",
@@ -201,7 +205,8 @@
   },
   "swap_page": {
     "title": "Mintable CAW",
-    "goerli_msg": "Debe configurar Goerli testnet en su monedero antes de acuñar mCAW",
+    "goerli_msg_1": "Debe configurar",
+    "goerli_msg_2": "en su monedero antes de acuñar mCAW",
     "get_goerli": "Solicitar Goerli ETH de una faucet, por ejemplo : ",
     "approve_req_msg": "Una vez que acuñado, debe que aprobar la transacción para transferir sus tokens CAW, de lo contrario sus fondos quedarán bloqueados en el contrato.",
     "alert_cf_mint": "¿Desea acuñar {$0} mCAW?"

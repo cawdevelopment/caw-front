@@ -59,8 +59,12 @@
     "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network"
   },
   "labels": {
+    "under_dev": "Under development",
     "the": "The",
     "more": "more",
+    "wallet": "Wallet",
+    "network": "Network",
+    "disconnect": "Disconnect",
     "search_caw": "Search CAW",
     "add_photo": "Add a Photo",
     "add_gif": "Add an animated GIF",
@@ -88,7 +92,7 @@
     "approving": "Approving...",
     "approved": "Approved",
     "block_explorer": "Block Explorer",
-    "check_ntf_on": "Check your NFT on",
+    "check_ntf_on": "Check out your NFT on",
     "its_magic": "✨It's magic✨",
     "balance": "Balance",
     "enter_amount": "Enter an amount",
@@ -103,7 +107,7 @@
     "quickmintlabel": "Mint professionally, with more options, learning it, and step-by-step.",
     "getmcaw": "Get mCAW",
     "getmcawlarge": "Get MintableCAW",
-    "testnet_msg": "Connect to goerli testnet to test the process"
+    "testnet_msg": "Connect to Goerli testnet to test the process"
   },
   "common": {
     "amountgtzero": "Amount must be greater than zero"
@@ -211,7 +215,8 @@
   },
   "swap_page": {
     "title": "Mintable CAW",
-    "goerli_msg": "You need to set up Goerli testnet in your wallet before minting mCAW",
+    "goerli_msg_1": "You need to set up",
+    "goerli_msg_2": "in your wallet before minting mCAW",
     "get_goerli": "Retrieve some Goerli ETH from a faucet, i.g. : ",
     "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens,otherwise your funds will be locked in the contract.",
     "alert_cf_mint": "Do you want to mint {$0} mCAW?"

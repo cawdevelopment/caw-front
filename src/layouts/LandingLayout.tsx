@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Spacer, useColorModeValue, Tooltip, Flex, Center } from '@chakra-ui/react';
+import { Box, Spacer, useColorModeValue, Tooltip, Flex, Center, Link } from '@chakra-ui/react';
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 
@@ -55,8 +55,11 @@ export default function LandingLayout({ children }: Props) {
                     maxW={"container.xl"}
                 >
                     <Logo />
-                    <Spacer />
+                    <Spacer />                    
                     <Flex alignItems="center" gap={5} >
+                        <Link href='https://caw.is' isExternal>
+                            Manifesto
+                        </Link>
                         <Tooltip
                             hasArrow
                             label={t('home.btn_mint_tooltip')}
@@ -76,7 +79,7 @@ export default function LandingLayout({ children }: Props) {
                             </div>
                         </Tooltip>
                         <LanguagePopover />
-                        <ColorModeToggle />
+                        <ColorModeToggle />                        
                     </Flex>
                 </Flex>
             </Center>

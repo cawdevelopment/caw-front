@@ -4,6 +4,7 @@ import { Box, Center, Flex, Spacer, useColorModeValue } from '@chakra-ui/react';
 import LanguagePopover from "src/components/settings/LanguagePopover";
 import ColorModeToggle from "src/components/settings/ToogleMode";
 import Logo from 'src/components/Logo';
+import WalletOptions from 'src/sections/compronents/Wallet';
 
 type Props = {
     children?: React.ReactNode;
@@ -47,11 +48,13 @@ export default function LogoOnlyLayout({ children }: Props) {
                     h="10vh"
                     p="6"
                     w="full"
+                    gap={2}
                     maxW={"container.xl"}
                 >
                     <Logo />
                     <Spacer />
                     <LanguagePopover />
+                    <WalletOptions />
                     <ColorModeToggle />
                 </Flex>
             </Center>

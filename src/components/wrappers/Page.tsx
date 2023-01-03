@@ -29,10 +29,11 @@ const Page = forwardRef<HTMLDivElement, Props>(({ children, title = '', meta, ..
         {meta}
       </Head>
 
-      <Box
+      <Box        
         ref={ref} {...other}
         id={`page-wrapper-${slugify(title)}`}
         bg={bg}
+        minH="100vh"
       >
         {children}
       </Box>

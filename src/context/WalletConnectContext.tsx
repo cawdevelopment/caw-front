@@ -153,7 +153,7 @@ const CAWProvider = ({ children }: Props) => {
                 chain,
                 openAccountModal,
                 openChainModal,
-                openConnectModal,
+                openConnectModal,                
                 mounted,
             }) => (
                 <CAWContext.Provider value={{
