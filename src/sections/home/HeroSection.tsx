@@ -57,6 +57,7 @@ export default function HeroSection() {
                     objectFit='scale-down'
                     borderRadius={10}
                     position='absolute'
+                    right={0}
                     display={{ base: 'flex', md: 'none' }}
                 />
                 <Spacer h={100} />
@@ -120,6 +121,7 @@ export default function HeroSection() {
                                         boxSize='400px'
                                         objectFit='cover'
                                         borderRadius="100%"
+                                        right={0}
                                         display={{ base: 'none', md: 'flex' }}
                                     />
                                 </m.div>

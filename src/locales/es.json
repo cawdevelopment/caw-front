@@ -25,7 +25,8 @@
     "cancel": "cancelar",
     "confirm": "confirmar",
     "swap": "intercambiar",
-    "get": "obtener"
+    "get": "obtener",
+    "go": "ir"
   },
   "buttons": {
     "go_home": "Inicio",

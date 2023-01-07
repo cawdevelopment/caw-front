@@ -34,7 +34,8 @@
     "cancel": "cancel",
     "confirm": "confirm",
     "swap": "swap",
-    "get": "get"
+    "get": "get",
+    "go": "go"
   },
   "buttons": {
     "go_home": "Home",
