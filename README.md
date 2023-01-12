@@ -51,6 +51,14 @@ Regarding the code, we invite you to read this project's [CONTRIBUTING](docs/CON
  - [AYU Theme](https://marketplace.visualstudio.com/items?itemName=teabyii.ayu)
  - [One Dark Pro theme](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
 
+## Built with
+ - [TypeScript](https://www.typescriptlang.org/)
+ - [Next.js](https://nextjs.org/)
+ - [Chakra UI](https://chakra-ui.com/)
+ - [Ethers.js](https://docs.ethers.io/v5/)
+ - [Wagmi](https://wagmi.sh/)
+ - [RainbowKit](https://www.rainbowkit.com/)
+
 ## Next Steps
 - [ ] Add more documentation
 - [ ] Add other guidelines
