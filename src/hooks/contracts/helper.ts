@@ -14,7 +14,7 @@ export function getContract(params: ContractParams) {
     const _network = ethers.providers.getNetwork(network);
     const provider = new ethers.providers.InfuraProvider(_network, apiKey);
     const contract = new ethers.Contract(address, abi, provider);
-    return { contract };
+    return { contract, provider };
 }
 
 export const getSignerContract = async (contract: ethers.Contract, walletAddress: string) => {
@@ -75,15 +75,15 @@ export function getExplorerUrl({ network, addressOrTx, type }: { network: string
     return url;
 }
 
-export function getOpenSeaUrl(network: string | number, ntfCTAddress: string, userId: number) {
+export function getOpenSeaUrl(network: string | number, nftCTAddress: string, userId: number) {
 
     const _network = ethers.providers.getNetwork(network);
 
     switch (network) {
         case 1:
-            return `https://opensea.io/assets/${ntfCTAddress}/${userId}`;
+            return `https://opensea.io/assets/${nftCTAddress}/${userId}`;
         default:
-            return `https://testnets.opensea.io/assets/${_network.name}/${ntfCTAddress}/${userId}`;
+            return `https://testnets.opensea.io/assets/${_network.name}/${nftCTAddress}/${userId}`;
     }
 }
 

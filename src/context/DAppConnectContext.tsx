@@ -4,7 +4,7 @@ import { ConnectButton, } from "@rainbow-me/rainbowkit";
 
 import { shortenAddress } from "src/utils/helper";
 import { CawUserName } from "src/types/dtos";
-import { useCawNames } from 'src/hooks/';
+import { useCawNamesContract } from 'src/hooks/';
 
 type ContextModel = {
     mounted: boolean;
@@ -13,7 +13,6 @@ type ContextModel = {
     shortenAddress: string;
     cawAccount: CawUserName | null;
     cawAccounts: CawUserName[];
-    changeCawAccount: (cawAccount: CawUserName) => void;
     status: "connecting" | "disconnected" | "connected" | "reconnecting",
     account: {
         address: string;
@@ -34,6 +33,7 @@ type ContextModel = {
         name?: string;
         unsupported?: boolean;
     } | undefined,
+    changeCawAccount: (cawAccount: CawUserName) => void;
     openAccountModal: () => void;
     openChainModal: () => void;
     openConnectModal: () => void;
@@ -44,6 +44,7 @@ const defaultValue: ContextModel = {
     address: '',
     shortenAddress: '0x000...0000',
     status: 'disconnected',
+
     cawAccounts: [],
     cawAccount: null,
     mounted: false,
@@ -56,12 +57,12 @@ const defaultValue: ContextModel = {
     openConnectModal: () => { },
 }
 
-const CAWContext = createContext(defaultValue);
+const DAppContext = createContext(defaultValue);
 
 //* Create a custom hook to use the context
-const useCawProvider = () => {
+const useDappProvider = () => {
 
-    const context = useContext(CAWContext);
+    const context = useContext(DAppContext);
     if (context === undefined) {
         throw new Error('useCawContext must be used within a CAWProvider');
     }
@@ -73,13 +74,14 @@ type Props = {
     children: ReactNode;
 }
 
-const CAWProvider = ({ children }: Props) => {
+const DAppProvider = ({ children }: Props) => {
 
-    const { address, status } = useAccount();
-    const { initialized, read: { getTokens, getTokenURI } } = useCawNames();
+    const { address, status, isConnected } = useAccount();
+    const { initialized, read: { getTokens, getTokenURI } } = useCawNamesContract();
     const [ userName, setUserName ] = useState<CawUserName | null>(null)
     const [ userNames, setUserNames ] = useState<CawUserName[]>([]);
     const [ getTokenFetched, setGetTokenFetched ] = useState(false);
+
 
     const handleCawAccount = useCallback(async (cawAccount: CawUserName) => {
 
@@ -118,13 +120,7 @@ const CAWProvider = ({ children }: Props) => {
         }
     }, [ address, getTokenFetched, getTokens ]);
 
-    useEffect(() => {
 
-        //* Reset the state when the address changes
-        setGetTokenFetched(false);
-        setUserName(null);
-        setUserNames([]);
-    }, [ address ]);
 
     useEffect(() => {
 
@@ -156,7 +152,7 @@ const CAWProvider = ({ children }: Props) => {
                 openConnectModal,                
                 mounted,
             }) => (
-                <CAWContext.Provider value={{
+                <DAppContext.Provider value={{
                     address: address || '0x0000000000000000000000000000000000000000',
                     shortenAddress: shortenAddress(address || '0x000...0000'),
                     status,
@@ -164,7 +160,7 @@ const CAWProvider = ({ children }: Props) => {
                     cawAccounts: userNames,
                     account,
                     chain,
-                    connected: (mounted || '').toString() !== "loading" && account?.address && chain?.id && !chain?.unsupported ? true : false,
+                    connected: isConnected && (mounted || '').toString() !== "loading" && Boolean(account?.address) && Boolean(chain?.id) && !chain?.unsupported,
                     mounted,
                     changeCawAccount: handleCawAccount,
                     openAccountModal,
@@ -172,10 +168,10 @@ const CAWProvider = ({ children }: Props) => {
                     openConnectModal,
                 }}>
                     {children}
-                </CAWContext.Provider>
+                </DAppContext.Provider>
             )}
         </ConnectButton.Custom>
     );
 }
 
-export { CAWContext, CAWProvider, useCawProvider };
+export { DAppContext, DAppProvider, useDappProvider };

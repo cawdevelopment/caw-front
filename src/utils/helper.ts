@@ -19,17 +19,5 @@ export function uuidv4() {
 
 export const shortenAddress = (address: string) => address ? `${address.slice(0, 4)}...${address.slice(address.length - 4)}` : '';
 
-export const isValidUsername = (username: string) => {
-
-    //* a-z and 0-9, without the use of special characters or spaces, no more than 255 characters, no capital letters    
-    if (!username)
-        return false;
-
-    if (username.length === 0 || username.length > 255)
-        return false;
-
-    const regex = /^[a-z0-9]+$/;
-    return regex.test(username);
-}
 
 export const sentenceCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
