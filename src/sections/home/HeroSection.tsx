@@ -1,5 +1,5 @@
 import React from "react";
-import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center, useColorModeValue, Button } from "@chakra-ui/react";
+import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center, useColorModeValue, Button, Show, Hide } from "@chakra-ui/react";
 import { m } from "framer-motion";
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
@@ -21,20 +21,18 @@ type ContentAlignPops = {
     children: React.ReactNode;
 }
 
-export const ContentAlign = React.forwardRef(({ children }: ContentAlignPops, ref: any) => {
-
-    const mdSize = useToken('breakpoints', 'md');
-    const [ isMd ] = useMediaQuery(`(min-width: ${mdSize})`)
-
-    if (isMd)
-        return <>{children}</>
-
-    return (
-        <Center>
+export const ContentAlign = React.forwardRef(({ children }: ContentAlignPops, ref: any) => (
+    <>
+        <Show above='md'>
             {children}
-        </Center>
-    );
-});
+        </Show>
+        <Hide above='md'>
+            <Center>
+                {children}
+            </Center>
+        </Hide>
+    </>
+));
 
 export default function HeroSection() {
 
