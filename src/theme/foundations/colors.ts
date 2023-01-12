@@ -21,7 +21,8 @@ export const schemes = [
 	'messenger',
 	'linkedin',
 	'telegram',
-	'caw'
+	'caw',
+	'blueCaw',
 ] as const
 
 const colors: Colors = {
@@ -275,6 +276,18 @@ const colors: Colors = {
 		800: 'rgba(247, 192, 52, 0.80)',
 		900: 'rgba(247, 192, 52, 0.92)',
 	},
+	blueCaw: {
+		50: '#73a8e8',
+		100: '##478de0',
+		200: '#3180dd',
+		300: '##2373d2',
+		400: '#1f67bc',
+		500: '#184f90',
+		600: '#113764',
+		700: '#0d2b4e',
+		800: '#091f39',
+		900: '#02070d',
+	}
 }
 
 export default colors
