@@ -1,6 +1,8 @@
 import { IconButton, Flex, useColorModeValue, FlexProps } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+
 import Logo from "src/components/Logo";
+import { TopBarMenu } from "src/components/topbar/TopBarMenu";
 
 
 export interface MobileProps extends FlexProps {
@@ -27,6 +29,7 @@ export function MobileNav({ onOpen, ...rest }: MobileProps): JSX.Element {
                 icon={<HamburgerIcon />}
             />
             <Logo disabledLink={false} />
+            <TopBarMenu />
         </Flex>
     );
 }
