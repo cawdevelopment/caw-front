@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { ethers, utils } from "ethers";
 import { useWaitForTransaction } from "wagmi";
 
+import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
-import { getCawPriceInUsd, getContract, getSignerContract, getEthPriceInUsd } from "./contractHelper";
-import useAppConfigurations from './useAppConfigurations';
+import { getCawPriceInUsd, getContract, getSignerContract, getEthPriceInUsd } from "./helper";
 
 //* Contract name :  CawNameMinter
 //* Get the cost of a name, validate the name, and mint a username

@@ -1,28 +1,59 @@
-import { useEffect, useState } from "react";
-import { useBalance } from "wagmi";
+import { useCallback, useEffect, useState } from "react";
+import { WalletBalanceInterface } from "src/interface/WalletBalanceInterface";
 
-import { useCawProvider } from "src/context/WalletConnectContext";
+type Props = {
+    account: string;
+    chainId: number;
+    chainName: string;
+    onSuccess?: (balance: number, data: any) => void;
+    onError?: (error: any) => void;
+}
 
-export default function useETHBalance(account: string) {
+export default function useETHBalance({ account, chainId, chainName, onSuccess, onError }: Props) {
 
-    const { chain } = useCawProvider();
     const [ balance, setBalance ] = useState<number>(0);
+    const [ fetchingETH, setFetchingETH ] = useState<boolean>(false);
 
-    const { isFetching: fetchingETH, refetch } = useBalance({
-        addressOrName: account, chainId: chain?.id, watch: false,
-        onSuccess(data) {
-            setBalance(Number(data?.formatted || 0));
-        },
-    });
+    const getEthBalance = useCallback(async () => {
 
-    useEffect(() => {
-
-        if (account && chain?.id) {
-            refetch();
+        if (!account) {
+            setBalance(0);
+            onError && onError('Account not connected');
+            return;
         }
 
-    }, [ account, chain?.id, refetch ]);
+        if (!chainId || !chainName) {
+            setBalance(0);
+            onError && onError('Chain not valid');
+            return;
+        }
+
+        try {
+            setFetchingETH(true);
+            const accountBalance = new WalletBalanceInterface(account, chainId, chainName);
+            const bal = await accountBalance.getEthBalance();
+            setBalance(() => bal);
+            onSuccess && onSuccess(bal, null);
+        }
+        catch (error) {
+            console.error(`ETH->Balance.error`, error);
+            setBalance(0);
+            onError && onError(error);
+        }
+        finally {
+            setFetchingETH(false);
+        }
+    }, [ account, chainId, chainName, onError, onSuccess ]);
 
 
-    return { balance, fetchingETH };
+    useEffect(() => {
+        getEthBalance();
+    }, [ getEthBalance ]);
+
+
+    return {
+        fetchETH: getEthBalance,
+        balance,
+        fetchingETH,
+    };
 }

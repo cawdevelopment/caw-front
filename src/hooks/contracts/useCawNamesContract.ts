@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BigNumber, ethers } from "ethers";
 
+import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
 import { CawUserName } from 'src/types/dtos';
-import { getContract, getSignerContract } from "./contractHelper";
-import useAppConfigurations from './useAppConfigurations';
+import { getContract, getSignerContract } from "./helper";
 
 
 //* Contract name :  CawName

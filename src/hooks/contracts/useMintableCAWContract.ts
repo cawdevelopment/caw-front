@@ -2,9 +2,9 @@ import { ethers, utils } from "ethers";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
-import { getContract, getSignerContract } from "./contractHelper";
-import useAppConfigurations from './useAppConfigurations';
+import { getContract, getSignerContract } from "./helper";
 
 //* Contract name :  MintableCAW
 //* Swap ETH to mCAW
