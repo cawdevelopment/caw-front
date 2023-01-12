@@ -40,7 +40,6 @@
     "i18next-browser-languagedetector": "^6.1.8",
     "lodash.debounce": "^4.0.8",
     "next": "^13.1.1",
-    "notistack": "^2.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.4",
