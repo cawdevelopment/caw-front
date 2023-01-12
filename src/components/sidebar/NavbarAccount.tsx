@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Text, HStack, VStack, useColorModeValue, Image } from '@chakra-ui/react';
 
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import ConnectWalletButton from "src/sections/compronents/contract/ConnectWalletButton";
 import PopoverAccount, { PopoverAccountProps } from "src/sections/compronents/contract/PopoverAccount";
 
@@ -11,9 +11,8 @@ interface Props extends PopoverAccountProps {
 
 export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter }: Props) {
 
-  const bgColor = useColorModeValue('gray.200', 'gray.800');
-  const { shortenAddress, address, cawAccount, chain, openChainModal, openAccountModal } = useCawProvider();
-  const { connected } = useCawProvider();
+  const bgColor = useColorModeValue('gray.400', 'gray.800');
+  const { connected, shortenAddress, address, cawAccount, chain, openChainModal, openAccountModal } = useDappProvider();
 
   return (
     <Box
@@ -51,7 +50,7 @@ export default function NavbarAccount({ displayAddressMode = 'shorten', showFoot
               <Text
                 noOfLines={1}
                 fontSize="sm"
-                color="gray.500"
+                color="gray.600"
                 cursor={'pointer'}
                 onClick={openChainModal}
               >

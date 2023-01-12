@@ -1,11 +1,11 @@
 import { Button, Image, Box, VStack } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-import { useCawProvider } from 'src/context/WalletConnectContext'
+import { useDappProvider } from 'src/context/DAppConnectContext'
 
 const ConnectWalletButton = () => {
 
-  const { chain, status, openChainModal, openConnectModal } = useCawProvider();
+  const { chain, status, openChainModal, openConnectModal } = useDappProvider();
   const { t } = useTranslation();
 
   if (status === 'disconnected') {
@@ -31,12 +31,11 @@ const ConnectWalletButton = () => {
   }
 
   return (
-    <Box>
+    <Box >
       <VStack>
         <Button
           onClick={openChainModal}
-          width="15vw"
-          variant="outline"
+          variant="ghost"
           bgGradient="linear(to-l, brand.100, brand.200)"
         >
           {chain?.hasIcon && (

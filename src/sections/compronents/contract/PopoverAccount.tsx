@@ -6,15 +6,15 @@ import {
     Button, Divider, ButtonGroup, Avatar, AvatarBadge, chakra, Tooltip, Spacer, Flex, useColorModeValue
 } from '@chakra-ui/react';
 
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import StoryStyledAvatar from "src/components/avatar/StoryStyledAvatar";
 import Iconify from "src/components/icons/Iconify";
 
-import { useETHBalance } from "src/hooks";
 import { fDecimal } from "src/utils/formatNumber";
 import { CawUserName } from "src/types/dtos";
+import { useETHBalance } from "src/hooks";
 
-import QuickMintingUserName from "./QuickMintUserName";
+import { QuickMintingUserNameButton } from "./QuickMintUserName";
 
 export interface PopoverAccountProps {
     displaMode: 'list' | 'carousel';
@@ -42,8 +42,8 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
 
     const initialFocusRef = useRef();
     const { t } = useTranslation();
-    const { address, cawAccount, cawAccounts, changeCawAccount } = useCawProvider();
-    const { balance, fetchingETH } = useETHBalance(address);
+    const { address, cawAccount, cawAccounts, changeCawAccount, chain } = useDappProvider();
+    const { balance, fetchingETH } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
     const contentWrapper = useRef<HTMLDivElement>(null);
     const popoverBg = useColorModeValue('gray.700', 'blue.800');
     const popoverBordercolor = useColorModeValue('gray.700', 'gray.500');
@@ -188,7 +188,7 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
                     >
                         <Box fontSize='sm'>{t('labels.options')}</Box>
                         <ButtonGroup size='sm'>
-                            <QuickMintingUserName />
+                            <QuickMintingUserNameButton />
                             <Button
                                 colorScheme='green'
                                 color={balanceButtonColor}

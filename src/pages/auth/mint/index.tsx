@@ -5,9 +5,9 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import { useCawNameMinterContract } from "src/hooks";
-import { getBlockChainErrMsg } from "src/hooks/contractHelper";
+import { getBlockChainErrMsg } from "src/hooks/contracts/helper";
 import { PATH_AUTH } from "src/routes/paths";
 import FormStepper from "./FormStepper";
 
@@ -46,7 +46,7 @@ export default function RegisterPage() {
 
     const { t } = useTranslation();
     const { mint, isLoading, minting } = useCawNameMinterContract();
-    const { address, connected } = useCawProvider();
+    const { address, connected } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
     const toast = useToast();
 

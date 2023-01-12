@@ -2,7 +2,7 @@ import { Tooltip } from "@chakra-ui/react";
 import { motion } from 'framer-motion';
 
 import StoryStyledAvatar from "src/components/avatar/StoryStyledAvatar";
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 
 const list = {
     visible: {
@@ -25,7 +25,7 @@ const item = {
 
 const Avatars = () => {
 
-    const { cawAccounts, changeCawAccount } = useCawProvider();
+    const { cawAccounts, changeCawAccount } = useDappProvider();
 
     return (
         <motion.ul

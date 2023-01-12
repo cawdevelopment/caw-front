@@ -8,24 +8,29 @@ import {
 
 import AlertDialog from "src/components/dialogs/AlertDialog";
 import AlertMessage from "src/components/AlertMessage";
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import NavbarAccount from 'src/components/sidebar/NavbarAccount';
 
 import { MILLION } from 'src/utils/constants';
 import { fDecimal, kFormatter } from 'src/utils/formatNumber';
 import { sentenceCase, shortenAddress } from "src/utils/helper";
 import { useETHBalance, useMintableCAWContract } from "src/hooks";
-import { getBlockChainErrMsg, getCawPriceInUsd, getEthPriceInUsd, getExplorerUrl } from "src/hooks/contractHelper";
+import { getBlockChainErrMsg, getCawPriceInUsd, getEthPriceInUsd, getExplorerUrl } from "src/hooks/contracts/helper";
 
 export default function SwapMCAWForm() {
 
     const { t } = useTranslation();
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const { address, connected, chain } = useCawProvider();
+    const { address, connected, chain } = useDappProvider();
     const bg = useColorModeValue("gray.50", "gray.800");
     const brColor = useColorModeValue("gray.400", "gray.50");
     const colorText = useColorModeValue("gray.900", "gray.50");
-    const { balance } = useETHBalance(address);
+    const { balance, fetchingETH } = useETHBalance({
+        account: address,
+        chainId: chain?.id || 0,
+        chainName: chain?.name || '',
+    });
+
     const { initialized, mint, approve } = useMintableCAWContract();
 
     const [{ cawUSD, ethUSD }, setPrices] = useState({ cawUSD: 0, ethUSD: 0 });
@@ -141,7 +146,7 @@ export default function SwapMCAWForm() {
                         <Image src={`/assets/tokens/eth.png`} alt='ETH' width={24} height={24} />
                         <Text as="b">ETH</Text>
                         <Spacer />
-                        <Text as="b">{t('labels.balance')} : {kFormatter(balance)}</Text>
+                        <Text as="b">{t('labels.balance')} : {fetchingETH ? '---' : kFormatter(balance)}</Text>
                     </HStack>
                     <Spacer h={10} />
                     <VStack spacing={4}>

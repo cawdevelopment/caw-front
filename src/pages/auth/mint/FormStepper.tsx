@@ -6,7 +6,7 @@ import { m } from "framer-motion";
 
 import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 import { MotionContainer } from "src/components/animate";
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
 
 import { useMintingPageContext } from '.';
@@ -36,7 +36,7 @@ export default function FormStepper(props: Props) {
     const [ step, setStep ] = useState(1);
     const [progress, setProgress] = useState(getProgress(step));
     const { t } = useTranslation();
-    const { connected } = useCawProvider();
+    const { connected } = useDappProvider();
 
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });

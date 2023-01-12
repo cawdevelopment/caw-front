@@ -1,33 +1,13 @@
-import { useState } from "react";
-import { useBalance } from "wagmi";
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
 import { Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer, Stack } from "@chakra-ui/react";
 
-import { useCawProvider } from "src/context/WalletConnectContext";
-import useAppConfigurations from "src/hooks/useAppConfigurations";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import { WalletBalanceModel } from "src/types/dtos";
 import { fDecimal, kFormatter } from "src/utils/formatNumber";
 import { BILLION } from 'src/utils/constants';
 import { PATH_DASHBOARD } from "src/routes/paths";
-
-const defaultBalance: WalletBalanceModel[] = [
-    {
-        symbol: 'ETH',
-        name: 'Ethereum',
-        amount: 0,
-    },
-    {
-        symbol: 'CAW',
-        name: 'A Hunters Dream',
-        amount: 0,
-    },
-    {
-        symbol: 'mCAW',
-        name: 'Mintable CAW',
-        amount: 0,
-    }
-];
+import { useAccountBalance } from "src/hooks";
 
 function AssetItem({ balance }: { balance: WalletBalanceModel }) {
 
@@ -55,44 +35,21 @@ function AssetItem({ balance }: { balance: WalletBalanceModel }) {
 
 export default function WalletBalanceCard({ width }: { width: number }) {
 
-    const { address, chain } = useCawProvider();
-    const { contracts: { CAW, MINTABLE_CAW } } = useAppConfigurations();
-    const [assets, setAssets] = useState<WalletBalanceModel[]>(defaultBalance);
     const { t } = useTranslation();
-
-    const { isFetching: fetchingETH } = useBalance({
-        addressOrName: address, chainId: chain?.id, watch: false,
-        onSuccess(data) { updateBalance(data, 'ETH', 'Ethereum'); }
+    const { address, chain, connected } = useDappProvider();
+    const { assets, processing: fetchingBalance } = useAccountBalance({
+        address: address || '',
+        connected: connected,
+        chainId: chain?.id || 0,
+        chainName: chain?.name || '',
     });
-
-    const { isFetching: fetcinghCAW } = useBalance({
-        addressOrName: address, token: CAW.address, chainId: chain?.id, watch: false,
-        onSuccess(data) { updateBalance(data, 'CAW', 'A Hunters Dream'); },
-    });
-
-    const { isFetching: fetchingMCAW } = useBalance({
-        addressOrName: address, token: MINTABLE_CAW.address, chainId: chain?.id, watch: false,
-        onSuccess(data) { updateBalance(data, 'MCAW', 'Mintable CAW'); },
-    });
-
-
-    function updateBalance(data: any, symbol: string, name: string) {
-        setAssets(prev => {
-            const asset = prev.find(a => (a.symbol || '').toUpperCase() === symbol.toUpperCase());
-            if (asset) {
-                asset.amount = Number(data?.formatted || 0);
-                return prev;
-            }
-
-            return [...prev, { symbol: symbol, name: name, amount: Number(data?.formatted || 0) }];
-        });
-    }
 
     const sortedByAmount = assets.sort((a, b) => b.amount - a.amount);
+
     return (
         <Box width={width <= 0 ? 'full' : width} maxWidth={"container.md"}  >
             <Heading size="md" mb={2}>
-                {(fetchingETH || fetcinghCAW || fetchingMCAW) ? t('minting_page.upding_balance') : t('minting_page.main_balance')}
+                {fetchingBalance ? t('minting_page.upding_balance') : t('minting_page.main_balance')}
             </Heading>
             <Spacer h={10} />
             {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} />)}

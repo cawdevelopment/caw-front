@@ -1,15 +1,18 @@
-import { Box, Button, ButtonGroup, HStack, IconButton, Menu, MenuButton, MenuItem, MenuList, useColorMode } from '@chakra-ui/react';
+import {
+    Box, Button, ButtonGroup, ButtonGroupProps, ButtonProps, HStack, IconButton,
+    Menu, MenuButton, MenuButtonProps, MenuItem, MenuList, useColorMode
+} from '@chakra-ui/react';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
 import { useDisconnect } from 'wagmi'
 import Image from 'next/image'
 
 import Iconify from "src/components/icons/Iconify";
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 
 function NetworkIcon() {
 
-    const { chain } = useCawProvider();
+    const { chain } = useDappProvider();
 
     if (chain?.hasIcon)
         return (
@@ -37,19 +40,25 @@ function NetworkIcon() {
     return null;
 }
 
-function WalletButton() {
+type WalletButtonProps = {
+    buttonProps?: ButtonProps;
+    menuButtonProps?: MenuButtonProps
+}
+
+function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
 
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
-    const { chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useCawProvider();
+    const { connected, chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useDappProvider();
 
-    if (status === 'disconnected') {
+    if (status === 'disconnected' || !connected) {
         return (
             <Button
+                {...buttonProps}
                 variant="ghost"
                 onClick={openConnectModal}
             >
-                {t('buttons.btn_connect_wallet')}
+                {t('labels.wallet')}
             </Button>
         );
     }
@@ -57,6 +66,7 @@ function WalletButton() {
     if (chain?.unsupported) {
         return (
             <Button
+                {...buttonProps}
                 variant="ghost"
                 onClick={openChainModal}
             >
@@ -67,19 +77,30 @@ function WalletButton() {
 
     return (
         <Menu>
-            <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
+            <MenuButton
+                {...menuButtonProps}
+                as={Button}
+                rightIcon={<ChevronDownIcon />}
+            >
                 {shortenAddress}
             </MenuButton>
-            <MenuList>
-                <MenuItem onClick={openAccountModal} icon={<Iconify icon="ion:wallet" width={16} height={16} />}>
+            <MenuList id="wallet-button-menu-list" >
+                <MenuItem
+                    onClick={openAccountModal}
+                    icon={<Iconify icon="ion:wallet" width={16} height={16} />}
+                >
                     {t('labels.wallet')}
                 </MenuItem>
-
-                <MenuItem onClick={openChainModal} icon={<NetworkIcon />}>
+                <MenuItem
+                    onClick={openChainModal} icon={<NetworkIcon />}
+                >
 
                     {t('labels.network')} ({chain?.name || ''})
                 </MenuItem>
-                <MenuItem onClick={() => disconnect()} icon={<Iconify icon="uil:exit" width={16} height={16} />}>
+                <MenuItem
+                    onClick={() => disconnect()}
+                    icon={<Iconify icon="uil:exit" width={16} height={16} />}
+                >
                     {t('labels.disconnect')}
                 </MenuItem>
             </MenuList>
@@ -87,21 +108,40 @@ function WalletButton() {
     );
 }
 
-export default function WalletOptions() {
+interface Props extends WalletButtonProps {
+    iconColor?: string;
+    hoverColor?: string;
+    buttonGroup?: ButtonGroupProps
+}
+
+export default function WalletOptions({ iconColor, hoverColor, menuButtonProps, buttonProps, buttonGroup }: Props = {}) {
 
     const { colorMode } = useColorMode();
 
     return (
         <HStack
+            id="wallet-options-stack"
             spacing={1}
             alignItems="center"
             borderRadius="md"
             border="1px"
             borderColor={colorMode === 'light' ? 'gray.300' : 'gray.600'}
         >
-            <ButtonGroup size='sm' isAttached variant='ghost'>
-                <IconButton aria-label='Wallet icon' icon={<Iconify icon="ph:wallet-fill" />} />
-                <WalletButton />
+            <ButtonGroup
+                {...buttonGroup}
+                size='sm'
+                isAttached
+                variant='ghost'
+            >
+                <IconButton
+                    aria-label='Wallet icon'
+                    icon={<Iconify icon="ph:wallet-fill" color={iconColor} />}
+                    _hover={hoverColor ? { bg: hoverColor } : undefined}
+                />
+                <WalletButton
+                    buttonProps={buttonProps}
+                    menuButtonProps={menuButtonProps}
+                />
             </ButtonGroup>
         </HStack>
     );

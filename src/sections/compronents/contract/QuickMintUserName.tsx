@@ -3,15 +3,15 @@ import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 import { useDebounce } from "use-debounce";
 import {
-    Box, Button, Input, Link, Text,
-    Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Stack, HStack, useColorModeValue
+    Box, Button, Input, Link, Text, Stack, HStack,
+    Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useColorModeValue
 } from "@chakra-ui/react";
 
 import { useCawNameMinterContract } from "src/hooks";
 import AlertDialog from "src/components/dialogs/AlertDialog";
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
-import { getBlockChainErrMsg, getExplorerUrl } from "src/hooks/contractHelper";
+import { getBlockChainErrMsg, getExplorerUrl } from "src/hooks/contracts/helper";
 import { sentenceCase, shortenAddress } from "src/utils/helper";
 import { PATH_AUTH } from "src/routes/paths";
 
@@ -19,7 +19,7 @@ function MintNFTNameForm() {
 
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { t } = useTranslation();
-    const { address, connected, chain } = useCawProvider();
+    const { address, connected, chain } = useDappProvider();
     const [ value, setValue ] = React.useState();
     const [ debouncedValue ] = useDebounce(value, 500);
     const { mint, minting } = useCawNameMinterContract();
@@ -109,24 +109,19 @@ function MintNFTNameForm() {
     );
 }
 
-export default function QuickMintingUserName() {
+
+type QuickMintingUserNameProps = {
+    isOpen: boolean;
+    onClose: () => void;
+}
+
+export function QuickMintingUserName({ isOpen, onClose }: QuickMintingUserNameProps) {
 
     const { t } = useTranslation();
-    const { isOpen, onOpen, onClose } = useDisclosure();
-    const buttonMintBg = useColorModeValue('blue.400', 'blue.200');
-
     return (
         <>
-            <Button
-                colorScheme='blue'
-                color={buttonMintBg}
-                variant={"ghost"}
-                size="sm"
-                onClick={onOpen}
-            >
-                {t('labels.quickmint')}
-            </Button>
             <Modal
+                isCentered
                 motionPreset='slideInBottom'
                 isOpen={isOpen}
                 closeOnEsc={true}
@@ -153,3 +148,24 @@ export default function QuickMintingUserName() {
     );
 }
 
+export function QuickMintingUserNameButton() {
+
+    const { t } = useTranslation();
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const buttonMintBg = useColorModeValue('blue.400', 'blue.200');
+
+    return (
+        <>
+            <Button
+                colorScheme='blue'
+                color={buttonMintBg}
+                variant={"ghost"}
+                size="sm"
+                onClick={onOpen}
+            >
+                {t('labels.quickmint')}
+            </Button>
+            <QuickMintingUserName isOpen={isOpen} onClose={onClose} />
+        </>
+    );
+}
