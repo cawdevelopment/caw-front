@@ -1,6 +1,5 @@
 import { useCallback } from "react";
 import { Box, Divider, useColorModeValue, useToken } from "@chakra-ui/react";
-// import { useSnackbar } from 'notistack'
 
 import PostContent from 'src/components/PostContent';
 import { TagType } from "src/components/tag-parser/parser";
@@ -14,7 +13,6 @@ type Props = {
 
 export default function Post({ post }: Props) {
 
-    // const { enqueueSnackbar } = useSnackbar();
     const [ htLight, htDark ] = useToken('colors', [ 'caw.800', 'caw.600' ]);
     const [ mtLight, mtDark ] = useToken('colors', [ 'red.600', 'red.500' ]);
     const [ urlLight, urlDark ] = useToken('colors', [ 'blue.600', 'blue.500' ]);
@@ -26,14 +24,10 @@ export default function Post({ post }: Props) {
 
     const handleHashTagClicked = useCallback((ht: string, type: TagType, element: any) => {
         console.log(ht, type, element);
-        // enqueueSnackbar(`Clicked on ${ht} of type ${type}`, {
-        //     variant: type === '#' ? 'warning' : type === '$' ? 'success' : type === '@' ? 'error' : type === 'url' ? 'info' : 'default',
-        // });
     }, []);
 
     const handleDeletePost = useCallback(() => {
         console.log('Delete post', id);
-        // enqueueSnackbar(`Deleted post ${id}`, { variant: 'info' });
     }, [ id ]);
 
     return (

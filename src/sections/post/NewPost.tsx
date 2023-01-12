@@ -8,7 +8,6 @@ import CircularProgress from 'src/components/CircularProgress';
 import Iconify from 'src/components/icons/Iconify';
 
 export const MAX_CHARECTERS = 420;
-const defaultText = 'The next #censor would be whoever is looking at the text, seeing what words they would “trick out” to fit the political';
 
 export default function NewPost() {
 
@@ -19,7 +18,7 @@ export default function NewPost() {
     const warningColor = useColorModeValue('orange.500', 'orange.400');
     const errorColor = useColorModeValue('red.500', 'red.400');
 
-    const [ characters, setCharacters ] = useState(defaultText.length);
+    const [ characters, setCharacters ] = useState(0);
     const [ progress, setProgress ] = useState(0);
 
     useEffect(() => {
@@ -35,7 +34,7 @@ export default function NewPost() {
                 <Stack direction={{ xs: 'column', sm: 'row' }} gap={4}>
                     <MyAvatar sx={{ display: { base: 'none', sm: 'block' } }} />
                     <Textarea
-                        defaultValue={defaultText}
+                        autoFocus
                         resize="none"
                         placeholder={t('labels.new_post_plh')}
                         inputMode="text"

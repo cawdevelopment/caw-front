@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 
 import Block from "src/components/Block";
 import SettingMode from "./SettingMode";
-import SettingDirection from "./SettingDirection";
-import SettingColorPresets from "./SettingColorPresets";
-import SettingFullscreen from "./SettingFullscreen";
+// import SettingDirection from "./SettingDirection";
+// import SettingColorPresets from "./SettingColorPresets";
+// import SettingFullscreen from "./SettingFullscreen";
 
 export default function DisplaySettings() {
     const { t } = useTranslation();
@@ -29,14 +29,14 @@ export default function DisplaySettings() {
                         </Text>
                         <SettingMode />
                     </div>
-                    <div>
+                    {/* <div>
                         <Text as="b">
                             {t('labels.direction')}
                         </Text>
                         <SettingDirection />
-                    </div>
+                    </div> */}
                 </Stack>
-                <Stack spacing={1} sx={{ width: '-webkit-fill-available' }} >
+                {/* <Stack spacing={1} sx={{ width: '-webkit-fill-available' }} >
                     <div>
                         <Text as="b">
                             {t('labels.color_presets')}
@@ -49,7 +49,7 @@ export default function DisplaySettings() {
                         </Text>
                         <SettingFullscreen />
                     </div>
-                </Stack>
+                </Stack> */}
             </Stack>
         </Block>
     );

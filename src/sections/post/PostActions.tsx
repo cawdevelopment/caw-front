@@ -16,9 +16,10 @@ export default function PostActions({ likes, comments, shared, dislikes }: Props
     return (
         <HStack direction="row" spacing={4} alignItems="center">
             {LikeAction(likes)}
-            {DislikeAction(dislikes)}
+            {/* {DislikeAction(dislikes)} */}
             {CommentsAction(comments)}
             {SharingAction(shared)}
+            {BlockScan()}
         </HStack>
     );
 }
@@ -42,7 +43,7 @@ function CommentsAction(comments: number) {
     return (
         <Tooltip hasArrow label={t('labels.comments')}>
             <HStack spacing={1} alignItems="center">
-                <Iconify icon={'ic:baseline-comment'} width={20} height={20} />
+                <Iconify icon={'material-symbols:mode-comment-rounded'} width={20} height={20} />
                 <Text>
                     {kFormatter(comments)}
                 </Text>
@@ -51,19 +52,19 @@ function CommentsAction(comments: number) {
     );
 }
 
-function DislikeAction(dislikes: number) {
-    const { t } = useTranslation();
-    return (
-        <Tooltip hasArrow label={t('labels.dislikes')}>
-            <HStack spacing={1} alignItems="center">
-                <Iconify icon={'clarity:heart-broken-solid'} width={20} height={20} color="darkred" />
-                <Text>
-                    {kFormatter(dislikes)}
-                </Text>
-            </HStack>
-        </Tooltip>
-    );
-}
+// function DislikeAction(dislikes: number) {
+//     const { t } = useTranslation();
+//     return (
+//         <Tooltip hasArrow label={t('labels.dislikes')}>
+//             <HStack spacing={1} alignItems="center">
+//                 <Iconify icon={'clarity:heart-broken-solid'} width={20} height={20} color="darkred" />
+//                 <Text>
+//                     {kFormatter(dislikes)}
+//                 </Text>
+//             </HStack>
+//         </Tooltip>
+//     );
+// }
 
 function LikeAction(likes: number) {
     const { t } = useTranslation();
@@ -74,6 +75,17 @@ function LikeAction(likes: number) {
                 <Text>
                     {kFormatter(likes)}
                 </Text>
+            </HStack>
+        </Tooltip>
+    );
+}
+
+function BlockScan() {
+    const { t } = useTranslation();
+    return (
+        <Tooltip hasArrow label={t('buttons.btn_scan')}>
+            <HStack spacing={1} alignItems="center">
+                <Iconify icon={'fa-brands:ethereum'} width={20} height={20} />
             </HStack>
         </Tooltip>
     );

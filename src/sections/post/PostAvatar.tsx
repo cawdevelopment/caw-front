@@ -1,4 +1,4 @@
-import { Box, Stack, Tooltip, Text } from "@chakra-ui/react";
+import { Stack, Tooltip, Text } from "@chakra-ui/react";
 import NextLink from 'next/link';
 
 import Avatar from 'src/components/avatar/Avatar';
@@ -6,7 +6,7 @@ import Iconify from 'src/components/icons/Iconify';
 import { PATH_DASHBOARD } from "src/routes/paths";
 import { MediaType } from "src/types/community-feed";
 import { fDateTimeSuffix, fToNowShorter } from "src/utils/formatTime";
-import { PostMenu } from "./PostMenu";
+// import { PostMenu } from "./PostMenu";
 
 type Props = {
     src: string;
@@ -22,7 +22,7 @@ type Props = {
 
 export default function PostAvatar(props: Props) {
 
-    const { src, displayName, username, type, verified, date, postId, txId, onDelete } = props;
+    const { src, displayName, username, type, verified, date, postId } = props;
     const profileUrl = PATH_DASHBOARD.user.profile.replace(':username', username);
 
     return (
@@ -69,8 +69,8 @@ export default function PostAvatar(props: Props) {
                     </Stack>
                 </Stack>
             </NextLink>
-            <Box sx={{ flexGrow: 1 }} />
-            <PostMenu txId={txId} postId={postId} onDelete={onDelete} />
+            {/* <Box sx={{ flexGrow: 1 }} /> */}
+            {/* <PostMenu txId={txId} postId={postId} onDelete={onDelete} /> */}
         </Stack >
     )
 }
