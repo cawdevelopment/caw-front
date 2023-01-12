@@ -1,6 +1,6 @@
 import { uuidv4 } from "src/utils/helper";
 
-export type MediaType = 'image' | 'video' | 'audio' | 'file' | 'text' | 'url' | 'ntf';
+export type MediaType = 'image' | 'video' | 'audio' | 'file' | 'text' | 'url' | 'nft';
 
 export type MediaMetaDto = {
     id: string;
@@ -65,7 +65,7 @@ export const user: AuthUser = {
         width: 100,
         height: 100,
         id: uuidv4(),
-        type: 'ntf',
+        type: 'nft',
         watermark: {
             porcentage: 0.5,
         }

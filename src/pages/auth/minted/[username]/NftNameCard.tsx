@@ -3,7 +3,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 import { Props } from "./[tx]";
 
-export default function NtfNameCard({ userId, userName, image, blockExplorerUrl, openSeaUrl }: Props) {
+export default function NftNameCard({ userId, userName, image, blockExplorerUrl, openSeaUrl }: Props) {
 
     const bgBox = useColorModeValue('white', 'gray.800');
     const { t } = useTranslation();
@@ -56,7 +56,7 @@ export default function NtfNameCard({ userId, userName, image, blockExplorerUrl,
                     <Stack pt={10} align={'center'}>
                         <Code p={2}>{`#${userId}`}</Code>
                         <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-                            {t('labels.check_ntf_on')}
+                            {t('labels.check_nft_on')}
                         </Heading>
                         <Spacer h={5} />
                         <Stack direction={'column'} align={'center'}>
@@ -72,7 +72,7 @@ export default function NtfNameCard({ userId, userName, image, blockExplorerUrl,
                             <Link
                                 isExternal
                                 color={'blue.400'}
-                                target="_blank"                                
+                                target="_blank"
                                 href={openSeaUrl}
                             >
                                 <b>OpenSea</b> <ExternalLinkIcon mx='2px' />

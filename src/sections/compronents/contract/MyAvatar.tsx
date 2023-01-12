@@ -1,7 +1,7 @@
 
 import { SystemStyleObject } from "@chakra-ui/react";
 
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import Avatar from 'src/components/avatar/Avatar';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 
 export default function MyAvatar({ sx }: Props) {
 
-    const { cawAccount } = useCawProvider();
+    const { cawAccount } = useDappProvider();
 
     return (
         <Avatar
@@ -18,7 +18,7 @@ export default function MyAvatar({ sx }: Props) {
             size="md"
             color="white"
             src={cawAccount?.avatar || ''}
-            type={'ntf'}
+            type={'nft'}
             sx={sx}
         />
     )

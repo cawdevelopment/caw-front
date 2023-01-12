@@ -3,7 +3,7 @@ import { InfoIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 
 import NavbarAccount from 'src/components/sidebar/NavbarAccount';
-import { useCawProvider } from "src/context/WalletConnectContext";
+import { useDappProvider } from "src/context/DAppConnectContext";
 import { useEffect, useRef } from "react";
 
 type Props = {
@@ -16,7 +16,7 @@ export default function WalletConnection({ onInitilizedBox }: Props) {
     const fontColor1 = useColorModeValue("gray.500", "gray.50");
     const fontColor2 = useColorModeValue("gray.600", "gray.100");
     const fontColor3 = useColorModeValue("gray.900", "gray.200");
-    const { connected } = useCawProvider();
+    const { connected } = useDappProvider();
     const refDiv = useRef<HTMLDivElement>(null);
     const breakpoint = useBreakpoint({ ssr: false })
 
@@ -53,14 +53,14 @@ export default function WalletConnection({ onInitilizedBox }: Props) {
                     {t('minting_page.step_description')}
                 </Text>
                 <Heading as="h3" size="md" mt={6} mb={2}>
-                    {t('minting_page.ntf_state_q')}
+                    {t('minting_page.nft_state_q')}
                 </Heading>
                 <Text color={fontColor2} >
-                    {t('minting_page.ntf_state_a')}
+                    {t('minting_page.nft_state_a')}
                 </Text>
                 <Spacer h={5} />
                 <Text color={fontColor3} >
-                    {t('minting_page.ntf_state_ai')}
+                    {t('minting_page.nft_state_ai')}
                 </Text>
                 <Spacer h={10} />
                 <Stack direction='column' textAlign={"left"}>

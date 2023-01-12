@@ -7,14 +7,12 @@ import NextLink from 'next/link';
 import { PATH_AUTH } from "src/routes/paths";
 import { WrapperFadeAnimation } from 'src/components/animate'
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import { useCawProvider } from "src/context/WalletConnectContext";
-import { getExplorerUrl, getOpenSeaUrl } from 'src/hooks/contractHelper'
-import useCawNamesContract from "src/hooks/useCawNamesContract";
-import useAppConfigurations from "src/hooks/useAppConfigurations";
-import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
+import { useDappProvider } from "src/context/DAppConnectContext";
+import { getExplorerUrl, getOpenSeaUrl } from 'src/hooks/contracts/helper'
+import { useCawNameMinterContract, useCawNamesContract, useAppConfigurations } from "src/hooks";
 
 import LoaderCard from "./LoaderCard";
-import NtfNameCard from "./NtfNameCard";
+import NftNameCard from "./NftNameCard";
 
 MintedUserNamePage.getLayout = function getLayout(page: React.ReactElement) {
     return <Layout variant="logoOnly">{page}</Layout>;
@@ -41,11 +39,11 @@ export default function MintedUserNamePage() {
     const [ userId, setUserId ] = useState(0);
     const [ image, setImage ] = useState('');
     const [ error, setError ] = useState('');
-    const { chain } = useCawProvider();
+    const { chain } = useDappProvider();
     const { t } = useTranslation();
 
 
-    const ntfURL = getOpenSeaUrl(chain?.id || 0, cawNamesAddress, userId);
+    const nftURL = getOpenSeaUrl(chain?.id || 0, cawNamesAddress, userId);
     const explorerUrl = getExplorerUrl({
         network: chain?.id || 0,
         addressOrTx: transactionHash as string,
@@ -141,9 +139,9 @@ export default function MintedUserNamePage() {
                 </WrapperFadeAnimation>
                 <WrapperFadeAnimation show={!loading}>
                     <Box>
-                        <NtfNameCard
+                        <NftNameCard
                             blockExplorerUrl={explorerUrl}
-                            openSeaUrl={ntfURL}
+                            openSeaUrl={nftURL}
                             image={image}
                             userId={userId}
                             userName={userName as string}

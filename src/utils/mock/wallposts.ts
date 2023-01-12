@@ -3,7 +3,7 @@ import _mock from './mock';
 import { randomNumberRange } from "./funcs";
 
 
-export const posts: PostDto[] = Array.from({ length: 25 }, (_, i) => ({
+export const posts: PostDto[] = Array.from({ length: 41 }, (_, i) => ({
     id: _mock.id(i),
     transactionHash: _mock.id(i),
     title: _mock.text.title(i),
@@ -16,7 +16,7 @@ export const posts: PostDto[] = Array.from({ length: 25 }, (_, i) => ({
             id: _mock.id(i),
             src: _mock.image.avatar(i),
             height: 100,
-            type: 'ntf',
+            type: 'nft',
             width: 100,
             watermark: {
                 porcentage: 0,

@@ -44,6 +44,7 @@ export default function LogoOnlyLayout({ children }: Props) {
                 boxShadow={scroll ? 'base' : 'none'}
             >
                 <Flex
+                    id="logo-only-layout-flex"
                     alignItems="center"
                     h="10vh"
                     p="6"

@@ -98,10 +98,10 @@ function MediumMenu() {
                             <NextLink href={PATH_AUTH.mint} passHref>
                                 <div>
                                     <Button
-                                        aria-label="change language"
+                                        aria-label="register"
                                         sx={{ textTransform: 'none' }}
                                     >
-                                        {t('home.btn_mint')}
+                                        {t('home.btn_register')}
                                     </Button>
                                 </div>
                             </NextLink>
@@ -199,7 +199,7 @@ function MobileMenu() {
                         <Divider />
                         <HStack>
                             <Text>
-                                {t('home.btn_mint')}
+                                {t('home.btn_register')}
                             </Text>
                             <Spacer />
                             <NextLink href={PATH_AUTH.mint} passHref>

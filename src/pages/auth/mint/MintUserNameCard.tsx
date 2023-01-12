@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import debounce from 'lodash.debounce';
 
 import { useMintingPageContext } from ".";
-import useCawNameMinterContract from "src/hooks/useCawNameMinterContract";
-import { isValidUsername as validateUserNameLocally } from "src/utils/helper";
+import useCawNameMinterContract from "src/hooks/contracts/useCawNameMinterContract";
+import { isValidUsername as validateUserNameLocally } from "src/utils/manifestoHelper";
 import MintingCost from "./MintingCost";
 import { WrapperFadeAnimation } from "src/components/animate";
 import AlertMessage from "src/components/AlertMessage";
@@ -106,7 +106,7 @@ export default function MintUserNameCard({ width }: { width: number }) {
     return (
         <Stack spacing={4} width={width <= 0 ? 'full' : width}>
             <FormControl id="username">
-                <FormLabel>{t('minting_page.enter_ntf_input_lb') + ':'}</FormLabel>
+                <FormLabel>{t('minting_page.enter_nft_input_lb') + ':'}</FormLabel>
                 <InputGroup>
                     <Input        
                         ref={inputRef}
