@@ -142,13 +142,22 @@ export default function FormStepper(props: Props) {
                             </ButtonGroup>
                         </Box>
                         <Spacer />
-                        <Flex direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
+                        <Flex
+                            direction={{ base: "column", md: "row" }}
+                            alignItems="center"
+                            justifyContent="space-between"
+                            rowGap={2}
+                        >
                             <NextLink href={PATH_DASHBOARD.swap.mcaw} passHref>
                                 <Link color={'blue.400'}>
                                     <b>{t('labels.getmcaw')}</b>
                                 </Link>
                             </NextLink>
-                            <Spacer />
+                            <NextLink href={PATH_DASHBOARD.app.home} passHref>
+                                <Link color={'blue.400'}>
+                                    <b>{t('labels.dashboard')}</b>
+                                </Link>
+                            </NextLink>
                             <NextLink href={PATH_AUTH.connect} passHref>
                                 <Link color={'blue.400'}>{t('minting_page.already_minted')}</Link>
                             </NextLink>

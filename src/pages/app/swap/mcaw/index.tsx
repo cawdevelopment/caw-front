@@ -1,11 +1,11 @@
-import { chakra, Container, Stack, Link, Text, Flex, Spacer } from "@chakra-ui/react";
+import { chakra, Container, Stack, Link, Text, Flex } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 
 import Block from "src/components/Block";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import SwapMCAWForm from 'src/views/MintableCawForm';
-import { PATH_AUTH } from "src/routes/paths";
+import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 
 SwapMintableCAW.getLayout = function getLayout(page: React.ReactElement) {
     return <Layout variant="logoOnly">{page}</Layout>;
@@ -51,13 +51,23 @@ export default function SwapMintableCAW() {
                 >
                     <SwapMCAWForm />
                 </Block>
-                <Flex p={3} direction={{ base: "column", md: "row" }} alignItems="center" rowGap={2}>
+                <Flex
+                    direction={{ base: "column", md: "row" }}
+                    alignItems="center"
+                    justifyContent="space-between"
+                    rowGap={2}
+                    mt={5}
+                >
                     <NextLink href={PATH_AUTH.mint} passHref rel="noopener noreferrer">
                         <Link color={'blue.400'}>
                             <b>{t('home.btn_mint')}</b>
                         </Link>
                     </NextLink>
-                    <Spacer />
+                    <NextLink href={PATH_DASHBOARD.app.home} passHref>
+                        <Link color={'blue.400'}>
+                            <b>{t('labels.dashboard')}</b>
+                        </Link>
+                    </NextLink>
                     <NextLink href={PATH_AUTH.connect} passHref rel="noopener noreferrer">
                         <Link color={'blue.400'}>
                             {t('minting_page.already_minted')}
