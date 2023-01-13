@@ -1,6 +1,6 @@
 import {
     Wrap, WrapItem, useColorModeValue, Button as CrkButton, Text,
-    Center, useDisclosure, VStack
+    Center, useDisclosure, VStack, useToken
 } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation';
 
@@ -12,7 +12,7 @@ import { ProtocolCostModal } from "src/components/contract/stats/ProtocolCost";
 import LanguagePopover from 'src/components/settings/LanguagePopover';
 
 import { PATH_DASHBOARD } from "src/routes/paths";
-import { TopBarMenu } from "./TopBarMenu";
+import TopBarMenuButton from "./menu";
 
 function ItemWrapper({ children, padding, minW = "6rem" }: { children: React.ReactNode, padding?: string, minW?: string }) {
 
@@ -22,13 +22,16 @@ function ItemWrapper({ children, padding, minW = "6rem" }: { children: React.Rea
             _hover={{ bg: 'whiteAlpha.100' }}
             p={padding ?? '0.2rem'}
             minW={minW}
+            alignContent="center"
+            alignItems="center"
+            justifyContent="center"
         >
             {children}
         </ WrapItem>
     );
 }
 
-function CalculatorItem({ iconColor }: { iconColor: string }) {
+function CalculatorItem({ iconColor, textColor }: { iconColor: string, textColor: string }) {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -37,10 +40,7 @@ function CalculatorItem({ iconColor }: { iconColor: string }) {
             onClick={onOpen}
             cursor="pointer"
         >
-            <Text
-                color={'white'}
-                fontSize="medium"
-            >
+            <Text fontSize="medium" color={textColor} >
                 CALC
             </Text>
             <Iconify icon="mdi:file-table-box" color={iconColor} />
@@ -61,9 +61,11 @@ export default function TopBar() {
     `
     const bg = useColorModeValue(wBgLight, wBgDark);
 
-    const iconColor = useColorModeValue('white', 'gray.800');
+    const textColor = useColorModeValue('gray.50', 'gray.50');
+    const iconColor = useColorModeValue('gray.50', 'gray.800');
+    const [ icLight, icDark ] = useToken('colors', [ 'gray.300', 'gray.500' ]);
+    const menuItemIconColor = useColorModeValue(icLight, icDark);
     const hoverColor = useColorModeValue('whiteAlpha.100', 'gray.800');
-    const colorButtonGroup = useColorModeValue('gray.900', 'gray.50');
     const shadowBottom = '0 0 20px 20px rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1)';
 
     return (
@@ -73,14 +75,14 @@ export default function TopBar() {
             justify={{ base: 'center', md: 'space-between', lg: 'flex-end' }}
             border="ActiveBorder"
             bg={bg}
-            color="white"
+            color={textColor}
             p='0.5rem'
             spacing={5}
             shadow={shadowBottom}
             overflow="hidden"
         >
             <ItemWrapper>
-                <CalculatorItem iconColor={iconColor} />
+                <CalculatorItem iconColor={iconColor} textColor={textColor} />
             </ItemWrapper>
             <ItemWrapper>
                 <CawPrice watch />
@@ -111,16 +113,16 @@ export default function TopBar() {
                     iconColor={iconColor}
                     hoverColor={hoverColor}
                     buttonProps={{
-                        color: 'white',
+                        color: textColor,
                         _hover: {
                             bg: hoverColor,
                         }
                     }}
                     buttonGroup={{
-                        color: colorButtonGroup,
+                        color: textColor,
                     }}
                     menuButtonProps={{
-                        color: 'white',
+                        color: textColor,
                         _hover: {
                             bg: hoverColor,
                         },
@@ -131,7 +133,11 @@ export default function TopBar() {
                 />
             </ItemWrapper>
             <ItemWrapper>
-                <TopBarMenu />
+                <TopBarMenuButton
+                    iconColor={textColor}
+                    textColor={textColor}
+                    itemIconColor={menuItemIconColor}
+                />
             </ItemWrapper>
         </Wrap>
     );
