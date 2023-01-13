@@ -17,12 +17,14 @@ export default function NavbarAccount({ displayAddressMode = 'shorten', showFoot
   return (
     <Box
       p="3"
-      m="3"
       bg={bgColor}
       borderRadius="lg"
+      width={'100%'}
     >
       {connected ?
-        <HStack>
+        <HStack
+          width={'100%'}
+        >
           <PopoverAccount displaMode="carousel" showFooter={showFooter} />
           <VStack textAlign="left" alignItems="flex-start">
             <Text noOfLines={1} as="b">
