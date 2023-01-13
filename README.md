@@ -1,37 +1,64 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🌙 CAW Frontend 
+<p align="center">
+  <a href="https://caw.is">
+      <img src="public/assets/tokens/caw.png" height="128">
+  </a>  
+<br>
+<br>
+</p>
 
 ## Getting Started
 
-Add a .env.local file with a single var. EG:
-NEXT_PUBLIC_ALCHEMY_HTTPS_KEY=https://eth-goerli.g.alchemy.com/v2/SOMESTRINGOFCHARS
-
-First, run the development server:
+Add the .env file (be aware that this file is not tracked by git) and add the following:
 
 ```bash
-npm run dev
-# or
-yarn dev
+ALCHEMY_API_KEY=SOME-STRING-OF-CHARS
+INFURA_API_KEY=SOME-STRING-OF-CHARS
+CAW_CONTRACT ="0xf3b9569F82B18aEf890De263B84189bd33EBe452"
+CAW_NAME_CONTRACT="0x3F63Ad5E6309135a9D5fD3540270b93f56FD9CD9"
+CAW_NAME_MINTER_CONTRACT="0x56F0d5DA1Bc735e03d6A4cd988784ED498FD9Ee3"
+MINTABLE_CAW_CONTRACT="0x0bc5f399265fA0Fb95F5473c8ec1737d1dBB015c"
+NETWORK="goerli"
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> INFURA_API_KEY : Make sure to create a WEB3 API (Formely Ethereum) project on Infura and add the API key here.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Then, run the development server:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```bash
+yarn install
+yarn dev
+yarn build
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Contributing
+Would you like to contribute to this project?
 
-To learn more about Next.js, take a look at the following resources:
+This project is open source and welcomes contributions. We focus layer on the CAW Manifesto. We are in the early stages of a Social Clearing house; read more about it [here](https://caw.is/).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+We are looking for people who want to contribute to the project, not just the code. Join us on [Telegram](https://t.me/cawbuilders)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Regarding the code, we invite you to read this project's [CONTRIBUTING](docs/CONTRIBUTING.md) guidelines.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Recommended extensions
+ - [BetterComments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
+ - [GitLents](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+ - [ENV](https://marketplace.visualstudio.com/items?itemName=IronGeek.vscode-env)
+ - [Material Icons theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
+ - [AYU Theme](https://marketplace.visualstudio.com/items?itemName=teabyii.ayu)
+ - [One Dark Pro theme](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Built with
+ - [TypeScript](https://www.typescriptlang.org/)
+ - [Next.js](https://nextjs.org/)
+ - [Chakra UI](https://chakra-ui.com/)
+ - [Ethers.js](https://docs.ethers.io/v5/)
+ - [Wagmi](https://wagmi.sh/)
+ - [RainbowKit](https://www.rainbowkit.com/)
+
+## Next Steps
+- [ ] Add more documentation
+- [ ] Add other guidelines
