@@ -18,7 +18,7 @@ export default function CalculatorItem({ iconColor, useIcon }: Props) {
                 iconColor={iconColor}
                 useLink={false}
                 icon="mdi:file-table-box"
-                label="Calculator"
+                label="Calc"
                 onClick={onOpen} />
             <ProtocolCostModal isOpen={isOpen} onClose={onClose} />
         </>
