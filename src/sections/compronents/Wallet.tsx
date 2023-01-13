@@ -76,28 +76,35 @@ function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
     }
 
     return (
-        <Menu>
+        <Menu isLazy>
             <MenuButton
                 {...menuButtonProps}
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
+                transition='all 0.2s'
             >
                 {shortenAddress}
             </MenuButton>
-            <MenuList id="wallet-button-menu-list" >
+            <MenuList
+                id="wallet-button-menu-list"
+                shadow="md"
+            >
                 <MenuItem
+                    value='account'
                     onClick={openAccountModal}
                     icon={<Iconify icon="ion:wallet" width={16} height={16} />}
                 >
                     {t('labels.wallet')}
                 </MenuItem>
                 <MenuItem
+                    value='network'
                     onClick={openChainModal} icon={<NetworkIcon />}
                 >
 
                     {t('labels.network')} ({chain?.name || ''})
                 </MenuItem>
                 <MenuItem
+                    value='disconnect'
                     onClick={() => disconnect()}
                     icon={<Iconify icon="uil:exit" width={16} height={16} />}
                 >
