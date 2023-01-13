@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from '@chakra-ui/react';
 
-import { UsefulLinksModal } from "src/sections/compronents/UsefulLinksModal";
+import { UsefulLinksModal } from "src/components/contract/modals/UsefulLinksModal";
 import MenuItem from "./MenuItem";
 
 type Props = {

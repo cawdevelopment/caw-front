@@ -15,7 +15,7 @@ import { fDecimal } from "src/utils/formatNumber";
 import { CawUserName } from "src/types/dtos";
 import { useETHBalance } from "src/hooks";
 
-import { QuickMintingUserNameButton } from "./QuickMintUserName";
+import { QuickMintingUserNameButton } from "../modals/QuickMintUserName";
 
 export interface PopoverAccountProps {
     displaMode: 'list' | 'carousel';

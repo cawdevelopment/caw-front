@@ -1,7 +1,7 @@
 import { Stack, Text, Divider } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-import NavbarAccount from 'src/components/sidebar/NavbarAccount';
+import NavbarAccount from 'src/components/contract/wallet/NavbarAccount';
 import MintingCost from "./MintingCost";
 import UserAcceptance from "./UserAcceptance";
 

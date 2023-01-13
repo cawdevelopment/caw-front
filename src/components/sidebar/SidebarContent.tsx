@@ -5,7 +5,7 @@ import Logo from 'src/components/Logo';
 import ColorModeToggle from "src/components/settings/ToogleMode";
 import { LinkItems } from "./menu";
 import NavItem from "./NavItem";
-import NavbarAccount from './NavbarAccount';
+import NavbarAccount from '../contract/wallet/NavbarAccount';
 
 export interface SidebarProps extends BoxProps {
     onClose: () => void;

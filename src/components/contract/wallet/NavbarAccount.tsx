@@ -2,8 +2,8 @@ import React from "react";
 import { Box, Text, HStack, VStack, useColorModeValue, Image } from '@chakra-ui/react';
 
 import { useDappProvider } from "src/context/DAppConnectContext";
-import ConnectWalletButton from "src/sections/compronents/contract/ConnectWalletButton";
-import PopoverAccount, { PopoverAccountProps } from "src/sections/compronents/contract/PopoverAccount";
+import ConnectWalletButton from "src/components/contract/wallet/ConnectWalletButton";
+import PopoverAccount, { PopoverAccountProps } from "src/components/contract/wallet/PopoverAccount";
 
 interface Props extends PopoverAccountProps {
   displayAddressMode?: 'full' | 'shorten',

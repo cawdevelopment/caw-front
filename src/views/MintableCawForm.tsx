@@ -9,7 +9,7 @@ import {
 import AlertDialog from "src/components/dialogs/AlertDialog";
 import AlertMessage from "src/components/AlertMessage";
 import { useDappProvider } from "src/context/DAppConnectContext";
-import NavbarAccount from 'src/components/sidebar/NavbarAccount';
+import NavbarAccount from 'src/components/contract/wallet/NavbarAccount';
 
 import { MILLION } from 'src/utils/constants';
 import { fDecimal, kFormatter } from 'src/utils/formatNumber';

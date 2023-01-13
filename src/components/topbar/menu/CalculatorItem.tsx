@@ -1,6 +1,6 @@
 import { useDisclosure } from '@chakra-ui/react';
 
-import { ProtocolCostModal } from "src/components/contract/stats/ProtocolCost";
+import { ProtocolCostModal } from "src/components/contract/modals/ProtocolCost";
 import MenuItem from "./MenuItem";
 
 type Props = {

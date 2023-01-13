@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from '@chakra-ui/react';
 
-import { QuickMintingUserName } from "src/sections/compronents/contract/QuickMintUserName";
+import { QuickMintingUserName } from "src/components/contract/modals/QuickMintUserName";
 import MenuItem from "./MenuItem";
 
 type Props = {

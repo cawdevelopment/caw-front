@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from '@chakra-ui/react';
 
-import BuyCawModal from "src/sections/compronents/BuyCawModal";
+import BuyCawModal from "src/components/contract/modals/BuyCawModal";
 import MenuItem from "./MenuItem";
 
 type Props = {

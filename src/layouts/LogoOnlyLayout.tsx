@@ -4,7 +4,7 @@ import { Box, Center, Flex, Spacer, useColorModeValue } from '@chakra-ui/react';
 import LanguagePopover from "src/components/settings/LanguagePopover";
 import ColorModeToggle from "src/components/settings/ToogleMode";
 import Logo from 'src/components/Logo';
-import WalletOptions from 'src/sections/compronents/Wallet';
+import WalletOptions from 'src/components/contract/wallet/Wallet';
 
 type Props = {
     children?: React.ReactNode;

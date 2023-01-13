@@ -6,9 +6,9 @@ import { usePathname } from 'next/navigation';
 
 import CawPrice from 'src/components/contract/stats/CawPrice';
 import EthPrice from 'src/components/contract/stats/EthPrice';
-import Wallet from 'src/sections/compronents/Wallet';
+import Wallet from 'src/components/contract/wallet/Wallet';
 import Iconify from "src/components/icons/Iconify";
-import { ProtocolCostModal } from "src/components/contract/stats/ProtocolCost";
+import { ProtocolCostModal } from "src/components/contract/modals/ProtocolCost";
 import LanguagePopover from 'src/components/settings/LanguagePopover';
 
 import { PATH_DASHBOARD } from "src/routes/paths";

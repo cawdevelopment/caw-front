@@ -10,7 +10,7 @@ import Logo from "src/components/Logo";
 
 import TopBar from "../topbar";
 import { LinkItems } from "./menu";
-import NavbarAccount from "./NavbarAccount";
+import NavbarAccount from "../contract/wallet/NavbarAccount";
 import MobileNav from "./MobileNav";
 import SidebarContent from "./SidebarContent";
 import NavItem from "./NavItem";
