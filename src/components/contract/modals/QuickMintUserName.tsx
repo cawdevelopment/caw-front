@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 import { useDebounce } from "use-debounce";
 import {
-    Box, Button, Input, Link, Text, Stack, HStack,
-    Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, useColorModeValue
+    Box, Button, Input, Link, Text, Stack, HStack, useDisclosure,
+    Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay
 } from "@chakra-ui/react";
 
 import { useCawNameMinterContract } from "src/hooks";
@@ -152,13 +152,11 @@ export function QuickMintingUserNameButton() {
 
     const { t } = useTranslation();
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const buttonMintBg = useColorModeValue('blue.400', 'blue.200');
 
     return (
         <>
             <Button
                 colorScheme='blue'
-                color={buttonMintBg}
                 variant={"ghost"}
                 size="sm"
                 onClick={onOpen}

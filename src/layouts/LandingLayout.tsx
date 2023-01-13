@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
-import { Button as CrkButton, Box, Spacer, useColorModeValue, Tooltip, Text, Flex, Center, Link, Stack, useDisclosure, HStack, IconButton, Show, Hide, Divider } from '@chakra-ui/react';
-import { ArrowForwardIcon, CloseIcon, ExternalLinkIcon, HamburgerIcon } from "@chakra-ui/icons";
+import {
+    Button as CrkButton, Box, Spacer, useColorModeValue, Tooltip, Text, Flex, Center, Link,
+    Stack, useDisclosure, HStack, IconButton, Show, Hide, Divider
+} from '@chakra-ui/react';
+import { ArrowForwardIcon, CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
 
 import Logo from 'src/components/Logo';
 import Button from 'src/components/buttons/Button';
 import LanguagePopover from "src/components/settings/LanguagePopover";
 import ColorModeToggle from "src/components/settings/ToogleMode";
-import { PATH_AUTH } from "src/routes/paths";
+import PopoverWrapperInModal from "src/components/wrappers/PopoverWrapper";
+import Iconify from "src/components/icons/Iconify";
+import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 
 type Props = {
     children?: React.ReactNode;
@@ -121,8 +126,7 @@ function MobileMenu() {
     const { t } = useTranslation();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const bg = useColorModeValue('gray.100', 'gray.900');
-    const bgPopover = useColorModeValue('gray.300', 'gray.700');
-    const ref = React.useRef<any>()
+    const ref = React.useRef<any>();
 
     useEffect(() => {
 
@@ -168,20 +172,16 @@ function MobileMenu() {
                 <Logo />
             </Flex>
             {isOpen ? (
-                <Box
-                    pos={'absolute'}
-                    id="mobile-menu-open-box"
-                    width="full"
-                    right={"0.5"}
-                    left={"0.5"}
+                <PopoverWrapperInModal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    wrapAbove="md"
                 >
                     <Stack
                         id="mobile-menu-stack"
                         as={'nav'}
                         spacing={4}
                         borderRadius={"md"}
-                        bg={bgPopover}
-                        boxShadow={"md"}
                         p={4}
                         ref={ref}
                     >
@@ -193,7 +193,30 @@ function MobileMenu() {
                                     Manifesto
                                 </Text>
                                 <Spacer />
-                                <ExternalLinkIcon mx='2px' />
+                                <CrkButton
+                                    size='sm'
+                                    aria-label="mint-btn"
+                                    rightIcon={<Iconify icon={'carbon:document-sentiment'} />}
+                                    variant='ghost'
+                                    colorScheme={"gray"}
+                                    sx={{ textTransform: 'uppercase' }}
+                                />
+                            </HStack>
+                        </NextLink>
+                        <NextLink href={PATH_DASHBOARD.app.home} passHref>
+                            <HStack>
+                                <Text>
+                                    {t('labels.dashboard')}
+                                </Text>
+                                <Spacer />
+                                <CrkButton
+                                    size='sm'
+                                    aria-label="mint-btn"
+                                    rightIcon={<Iconify icon={'charm:layout-rows'} />}
+                                    variant='ghost'
+                                    colorScheme={"gray"}
+                                    sx={{ textTransform: 'uppercase' }}
+                                />
                             </HStack>
                         </NextLink>
                         <Divider />
@@ -230,7 +253,7 @@ function MobileMenu() {
                             <ColorModeToggle />
                         </HStack>
                     </Stack>
-                </Box>
+                </PopoverWrapperInModal>
             ) : null}
         </Box>
     );

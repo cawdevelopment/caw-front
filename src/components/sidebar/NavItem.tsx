@@ -8,7 +8,7 @@ export interface NavItemProps extends FlexProps {
     link: string;
 }
 
-export function NavItem({ icon, link, name, ...rest }: NavItemProps) {
+export default function NavItem({ icon, link, name, ...rest }: NavItemProps) {
 
     const pathname = usePathname();
     const selected = pathname === link;

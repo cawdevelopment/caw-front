@@ -3,7 +3,7 @@ import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, To
 import { useTranslation } from "react-i18next"; 
 
 import { MotionContainer } from "src/components/animate";
-import MyAvatar from 'src/sections/compronents/contract/MyAvatar';
+import MyAvatar from 'src/components/contract/avatars/MyAvatar';
 import CircularProgress from 'src/components/CircularProgress';
 import Iconify from 'src/components/icons/Iconify';
 

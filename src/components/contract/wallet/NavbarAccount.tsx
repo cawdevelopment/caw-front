@@ -2,14 +2,16 @@ import React from "react";
 import { Box, Text, HStack, VStack, useColorModeValue, Image } from '@chakra-ui/react';
 
 import { useDappProvider } from "src/context/DAppConnectContext";
-import ConnectWalletButton from "src/sections/compronents/contract/ConnectWalletButton";
-import PopoverAccount, { PopoverAccountProps } from "src/sections/compronents/contract/PopoverAccount";
+import ConnectWalletButton from "src/components/contract/wallet/ConnectWalletButton";
+import PopoverAccount, { PopoverAccountProps } from "src/components/contract/wallet/PopoverAccount";
 
 interface Props extends PopoverAccountProps {
   displayAddressMode?: 'full' | 'shorten',
+  borderBottomLeftRadius?: string,
+  borderBottomRightRadius?: string,
 }
 
-export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter }: Props) {
+export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter, borderBottomLeftRadius, borderBottomRightRadius }: Props) {
 
   const bgColor = useColorModeValue('gray.400', 'gray.800');
   const { connected, shortenAddress, address, cawAccount, chain, openChainModal, openAccountModal } = useDappProvider();
@@ -17,12 +19,16 @@ export default function NavbarAccount({ displayAddressMode = 'shorten', showFoot
   return (
     <Box
       p="3"
-      m="3"
       bg={bgColor}
       borderRadius="lg"
+      borderBottomLeftRadius={borderBottomLeftRadius || "lg"}
+      borderBottomRightRadius={borderBottomRightRadius || "lg"}
+      width={'100%'}
     >
       {connected ?
-        <HStack>
+        <HStack
+          width={'100%'}
+        >
           <PopoverAccount displaMode="carousel" showFooter={showFooter} />
           <VStack textAlign="left" alignItems="flex-start">
             <Text noOfLines={1} as="b">

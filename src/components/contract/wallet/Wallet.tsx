@@ -41,11 +41,12 @@ function NetworkIcon() {
 }
 
 type WalletButtonProps = {
+    connectButtonLabel?: string;
     buttonProps?: ButtonProps;
     menuButtonProps?: MenuButtonProps
 }
 
-function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
+export function WalletButton({ connectButtonLabel, menuButtonProps, buttonProps = { variant: "ghost" } }: WalletButtonProps) {
 
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
@@ -55,10 +56,9 @@ function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
         return (
             <Button
                 {...buttonProps}
-                variant="ghost"
                 onClick={openConnectModal}
             >
-                {t('labels.wallet')}
+                {connectButtonLabel || t('labels.wallet')}
             </Button>
         );
     }
@@ -67,7 +67,6 @@ function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
         return (
             <Button
                 {...buttonProps}
-                variant="ghost"
                 onClick={openChainModal}
             >
                 {t('buttons.btn_wrong_network')}
@@ -76,28 +75,35 @@ function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
     }
 
     return (
-        <Menu>
+        <Menu isLazy>
             <MenuButton
                 {...menuButtonProps}
                 as={Button}
                 rightIcon={<ChevronDownIcon />}
+                transition='all 0.2s'
             >
                 {shortenAddress}
             </MenuButton>
-            <MenuList id="wallet-button-menu-list" >
+            <MenuList
+                id="wallet-button-menu-list"
+                shadow="md"
+            >
                 <MenuItem
+                    value='account'
                     onClick={openAccountModal}
                     icon={<Iconify icon="ion:wallet" width={16} height={16} />}
                 >
                     {t('labels.wallet')}
                 </MenuItem>
                 <MenuItem
+                    value='network'
                     onClick={openChainModal} icon={<NetworkIcon />}
                 >
 
                     {t('labels.network')} ({chain?.name || ''})
                 </MenuItem>
                 <MenuItem
+                    value='disconnect'
                     onClick={() => disconnect()}
                     icon={<Iconify icon="uil:exit" width={16} height={16} />}
                 >

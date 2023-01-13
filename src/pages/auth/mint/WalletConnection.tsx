@@ -2,7 +2,7 @@ import { Box, Stack, Text, Heading, Link, Code, Spacer, useColorModeValue, useBr
 import { InfoIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
 
-import NavbarAccount from 'src/components/sidebar/NavbarAccount';
+import NavbarAccount from 'src/components/contract/wallet/NavbarAccount';
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { useEffect, useRef } from "react";
 
