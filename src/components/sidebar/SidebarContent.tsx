@@ -1,17 +1,17 @@
 import { useTranslation } from "react-i18next";
-import { chakra, Box, CloseButton, Flex, useColorModeValue, BoxProps, Spacer } from '@chakra-ui/react';
+import { chakra, Box, CloseButton, Flex, useColorModeValue, BoxProps, Spacer, Stack } from '@chakra-ui/react';
 
 import Logo from 'src/components/Logo';
 import ColorModeToggle from "src/components/settings/ToogleMode";
 import { LinkItems } from "./menu";
-import { NavItem } from "./NavItem";
+import NavItem from "./NavItem";
 import NavbarAccount from './NavbarAccount';
 
 export interface SidebarProps extends BoxProps {
     onClose: () => void;
 }
 
-export function SidebarContent({ onClose, ...rest }: SidebarProps) {
+export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
 
     const { t } = useTranslation();
     const bg = useColorModeValue('white', 'gray.900');
@@ -33,6 +33,13 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                 <ColorModeToggle />
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
             </Flex>
+            <Stack
+                spacing={0}
+                p={0}
+                m={0}
+                maxH={{ base: 'full', md: 'calc(100vh - 4rem)' }}
+                overflow="scroll"
+            >
             {LinkItems.map((link) => (
                 <NavItem
                     key={link.name}
@@ -41,6 +48,7 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                     link={link.link}
                 />
             ))}
+            </Stack>
             <chakra.div
                 position="fixed"
                 width="inherit"
@@ -48,7 +56,13 @@ export function SidebarContent({ onClose, ...rest }: SidebarProps) {
                 bottom={0}
                 textAlign="center"
             >
-                <NavbarAccount displaMode="carousel" showFooter={false} />
+                <NavbarAccount
+                    displayAddressMode="full"
+                    displaMode="carousel"
+                    showFooter={false}
+                    borderBottomLeftRadius="0"
+                    borderBottomRightRadius="0"
+                />
             </chakra.div>
         </Box>
 

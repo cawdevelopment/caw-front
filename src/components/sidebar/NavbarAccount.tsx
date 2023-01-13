@@ -7,9 +7,11 @@ import PopoverAccount, { PopoverAccountProps } from "src/sections/compronents/co
 
 interface Props extends PopoverAccountProps {
   displayAddressMode?: 'full' | 'shorten',
+  borderBottomLeftRadius?: string,
+  borderBottomRightRadius?: string,
 }
 
-export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter }: Props) {
+export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter, borderBottomLeftRadius, borderBottomRightRadius }: Props) {
 
   const bgColor = useColorModeValue('gray.400', 'gray.800');
   const { connected, shortenAddress, address, cawAccount, chain, openChainModal, openAccountModal } = useDappProvider();
@@ -19,6 +21,8 @@ export default function NavbarAccount({ displayAddressMode = 'shorten', showFoot
       p="3"
       bg={bgColor}
       borderRadius="lg"
+      borderBottomLeftRadius={borderBottomLeftRadius || "lg"}
+      borderBottomRightRadius={borderBottomRightRadius || "lg"}
       width={'100%'}
     >
       {connected ?

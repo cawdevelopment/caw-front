@@ -1,13 +1,24 @@
 import React, { ReactNode } from 'react';
-import { Box, useColorModeValue, Drawer, DrawerContent, useDisclosure, Show, chakra } from '@chakra-ui/react';
+import { useTranslation } from "react-i18next";
+import {
+    Box, useColorModeValue, Drawer, DrawerContent, useDisclosure, Show, chakra, DrawerOverlay,
+    DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, Flex
+} from '@chakra-ui/react';
+
+import ColorModeToggle from "src/components/settings/ToogleMode";
+import Logo from "src/components/Logo";
 
 import TopBar from "../topbar";
-import { MobileNav } from "./MobileNav";
-import { SidebarContent } from "./SidebarContent";
+import { LinkItems } from "./menu";
+import NavbarAccount from "./NavbarAccount";
+import MobileNav from "./MobileNav";
+import SidebarContent from "./SidebarContent";
+import NavItem from "./NavItem";
 
 export const DASHBOARD_WIDTH = 280;
 export default function SimpleSidebar({ children }: { children: ReactNode; }) {
 
+    const { t } = useTranslation();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const borderRightColor = useColorModeValue('gray.400', 'gray.700');
     const bg = useColorModeValue('gray.50', 'gray.900');
@@ -29,16 +40,41 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                 style={{ width: `${DASHBOARD_WIDTH}px` }}
             />
             <Drawer
+                allowPinchZoom
+                closeOnEsc
+                closeOnOverlayClick
+                returnFocusOnClose
+                preserveScrollBarGap
                 autoFocus={false}
                 isOpen={isOpen}
                 placement="left"
                 onClose={onClose}
-                returnFocusOnClose={false}
                 onOverlayClick={onClose}
                 size="full"
             >
+                <DrawerOverlay />
                 <DrawerContent>
-                    <SidebarContent onClose={onClose} />
+                    <DrawerCloseButton />
+                    <DrawerHeader>
+                        <Flex h="20" alignItems="center" mx="4" justifyContent="space-between">
+                            <Logo disabledLink={false} />
+                            <ColorModeToggle />
+                        </Flex>
+                        <hr />
+                    </DrawerHeader>
+                    <DrawerBody>
+                        {LinkItems.map((link) => (
+                            <NavItem
+                                key={link.name}
+                                name={t(link.name)}
+                                icon={link.icon}
+                                link={link.link}
+                            />
+                        ))}
+                    </DrawerBody>
+                    <DrawerFooter>
+                        <NavbarAccount displaMode="carousel" displayAddressMode="full" showFooter={false} />
+                    </DrawerFooter>
                 </DrawerContent>
             </Drawer>            
             <MobileNav display={{ base: 'flex', md: 'none' }} onOpen={onOpen} />
