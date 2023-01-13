@@ -9,6 +9,7 @@ import {
 import Iconify from "src/components/icons/Iconify";
 import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 import PopoverWrapper from "src/components/wrappers/PopoverWrapper";
+import { WalletButton } from 'src/components/contract/wallet/Wallet';
 
 import QuickMintUserNameItem from "./QuickMintUserNameItem";
 import BuyCawItem from "./BuyCawItem";
@@ -68,6 +69,17 @@ export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Prop
                     >
                         <List spacing={1}>
                             <Hide above="md">
+                                <br />
+                                <WalletButton
+                                    connectButtonLabel={t('buttons.btn_connect_wallet')}
+                                    buttonProps={{
+                                        variant: "outline",
+                                        width: '-webkit-fill-available'
+                                    }}
+                                    menuButtonProps={{
+                                        width: '-webkit-fill-available'
+                                    }}
+                                />
                                 <CalculatorItem useIcon={showIcon} iconColor={itemIconColor} />
                             </Hide>
                             <MenuItem

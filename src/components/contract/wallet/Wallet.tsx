@@ -41,11 +41,12 @@ function NetworkIcon() {
 }
 
 type WalletButtonProps = {
+    connectButtonLabel?: string;
     buttonProps?: ButtonProps;
     menuButtonProps?: MenuButtonProps
 }
 
-function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
+export function WalletButton({ connectButtonLabel, menuButtonProps, buttonProps = { variant: "ghost" } }: WalletButtonProps) {
 
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
@@ -55,10 +56,9 @@ function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
         return (
             <Button
                 {...buttonProps}
-                variant="ghost"
                 onClick={openConnectModal}
             >
-                {t('labels.wallet')}
+                {connectButtonLabel || t('labels.wallet')}
             </Button>
         );
     }
@@ -67,7 +67,6 @@ function WalletButton({ menuButtonProps, buttonProps }: WalletButtonProps) {
         return (
             <Button
                 {...buttonProps}
-                variant="ghost"
                 onClick={openChainModal}
             >
                 {t('buttons.btn_wrong_network')}

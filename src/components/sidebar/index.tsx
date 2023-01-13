@@ -62,7 +62,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                         </Flex>
                         <hr />
                     </DrawerHeader>
-                    <DrawerBody>
+                    <DrawerBody overflow="scroll">
                         {LinkItems.map((link) => (
                             <NavItem
                                 key={link.name}
