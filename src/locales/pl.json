@@ -45,7 +45,8 @@
     "btn_mint_again": "Mintuj ponownie",
     "btn_swap": "Wymień",
     "btn_approve": "Zatwierdź",
-    "btn_close": "Zamknij"
+    "btn_close": "Zamknij",
+    "btn_connecting": "Podłączanie..."
   },
   "errors": {
     "install_wallet": "Nie wykryto portfela, zainstaluj Metamask lub inny kombatybilny portfel.",
@@ -93,6 +94,7 @@
     "viewall": "Zobacz całość",
     "manage_accounts": "Edytuj konto",
     "connectedto": "Podłącz do",
+    "unknownChain": "Nieznana sieć",
     "accounts": "Konta",
     "options": "Opcje",
     "quickmint": "Szybko mintuj",
@@ -204,7 +206,7 @@
     "user_acceptance_warn_2": "Odpowiadam za moją nazwę użytkownika oraz czynności z nią powiązane",
     "user_acceptance_warn_3": "Jestem świadomy, że nie będą mógł zmienić mojej nazwy użytkownika później",
     "user_acceptance_warn_4": "Odchodzimy od emaili i numeru telefonu jako możliwości identyfikacji użytkownika",
-    "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność."
+    "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.",
     "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?"
   },
   "minted_page": {

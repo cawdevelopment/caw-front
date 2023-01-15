@@ -54,7 +54,8 @@
     "btn_mint_again": "Mint Again",
     "btn_swap": "Swap",
     "btn_approve": "Approve",
-    "btn_close": "Close"
+    "btn_close": "Close",
+    "btn_connecting": "Connecting..."
   },
   "errors": {
     "install_wallet": "No ethereum provider found, please install metamask or similar",
@@ -102,6 +103,7 @@
     "viewall": "View all",
     "manage_accounts": "Manage your accounts",
     "connectedto": "Connected to",
+    "unknownChain": "Unknown Chain",
     "accounts": "Accounts",
     "options": "Options",
     "quickmint": "Quick Mint",

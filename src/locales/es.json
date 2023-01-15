@@ -45,7 +45,8 @@
     "btn_mint_again": "Acuñar otro",
     "btn_swap": "Intercambiar",
     "btn_approve": "Aprobar",
-    "btn_close": "Cerrar"
+    "btn_close": "Cerrar",
+    "btn_connecting": "Conectando..."
   },
   "errors": {
     "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar.",
@@ -93,6 +94,7 @@
     "viewall": "Ver todo",
     "manage_accounts": "Administrar cuentas",
     "connectedto": "Conectado con",
+    "unknownChain": "Red desconocida",
     "accounts": "Cuentas",
     "options": "Opciones",
     "quickmint": "Acuñación simple",
