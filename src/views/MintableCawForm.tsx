@@ -270,7 +270,12 @@ export default function SwapMCAWForm() {
                             </VStack>
                         </Center>
                         :
-                        <VStack pt={10}>
+                        <VStack
+                            pt={10}
+                            justifyContent="center"
+                            alignItems="center"
+                            textAlign={"center"}
+                        >
                             <Divider />
                             <NavbarAccount displaMode="carousel" showFooter={false} displayAddressMode="full" />
                         </VStack>

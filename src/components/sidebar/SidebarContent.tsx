@@ -38,7 +38,7 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
                 p={0}
                 m={0}
                 maxH={{ base: 'full', md: 'calc(100vh - 4rem)' }}
-                overflow="scroll"
+                overflow="auto"
             >
             {LinkItems.map((link) => (
                 <NavItem
@@ -50,11 +50,12 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
             ))}
             </Stack>
             <chakra.div
+                id="navbar-account-footer"
                 position="fixed"
+                textAlign="center"
                 width="inherit"
                 left={0}
                 bottom={0}
-                textAlign="center"
             >
                 <NavbarAccount
                     displayAddressMode="full"

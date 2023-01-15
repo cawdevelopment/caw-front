@@ -72,7 +72,13 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                             />
                         ))}
                     </DrawerBody>
-                    <DrawerFooter>
+                    <DrawerFooter
+                        id="drawer-footer"
+                        textAlign="center"
+                        justifyContent="center"
+                        alignItems="center"
+                        alignContent={"center"}
+                    >
                         <NavbarAccount displaMode="carousel" displayAddressMode="full" showFooter={false} />
                     </DrawerFooter>
                 </DrawerContent>
