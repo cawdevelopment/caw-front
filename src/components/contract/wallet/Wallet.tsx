@@ -97,10 +97,11 @@ export function WalletButton({ connectButtonLabel, menuButtonProps, buttonProps 
                 </MenuItem>
                 <MenuItem
                     value='network'
-                    onClick={openChainModal} icon={<NetworkIcon />}
+                    onClick={chain?.name ? openChainModal : openConnectModal}
+                    icon={<NetworkIcon />}
                 >
 
-                    {t('labels.network')} ({chain?.name || ''})
+                    {t('labels.network')} ({chain?.name || t('labels.unknownChain')})
                 </MenuItem>
                 <MenuItem
                     value='disconnect'

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Box, Text, HStack, VStack, useColorModeValue, Image } from '@chakra-ui/react';
 
 import { useDappProvider } from "src/context/DAppConnectContext";
@@ -13,6 +14,7 @@ interface Props extends PopoverAccountProps {
 
 export default function NavbarAccount({ displayAddressMode = 'shorten', showFooter, borderBottomLeftRadius, borderBottomRightRadius }: Props) {
 
+  const { t } = useTranslation();
   const bgColor = useColorModeValue('gray.400', 'gray.800');
   const { connected, shortenAddress, address, cawAccount, chain, openChainModal, openAccountModal } = useDappProvider();
 
@@ -58,9 +60,9 @@ export default function NavbarAccount({ displayAddressMode = 'shorten', showFoot
                 fontSize="sm"
                 color="gray.600"
                 cursor={'pointer'}
-                onClick={openChainModal}
+                onClick={chain?.name ? openChainModal : openAccountModal}
               >
-                {chain?.name || ''}
+                {chain?.name || t('labels.unknownChain')}
               </Text>
             </HStack>
             <Text

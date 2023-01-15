@@ -19,10 +19,21 @@ const ConnectWalletButton = () => {
     );
   }
 
-  if (chain?.unsupported) {
+  if (status === 'connecting' || status === 'reconnecting') {
     return (
       <Button
         variant="ghost"
+        onClick={openConnectModal}
+      >
+        {t('buttons.btn_connecting')}
+      </Button>
+    );
+  }
+
+  if (!chain || chain?.unsupported) {
+    return (
+      <Button
+        variant="ghost"        
         onClick={openChainModal}
       >
         {t('buttons.btn_wrong_network')}
@@ -34,7 +45,7 @@ const ConnectWalletButton = () => {
     <Box >
       <VStack>
         <Button
-          onClick={openChainModal}
+          onClick={chain?.name ? openChainModal : openConnectModal}
           variant="ghost"
           bgGradient="linear(to-l, brand.100, brand.200)"
         >
@@ -58,7 +69,7 @@ const ConnectWalletButton = () => {
               )}
             </Box>
           )}
-          {chain?.name || 'Not supported'}
+          {chain?.name || t('labels.unknownChain')}
         </Button>
       </VStack>
     </Box>
