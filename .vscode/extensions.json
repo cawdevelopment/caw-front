@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "aaron-bond.better-comments",
+    "IronGeek.vscode-env",
+    "PKief.material-icon-theme"
+  ]
+}
