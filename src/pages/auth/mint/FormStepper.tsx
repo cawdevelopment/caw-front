@@ -20,9 +20,8 @@ function getProgress(step: number) {
 }
 
 type Props = {
-    termsAccepted: boolean;
-    isLoading: boolean;
-    minting: boolean;
+    termsAccepted: boolean;    
+    procesing: boolean;
     isValid: boolean;
     userName: string;
     error: string | null;
@@ -30,7 +29,7 @@ type Props = {
 
 export default function FormStepper(props: Props) {
 
-    const { termsAccepted, isLoading, minting, isValid, userName, error } = useMintingPageContext();
+    const { termsAccepted, procesing, isValid, userName, error } = useMintingPageContext();
     const bg = useColorModeValue('gray.50', 'gray.800');
     const boxBg = useColorModeValue('white', 'gray.700');
     const [ step, setStep ] = useState(1);
@@ -120,7 +119,7 @@ export default function FormStepper(props: Props) {
                                             }}
                                             colorScheme="caw"
                                             variant="outline"
-                                            disabled={isLoading || minting ? true : false}
+                                            disabled={procesing}
                                         >
                                             {t('buttons.btn_next')}
                                         </Button>
@@ -131,9 +130,9 @@ export default function FormStepper(props: Props) {
                                             w="8rem"
                                             colorScheme="green"
                                             variant="solid"
-                                            isLoading={isLoading || minting}
+                                            isLoading={procesing}
                                             loadingText={t('labels.minting')}
-                                            disabled={isLoading || minting ? true : (!connected || !termsAccepted || !isValid || !userName)}
+                                            disabled={procesing ? true : (!connected || !termsAccepted || !isValid || !userName)}
                                         >
                                             {t('buttons.btn_mint')}
                                         </Button>

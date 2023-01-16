@@ -39,7 +39,7 @@ export class WalletBalanceInterface {
 
         const _s = AppEnvSettings();
         if (chainId === 1)
-            this.provider = new ethers.providers.JsonRpcProvider('https://rpc.builder0x69.io');
+            this.provider = new ethers.providers.JsonRpcProvider(_s.jsonRpcUrl);
         else
             this.provider = ethers.getDefaultProvider({ chainId: this.chainId, name: this.chainName.toLowerCase() });
 

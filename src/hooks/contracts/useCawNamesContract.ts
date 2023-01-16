@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BigNumber, ethers } from "ethers";
+import { useSigner } from "wagmi";
 
 import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
 import { CawUserName } from 'src/types/dtos';
-import { getContract, getSignerContract } from "./helper";
+import { getContract } from "./helper";
 
 
 //* Contract name :  CawName
@@ -16,24 +17,26 @@ export default function useCawNamesContract() {
     const { allowMainnet, keys: { INFURA_API_KEY }, network, contracts: { CAW_NAME } } = useAppConfigurations();
     const { address, abi } = CAW_NAME;
 
+    const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
+
     useEffect(() => {
         const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY });
         setContract(contract);
     }, [ address, abi, network, INFURA_API_KEY ]);
 
 
-    const _getSignerContract = (walletAddress: string) => {
+    const _getSignerContract = () => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        if (!window || !window.ethereum)
-            throw new Error((t('errors.install_wallet')));
-
         if (!allowMainnet)
             throw new Error((t('errors.mainnet_not_allowed')));
 
-        return getSignerContract(contract, walletAddress);
+        if (!signer || isSignerError || loadingSigner)
+            throw new Error((t('errors.signer_not_found')));
+
+        return contract.connect(signer);
     }
 
     const getTokenURI = async (tokenId: number) => {
@@ -86,7 +89,7 @@ export default function useCawNamesContract() {
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        const contractWithSigner = await _getSignerContract(userWalletAddress);
+        const contractWithSigner = _getSignerContract();
         const tx = await contractWithSigner.mint(sender, userName, newId);
         const receipt = await tx.wait();
 

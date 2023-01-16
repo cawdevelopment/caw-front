@@ -1,25 +1,21 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ethers, utils } from "ethers";
-import { useWaitForTransaction } from "wagmi";
+import { useSigner } from "wagmi";
 
 import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
-import { getCawPriceInUsd, getContract, getSignerContract, getEthPriceInUsd } from "./helper";
+import { getCawPriceInUsd, getContract, getEthPriceInUsd } from "./helper";
 
 //* Contract name :  CawNameMinter
-//* Get the cost of a name, validate the name, and mint a username
+//* Get the cost of a name, validate the name, and mint a NTF-Username
 export default function useCawNameMinterContract() {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
     const { allowMainnet, network, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
     const { address, abi } = CAW_NAME_MINTER;
-    const [ minting, setMinting ] = useState(false);
-
-    const [ tx, setTx ] = useState<ethers.providers.TransactionResponse | null>(null);
-    const [ receipt, setReceipt ] = useState<ethers.providers.TransactionReceipt | null>(null);
-    const { data, isError, isLoading } = useWaitForTransaction({ hash: tx?.hash });
+    const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
 
     useEffect(() => {
         const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY });
@@ -28,6 +24,7 @@ export default function useCawNameMinterContract() {
 
 
     const getCostOfName = async (userName: string) => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
@@ -48,6 +45,7 @@ export default function useCawNameMinterContract() {
     }
 
     const getIdByUserName = async (userName: string): Promise<number> => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
@@ -57,6 +55,7 @@ export default function useCawNameMinterContract() {
     }
 
     const isValidUsername = async (userName: string): Promise<boolean> => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
@@ -64,60 +63,51 @@ export default function useCawNameMinterContract() {
         return Boolean(result);
     }
 
-    const _getSignerContract = (walletAddress: string) => {
+    const _getSignerContract = () => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        if (!window || !window.ethereum)
-            throw new Error((t('errors.install_wallet')));
-
         if (!allowMainnet)
             throw new Error((t('errors.mainnet_not_allowed')));
 
-        return getSignerContract(contract, walletAddress);
+        if (!signer || isSignerError || loadingSigner)
+            throw new Error((t('errors.signer_not_found')));
+
+        return contract.connect(signer);
     }
 
-    const mint = async (username: string, walletAddress: string) => {
+
+    const mint = async (username: string) => {
 
         try {
 
-            const contractWithSigner = await _getSignerContract(walletAddress);
+            const contractWithSigner = _getSignerContract();
+            console.log(`🐛  -> 🔥 :  mint 🔥 :  contractWithSigner`, contractWithSigner);
 
-            setMinting(true);
             const tx = await contractWithSigner.mint(username);
-            setTx(tx);
+            console.log(`🐛  -> 🔥 :  mint 🔥 :  tx`, tx);
+
             const receipt = await tx.wait();
-            setMinting(false);
+            console.log(`🐛  -> 🔥 :  mint 🔥 :  receipt`, receipt);
+
             return {
                 tx,
                 receipt
             };
 
         } catch (error) {
-            setMinting(false);
+            console.error("minting error : ", error);
             throw error;
         }
     }
 
-    function restart() {
-        setTx(null);
-        setReceipt(null);
-        setMinting(false);
-    }
 
     return {
         initialized: !!contract,
-        minting,
-        tx,
-        receipt,
-        data,
-        isError,
-        isLoading,
         getCostOfName,
         getIdByUserName,
         isValidUsername,
-        mint,
-        restart
+        mint
     }
 }

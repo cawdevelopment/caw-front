@@ -25,11 +25,7 @@ export default function SwapMCAWForm() {
     const bg = useColorModeValue("gray.50", "gray.800");
     const brColor = useColorModeValue("gray.400", "gray.50");
     const colorText = useColorModeValue("gray.900", "gray.50");
-    const { balance, fetchingETH } = useETHBalance({
-        account: address,
-        chainId: chain?.id || 0,
-        chainName: chain?.name || '',
-    });
+    const { balance, fetchingETH } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
 
     const { initialized, mint, approve } = useMintableCAWContract();
 

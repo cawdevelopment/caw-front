@@ -22,9 +22,10 @@ function MintNFTNameForm() {
     const { address, connected, chain } = useDappProvider();
     const [ value, setValue ] = React.useState();
     const [ debouncedValue ] = useDebounce(value, 500);
-    const { mint, minting } = useCawNameMinterContract();
+    const { mint } = useCawNameMinterContract();
     const [ txMintHash, setTxMintHash ] = useState(null);
     const [ error, setError ] = useState<string | null>(null);
+    const [ processing, setProcessing ] = useState(false);
 
     const handleChange = (event: any) => setValue(event.target.value);
 
@@ -34,10 +35,13 @@ function MintNFTNameForm() {
             if (!address || !debouncedValue || !connected)
                 throw new Error("No address");
 
-            const { tx } = await mint(debouncedValue, address);
+            setProcessing(true);
+            const { tx } = await mint(debouncedValue);
             setTxMintHash(tx.hash);
+            setProcessing(false);
 
         } catch (error) {
+            setProcessing(false);
             const { code, message } = getBlockChainErrMsg(error);
             setError(message ? message + ' : ' + code : 'Something went wrong');
         }
@@ -64,7 +68,7 @@ function MintNFTNameForm() {
                         width={"full"}
                         colorScheme="caw"
                         disabled={!connected || Boolean(txMintHash)}
-                        isLoading={minting}
+                        isLoading={processing}
                         loadingText={t('labels.minting')}
                         onClick={debouncedValue && onOpen}
                     >
