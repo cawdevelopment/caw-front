@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
 import { useTranslation } from "react-i18next";
 import { Box, CloseButton, Slide } from "@chakra-ui/react";
+import type { FC, ReactNode } from 'react';
 
 import { useLocalStorage } from "src/hooks";
 import DashboardLayout from './DashboardLayout';
@@ -38,8 +38,8 @@ function WarningSlide() {
   );
 }
 
-export default function Layout({ variant = 'dashboard', children }: Props) {
-
+// export default function Layout({ variant = 'dashboard', children }: Props) {
+const Layout: FC<Props> = ({ variant = 'dashboard', children }) => {
   if (variant === 'dashboard') {
     return (
       <DashboardLayout>
@@ -63,4 +63,6 @@ export default function Layout({ variant = 'dashboard', children }: Props) {
       <WarningSlide />
     </LogoOnlyLayout>
   );
-}
+  }
+
+export default Layout;

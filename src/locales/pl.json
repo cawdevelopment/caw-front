@@ -50,7 +50,8 @@
   },
   "errors": {
     "install_wallet": "Nie wykryto portfela, zainstaluj Metamask lub inny kombatybilny portfel.",
-    "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć."
+    "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć.",
+    "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony."
   },
   "labels": {
     "under_dev": "W przygotowaniu",
@@ -246,6 +247,7 @@
     "bugs_report": "Błędy i nowe fukncje",
     "firsttweb3": "Pierwszy raz używasz Web3?",
     "learn_more": "Dowiedz się więcej",
+    "learn_more_link": "https://ethereum.org/pl/wallets/",
     "exp_exchanges": "Odkryj CAW na giełdach"
   }
 }

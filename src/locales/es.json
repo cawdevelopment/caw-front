@@ -50,7 +50,8 @@
   },
   "errors": {
     "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar.",
-    "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas."
+    "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas.",
+    "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada."
   },
   "labels": {
     "under_dev": "En desarrollo",
@@ -245,6 +246,7 @@
     "bugs_report": "Fallos o nuevas funciones",
     "firsttweb3": "Nuevo en Web3?",
     "learn_more": "Aprende más",
+    "learn_more_link": "https://ethereum.org/es/web3/",
     "exp_exchanges": "Ver en intercambios"
   }
 }

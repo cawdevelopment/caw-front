@@ -59,7 +59,8 @@
   },
   "errors": {
     "install_wallet": "No ethereum provider found, please install metamask or similar",
-    "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network"
+    "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network",
+    "signer_not_found": "Signer not found, check if your wallet is connected"
   },
   "labels": {
     "under_dev": "Under development",
@@ -188,7 +189,7 @@
     "nft_state_q": "What is an NFT?",
     "nft_state_a": "NFT refers to a Non-Fungible Token and is a digital asset that is unique and stored on a blockchain that allows for the secure transfer of ownership of digital assets.",
     "nft_state_ai": "Ownership of an NFT username will provide access to the associated account.",
-    "already_minted": "Already have your CAW-NFT?",
+    "already_minted": "Already have an NFT username?",
     "username_already_taken": "already taken",
     "username_invalid": "username must be : alphanumeric, lowercase, no spaces, non special characters",
     "username_available": "is available",
@@ -255,6 +256,7 @@
     "bugs_report": "Bugs and feature requests",
     "firsttweb3": "First time using Web3?",
     "learn_more": "Learn more",
+    "learn_more_link": "https://ethereum.org/en/web3/",
     "exp_exchanges": "Explore Exchanges"
   }
 }

@@ -49,8 +49,8 @@ export default function LanguagePopover({ bgIPopover }: LanguagePopoverProps) {
                         m={1}
                         p={2}
                         borderRadius={10}
-                        width="-webkit-fill-available"
-                        _hover={{ bg: bgMenuItemHover }}
+                        _hover={{ bg: bgMenuItemHover }}                        
+                        width='calc(100% - 0.5rem)'
                         onClick={() => onChangeLang(lang.value)}
                     >
                         <HStack spacing={2} >
