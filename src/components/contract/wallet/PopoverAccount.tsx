@@ -39,6 +39,25 @@ function MotionContainer({ children }: { children: React.ReactNode }) {
     );
 }
 
+function Footer() {
+    const { t } = useTranslation();
+    return (
+        <>
+            <Box fontSize='sm'>{t('labels.options')}</Box>
+            <ButtonGroup size='sm'>
+                <QuickMintingUserNameButton />
+                <Button
+                    colorScheme='blue'
+                    variant={"ghost"}
+                    size="sm"
+                >
+                    {t('labels.balance')}
+                </Button>
+            </ButtonGroup>
+        </>
+    );
+}
+
 export default function PopoverAccount({ displaMode, showFooter }: PopoverAccountProps) {
 
     const initialFocusRef = useRef();
@@ -200,17 +219,7 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
                             justifyContent='space-between'
                             pb={4}
                         >
-                            <Box fontSize='sm'>{t('labels.options')}</Box>
-                            <ButtonGroup size='sm'>
-                                <QuickMintingUserNameButton />
-                                <Button
-                                    colorScheme='blue'
-                                    variant={"ghost"}
-                                    size="sm"
-                                >
-                                    {t('labels.balance')}
-                                </Button>
-                            </ButtonGroup>
+                            <Footer />
                         </PopoverFooter>
                     )}
                 </PopoverWrapperInModal>
