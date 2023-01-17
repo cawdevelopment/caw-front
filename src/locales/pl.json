@@ -250,5 +250,11 @@
     "learn_more": "Dowiedz się więcej",
     "learn_more_link": "https://ethereum.org/pl/wallets/",
     "exp_exchanges": "Odkryj CAW na giełdach"
+  },
+  "wallet": {
+    "notConnected": "Nie podłączony",
+    "signIn": "Zaloguj się za pomocą portfela",
+    "awating_cnn": "Oczekiwanie na połączenie...",
+    "awating_sign": "Oczekiwanie na podpis..."
   }
 }

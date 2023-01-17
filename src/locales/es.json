@@ -54,10 +54,12 @@
     "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada."
   },
   "labels": {
+    "awating_cnn": "Awaiting connection...",
+    "awating_sign": "Awaiting signature...",
     "under_dev": "En desarrollo",
     "the": "El",
     "more": "más",
-    "dashboard": "Feed",
+    "dashboard": "Tablero",
     "wallet": "Monedero",
     "network": "Red",
     "disconnect": "Desconectar",
@@ -84,12 +86,12 @@
     "cost": "Costo",
     "minting": "Acuñando...",
     "minted": "Acuñado",
-    "minted_success": "¡Acuñado con éxito!",
+    "minted_success": "¡NFT Acuñado con éxito!",
     "approving": "Aprobando...",
     "approved": "Aprobado",
     "block_explorer": "Explorador de bloques",
     "check_nft_on": "Compruebe tu NFT en",
-    "its_magic": "✨Es fantástico✨",
+    "its_magic": "✨Fantástico✨",
     "balance": "Balance",
     "enter_amount": "Introduzca la cantidad",
     "viewall": "Ver todo",
@@ -249,5 +251,11 @@
     "learn_more": "Aprende más",
     "learn_more_link": "https://ethereum.org/es/web3/",
     "exp_exchanges": "Ver en intercambios"
+  },
+  "wallet": {
+    "notConnected": "No está conectado",
+    "signIn": "Iniciar sesión con tu monedero",
+    "awating_cnn": "Esperando conexión...",
+    "awating_sign": "Esperando firma..."
   }
 }

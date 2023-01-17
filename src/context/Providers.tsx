@@ -4,7 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 //Web3
 import { RainbowKitProvider, getDefaultWallets, lightTheme } from "@rainbow-me/rainbowkit";
-import { WagmiConfig, createClient, configureChains, goerli, mainnet, createStorage } from "wagmi";
+import { WagmiConfig, createClient, configureChains, goerli } from "wagmi";
 import { infuraProvider } from "wagmi/providers/infura";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
@@ -17,7 +17,7 @@ import theme from 'src/theme'
 
 //* Web3 connector and layer
 const { chains, provider } = configureChains(
-  [ goerli, mainnet ],
+  [ goerli ],
   [
     infuraProvider({ apiKey: process.env.INFURA_API_KEY || '', priority: 1, }),
     alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY || '', priority: 2 }),
@@ -32,7 +32,6 @@ const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
-  storage: createStorage({ storage: window.localStorage }),
 });
 
 
@@ -47,7 +46,7 @@ const Providers = ({ children }: { children: ReactNode }) => (
             showRecentTransactions={true}
             modalSize="wide"
             theme={lightTheme({
-              accentColor: "#623485", //color of wallet  try #703844
+              accentColor: "#f7c034",
               accentColorForeground: "white",
               borderRadius: "large",
               fontStack: "system",

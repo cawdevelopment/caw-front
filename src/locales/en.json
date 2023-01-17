@@ -259,5 +259,11 @@
     "learn_more": "Learn more",
     "learn_more_link": "https://ethereum.org/en/web3/",
     "exp_exchanges": "Explore Exchanges"
+  },
+  "wallet": {
+    "notConnected": "You are not connected.",
+    "signIn": "Sign in with your wallet",
+    "awating_cnn": "Awaiting connection...",
+    "awating_sign": "Awaiting signature..."
   }
 }

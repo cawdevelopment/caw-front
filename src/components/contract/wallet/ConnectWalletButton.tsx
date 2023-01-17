@@ -1,4 +1,4 @@
-import { Button, Image, Box, VStack } from "@chakra-ui/react";
+import { Button, Image, Box, VStack, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { useDappProvider } from 'src/context/DAppConnectContext'
@@ -10,12 +10,17 @@ const ConnectWalletButton = () => {
 
   if (status === 'disconnected') {
     return (
-      <Button
-        variant="ghost"
-        onClick={openConnectModal}
-      >
-        {t('buttons.btn_connect_wallet')}
-      </Button>
+      <VStack>
+        <Text as="b">
+          {t('wallet.notConnected')}
+        </Text>
+        <Text
+          cursor={'pointer'}
+          onClick={() => openConnectModal}
+        >
+          {t('wallet.signIn')}
+        </Text>
+      </VStack>
     );
   }
 
@@ -25,7 +30,7 @@ const ConnectWalletButton = () => {
         variant="ghost"
         onClick={openConnectModal}
       >
-        {t('buttons.btn_connecting')}
+        {t('wallet.awating_cnn')}
       </Button>
     );
   }
