@@ -7,31 +7,42 @@
 <br>
 </p>
 
+# About CAW - A Hunters Dream
+
+
+## 📦 Environments
+| Name            | Link                                |
+| --------------- | ----------------------------------- |
+| Mainnet         | Not yet                 |
+| Alpha Test UI         | https://teh-eyes.vercel.app/         |
+| Nightly Test UI         | https://nightly-eyes.vercel.app/        |
+
 ## Getting Started
 
-Add the .env file (be aware that this file is not tracked by git) and add the following:
+Create an .env file (be aware that this file is not tracked by git) and add the following:
 
 ```bash
 ALCHEMY_API_KEY=SOME-STRING-OF-CHARS
 INFURA_API_KEY=SOME-STRING-OF-CHARS
-CAW_CONTRACT ="0xf3b9569F82B18aEf890De263B84189bd33EBe452"
-CAW_NAME_CONTRACT="0x3F63Ad5E6309135a9D5fD3540270b93f56FD9CD9"
-CAW_NAME_MINTER_CONTRACT="0x56F0d5DA1Bc735e03d6A4cd988784ED498FD9Ee3"
-MINTABLE_CAW_CONTRACT="0x0bc5f399265fA0Fb95F5473c8ec1737d1dBB015c"
+JSON_RPC_URL="https://rpc.builder0x69.io"
 NETWORK="goerli"
 
 ```
-
 > INFURA_API_KEY : Make sure to create a WEB3 API (Formely Ethereum) project on Infura and add the API key here.
 
-Then, run the development server:
+then run the following commands:
 
-```bash
+```sh
 yarn install
-yarn dev
-yarn build
-```
 
+# Development
+yarn dev
+
+# Production
+yarn build
+yarn start
+```
+and visit http://localhost:8082
 
 ## Contributing
 Would you like to contribute to this project?

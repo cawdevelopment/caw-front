@@ -1,18 +1,16 @@
-import { ColorModeScript } from '@chakra-ui/react'
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/react'
+
+import { APP_DESCRIPTION } from 'src/utils/constants'
 import theme from '../theme';
 
 export default class MyDocument extends Document {
 
-    static async getInitialProps(ctx: any) {
-        return await Document.getInitialProps(ctx)
-    }
+    // static async getInitialProps(ctx: any) {
+    //     return await Document.getInitialProps(ctx)
+    // }
 
     render() {
-
-        // const { locale } = this.props.__NEXT_DATA__
-        // const dir = locale === "ar" ? "rtl" : "ltr"
-
         return (
             <Html lang='en'>
                 <Head>
@@ -29,7 +27,7 @@ export default class MyDocument extends Document {
                     />
                     <meta
                         name="description"
-                        content="Caw is an Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it."
+                        content={APP_DESCRIPTION}
                     />
                     <meta name="keywords" content="social,community,decentralized,ethereum,blockchain,web3,rewards" />
                     <meta name="author" content="Teh CAWMmunity" />

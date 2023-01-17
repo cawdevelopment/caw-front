@@ -63,7 +63,7 @@ export const getCurrentMCap = async () => {
 export const NftCostAtMcap = (username: string | number, marketCap: number[]) => {
 
     //* Calculate the cost of the NFT at different market caps
-    const costInCaw = typeof username === 'string' ? NtfCostInCaw(username) : NFT_COST[ username ];
+    const costInCaw = typeof username === 'string' ? NtfCostInCaw(username) : (NFT_COST[ username ] || NFT_COST[ 8 ]);
     const costAtMcap: any = {};
 
     for (let i = 0; i < marketCap.length; i++) {

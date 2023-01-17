@@ -16,7 +16,6 @@ export type MenuItemProps = {
 export default function MenuItem({ useLink, href, useIcon = true, icon, iconColor, label, isExternal, onClick }: MenuItemProps) {
 
     const hoverColor = useColorModeValue('blackAlpha.50', 'whiteAlpha.100');
-    console.log("MenuItem.iconColor: ", iconColor);
 
     return (
         <ListItem>

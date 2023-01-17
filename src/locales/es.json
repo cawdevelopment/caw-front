@@ -45,13 +45,17 @@
     "btn_mint_again": "Acuñar otro",
     "btn_swap": "Intercambiar",
     "btn_approve": "Aprobar",
-    "btn_close": "Cerrar"
+    "btn_close": "Cerrar",
+    "btn_connecting": "Conectando..."
   },
   "errors": {
     "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar.",
-    "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas."
+    "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas.",
+    "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada."
   },
   "labels": {
+    "awating_cnn": "Awaiting connection...",
+    "awating_sign": "Awaiting signature...",
     "under_dev": "En desarrollo",
     "the": "El",
     "more": "más",
@@ -82,17 +86,18 @@
     "cost": "Costo",
     "minting": "Acuñando...",
     "minted": "Acuñado",
-    "minted_success": "¡Acuñado con éxito!",
+    "minted_success": "¡NFT Acuñado con éxito!",
     "approving": "Aprobando...",
     "approved": "Aprobado",
     "block_explorer": "Explorador de bloques",
     "check_nft_on": "Compruebe tu NFT en",
-    "its_magic": "✨Es fantástico✨",
+    "its_magic": "✨Fantástico✨",
     "balance": "Balance",
     "enter_amount": "Introduzca la cantidad",
     "viewall": "Ver todo",
     "manage_accounts": "Administrar cuentas",
     "connectedto": "Conectado con",
+    "unknownChain": "Red desconocida",
     "accounts": "Cuentas",
     "options": "Opciones",
     "quickmint": "Acuñación simple",
@@ -156,7 +161,7 @@
     "wall_title": "Inicio"
   },
   "layout_page": {
-    "text_1": "Por favor, tenga en cuenta que esta DAPP está en desarrollo y algunas funcionalidades puede no funcionen como se espera.",
+    "text_1": "Por favor, tenga en cuenta que esta dApp está en desarrollo y algunas funcionalidades puede no funcionen como se espera.",
     "text_2": "Además, hay algunos textos e imágenes de relleno."
   },
   "settings_page": {
@@ -204,7 +209,8 @@
     "user_acceptance_warn_2": "Soy responsable de mi nombre de usuario y de sus acciones",
     "user_acceptance_warn_3": "No podré cambiar mi nombre de usuario después",
     "user_acceptance_warn_4": "Estamos dejando de utilizar el correo electrónico y el teléfono para identificar a los usuarios.",
-    "user_acceptance_warn_5": "El poder que se me ha dado, con un gran poder viene una gran responsabilidad"
+    "user_acceptance_warn_5": "El poder que se me ha dado, con un gran poder viene una gran responsabilidad",
+    "longerResponse": "Reconecte su billetera si esta tarda demasiado en confirmar la transacción."
   },
   "minted_page": {
     "title": "¡Felicidades! Tu NFT ha sido acuñado"
@@ -229,7 +235,7 @@
     "mint_action": "Acuñar usuario de {0}{1} letra{2}",
     "follow_acc": "Seguir una cuenta",
     "follow_acc_burn": "Pago 80/20 % a la cuenta y stakepool",
-    "send_caw": "Crear CAW",
+    "send_caw": "Crear un CAW",
     "send_caw_burn": "Pago 100% a stakepool",
     "like_caw": "Like CAW",
     "like_caw_burn": "Pago 80/20% a la cuenta y stakepool",
@@ -243,6 +249,13 @@
     "bugs_report": "Fallos o nuevas funciones",
     "firsttweb3": "Nuevo en Web3?",
     "learn_more": "Aprende más",
+    "learn_more_link": "https://ethereum.org/es/web3/",
     "exp_exchanges": "Ver en intercambios"
+  },
+  "wallet": {
+    "notConnected": "No está conectado",
+    "signIn": "Iniciar sesión con tu monedero",
+    "awating_cnn": "Esperando conexión...",
+    "awating_sign": "Esperando firma..."
   }
 }

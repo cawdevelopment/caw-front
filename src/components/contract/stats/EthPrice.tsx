@@ -24,7 +24,6 @@ export default function CawCurrentPrice({ watch }: Props) {
             return;
 
         const interval = setInterval(() => {
-            console.log("updating eth price");
             execute();
         }, 60000);
 

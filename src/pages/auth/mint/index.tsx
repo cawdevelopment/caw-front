@@ -2,7 +2,8 @@
 import { Container, useToast } from "@chakra-ui/react";
 import { useState, createContext, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useTranslation, } from "react-i18next";
+import { useRouter } from 'next/router'
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
@@ -23,8 +24,7 @@ export const MintingPageContext = createContext({
     userName: '',
     termsAccepted: false,
     isValid: false,
-    isLoading: false,
-    minting: false,
+    procesing: false,
     message: '',
     onChainValidated: false,
     costVerified: false,
@@ -45,10 +45,12 @@ export function useMintingPageContext() {
 export default function RegisterPage() {
 
     const { t } = useTranslation();
-    const { mint, isLoading, minting } = useCawNameMinterContract();
+    const { mint } = useCawNameMinterContract();
     const { address, connected } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
+    const [ procesing, setProcesing ] = useState(false);
     const toast = useToast();
+    const router = useRouter()
 
     const methods = useForm({
         defaultValues: {
@@ -90,14 +92,13 @@ export default function RegisterPage() {
                 return;
             }
 
-            const { receipt } = await mint(userName, address);
-
+            setProcesing(true);
+            const { receipt } = await mint(userName);
             const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
-
-            // window.open(url, '_blank');
-            window.location.assign(url);
+            router.push(url);
         }
         catch (error: any) {
+            setProcesing(false);
             const { message, code } = getBlockChainErrMsg(error);
             setError(message ? message + ' : ' + code : 'Something went wrong');
         }
@@ -115,8 +116,7 @@ export default function RegisterPage() {
                         userName,
                         termsAccepted,
                         isValid,
-                        isLoading,
-                        minting,
+                        procesing,
                         message,
                         onChainValidated,
                         costVerified,
@@ -129,11 +129,12 @@ export default function RegisterPage() {
                         onSubmit,
                     }}
                 >
-                    <FormProvider {...methods} >
-                        <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <FormProvider {...methods}>
+                        <form
+                            onSubmit={methods.handleSubmit(onSubmit)}
+                        >
                             <FormStepper
-                                isLoading={isLoading}
-                                minting={minting}
+                                procesing={procesing}
                                 termsAccepted={termsAccepted}
                                 userName={userName}
                                 error={error}

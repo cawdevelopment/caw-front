@@ -1,7 +1,7 @@
 import { Stack, Tooltip, Text } from "@chakra-ui/react";
 import NextLink from 'next/link';
+import Blockies from 'react-blockies';
 
-import Avatar from 'src/components/avatar/Avatar';
 import Iconify from 'src/components/icons/Iconify';
 import { PATH_DASHBOARD } from "src/routes/paths";
 import { MediaType } from "src/types/community-feed";
@@ -22,18 +22,17 @@ type Props = {
 
 export default function PostAvatar(props: Props) {
 
-    const { src, displayName, username, type, verified, date, postId } = props;
+    const { displayName, username, verified, date, postId } = props;
     const profileUrl = PATH_DASHBOARD.user.profile.replace(':username', username);
 
     return (
         <Stack direction="row" spacing={1} alignItems="center" id={`avatar-post-${postId}`}>
             <NextLink href={profileUrl} passHref >
                 <div>
-                    <Avatar
-                        src={src}
-                        name={displayName}
-                        type={type}
-                        sx={{ cursor: 'pointer' }}
+                    <Blockies
+                        seed={displayName.toLowerCase()}
+                        scale={5} size={8}
+                        className="rounded-full"
                     />
                 </div>
             </NextLink>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Stack, Text, Checkbox, Link, chakra } from "@chakra-ui/react";
 
@@ -21,9 +21,31 @@ export default function UserAcceptance() {
     const allChecked = checkedItems.every(Boolean);
     const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
 
-    useEffect(() => {
-        onSetValue('termsAccepted', allChecked);
-    }, [ allChecked, onSetValue ]);
+    const handleCheckAll = (e: any) => {
+
+        setCheckedItems((prev) => {
+
+            const newCheckedItems = prev.map(() => e.target.checked);
+            const newAllChecked = newCheckedItems.every(Boolean);
+
+            onSetValue('termsAccepted', newAllChecked);
+
+            return newCheckedItems;
+        });
+    }
+
+    const handleCheck = (index: number) => (e: any) => {
+
+        setCheckedItems((prev) => {
+
+            const newCheckedItems = prev.map((c, i) => i === index ? e.target.checked : c);
+            const newAllChecked = newCheckedItems.every(Boolean);
+
+            onSetValue('termsAccepted', newAllChecked);
+
+            return newCheckedItems;
+        });
+    }
 
     return (
         <chakra.div pt={5}>
@@ -33,7 +55,7 @@ export default function UserAcceptance() {
             <Checkbox
                 isChecked={allChecked}
                 isIndeterminate={isIndeterminate}
-                onChange={(e) => setCheckedItems(checkedItems.map(() => e.target.checked))}
+                onChange={handleCheckAll}
             >
                 {t('minting_page.user_acceptance_mchk_1')} <Link color={'blue.400'}><b>{`${t('minting_page.user_acceptance_mchk_dapp')} `}</b></Link>{t('minting_page.user_acceptance_mchk_2')}
             </Checkbox>
@@ -42,7 +64,7 @@ export default function UserAcceptance() {
                     <Checkbox
                         key={index}
                         isChecked={checkedItems[ index ]}
-                        onChange={(e) => setCheckedItems(checkedItems.map((c, i) => i === index ? e.target.checked : c))}
+                        onChange={handleCheck(index)}
                     >
                         {t(`minting_page.${caption}`)}
                     </Checkbox>

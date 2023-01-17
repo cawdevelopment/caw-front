@@ -1,4 +1,7 @@
 import { useState } from "react";
+
+import useIsMounted from "src/hooks/useIsMounted";
+
 import { useMintingPageContext } from ".";
 import WalletConnection from "./WalletConnection";
 import ConfirmAndMintCard from "./ConfirmAndMintCard";
@@ -14,9 +17,12 @@ export default function Steps({ step }: Props) {
 
     const { userName } = useMintingPageContext();
     const [ width, setWidth ] = useState(0);
+    const { mounted } = useIsMounted();
 
     const onInitilizedBox = (width: number) => {
-        setWidth(width);
+
+        if (mounted)
+            setWidth(width);
     }
 
     switch (step) {

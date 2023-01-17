@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import {
-    TableContainer, Table, Thead, Tr, Th, Tbody, Td, Button, Modal, ModalContent,
+    TableContainer, Table, Thead, Tr, Th, Tbody, Td, Modal, ModalContent,
     ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Tooltip, TableCaption
 } from "@chakra-ui/react";
 
@@ -184,17 +184,14 @@ export function ProtocolCostModal({ isOpen, onClose }: ProtocolCostModalProps) {
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>
+                    <br />
                     {t('calc.title')}
                 </ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                     <ProtocolCost />
                 </ModalBody>
-                <ModalFooter>
-                    <Button onClick={onClose}>
-                        {t('buttons.btn_close')}
-                    </Button>
-                </ModalFooter>
+                <ModalFooter />
             </ModalContent>
         </Modal>
     );

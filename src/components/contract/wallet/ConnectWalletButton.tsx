@@ -1,4 +1,4 @@
-import { Button, Image, Box, VStack } from "@chakra-ui/react";
+import { Button, Image, Box, VStack, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { useDappProvider } from 'src/context/DAppConnectContext'
@@ -10,19 +10,35 @@ const ConnectWalletButton = () => {
 
   if (status === 'disconnected') {
     return (
+      <VStack>
+        <Text as="b">
+          {t('wallet.notConnected')}
+        </Text>
+        <Text
+          cursor={'pointer'}
+          onClick={() => openConnectModal}
+        >
+          {t('wallet.signIn')}
+        </Text>
+      </VStack>
+    );
+  }
+
+  if (status === 'connecting' || status === 'reconnecting') {
+    return (
       <Button
         variant="ghost"
         onClick={openConnectModal}
       >
-        {t('buttons.btn_connect_wallet')}
+        {t('wallet.awating_cnn')}
       </Button>
     );
   }
 
-  if (chain?.unsupported) {
+  if (!chain || chain?.unsupported) {
     return (
       <Button
-        variant="ghost"
+        variant="ghost"        
         onClick={openChainModal}
       >
         {t('buttons.btn_wrong_network')}
@@ -34,7 +50,7 @@ const ConnectWalletButton = () => {
     <Box >
       <VStack>
         <Button
-          onClick={openChainModal}
+          onClick={chain?.name ? openChainModal : openConnectModal}
           variant="ghost"
           bgGradient="linear(to-l, brand.100, brand.200)"
         >
@@ -58,7 +74,7 @@ const ConnectWalletButton = () => {
               )}
             </Box>
           )}
-          {chain?.name || 'Not supported'}
+          {chain?.name || t('labels.unknownChain')}
         </Button>
       </VStack>
     </Box>
