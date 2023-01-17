@@ -208,7 +208,8 @@
     "user_acceptance_warn_3": "Jestem świadomy, że nie będą mógł zmienić mojej nazwy użytkownika później",
     "user_acceptance_warn_4": "Odchodzimy od emaili i numeru telefonu jako możliwości identyfikacji użytkownika",
     "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.",
-    "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?"
+    "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?",
+    "longerResponse": "Odpowiedź jest zbyt długaPodłącz ponownie portfel, jeśli komunikat potwierdzający nie pojawi się"
   },
   "minted_page": {
     "title": "Sukces! Twoje NFT zostało zmintowane"

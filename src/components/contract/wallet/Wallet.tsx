@@ -56,7 +56,7 @@ export function WalletButton(props: WalletButtonProps) {
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
     const { chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useDappProvider();
-    const { connectButtonLabel, menuButtonProps,
+    const { connectButtonLabel, menuButtonProps = { padding: 0.5 },
         menuButtonvariant = 'ghost', iconColor,
         menuListProps = { shadow: "md" },
         buttonProps = { variant: "ghost" } } = props;
@@ -108,7 +108,7 @@ export function WalletButton(props: WalletButtonProps) {
     return (
         <Menu>
             <MenuButton
-                {...menuButtonProps}
+                {...menuButtonProps}                
                 as={Button}
                 variant={menuButtonvariant}
                 leftIcon={<Iconify icon="ph:wallet-fill" color={iconColor} />}

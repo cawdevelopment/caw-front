@@ -24,7 +24,9 @@ export default function ConfirmAndMintCard({ userName, width }: Props) {
             <Text as="b">
                 {t('minting_page.owneraddress_label')} : <br />
             </Text>
-            <NavbarAccount displayAddressMode="full" displaMode="carousel" showFooter={false} />
+            <Stack textAlign="center">
+                <NavbarAccount displayAddressMode="full" displaMode="carousel" showFooter={false} />
+            </Stack>
             <Divider />
             <Stack spacing={1}>
                 <UserAcceptance />
@@ -32,6 +34,9 @@ export default function ConfirmAndMintCard({ userName, width }: Props) {
             <Divider />
             <Text as="b" fontSize={'lg'}>
                 {t('minting_page.press_bnt_action_label')} : <br />
+            </Text>
+            <Text>
+                {t('minting_page.longerResponse')} <br />
             </Text>
         </Stack>
     );

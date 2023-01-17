@@ -83,14 +83,8 @@ export default function useCawNameMinterContract() {
         try {
 
             const contractWithSigner = _getSignerContract();
-            console.log(`🐛  -> 🔥 :  mint 🔥 :  contractWithSigner`, contractWithSigner);
-
             const tx = await contractWithSigner.mint(username);
-            console.log(`🐛  -> 🔥 :  mint 🔥 :  tx`, tx);
-
             const receipt = await tx.wait();
-            console.log(`🐛  -> 🔥 :  mint 🔥 :  receipt`, receipt);
-
             return {
                 tx,
                 receipt

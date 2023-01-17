@@ -57,7 +57,7 @@
     "under_dev": "En desarrollo",
     "the": "El",
     "more": "más",
-    "dashboard": "Tablero",
+    "dashboard": "Feed",
     "wallet": "Monedero",
     "network": "Red",
     "disconnect": "Desconectar",
@@ -159,7 +159,7 @@
     "wall_title": "Inicio"
   },
   "layout_page": {
-    "text_1": "Por favor, tenga en cuenta que esta DAPP está en desarrollo y algunas funcionalidades puede no funcionen como se espera.",
+    "text_1": "Por favor, tenga en cuenta que esta dApp está en desarrollo y algunas funcionalidades puede no funcionen como se espera.",
     "text_2": "Además, hay algunos textos e imágenes de relleno."
   },
   "settings_page": {
@@ -207,7 +207,8 @@
     "user_acceptance_warn_2": "Soy responsable de mi nombre de usuario y de sus acciones",
     "user_acceptance_warn_3": "No podré cambiar mi nombre de usuario después",
     "user_acceptance_warn_4": "Estamos dejando de utilizar el correo electrónico y el teléfono para identificar a los usuarios.",
-    "user_acceptance_warn_5": "El poder que se me ha dado, con un gran poder viene una gran responsabilidad"
+    "user_acceptance_warn_5": "El poder que se me ha dado, con un gran poder viene una gran responsabilidad",
+    "longerResponse": "Reconecte su billetera si esta tarda demasiado en confirmar la transacción."
   },
   "minted_page": {
     "title": "¡Felicidades! Tu NFT ha sido acuñado"
@@ -232,7 +233,7 @@
     "mint_action": "Acuñar usuario de {0}{1} letra{2}",
     "follow_acc": "Seguir una cuenta",
     "follow_acc_burn": "Pago 80/20 % a la cuenta y stakepool",
-    "send_caw": "Crear CAW",
+    "send_caw": "Crear un CAW",
     "send_caw_burn": "Pago 100% a stakepool",
     "like_caw": "Like CAW",
     "like_caw_burn": "Pago 80/20% a la cuenta y stakepool",

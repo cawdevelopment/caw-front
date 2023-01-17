@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NextLink from 'next/link';
 import { useDebounce } from "use-debounce";
@@ -13,7 +13,9 @@ import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
 import { getBlockChainErrMsg, getExplorerUrl } from "src/hooks/contracts/helper";
 import { sentenceCase, shortenAddress } from "src/utils/helper";
+import { isValidUsername as validateUserNameLocally } from "src/utils/manifestoHelper";
 import { PATH_AUTH } from "src/routes/paths";
+import WrapperFadeAnimation from "@components/animate/WrapperFade";
 
 function MintNFTNameForm() {
 
@@ -22,13 +24,56 @@ function MintNFTNameForm() {
     const { address, connected, chain } = useDappProvider();
     const [ value, setValue ] = React.useState();
     const [ debouncedValue ] = useDebounce(value, 500);
-    const { mint } = useCawNameMinterContract();
+    const { mint, getIdByUserName } = useCawNameMinterContract();
     const [ txMintHash, setTxMintHash ] = useState(null);
     const [ error, setError ] = useState<string | null>(null);
     const [ processing, setProcessing ] = useState(false);
+    const [ isValid, setIsValid ] = useState(false);
+    const [ existing, setExisting ] = useState(false);
 
-    const handleChange = (event: any) => setValue(event.target.value);
+    const [ userNameError, setUserNameError ] = useState<string | null>(null);
+    const handleChange = (event: any) => { setValue(event.target.value) };
 
+    useEffect(() => {
+
+        if (!value)
+            return;
+
+        let isMounted = true;
+        const valid = validateUserNameLocally(value);
+        setIsValid(valid);
+
+        if (isMounted && !valid)
+            setUserNameError(valid ? null : `${value} : ${t('minting_page.username_already_taken')}`);
+
+        const checkExisting = async () => {
+
+            try {
+                const id = await getIdByUserName(value);
+                if (isMounted) {
+                    const existing = id !== 0;
+                    setExisting(existing);
+                    if (existing) {
+                        setIsValid(false);
+                        setUserNameError(`${value} : ${t('minting_page.username_already_taken')}`);
+                    }
+                    else {
+                        setUserNameError(null);
+                        setUserNameError(`${value} : ${t('minting_page.username_available')}`);
+                    }
+                }
+            }
+            catch (error) {
+                const { message, code } = getBlockChainErrMsg(error);
+                setUserNameError(message ? message + ' : ' + code : 'Something went wrong');
+            }
+        }
+
+        if (valid)
+            checkExisting();
+
+        return () => { isMounted = false; }
+    }, [ value, getIdByUserName, t ]);
 
     const handleMint = async () => {
         try {
@@ -51,6 +96,9 @@ function MintNFTNameForm() {
         setTxMintHash(null);
         setValue(undefined);
         setError(null);
+        setUserNameError(null);
+        setExisting(false);
+        setIsValid(false);
     }
 
     const mintExplorerTxUrl = getExplorerUrl({ addressOrTx: txMintHash || '', network: chain?.id || 0, type: 'tx' });
@@ -63,6 +111,14 @@ function MintNFTNameForm() {
                     readOnly={Boolean(txMintHash)}
                     onChange={handleChange}
                 />
+                <WrapperFadeAnimation show={!Boolean(txMintHash) && Boolean(value)} exitDuration={0.5}>
+                    <AlertMessage
+                        type={isValid && !existing ? "success" : "warning"}
+                        variant="subtle"
+                        showIcon={isValid}
+                        message={userNameError || ''}
+                    />
+                </WrapperFadeAnimation>                
                 <HStack>
                     <Button
                         width={"full"}
@@ -83,8 +139,13 @@ function MintNFTNameForm() {
                         >
                             {t('buttons.btn_start_over')}
                         </Button>
-                    )}
+                    )}                   
                 </HStack>
+                <WrapperFadeAnimation show={Boolean(processing)} exitDuration={0.5}>
+                    <Text>
+                        {t('minting_page.longerResponse')} <br />
+                    </Text>
+                </WrapperFadeAnimation>
                 <AlertDialog
                     isOpen={isOpen}
                     title={sentenceCase(t('verbs.confirm'))}
@@ -95,7 +156,7 @@ function MintNFTNameForm() {
                     onClose={onClose}
                     onConfirm={handleMint}
                 />
-                {error && (<AlertMessage type="warning" message={error} />)}
+                {error && !Boolean(txMintHash) && (<AlertMessage type="warning" message={error} />)}
                 {Boolean(txMintHash) && (
                     <Text color="green.500" as="b">
                         {`${t('labels.minted')}`}
@@ -144,7 +205,7 @@ export function QuickMintingUserName({ isOpen, onClose }: QuickMintingUserNamePr
                             <Link color={'blue.400'} textDecoration="none">
                                 {t('labels.quickmintlabel')}
                             </Link>
-                        </NextLink>
+                        </NextLink>                        
                     </ModalFooter>
                 </ModalContent>
             </Modal>
@@ -171,3 +232,4 @@ export function QuickMintingUserNameButton() {
         </>
     );
 }
+

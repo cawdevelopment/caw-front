@@ -66,7 +66,7 @@
     "under_dev": "Under development",
     "the": "The",
     "more": "more",
-    "dashboard": "Dashboard",
+    "dashboard": "Feed",
     "wallet": "Wallet",
     "network": "Network",
     "disconnect": "Disconnect",
@@ -168,7 +168,7 @@
     "wall_title": "Home"
   },
   "layout_page": {
-    "text_1": "Please bear in mind this DAPP is under development, and some features may not work as expected.",
+    "text_1": "Please bear in mind this dApp is under development, and some features may not work as expected.",
     "text_2": "In addition, there are some filler texts and images."
   },
   "settings_page": {
@@ -217,7 +217,8 @@
     "user_acceptance_warn_3": "I will not be able to change my username later",
     "user_acceptance_warn_5": "Power given to me, with great power comes great responsibility",
     "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users",
-    "confirm_mnt": "Are you sure you want to mint the name : {0}?"
+    "confirm_mnt": "Are you sure you want to mint the name : {0}?",
+    "longerResponse": "Reconnect your wallet if it takes too long to confirm the transaction"
   },
   "minted_page": {
     "title": "Your NFT-Username is minted"
@@ -240,11 +241,11 @@
     "MC10B": "Market Cap at $10 billion",
     "tbl_caption": "Forecast capitalization in USD",
     "mint_action": "Mint {0}{1} Character{2} username",
-    "follow_acc": "Follow Account",
+    "follow_acc": "Follow an Account",
     "follow_acc_burn": "paid 80/20% to account and stakepool",
-    "send_caw": "Send CAW",
+    "send_caw": "Send a CAW",
     "send_caw_burn": "paid 100% to stakepool",
-    "like_caw": "Like CAW",
+    "like_caw": "Like a CAW",
     "like_caw_burn": "paid 80/20% to account and stakepool",
     "recaw_burn": "paid 50/50% to account and stakepool"
   },
