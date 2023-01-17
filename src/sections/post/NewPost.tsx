@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, useToast, Tooltip, useColorModeValue, useToken } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, useToast, Tooltip, useColorModeValue, useToken, useColorMode } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { MotionContainer } from "src/components/animate";
@@ -12,6 +12,7 @@ export const MAX_CHARECTERS = 420;
 export default function NewPost() {
 
     const { t } = useTranslation();
+    const { colorMode } = useColorMode();
     const [light, dark] = useToken('colors', ['caw.600', 'caw.500']);
     const iconColor = useColorModeValue(light, dark);
     const okColor = useColorModeValue('caw.500', 'caw.600');
@@ -31,7 +32,7 @@ export default function NewPost() {
             title: t('new_post.yettodone_title'),
             description: t('new_post.yettodone_desc'),
             status: 'info',
-            variant: "top-accent",
+            variant: colorMode === 'dark' ? "solid" : 'subtle',
             position: 'top-right',
             duration: 9000,
             isClosable: true,
