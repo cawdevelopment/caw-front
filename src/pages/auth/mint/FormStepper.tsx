@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import NextLink from 'next/link';
 import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { m } from "framer-motion";
 
 import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
-import { MotionContainer } from "src/components/animate";
+import { MotionContainer, WrapperFadeAnimation } from "src/components/animate";
 import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
 
@@ -40,6 +40,20 @@ export default function FormStepper(props: Props) {
     useEffect(() => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         window.screenY = 0;
+    }, [ step ]);
+
+    const handleNext = useCallback(() => {
+
+        const newStep = step + 1;
+        setStep(newStep);
+        setProgress(getProgress(newStep));
+    }, [ step ]);
+
+    const handleBack = useCallback(() => {
+
+        const newStep = step - 1;
+        setStep(newStep);
+        setProgress(getProgress(newStep));
     }, [ step ]);
 
     return (
@@ -82,17 +96,24 @@ export default function FormStepper(props: Props) {
                             borderRadius={10}
                         />
                         <Box
-                            // minWidth={'container.md'}
                             bg={boxBg}
                             rounded={'lg'}
                             boxShadow={'2xl'}
                             p={8}
                         >
-                                <Steps
-                                    userName={userName}
-                                    step={step}
-                            />
-                            {error && (<AlertMessage type="warning" message={error} />)}
+                            <Steps userName={userName} step={step} />
+
+                            <WrapperFadeAnimation
+                                show={Boolean(error)}
+                            >
+                                <AlertMessage
+                                    type="warning"
+                                    message={error}
+                                    showCloseButton={true}
+                                    showIcon={true}
+                                />
+                            </WrapperFadeAnimation>
+
                             <ButtonGroup mt="5%" w="100%">
                                 <Flex w="100%" justifyContent="space-between">
                                     <Button
@@ -101,22 +122,14 @@ export default function FormStepper(props: Props) {
                                         variant="solid"
                                         w="8rem"
                                         mr="5%"
-                                        onClick={() => {
-                                            const newStep = step - 1;
-                                            setStep(newStep);
-                                            setProgress(getProgress(newStep));
-                                        }}
+                                        onClick={handleBack}
                                     >
                                         {t('buttons.btn_back')}
                                     </Button>
                                     {step !== maxSteps && (
                                         <Button
                                             w="8rem"
-                                            onClick={() => {
-                                                const newStep = step + 1;
-                                                setStep(newStep);
-                                                setProgress(getProgress(newStep));
-                                            }}
+                                            onClick={handleNext}
                                             colorScheme="caw"
                                             variant="outline"
                                             disabled={procesing}

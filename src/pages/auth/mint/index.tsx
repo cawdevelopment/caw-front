@@ -95,11 +95,7 @@ export default function RegisterPage() {
             setProcesing(true);
             const { receipt } = await mint(userName);
             const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
-            setProcesing(false);
             router.push(url);
-
-            // window.open(url, '_blank');
-            // window.location.assign(url);
         }
         catch (error: any) {
             setProcesing(false);
@@ -133,8 +129,10 @@ export default function RegisterPage() {
                         onSubmit,
                     }}
                 >
-                    <FormProvider {...methods} >
-                        <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <FormProvider {...methods}>
+                        <form
+                            onSubmit={methods.handleSubmit(onSubmit)}
+                        >
                             <FormStepper
                                 procesing={procesing}
                                 termsAccepted={termsAccepted}

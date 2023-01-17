@@ -80,20 +80,14 @@ export default function useCawNameMinterContract() {
 
     const mint = async (username: string) => {
 
-        try {
-
-            const contractWithSigner = _getSignerContract();
-            const tx = await contractWithSigner.mint(username);
-            const receipt = await tx.wait();
-            return {
-                tx,
-                receipt
-            };
-
-        } catch (error) {
-            console.error("minting error : ", error);
-            throw error;
-        }
+        const contractWithSigner = _getSignerContract();
+        console.log('contractWithSigner', 'mint');
+        const tx = await contractWithSigner.mint(username);
+        const receipt = await tx.wait();
+        return {
+            tx,
+            receipt
+        };
     }
 
 
