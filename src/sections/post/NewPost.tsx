@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, Tooltip, useColorModeValue, useToken } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next"; 
+import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, useToast, Tooltip, useColorModeValue, useToken } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
 
 import { MotionContainer } from "src/components/animate";
 import MyAvatar from 'src/components/contract/avatars/MyAvatar';
@@ -12,19 +12,31 @@ export const MAX_CHARECTERS = 420;
 export default function NewPost() {
 
     const { t } = useTranslation();
-    const [ light, dark ] = useToken('colors', [ 'caw.600', 'caw.500' ]);
+    const [light, dark] = useToken('colors', ['caw.600', 'caw.500']);
     const iconColor = useColorModeValue(light, dark);
     const okColor = useColorModeValue('caw.500', 'caw.600');
     const warningColor = useColorModeValue('orange.500', 'orange.400');
     const errorColor = useColorModeValue('red.500', 'red.400');
-
-    const [ characters, setCharacters ] = useState(0);
-    const [ progress, setProgress ] = useState(0);
+    const toast = useToast()
+    const [characters, setCharacters] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
         setProgress(characters >= MAX_CHARECTERS ? 100 : (characters / MAX_CHARECTERS) * 100);
-    }, [ characters ]);
+    }, [characters]);
 
+    const handlePost = () => {
+        toast.closeAll();
+        toast({
+            title: t('new_post.yettodone_title'),
+            description: t('new_post.yettodone_desc'),
+            status: 'info',
+            variant: "top-accent",
+            position: 'top-right',
+            duration: 9000,
+            isClosable: true,
+        });
+    }
 
     const progressColor = progress < 90 ? okColor : progress < 96 ? warningColor : progress < 100 ? errorColor : errorColor;
 
@@ -108,13 +120,15 @@ export default function NewPost() {
                         />
                         <Tooltip
                             hasArrow
-                            label={t('buttons.btn_caw_tooltip')}>
+                            label={t('buttons.btn_caw_tooltip')}
+                        >
                             <Button
                                 variant="contained"
                                 bg="caw.600"
                                 color={'gray.900'}
                                 size='sm'
                                 boxShadow='2xl'
+                                onClick={handlePost}
                             >
                                 CAW
                             </Button>
