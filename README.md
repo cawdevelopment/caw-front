@@ -13,9 +13,9 @@
 ## 📦 Environments
 | Name            | Link                                |
 | --------------- | ----------------------------------- |
-| Mainnet         | No yet                 |
-| Testnet         | https://teh-eyes.vercel.app/         |
-| Nightly         | https://nightly-eyes.vercel.app/        |
+| Mainnet         | Not yet                 |
+| Alpha Test UI ()         | https://teh-eyes.vercel.app/         |
+| Nightly Test UI         | https://nightly-eyes.vercel.app/        |
 
 ## Getting Started
 
