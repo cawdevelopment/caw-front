@@ -254,5 +254,9 @@
     "firsttweb3": "First time using Web3?",
     "learn_more": "Learn more",
     "exp_exchanges": "Explore Exchanges"
+  },
+  "new_post": {
+    "yettodone_title": "We have yet to work on it",
+    "yettodone_desc": "Feel free to invite more devs to join us."
   }
 }

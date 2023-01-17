@@ -244,5 +244,9 @@
     "firsttweb3": "Nuevo en Web3?",
     "learn_more": "Aprende más",
     "exp_exchanges": "Ver en intercambios"
+  },
+  "new_post": {
+    "yettodone_title": "Aún no puedes publicar",
+    "yettodone_desc": "Te animamos a invitar a más desarrolladores a colaborar."
   }
 }
