@@ -5,7 +5,7 @@
     "url": "https://caw.is"
   },
   "description": "Cawnect teh world",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -41,6 +41,7 @@
     "lodash.debounce": "^4.0.8",
     "next": "^13.1.1",
     "react": "^18.2.0",
+    "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.39.4",
     "react-i18next": "^11.18.6",

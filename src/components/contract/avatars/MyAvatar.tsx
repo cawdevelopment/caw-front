@@ -1,8 +1,9 @@
 
 import { SystemStyleObject } from "@chakra-ui/react";
+import Blockies from 'react-blockies';
 
+import StoryStyledAvatar from "src/components/avatar/StoryStyledAvatar";
 import { useDappProvider } from "src/context/DAppConnectContext";
-import Avatar from 'src/components/avatar/Avatar';
 
 type Props = {
     sx?: SystemStyleObject;
@@ -10,16 +11,21 @@ type Props = {
 
 export default function MyAvatar({ sx }: Props) {
 
-    const { cawAccount } = useDappProvider();
+    const { connected, cawAccount, address } = useDappProvider();
+
+    if (!connected) {
+        return (
+            <Blockies
+                seed={(address || '0x0').toLowerCase()}
+                scale={5} size={8}
+                className="rounded-full"
+            />);
+    }
 
     return (
-        <Avatar
-            name={cawAccount?.userName || ''}
-            size="md"
-            color="white"
+        <StoryStyledAvatar
             src={cawAccount?.avatar || ''}
-            type={'nft'}
-            sx={sx}
+            alt={cawAccount?.userName || ''}
         />
-    )
+    );
 }

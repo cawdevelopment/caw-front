@@ -1,3 +1,5 @@
+import packageJson from '../../package.json';
+
 export function slugify(text: string) {
     return text
         .toString()
@@ -21,3 +23,8 @@ export const shortenAddress = (address: string) => address ? `${address.slice(0,
 
 
 export const sentenceCase = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const getAppVersion = () => {
+    const { name, version } = packageJson
+    return name + '/' + version
+}

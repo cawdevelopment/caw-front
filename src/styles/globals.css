@@ -72,3 +72,6 @@ a {
     transform: rotate(359deg);
   }
 }
+.rounded-full {
+  border-radius: 9999px;
+}
