@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation, } from "react-i18next";
 import { useRouter } from 'next/router'
 
+import { BlockChainOperationInProgressModal } from "@components/dialogs/OperationInProgress";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { useCawNameMinterContract } from "src/hooks";
@@ -24,7 +25,7 @@ export const MintingPageContext = createContext({
     userName: '',
     termsAccepted: false,
     isValid: false,
-    procesing: false,
+    processing: false,
     message: '',
     onChainValidated: false,
     costVerified: false,
@@ -44,13 +45,41 @@ export function useMintingPageContext() {
 
 export default function RegisterPage() {
 
-    const { t } = useTranslation();
-    const { mint } = useCawNameMinterContract();
+    const { t } = useTranslation();    
     const { address, connected } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
-    const [ procesing, setProcesing ] = useState(false);
+    const [ processing, setProcessing ] = useState(false);
+    const [ txSent, setTxSent ] = useState(false);
     const toast = useToast();
-    const router = useRouter()
+    const router = useRouter();
+
+    const { mint } = useCawNameMinterContract({
+        onBeforeSend: () => {
+            setProcessing(true);
+        },
+        onTxSent: (tx) => {
+            setTxSent(true);
+        },
+        onTxConfirmed: (tx) => {
+            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', tx?.transactionHash || 'xxx');
+            router.push(url);
+        },
+        onError: (err) => {
+            setProcessing(false);
+            const { message, code } = getBlockChainErrMsg(err);
+            setError(message ? message + ' : ' + code : 'Something went wrong');
+        },
+        onCompleted: () => {
+            setProcessing(false);
+        }
+    });
+
+    const handleCloseModal = () => {
+        setProcessing(false);
+        setError(null);
+        setTxSent(false);
+        toast.closeAll();
+    }
 
     const methods = useForm({
         defaultValues: {
@@ -65,12 +94,13 @@ export default function RegisterPage() {
             costCAW: 0,
             swapAmount: 0,
         }
-    });
+    });    
 
     const { termsAccepted, userName, message, onChainValidated, costVerified, costCAW, costETH, costUSD, swapAmount, isValid } = methods.watch();
 
     const onSubmit = async (data: any) => {
         try {
+            toast.closeAll();
             if (!address || !connected) {
                 toast({ title: 'Wallet not connected', status: 'error', isClosable: true, });
                 return;
@@ -92,14 +122,10 @@ export default function RegisterPage() {
                 return;
             }
 
-            setProcesing(true);
-            const { receipt } = await mint(userName);
-            setProcesing(false);            
-            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
-            router.push(url);
+            mint(userName);            
         }
         catch (error: any) {
-            setProcesing(false);
+            setProcessing(false);
             const { message, code } = getBlockChainErrMsg(error);
             setError(message ? message + ' : ' + code : 'Something went wrong');
         }
@@ -117,7 +143,7 @@ export default function RegisterPage() {
                         userName,
                         termsAccepted,
                         isValid,
-                        procesing,
+                        processing,
                         message,
                         onChainValidated,
                         costVerified,
@@ -135,13 +161,19 @@ export default function RegisterPage() {
                             onSubmit={methods.handleSubmit(onSubmit)}
                         >
                             <FormStepper
-                                procesing={procesing}
+                                processing={processing}
                                 termsAccepted={termsAccepted}
                                 userName={userName}
                                 error={error}
                                 isValid={isValid}
                             />
                         </form>
+                        <BlockChainOperationInProgressModal
+                            processing={processing}
+                            txSent={txSent}
+                            message={t("minting_page.minting_ntf")}
+                            onClose={handleCloseModal}
+                        />
                     </FormProvider>
                 </MintingPageContext.Provider>
             </Container>

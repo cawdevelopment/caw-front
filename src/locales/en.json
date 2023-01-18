@@ -219,7 +219,8 @@
     "user_acceptance_warn_5": "Power given to me, with great power comes great responsibility",
     "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users",
     "confirm_mnt": "Are you sure you want to mint the name : {0}?",
-    "longerResponse": "Reconnect your wallet if it takes too long to confirm the transaction"
+    "longerResponse": "Reconnect your wallet if it takes too long to confirm the transaction",
+    "minting_ntf": "Minting your NFT-Username"
   },
   "minted_page": {
     "title": "Your NFT-Username is minted"
@@ -265,7 +266,11 @@
     "notConnected": "You are not connected",
     "signIn": "Sign in with your wallet",
     "awating_cnn": "Awaiting connection...",
-    "awating_sign": "Awaiting signature..."
+    "awating_sign": "Awaiting signature...",
+    "txSubmitted" : "Transaction submitted",
+    "waitingConfirm": "Waiting for confirmation",
+    "confirmTxInWallet": "Confirm this transaction in your wallet",
+    "waitConfirmedTx": "Wait for the transaction to be confirmed"
   },
   "new_post": {
     "yettodone_title": "This feature is not yet available",

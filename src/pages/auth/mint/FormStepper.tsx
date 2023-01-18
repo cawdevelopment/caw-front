@@ -21,7 +21,7 @@ function getProgress(step: number) {
 
 type Props = {
     termsAccepted: boolean;    
-    procesing: boolean;
+    processing: boolean;
     isValid: boolean;
     userName: string;
     error: string | null;
@@ -29,7 +29,7 @@ type Props = {
 
 export default function FormStepper(props: Props) {
 
-    const { termsAccepted, procesing, isValid, userName, error } = useMintingPageContext();
+    const { termsAccepted, processing, isValid, userName, error } = useMintingPageContext();
     const bg = useColorModeValue('gray.50', 'gray.800');
     const boxBg = useColorModeValue('white', 'gray.700');
     const [ step, setStep ] = useState(1);
@@ -132,7 +132,7 @@ export default function FormStepper(props: Props) {
                                             onClick={handleNext}
                                             colorScheme="caw"
                                             variant="outline"
-                                            disabled={procesing}
+                                            disabled={processing}
                                         >
                                             {t('buttons.btn_next')}
                                         </Button>
@@ -143,9 +143,9 @@ export default function FormStepper(props: Props) {
                                             w="8rem"
                                             colorScheme="green"
                                             variant="solid"
-                                            isLoading={procesing}
+                                            isLoading={processing}
                                             loadingText={t('labels.minting')}
-                                            disabled={procesing ? true : (!connected || !termsAccepted || !isValid || !userName)}
+                                            disabled={processing ? true : (!connected || !termsAccepted || !isValid || !userName)}
                                         >
                                             {t('buttons.btn_mint')}
                                         </Button>
@@ -177,6 +177,7 @@ export default function FormStepper(props: Props) {
                                 <b>{t('labels.dashboard')}</b>
                             </Link>
                         </Flex>
+                        <br />
                     </Stack>
                 </Flex>
             </div>

@@ -33,7 +33,7 @@ export default function NavbarAccount({ displayAddressMode = 'shorten', showFoot
         >
           <PopoverAccount displaMode="carousel" showFooter={showFooter} />
           <VStack textAlign="left" alignItems="flex-start">
-            <Text noOfLines={1} as="b">
+            <Text noOfLines={1} as="b" wordBreak="break-all">
               {cawAccount?.userName || '🌙'}
             </Text>
             <HStack>

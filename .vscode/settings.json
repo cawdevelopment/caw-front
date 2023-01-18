@@ -1,4 +1,7 @@
 {
   "compile-hero.disable-compile-files-on-did-save-code": false,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+},
 }

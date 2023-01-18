@@ -7,20 +7,28 @@ import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
 import { getCawPriceInUsd, getContract, getEthPriceInUsd } from "./helper";
 
+type Props = { 
+    onBeforeSend?: () => void;
+    onTxSent?: (tx: ethers.ContractTransaction) => void;
+    onTxConfirmed?: (receipt: ethers.ContractReceipt) => void;
+    onError?: (error: Error) => void;
+    onCompleted?: () => void;
+}
+
 //* Contract name :  CawNameMinter
 //* Get the cost of a name, validate the name, and mint a NTF-Username
-export default function useCawNameMinterContract() {
+export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onError,onCompleted,  onTxConfirmed }: Props = {}) {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const { allowMainnet, network, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
+    const { allowMainnet, network, provider, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
     const { address, abi } = CAW_NAME_MINTER;
     const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
 
     useEffect(() => {
-        const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY });
+        const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY , provider});
         setContract(contract);
-    }, [ address, abi, network, INFURA_API_KEY ]);
+    }, [ address, abi, network, provider, INFURA_API_KEY ]);
 
 
     const getCostOfName = async (userName: string) => {
@@ -79,18 +87,29 @@ export default function useCawNameMinterContract() {
 
 
     const mint = async (username: string) => {
+        
+        try {
+            onBeforeSend?.();
+            const contractWithSigner = _getSignerContract();
+            const tx = await contractWithSigner.mint(username);
+            onTxSent?.(tx);
 
-        const contractWithSigner = _getSignerContract();
-        console.log('contractWithSigner', 'mint');
-        const tx = await contractWithSigner.mint(username);
-        const receipt = await tx.wait();
-        return {
-            tx,
-            receipt
-        };
+            const receipt = await tx.wait();
+            onTxConfirmed?.(receipt);
+
+            return {
+                tx,
+                receipt
+            };
+        }
+        catch (error: any) {
+            onError?.(error);
+        }
+        finally {
+            onCompleted?.();
+        }
     }
-
-
+    
     return {
         initialized: !!contract,
         getCostOfName,

@@ -143,7 +143,7 @@ export default function SwapMCAWForm() {
                         <Image src={`/assets/tokens/eth.png`} alt='ETH' width={24} height={24} />
                         <Text as="b">ETH</Text>
                         <Spacer />
-                        <Text as="b">{t('labels.balance')} : {fetchingETH ? '...' : balance > 1 ? kFormatter(balance) : balance}</Text>
+                        <Text as="b">{t('labels.balance')} : {fetchingETH ? '...' : balance > 1 ? kFormatter(balance) : balance.toFixed(4)}</Text>
                     </HStack>
                     <Spacer h={10} />
                     <VStack spacing={4}>
