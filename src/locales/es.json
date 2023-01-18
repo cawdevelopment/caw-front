@@ -51,7 +51,8 @@
   "errors": {
     "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar.",
     "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas.",
-    "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada."
+    "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada.",
+    "fullscreen_not_supported": "Su navegador no es compatible con la pantalla completa."
   },
   "labels": {
     "awating_cnn": "Awaiting connection...",
@@ -197,7 +198,7 @@
     "wizard_step1_lb1": "Toda la actividad del usuario, social y financiera fluye a través de su nombre de usuario NFT",
     "wizard_step1_lb2": "Un monedero puede ser poseer varios nombres de usuario",
     "wizard_step1_lb3": "Puedes acuñar tantos como puedas permitirte",
-    "upding_balance": "Actualizando balance...",
+    "fetching_balance": "Actualizando balance...",
     "main_balance": "Balance principal",
     "caw_balance_req_lb": "Debe tener suficiente mCAW para acuñar un nombre de usuario. Puedes acuñar por mCAW aquí :",
     "enter_nft_input_lb": "Ingresa tu nuevo nombre de usuario NFT",

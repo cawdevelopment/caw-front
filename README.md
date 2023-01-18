@@ -15,7 +15,6 @@
 | --------------- | ----------------------------------- |
 | Mainnet         | Not yet                 |
 | Alpha Test UI         | https://teh-eyes.vercel.app/         |
-| Nightly Test UI         | https://nightly-eyes.vercel.app/        |
 
 ## Getting Started
 

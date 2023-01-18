@@ -60,13 +60,14 @@
   "errors": {
     "install_wallet": "No ethereum provider found, please install metamask or similar",
     "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network",
-    "signer_not_found": "Signer not found, check if your wallet is connected"
+    "signer_not_found": "Signer not found, check if your wallet is connected",
+    "fullscreen_not_supported": "Fullscreen not supported by your browser"
   },
   "labels": {
     "under_dev": "Under development",
     "the": "The",
     "more": "more",
-    "dashboard": "Feed",
+    "dashboard": "Dashboard",
     "wallet": "Wallet",
     "network": "Network",
     "disconnect": "Disconnect",
@@ -204,7 +205,7 @@
     "wizard_step1_lb1": "All user activity, social and financial flows through your NFT username",
     "wizard_step1_lb2": "A wallet can own several usernames",
     "wizard_step1_lb3": "You can mint as many as you can afford",
-    "upding_balance": "Updating balance...",
+    "fetching_balance": "Updating balance...",
     "main_balance": "Main balance",
     "caw_balance_req_lb": "You need to have enough mCAW to mint a username. You can mint mCAW here : ",
     "enter_nft_input_lb": "Enter your new NFT-Username",
@@ -228,7 +229,7 @@
     "goerli_msg_1": "You need to set up",
     "goerli_msg_2": "in your wallet before minting mCAW",
     "get_goerli": "Retrieve some free-of-charge Goerli ETH from a faucet, i.g. : ",
-    "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens,otherwise your funds will be locked in the contract.",
+    "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens, otherwise your funds will be locked in the contract.",
     "alert_cf_mint": "Do you want to mint {$0} mCAW?"
   },
   "calc": {

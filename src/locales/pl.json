@@ -51,7 +51,8 @@
   "errors": {
     "install_wallet": "Nie wykryto portfela, zainstaluj Metamask lub inny kombatybilny portfel.",
     "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć.",
-    "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony."
+    "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony.",
+    "fullscreen_not_supported": "Twoja przeglądarka nie obsługuje trybu pełnoekranowego."
   },
   "labels": {
     "under_dev": "W przygotowaniu",
@@ -195,7 +196,7 @@
     "wizard_step1_lb1": "Cała aktywność użytkownika, socialna oraz finansowa przepływa przez Twoją NFT nazwę użykownika",
     "wizard_step1_lb2": "Pojedńczy portfel może posiadać wiele nazwy użytkownika",
     "wizard_step1_lb3": "Możesz zmintować tyle, na ile możesz sobie pozwolić",
-    "upding_balance": "Aktualizuje saldo...",
+    "fetching_balance": "Aktualizuje saldo...",
     "main_balance": "Saldo główne",
     "caw_balance_req_lb": "Musisz mieć wystarczającą ilość mCAW aby zmintować nazwę użytkownika. Możesz zmintować mCAW atutaj :",
     "enter_nft_input_lb": "Wprowadź swoją nową NFT nzawę użytkownika",
