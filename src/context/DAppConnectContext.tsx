@@ -33,7 +33,7 @@ type ContextModel = {
         name?: string;
         unsupported?: boolean;
     } | undefined,
-    changeCawAccount: (cawAccount: CawUserName) => void;
+    changeCawAccount: (cawAccount: CawUserName, throwErr: boolean) => void;
     openAccountModal: () => void;
     openChainModal: () => void;
     openConnectModal: () => void;
@@ -83,15 +83,20 @@ const DAppProvider = ({ children }: Props) => {
     const [ getTokenFetched, setGetTokenFetched ] = useState(false);
 
 
-    const handleCawAccount = useCallback(async (cawAccount: CawUserName) => {
+    const handleCawAccount = useCallback(async (cawAccount: CawUserName, throwErr: boolean) => {
 
         if (!cawAccount?.userName || !address)
             return;
 
         //* Validate if the user is the owner of the username
         const _userName = userNames.find((user) => user.userName === cawAccount.userName);
-        if (!_userName)
-            throw new Error('You are not the owner of this username');
+        if (!_userName) {
+
+            if (throwErr)
+                throw new Error('You are not the owner of this username');
+
+            return;
+        }
 
         if (!_userName.avatar) {
             const uri = await getTokenURI(_userName.id);
@@ -126,9 +131,19 @@ const DAppProvider = ({ children }: Props) => {
 
         //* Set the first username as the default when the userNames changes and current username is null
         if (!Boolean(userName) && userNames?.length > 0)
-            handleCawAccount(userNames[ 0 ]);
+            handleCawAccount(userNames[ 0 ], false);
 
     }, [ userName, userNames, handleCawAccount ]);
+
+    useEffect(() => {
+
+        if (status !== 'connected') {
+            setUserName(null);
+            setUserNames([]);
+            setGetTokenFetched(false);
+        }
+
+    }, [ status ]);
 
     useEffect(() => {
 

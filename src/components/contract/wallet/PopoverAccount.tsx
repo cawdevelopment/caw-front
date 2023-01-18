@@ -94,7 +94,7 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
     }
 
     const handleCawAccountChange = (cawAccount: CawUserName) => () => {
-        changeCawAccount(cawAccount);
+        changeCawAccount(cawAccount, true);
     }
 
     return (

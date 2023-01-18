@@ -11,7 +11,7 @@ export default function useAppConfigurations() {
     const _env = _v.environment;
     return {
         ..._v,
-        provider,
+        provider : provider,
         allowMainnet: ((chain?.id || 0) === 1) ? (_env === 'production' || _env === 'live') && (_v.network === 'mainnet') : true,
     };
 }

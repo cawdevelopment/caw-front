@@ -84,17 +84,6 @@ export function WalletButton(props: WalletButtonProps) {
         );
     }
 
-    if (chain?.unsupported) {
-        return (
-            <Button
-                {...buttonProps}
-                onClick={openChainModal}
-            >
-                {t('buttons.btn_wrong_network')}
-            </Button>
-        );
-    }
-
     if (!chain || chain?.unsupported) {
         return (
             <Button

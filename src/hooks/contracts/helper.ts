@@ -1,19 +1,23 @@
 import { ethers } from "ethers";
-import { AppEnvSettings } from "src/config/siteSettings";
+import type { Provider } from "@wagmi/core";
 import detectEthereumProvider from '@metamask/detect-provider'
+
+import { AppEnvSettings } from "src/config/siteSettings";
 
 type ContractParams = {
     address: string;
     network: string;
     apiKey: string;
     abi: ethers.ContractInterface;
+    provider?: Provider | null;
 }
 
 export function getContract(params: ContractParams) {
 
-    const { address, abi, network, apiKey, } = params;
+    const { address, abi, network, apiKey, provider :providerArg} = params;
     const _network = ethers.providers.getNetwork(network);
-    const provider = new ethers.providers.InfuraProvider(_network, apiKey);
+    
+    const provider =providerArg || new ethers.providers.InfuraProvider(_network, apiKey);
     const contract = new ethers.Contract(address, abi, provider);
     return { contract, provider };
 }

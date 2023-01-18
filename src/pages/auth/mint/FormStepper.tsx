@@ -111,6 +111,7 @@ export default function FormStepper(props: Props) {
                                     message={error}
                                     showCloseButton={true}
                                     showIcon={true}
+                                    maxWidth="container.xl"
                                 />
                             </WrapperFadeAnimation>
 
