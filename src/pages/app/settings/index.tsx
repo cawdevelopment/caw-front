@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import DisplaySettings from './Display';
 import LanguageSettings from './Language';
+import SettingFullscreen from './SettingFullscreen';
 
 SettingsPage.getLayout = function getLayout(page: React.ReactElement) {
     return <Layout variant="dashboard">{page}</Layout>;
@@ -19,6 +20,7 @@ export default function SettingsPage() {
             <Stack spacing={10} m={4}>
                 <DisplaySettings />
                 <LanguageSettings />
+                <SettingFullscreen />
             </Stack>
         </PageWrapper >
     );
