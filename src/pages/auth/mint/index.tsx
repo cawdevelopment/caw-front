@@ -94,6 +94,7 @@ export default function RegisterPage() {
 
             setProcesing(true);
             const { receipt } = await mint(userName);
+            setProcesing(false);            
             const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
             router.push(url);
         }

@@ -56,13 +56,12 @@ export default function SidebarContent({ onClose, ...rest }: SidebarProps) {
                 width="inherit"
                 left={0}
                 bottom={0}
+                padding="0.3rem"
             >
                 <NavbarAccount
                     displayAddressMode="full"
                     displaMode="carousel"
                     showFooter={false}
-                    borderBottomLeftRadius="0"
-                    borderBottomRightRadius="0"
                 />
             </chakra.div>
         </Box>

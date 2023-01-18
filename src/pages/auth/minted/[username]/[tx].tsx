@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useSearchParams } from 'next/navigation';
 import NextLink from 'next/link';
 
-import { PATH_AUTH } from "src/routes/paths";
+import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 import { WrapperFadeAnimation } from 'src/components/animate'
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
@@ -159,7 +159,7 @@ export default function MintedUserNamePage() {
                                         {t('buttons.btn_mint_again')}
                                     </Button>
                                 </NextLink>
-                                <NextLink href={PATH_AUTH.connect} passHref>
+                                <NextLink href={PATH_DASHBOARD.app.home} passHref>
                                     <Button colorScheme='caw' variant="outline" w='-webkit-fill-available'>
                                         {t('buttons.btn_access')}
                                     </Button>

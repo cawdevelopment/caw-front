@@ -201,11 +201,14 @@ export function QuickMintingUserName({ isOpen, onClose }: QuickMintingUserNamePr
                         <MintNFTNameForm />
                     </ModalBody>
                     <ModalFooter alignItems="center">
-                        <NextLink href={PATH_AUTH.mint} target="_blank" rel="noopener noreferrer" passHref>
-                            <Link color={'blue.400'} textDecoration="none">
+                        <Link
+                            as={NextLink}
+                            href={PATH_AUTH.mint}
+                            color={'blue.400'}
+                            textDecoration="none"
+                        >
                                 {t('labels.quickmintlabel')}
-                            </Link>
-                        </NextLink>                        
+                        </Link>                     
                     </ModalFooter>
                 </ModalContent>
             </Modal>

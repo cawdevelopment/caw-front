@@ -39,9 +39,9 @@ function Footer() {
                 {t('menu.firsttweb3')}
             </Text>
             <Link
+                isExternal
                 variant="outline"
                 href={t('menu.learn_more_link')}
-                isExternal
                 textDecoration="none"
                 padding={2}
                 borderRadius="md"
