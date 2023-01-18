@@ -219,7 +219,7 @@
     "title": "Mintable CAW",
     "goerli_msg_1": "Debe configurar",
     "goerli_msg_2": "en su monedero antes de acuñar mCAW",
-    "get_goerli": "Solicitar Goerli ETH de una faucet, por ejemplo : ",
+    "get_goerli": "Solicitar Goerli ETH gratuitamente de una faucet, por ejemplo : ",
     "approve_req_msg": "Una vez que acuñado, debe que aprobar la transacción para transferir sus tokens CAW, de lo contrario sus fondos quedarán bloqueados en el contrato.",
     "alert_cf_mint": "¿Desea acuñar {$0} mCAW?"
   },
@@ -257,5 +257,9 @@
     "signIn": "Iniciar sesión con tu monedero",
     "awating_cnn": "Esperando conexión...",
     "awating_sign": "Esperando firma..."
+  },
+  "new_post": {
+    "yettodone_title": "Aún no puedes publicar",
+    "yettodone_desc": "Estamos trabajando en ello. Te animamos a invitar a más desarrolladores a colaborar."
   }
 }

@@ -218,7 +218,7 @@
     "title": "Mintowalne CAW",
     "goerli_msg_1": "Musisz skonfigurować",
     "goerli_msg_2": "w swoim portfelu przez zmintowaniem mCAW",
-    "get_goerli": "Zdobądz trochę Goerli ETH na przykład z faucet, itp. ",
+    "get_goerli": "Zdobądz trochę Goerli ETH nieodpłatnie na przykład z faucet, itp. ",
     "approve_req_msg": "Gdy mintujesz, musisz zatwierdzić transakcję aby transferować Twoje tokeny CAW, albo Twoje fundusze zostaną zablokowane w kontrakcie.",
     "alert_cf_mint": "Czy jesteś pewien, że chcesz zmintować {$0} mCAW?"
   },
@@ -256,5 +256,9 @@
     "signIn": "Zaloguj się za pomocą portfela",
     "awating_cnn": "Oczekiwanie na połączenie...",
     "awating_sign": "Oczekiwanie na podpis..."
+  },
+  "new_post": {
+    "yettodone_title": "Nie możesz jeszcze publikować",
+    "yettodone_desc": "Zachęcamy do zapraszania kolejnych deweloperów do współpracy."
   }
 }

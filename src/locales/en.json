@@ -227,7 +227,7 @@
     "title": "Mintable CAW",
     "goerli_msg_1": "You need to set up",
     "goerli_msg_2": "in your wallet before minting mCAW",
-    "get_goerli": "Retrieve some Goerli ETH from a faucet, i.g. : ",
+    "get_goerli": "Retrieve some free-of-charge Goerli ETH from a faucet, i.g. : ",
     "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens,otherwise your funds will be locked in the contract.",
     "alert_cf_mint": "Do you want to mint {$0} mCAW?"
   },
@@ -265,5 +265,9 @@
     "signIn": "Sign in with your wallet",
     "awating_cnn": "Awaiting connection...",
     "awating_sign": "Awaiting signature..."
+  },
+  "new_post": {
+    "yettodone_title": "This feature is not yet available",
+    "yettodone_desc": "We are working on it. Feel free to invite more devs to join us."
   }
 }
