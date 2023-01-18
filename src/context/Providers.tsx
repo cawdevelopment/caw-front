@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 
 //Web3
-import { RainbowKitProvider, getDefaultWallets, lightTheme } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider, getDefaultWallets, lightTheme, DisclaimerComponent } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, createClient, configureChains, goerli } from "wagmi";
 import { infuraProvider } from "wagmi/providers/infura";
 import { alchemyProvider } from "wagmi/providers/alchemy";
@@ -35,6 +35,21 @@ const wagmiClient = createClient({
 });
 
 
+const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
+  <Text
+  >
+    <b>
+      This app runs on the Goerli testnet
+    </b>
+    <br />
+    <b
+      style={{ color: "red" }}
+    >
+      Connect a wallet that supports testnets, like Rainbow Wallet or MetaMask for writing on the blockchain.
+    </b>
+  </Text>
+);
+
 const Providers = ({ children }: { children: ReactNode }) => (
   <>
     <ErrorBoundary>
@@ -45,6 +60,10 @@ const Providers = ({ children }: { children: ReactNode }) => (
             coolMode={false}
             showRecentTransactions={true}
             modalSize="wide"
+            appInfo={{
+              appName: APP_NAME,
+              disclaimer: Disclaimer,
+            }}
             theme={lightTheme({
               accentColor: "#f7c034",
               accentColorForeground: "white",
