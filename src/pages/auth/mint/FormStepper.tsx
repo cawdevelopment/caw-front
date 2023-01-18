@@ -162,7 +162,7 @@ export default function FormStepper(props: Props) {
                         >
                             <Link
                                 as={NextLink}
-                                href={PATH_AUTH.mint}
+                                href={PATH_DASHBOARD.swap.mcaw}
                                 color={'blue.400'}
                                 rel="noopener noreferrer"
                             >
