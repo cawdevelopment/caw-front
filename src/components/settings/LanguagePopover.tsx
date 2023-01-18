@@ -1,4 +1,4 @@
-import { Text, HStack, Button, Menu, MenuButton, MenuItem, MenuList, Image, useColorModeValue, Tooltip } from "@chakra-ui/react";
+import { Text, HStack, Button, Menu, MenuButton, MenuItem, MenuList, Image, useColorModeValue } from "@chakra-ui/react";
 import useLocales from "src/hooks/useLocale";
 
 type LanguagePopoverProps = {
@@ -14,9 +14,6 @@ export default function LanguagePopover({ bgIPopover }: LanguagePopoverProps) {
 
     return (
         <Menu>
-            <Tooltip
-                label={currentLang.label}
-            >
             <MenuButton
                 as={Button}
                 size='xs'
@@ -40,7 +37,6 @@ export default function LanguagePopover({ bgIPopover }: LanguagePopoverProps) {
                         alt={currentLang.label}
                     />
             </MenuButton>
-            </Tooltip>
             <MenuList borderRadius={10} bg={bgIPopover || bgMenuList}>
                 {allLang.map((lang) => (
                     <MenuItem

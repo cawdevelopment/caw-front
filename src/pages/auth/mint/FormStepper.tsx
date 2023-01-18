@@ -4,7 +4,7 @@ import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progre
 import { useTranslation } from "react-i18next";
 import { m } from "framer-motion";
 
-import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
+import { PATH_DASHBOARD } from "src/routes/paths";
 import { MotionContainer, WrapperFadeAnimation } from "src/components/animate";
 import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
