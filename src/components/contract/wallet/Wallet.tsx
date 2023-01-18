@@ -56,6 +56,7 @@ export function WalletButton(props: WalletButtonProps) {
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
     const { chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useDappProvider();
+
     const { connectButtonLabel, menuButtonProps = { padding: 0.5 },
         menuButtonvariant = 'ghost', iconColor,
         menuListProps = { shadow: "md" },

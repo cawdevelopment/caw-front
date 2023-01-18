@@ -1,4 +1,4 @@
-import { Button, Image, Box, HStack, VStack, Text, Badge } from "@chakra-ui/react";
+import { Button, Image, Box, HStack, VStack, Text, Icon } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { useDappProvider } from 'src/context/DAppConnectContext'
@@ -17,19 +17,12 @@ const ConnectWalletButton = () => {
         alignItems="center"
         onClick={() => openConnectModal()}
       >
-        <Badge
-          variant='solid'
-          bg="red.500"
-          color="white"
-          width={'1.1rem'}
-          height={'1.1rem'}
-          p={0}
-          m={0}
-          borderRadius={'full'}
-          textAlign={'center'}
-        >
-          ⏺
-        </Badge>
+        <Icon viewBox='0 0 200 200' color='red.500'>
+          <path
+            fill='currentColor'
+            d='M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0'
+          />
+        </Icon>
         <VStack
           alignItems={'flex-start'}
           textAlign={'left'}
