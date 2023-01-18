@@ -261,7 +261,7 @@
     "exp_exchanges": "Explore Exchanges"
   },
   "wallet": {
-    "notConnected": "You are not connected.",
+    "notConnected": "You are not connected",
     "signIn": "Sign in with your wallet",
     "awating_cnn": "Awaiting connection...",
     "awating_sign": "Awaiting signature..."

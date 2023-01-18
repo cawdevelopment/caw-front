@@ -12,7 +12,7 @@ export function AppEnvSettings() {
     const ALCHEMY_API_KEY = String(process.env.ALCHEMY_API_KEY);
 
     const ENVIRONMENT = String(process.env.ENVIRONMENT || '').toLowerCase();
-    const JSON_RPC_URL = String(process.env.JSON_RPC_URL || '').toLowerCase();
+    const JSON_RPC_URL = String(process.env.JSON_RPC_URL || 'https://rpc.builder0x69.io').toLowerCase();
 
     return {
         keys: {
