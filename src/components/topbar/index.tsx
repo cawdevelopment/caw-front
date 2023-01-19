@@ -1,5 +1,5 @@
 import {
-    Wrap, WrapItem, useColorModeValue, Button as CrkButton, Text,
+    Wrap, WrapItem, useColorModeValue, Button, Text,
     Center, useDisclosure, VStack, useToken
 } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation';
@@ -62,10 +62,11 @@ export default function TopBar() {
     const bg = useColorModeValue(wBgLight, wBgDark);
 
     const textColor = useColorModeValue('gray.50', 'gray.50');
+    const walletMenuTextColor = useColorModeValue('gray.800', 'gray.50');
     const iconColor = useColorModeValue('gray.50', 'gray.800');
     const [ icLight, icDark ] = useToken('colors', [ 'gray.300', 'gray.500' ]);
     const menuItemIconColor = useColorModeValue(icLight, icDark);
-    const hoverColor = useColorModeValue('whiteAlpha.100', 'gray.800');
+    const hoverColor = useColorModeValue('whiteAlpha.50', 'whiteAlpha.50');
     const shadowBottom = '0 0 20px 20px rgba(0, 0, 0, 0.05), 0 1px 3px 1px rgba(0, 0, 0, 0.1)';
 
     return (
@@ -91,14 +92,14 @@ export default function TopBar() {
                 <EthPrice watch />
             </ItemWrapper>
             {showNewPostButton && (
-                <ItemWrapper>
-                    <CrkButton
+                <ItemWrapper padding="0.0rem" minW="0.0rem">
+                    <Button
                         leftIcon={<Iconify icon="la:crow" color={iconColor} />}
                         _hover={{ bg: hoverColor }}
                         variant={"ghost"}
                     >
                         + Post
-                    </CrkButton>
+                    </Button>
                 </ItemWrapper>
             )}
             {showLanguagePopover && (
@@ -108,18 +109,17 @@ export default function TopBar() {
                     </Center>
                 </ItemWrapper>
             )}
-            <ItemWrapper>
+            <ItemWrapper padding="0.0rem" minW="0.0rem">
                 <Wallet
+                    addressTextColor={textColor}
                     iconColor={iconColor}
                     hoverColor={hoverColor}
                     buttonProps={{
                         color: textColor,
+                        variant: 'ghost',
                         _hover: {
                             bg: hoverColor,
                         }
-                    }}
-                    buttonGroup={{
-                        color: textColor,
                     }}
                     menuButtonProps={{
                         color: textColor,
@@ -130,9 +130,12 @@ export default function TopBar() {
                             bg: hoverColor,
                         }
                     }}
+                    menuListProps={{
+                        color: walletMenuTextColor
+                    }}
                 />
             </ItemWrapper>
-            <ItemWrapper>
+            <ItemWrapper padding="0.0rem" minW="0.0rem">
                 <TopBarMenuButton
                     iconColor={textColor}
                     textColor={textColor}

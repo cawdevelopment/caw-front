@@ -45,11 +45,15 @@
     "btn_mint_again": "Mintuj ponownie",
     "btn_swap": "Wymień",
     "btn_approve": "Zatwierdź",
-    "btn_close": "Zamknij"
+    "btn_close": "Zamknij",
+    "btn_connecting": "Podłączanie..."
   },
   "errors": {
     "install_wallet": "Nie wykryto portfela, zainstaluj Metamask lub inny kombatybilny portfel.",
-    "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć."
+    "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć.",
+    "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony.",
+    "fullscreen_not_supported": "Twoja przeglądarka nie obsługuje trybu pełnoekranowego.",
+    "InsufficientmCAW": "Niewystarczające saldo mCAW do wykonania tego NFT, proszę zdobyć trochę mCAW."
   },
   "labels": {
     "under_dev": "W przygotowaniu",
@@ -93,6 +97,7 @@
     "viewall": "Zobacz całość",
     "manage_accounts": "Edytuj konto",
     "connectedto": "Podłącz do",
+    "unknownChain": "Nieznana sieć",
     "accounts": "Konta",
     "options": "Opcje",
     "quickmint": "Szybko mintuj",
@@ -192,7 +197,7 @@
     "wizard_step1_lb1": "Cała aktywność użytkownika, socialna oraz finansowa przepływa przez Twoją NFT nazwę użykownika",
     "wizard_step1_lb2": "Pojedńczy portfel może posiadać wiele nazwy użytkownika",
     "wizard_step1_lb3": "Możesz zmintować tyle, na ile możesz sobie pozwolić",
-    "upding_balance": "Aktualizuje saldo...",
+    "fetching_balance": "Aktualizuje saldo...",
     "main_balance": "Saldo główne",
     "caw_balance_req_lb": "Musisz mieć wystarczającą ilość mCAW aby zmintować nazwę użytkownika. Możesz zmintować mCAW atutaj :",
     "enter_nft_input_lb": "Wprowadź swoją nową NFT nzawę użytkownika",
@@ -204,7 +209,10 @@
     "user_acceptance_warn_2": "Odpowiadam za moją nazwę użytkownika oraz czynności z nią powiązane",
     "user_acceptance_warn_3": "Jestem świadomy, że nie będą mógł zmienić mojej nazwy użytkownika później",
     "user_acceptance_warn_4": "Odchodzimy od emaili i numeru telefonu jako możliwości identyfikacji użytkownika",
-    "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.""confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?"
+    "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.",
+    "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?",
+    "longerResponse": "Odpowiedź jest zbyt długaPodłącz ponownie portfel, jeśli komunikat potwierdzający nie pojawi się",
+    "minting_ntf": "Mennica Nazwa użytkownika NFT"
   },
   "minted_page": {
     "title": "Sukces! Twoje NFT zostało zmintowane"
@@ -213,7 +221,7 @@
     "title": "Mintowalne CAW",
     "goerli_msg_1": "Musisz skonfigurować",
     "goerli_msg_2": "w swoim portfelu przez zmintowaniem mCAW",
-    "get_goerli": "Zdobądz trochę Goerli ETH na przykład z faucet, itp. ",
+    "get_goerli": "Zdobądz trochę Goerli ETH nieodpłatnie na przykład z faucet, itp. ",
     "approve_req_msg": "Gdy mintujesz, musisz zatwierdzić transakcję aby transferować Twoje tokeny CAW, albo Twoje fundusze zostaną zablokowane w kontrakcie.",
     "alert_cf_mint": "Czy jesteś pewien, że chcesz zmintować {$0} mCAW?"
   },
@@ -243,7 +251,18 @@
     "bugs_report": "Błędy i nowe fukncje",
     "firsttweb3": "Pierwszy raz używasz Web3?",
     "learn_more": "Dowiedz się więcej",
+    "learn_more_link": "https://ethereum.org/pl/wallets/",
     "exp_exchanges": "Odkryj CAW na giełdach"
+  },
+  "wallet": {
+    "notConnected": "Nie podłączony",
+    "signIn": "Zaloguj się za pomocą portfela",
+    "awating_cnn": "Oczekiwanie na połączenie...",
+    "awating_sign": "Oczekiwanie na podpis...",
+    "txSubmitted" : "Transakcja wysłana",
+    "waitingConfirm": "Oczekiwanie na potwierdzenie transakcji",
+    "confirmTxInWallet": "Potwierdź tę transakcję w swoim portfelu",
+    "waitConfirmedTx": "Poczekaj na potwierdzenie transakcji"
   },
   "new_post": {
     "yettodone_title": "Nie możesz jeszcze publikować",

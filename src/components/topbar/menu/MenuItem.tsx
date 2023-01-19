@@ -1,4 +1,5 @@
 import { useColorModeValue, Text, Link, ListItem, HStack, Spacer } from '@chakra-ui/react';
+import NextLink from 'next/link'
 
 import Iconify from "src/components/icons/Iconify";
 
@@ -16,12 +17,11 @@ export type MenuItemProps = {
 export default function MenuItem({ useLink, href, useIcon = true, icon, iconColor, label, isExternal, onClick }: MenuItemProps) {
 
     const hoverColor = useColorModeValue('blackAlpha.50', 'whiteAlpha.100');
-    console.log("MenuItem.iconColor: ", iconColor);
 
     return (
         <ListItem>
             <Link
-                as={useLink ? "a" : "div"}
+                as={useLink ? NextLink : "div"}
                 isExternal={isExternal}
                 href={href}
                 textDecoration="none"

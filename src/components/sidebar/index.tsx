@@ -32,7 +32,7 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
         >            
             <SidebarContent
                 id="sidebar-content"
-                onClose={() => onClose}
+                onClose={onClose}
                 display={{ base: 'none', md: 'block' }}
                 bg={sidebarBg}
                 borderRightColor={borderRightColor}
@@ -62,17 +62,27 @@ export default function SimpleSidebar({ children }: { children: ReactNode; }) {
                         </Flex>
                         <hr />
                     </DrawerHeader>
-                    <DrawerBody overflow="auto">
+                    <DrawerBody
+                        overflow="auto"
+                        onClick={onClose}
+                    >
                         {LinkItems.map((link) => (
                             <NavItem
                                 key={link.name}
                                 name={t(link.name)}
                                 icon={link.icon}
                                 link={link.link}
+                                onClick={onClose}
                             />
                         ))}
                     </DrawerBody>
-                    <DrawerFooter>
+                    <DrawerFooter
+                        id="drawer-footer"
+                        textAlign="center"
+                        justifyContent="center"
+                        alignItems="center"
+                        alignContent={"center"}                        
+                    >
                         <NavbarAccount displaMode="carousel" displayAddressMode="full" showFooter={false} />
                     </DrawerFooter>
                 </DrawerContent>

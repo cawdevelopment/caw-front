@@ -1,20 +1,19 @@
-import { ColorModeScript } from '@chakra-ui/react'
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/react'
+
+import { MetaTags } from "@components/wrappers/Page";
+import { APP_DESCRIPTION, APP_NAME } from 'src/utils/constants'
 import theme from '../theme';
 
 export default class MyDocument extends Document {
 
-    static async getInitialProps(ctx: any) {
-        return await Document.getInitialProps(ctx)
-    }
+    // static async getInitialProps(ctx: any) {
+    //     return await Document.getInitialProps(ctx)
+    // }
 
     render() {
-
-        // const { locale } = this.props.__NEXT_DATA__
-        // const dir = locale === "ar" ? "rtl" : "ltr"
-
         return (
-            <Html lang='en'>
+            <Html lang='en' prefix="og: https://ogp.me/ns#">
                 <Head>
                     <meta charSet="utf-8" />
                     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
@@ -29,10 +28,10 @@ export default class MyDocument extends Document {
                     />
                     <meta
                         name="description"
-                        content="Caw is an Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it."
+                        content={APP_DESCRIPTION}
                     />
-                    <meta name="keywords" content="social,community,decentralized,ethereum,blockchain,web3,rewards" />
-                    <meta name="author" content="Teh CAWMmunity" />
+
+                    <MetaTags title={APP_NAME} description={APP_DESCRIPTION} />
                 </Head>
                 <body>
                     {/* 👇 Here's the script */}

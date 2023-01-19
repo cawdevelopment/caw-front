@@ -67,8 +67,8 @@ export default function BuyCawModal({ isOpen, onClose }: Props) {
                             {links.map((link) => (
                                 <WrapItem key={link.name}>
                                     <Link
-                                        href={link.url}
                                         isExternal
+                                        href={link.url}
                                         rel="noopener noreferrer nofollow"
                                     >
                                         <VStack

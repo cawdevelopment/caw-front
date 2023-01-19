@@ -1,4 +1,4 @@
-import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, CloseButton, Spacer, useDisclosure } from "@chakra-ui/react";
+import { Alert, AlertDescription, AlertIcon, AlertTitle, Box, CloseButton, ResponsiveValue, Spacer, useDisclosure } from "@chakra-ui/react";
 import { WrapperFadeAnimation } from "./animate";
 
 type Props = {
@@ -8,9 +8,10 @@ type Props = {
     message: string;
     showIcon?: boolean;
     showCloseButton?: boolean;
+    maxWidth?: ResponsiveValue<string | number>;
 }
 
-export default function AlertMessage({ type, title, message, variant, showIcon = true, showCloseButton = false }: Props) {
+export default function AlertMessage({ type, title, message, variant, showIcon = true, maxWidth, showCloseButton = false }: Props) {
 
     const { isOpen: isVisible, onClose, } = useDisclosure({ defaultIsOpen: true });
 
@@ -20,6 +21,7 @@ export default function AlertMessage({ type, title, message, variant, showIcon =
             exitDuration={0.5}
         >
             <Alert
+                maxWidth={maxWidth}
                 status={type}
                 variant={variant}
             >

@@ -1,33 +1,38 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ethers, utils } from "ethers";
-import { useWaitForTransaction } from "wagmi";
+import { useSigner } from "wagmi";
 
 import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
-import { getCawPriceInUsd, getContract, getSignerContract, getEthPriceInUsd } from "./helper";
+import { getCawPriceInUsd, getContract, getEthPriceInUsd } from "./helper";
+
+type Props = { 
+    onBeforeSend?: () => void;
+    onTxSent?: (tx: ethers.ContractTransaction) => void;
+    onTxConfirmed?: (receipt: ethers.ContractReceipt) => void;
+    onError?: (error: Error) => void;
+    onCompleted?: () => void;
+}
 
 //* Contract name :  CawNameMinter
-//* Get the cost of a name, validate the name, and mint a username
-export default function useCawNameMinterContract() {
+//* Get the cost of a name, validate the name, and mint a NTF-Username
+export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onError,onCompleted,  onTxConfirmed }: Props = {}) {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const { allowMainnet, network, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
+    const { allowMainnet, network, provider, keys: { INFURA_API_KEY }, contracts: { CAW_NAME_MINTER } } = useAppConfigurations();
     const { address, abi } = CAW_NAME_MINTER;
-    const [ minting, setMinting ] = useState(false);
-
-    const [ tx, setTx ] = useState<ethers.providers.TransactionResponse | null>(null);
-    const [ receipt, setReceipt ] = useState<ethers.providers.TransactionReceipt | null>(null);
-    const { data, isError, isLoading } = useWaitForTransaction({ hash: tx?.hash });
+    const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
 
     useEffect(() => {
-        const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY });
+        const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY , provider});
         setContract(contract);
-    }, [ address, abi, network, INFURA_API_KEY ]);
+    }, [ address, abi, network, provider, INFURA_API_KEY ]);
 
 
     const getCostOfName = async (userName: string) => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
@@ -48,6 +53,7 @@ export default function useCawNameMinterContract() {
     }
 
     const getIdByUserName = async (userName: string): Promise<number> => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
@@ -57,6 +63,7 @@ export default function useCawNameMinterContract() {
     }
 
     const isValidUsername = async (userName: string): Promise<boolean> => {
+
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
@@ -64,60 +71,50 @@ export default function useCawNameMinterContract() {
         return Boolean(result);
     }
 
-    const _getSignerContract = (walletAddress: string) => {
+    const _getSignerContract = () => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        if (!window || !window.ethereum)
-            throw new Error((t('errors.install_wallet')));
-
         if (!allowMainnet)
             throw new Error((t('errors.mainnet_not_allowed')));
 
-        return getSignerContract(contract, walletAddress);
+        if (!signer || isSignerError || loadingSigner)
+            throw new Error((t('errors.signer_not_found')));
+
+        return contract.connect(signer);
     }
 
-    const mint = async (username: string, walletAddress: string) => {
 
+    const mint = async (username: string) => {
+        
         try {
-
-            const contractWithSigner = await _getSignerContract(walletAddress);
-
-            setMinting(true);
+            onBeforeSend?.();
+            const contractWithSigner = _getSignerContract();
             const tx = await contractWithSigner.mint(username);
-            setTx(tx);
+            onTxSent?.(tx);
+
             const receipt = await tx.wait();
-            setMinting(false);
+            onTxConfirmed?.(receipt);
+
             return {
                 tx,
                 receipt
             };
-
-        } catch (error) {
-            setMinting(false);
-            throw error;
+        }
+        catch (error: any) {
+            onError?.(error);
+        }
+        finally {
+            onCompleted?.();
         }
     }
-
-    function restart() {
-        setTx(null);
-        setReceipt(null);
-        setMinting(false);
-    }
-
+    
     return {
         initialized: !!contract,
-        minting,
-        tx,
-        receipt,
-        data,
-        isError,
-        isLoading,
         getCostOfName,
         getIdByUserName,
         isValidUsername,
-        mint,
-        restart
+        mint
     }
 }

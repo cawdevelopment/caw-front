@@ -19,16 +19,23 @@ export default function LanguagePopover({ bgIPopover }: LanguagePopoverProps) {
                 size='xs'
                 _focus={{ boxShadow: 'none' }}
                 variant="ghost"
-                w="fit-content"
+                    w="fit-content"                
                 pl={2}
                 pr={2}
                 style={{
                     paddingTop: "1.3rem",
                     paddingBottom: "1.3rem",
                 }}
-                borderRadius="50%"
+                    borderColor="gray.300"
+                    borderRadius="md"
             >
-                <Image src={currentLang.icon} alt={currentLang.label} />
+
+                    <Image
+                        w="2rem"
+                        h="auto"
+                        src={currentLang.icon}
+                        alt={currentLang.label}
+                    />
             </MenuButton>
             <MenuList borderRadius={10} bg={bgIPopover || bgMenuList}>
                 {allLang.map((lang) => (
@@ -38,8 +45,8 @@ export default function LanguagePopover({ bgIPopover }: LanguagePopoverProps) {
                         m={1}
                         p={2}
                         borderRadius={10}
-                        width="-webkit-fill-available"
-                        _hover={{ bg: bgMenuItemHover }}
+                        _hover={{ bg: bgMenuItemHover }}                        
+                        width='calc(100% - 0.5rem)'
                         onClick={() => onChangeLang(lang.value)}
                     >
                         <HStack spacing={2} >

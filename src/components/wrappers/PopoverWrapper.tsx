@@ -1,7 +1,8 @@
-import { Hide, Show, Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, ModalHeader } from "@chakra-ui/react";
+import { Hide, Show, Modal, ModalBody, ModalCloseButton, ModalContent, ModalOverlay, ModalHeader, ModalFooter } from "@chakra-ui/react";
 
 type Props = {
     children: React.ReactNode,
+    footer?: React.ReactNode,
     isOpen: boolean,
     onClose: () => void
     isCentered?: boolean,
@@ -11,7 +12,7 @@ type Props = {
 
 export default function PopoverWrapperInModal(props: Props) {
 
-    const { children, isCentered, scrollBehavior = 'inside', isOpen, onClose, wrapAbove } = props;
+    const { children, footer, isCentered, scrollBehavior = 'inside', isOpen, onClose, wrapAbove } = props;
 
     return (
         <>
@@ -30,6 +31,9 @@ export default function PopoverWrapperInModal(props: Props) {
                         <ModalBody>
                             {children}
                         </ModalBody>
+                        <ModalFooter>
+                            {footer}
+                        </ModalFooter>
                     </ModalContent>
                 </Modal>
             </Hide>

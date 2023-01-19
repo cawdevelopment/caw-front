@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import {
     useColorModeValue, Text, Popover, PopoverTrigger, PopoverArrow, PopoverBody,
     PopoverCloseButton, PopoverContent, PopoverFooter, PopoverHeader,
-    List, Link, useDisclosure, Hide, IconButton
+    List, Link, useDisclosure, Hide, IconButton, HStack
 } from '@chakra-ui/react';
 
 import Iconify from "src/components/icons/Iconify";
@@ -23,13 +23,44 @@ type Props = {
     itemIconColor: string;
 }
 
+function Footer() {
+    const { t } = useTranslation();
+    const learnMoreButtonColor = useColorModeValue('rgb(0, 181, 94)', 'rgb(0, 255, 132)');
+
+    return (
+        <HStack
+            width={'100%'}
+            display='flex'
+            alignItems='center'
+            justifyContent='space-between'
+            pb={4}
+        >
+            <Text as="b">
+                {t('menu.firsttweb3')}
+            </Text>
+            <Link
+                isExternal
+                variant="outline"
+                href={t('menu.learn_more_link')}
+                textDecoration="none"
+                padding={2}
+                borderRadius="md"
+                border="none"
+                bg="rgba(0, 181, 94, 0.15)"
+                color={learnMoreButtonColor}
+            >
+                {t('menu.learn_more')}
+            </Link>
+        </HStack>
+    );
+}
+
 export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Props) {
 
     const { t } = useTranslation();
     const initialFocusRef = useRef();
     const hoverColor = useColorModeValue('whiteAlpha.100', 'gray.800');
-    const popoverBordercolor = useColorModeValue('gray.300', 'gray.600');
-    const learnMoreButtonColor = useColorModeValue('rgb(0, 181, 94)', 'rgb(0, 255, 132)');
+    const popoverBordercolor = useColorModeValue('gray.300', 'gray.600');    
     const showIcon = true;
 
     const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,7 +79,6 @@ export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Prop
                     onClick={onOpen}
                 />
             </PopoverTrigger>
-
             <PopoverContent
                 color={textColor}
                 borderColor={popoverBordercolor}
@@ -66,18 +96,20 @@ export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Prop
                         isOpen={isOpen}
                         onClose={onClose}
                         wrapAbove="md"
+                        footer={<Footer />}
                     >
                         <List spacing={1}>
                             <Hide above="md">
                                 <br />
                                 <WalletButton
                                     connectButtonLabel={t('buttons.btn_connect_wallet')}
+                                    menuButtonvariant="outline"
                                     buttonProps={{
                                         variant: "outline",
-                                        width: '-webkit-fill-available'
+                                        width: '100%'
                                     }}
                                     menuButtonProps={{
-                                        width: '-webkit-fill-available'
+                                        width: '100%'
                                     }}
                                 />
                                 <CalculatorItem useIcon={showIcon} iconColor={itemIconColor} />
@@ -152,28 +184,8 @@ export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Prop
                         </List>
                     </PopoverWrapper>
                 </PopoverBody>
-                <PopoverFooter
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='space-between'
-                    pb={4}
-                >
-                    <Text as="b">
-                        {t('menu.firsttweb3')}
-                    </Text>
-                    <Link
-                        variant="outline"
-                        href="https://ethereum.org/en/web3/"
-                        isExternal
-                        textDecoration="none"
-                        padding={2}
-                        borderRadius="md"
-                        border="none"
-                        bg="rgba(0, 181, 94, 0.15)"
-                        color={learnMoreButtonColor}
-                    >
-                        {t('menu.learn_more')}
-                    </Link>
+                <PopoverFooter>
+                    <Footer />  
                 </PopoverFooter>
             </PopoverContent>
         </Popover>
