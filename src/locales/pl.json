@@ -52,7 +52,8 @@
     "install_wallet": "Nie wykryto portfela, zainstaluj Metamask lub inny kombatybilny portfel.",
     "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć.",
     "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony.",
-    "fullscreen_not_supported": "Twoja przeglądarka nie obsługuje trybu pełnoekranowego."
+    "fullscreen_not_supported": "Twoja przeglądarka nie obsługuje trybu pełnoekranowego.",
+    "InsufficientmCAW": "Niewystarczające saldo mCAW do wykonania tego NFT, proszę zdobyć trochę mCAW."
   },
   "labels": {
     "under_dev": "W przygotowaniu",

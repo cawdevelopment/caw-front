@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import { BlockChainOperationInProgressModal } from "@components/dialogs/OperationInProgress";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
-import { useCawNameMinterContract } from "src/hooks";
+import { useCawNameMinterContract, useAccountBalance } from "src/hooks";
 import { getBlockChainErrMsg } from "src/hooks/contracts/helper";
 import { PATH_AUTH } from "src/routes/paths";
 import FormStepper from "./FormStepper";
@@ -46,12 +46,19 @@ export function useMintingPageContext() {
 export default function RegisterPage() {
 
     const { t } = useTranslation();    
-    const { address, connected } = useDappProvider();
+    const { address, chain, connected } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
     const [ processing, setProcessing ] = useState(false);
     const [ txSent, setTxSent ] = useState(false);
     const toast = useToast();
     const router = useRouter();
+
+    const { assets, processing: fetchingBalance } = useAccountBalance({
+        address: address || '',
+        connected: connected,
+        chainId: chain?.id || 0,
+        chainName: chain?.name || '',
+    });
 
     const { mint } = useCawNameMinterContract({
         onBeforeSend: () => {
@@ -100,7 +107,9 @@ export default function RegisterPage() {
 
     const onSubmit = async (data: any) => {
         try {
+
             toast.closeAll();
+
             if (!address || !connected) {
                 toast({ title: 'Wallet not connected', status: 'error', isClosable: true, });
                 return;
@@ -119,6 +128,18 @@ export default function RegisterPage() {
 
             if (!isValid) {
                 toast({ title: errorMessage, status: 'error', isClosable: true, });
+                return;
+            }
+
+            if (fetchingBalance) {
+                toast({ title: 'Fetching balance', status: 'error', isClosable: true, });
+                return;
+            }
+
+            const mCAW = assets?.find((a: any) => a.symbol === 'mCAW')?.amount || 0;
+
+            if (costCAW > mCAW) {
+                toast({ title: t('errors.InsufficientmCAW'), status: 'error', isClosable: true, });
                 return;
             }
 

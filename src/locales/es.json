@@ -52,7 +52,8 @@
     "install_wallet": "No se encontró el proveedor. Por favor, instale metamask o su monedero similar.",
     "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas.",
     "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada.",
-    "fullscreen_not_supported": "Su navegador no es compatible con la pantalla completa."
+    "fullscreen_not_supported": "Su navegador no es compatible con la pantalla completa.",
+    "InsufficientmCAW": "Balance de mCAW insuficiente para acuñar este NFT, por favor, obtenga más mCAW."
   },
   "labels": {
     "awating_cnn": "Awaiting connection...",

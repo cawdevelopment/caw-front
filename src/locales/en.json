@@ -61,7 +61,8 @@
     "install_wallet": "No ethereum provider found, please install metamask or similar",
     "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network",
     "signer_not_found": "Signer not found, check if your wallet is connected",
-    "fullscreen_not_supported": "Fullscreen not supported by your browser"
+    "fullscreen_not_supported": "Fullscreen not supported by your browser",
+    "InsufficientmCAW": "Insufficient mCAW balance to mint this NFT, please get some mCAW"
   },
   "labels": {
     "under_dev": "Under development",
