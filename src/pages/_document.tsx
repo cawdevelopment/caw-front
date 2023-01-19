@@ -1,6 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ColorModeScript } from '@chakra-ui/react'
 
+import { MetaTags } from "@components/wrappers/Page";
 import { APP_DESCRIPTION } from 'src/utils/constants'
 import theme from '../theme';
 
@@ -12,7 +13,7 @@ export default class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang='en'>
+            <Html lang='en' prefix="og: https://ogp.me/ns#">
                 <Head>
                     <meta charSet="utf-8" />
                     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
@@ -29,8 +30,8 @@ export default class MyDocument extends Document {
                         name="description"
                         content={APP_DESCRIPTION}
                     />
-                    <meta name="keywords" content="social,community,decentralized,ethereum,blockchain,web3,rewards" />
-                    <meta name="author" content="Teh CAWMmunity" />
+
+                    <MetaTags title="" description={APP_DESCRIPTION} />
                 </Head>
                 <body>
                     {/* 👇 Here's the script */}

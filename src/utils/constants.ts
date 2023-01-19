@@ -4,8 +4,8 @@ export const MILLION = 1000000;
 export const BILLION = MILLION * 1000;
 export const CONTRACT_ERR_NOT_INIT = 'Contract not initialized, please try again in a few seconds';
 export const APP_NAME = 'CAW Social';
-export const APP_DESCRIPTION = 'Caw is an Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it.';
-export const DEFAULT_OG = '/assets/favicon/favicon-192x192.png';
+export const APP_DESCRIPTION = 'A Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it.';
+export const DEFAULT_OG = '/logo.jpeg';
 
 //* CAW CONTRACTS
 export const MintableCAW_CONTRACT: Address = '0x0bc5f399265fA0Fb95F5473c8ec1737d1dBB015c';

@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: [ 'images.unsplash.com', 'https://pbs.twimg.com', 'https://picsum.photos', ],
+    domains: [ 'images.unsplash.com', 'https://pbs.twimg.com', 'https://picsum.photos', 'https://caw.is' ],
   },
   env: {
     NETWORK: process.env.NETWORK,
