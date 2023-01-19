@@ -4,8 +4,8 @@ export const MILLION = 1000000;
 export const BILLION = MILLION * 1000;
 export const CONTRACT_ERR_NOT_INIT = 'Contract not initialized, please try again in a few seconds';
 export const APP_NAME = 'CAW Social';
-export const APP_DESCRIPTION = 'A Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it.';
-export const DEFAULT_OG = '/logo.jpeg';
+export const APP_DESCRIPTION = 'The Future of Decentralized Social Media | A Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it.';
+export const DEFAULT_OG = 'https://teh-eyes.vercel.app/logo.jpeg';
 
 //* CAW CONTRACTS
 export const MintableCAW_CONTRACT: Address = '0x0bc5f399265fA0Fb95F5473c8ec1737d1dBB015c';

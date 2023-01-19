@@ -41,8 +41,22 @@ export function MetaTags({ title, description = APP_DESCRIPTION }: { title: stri
       <link rel="manifest" href="/site.webmanifest" />
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="theme-color" content="#f7c034" />
+      <meta name="generator" content="Next JS 13.1.1" />
 
-      <meta property="og:url" content="https://teh-eyes.vercel.app" />
+      <meta data-react-helmet="true" name="description" content={description} />
+      <meta data-react-helmet="true" property="og:image" content={DEFAULT_OG} />
+      <meta data-react-helmet="true" property="twitter:image" content={DEFAULT_OG} />
+      <meta data-react-helmet="true" property="og:type" content="website" />
+      <meta data-react-helmet="true" property="og:url" content="https://teh-eyes.vercel.app/" />
+      <meta data-react-helmet="true" property="og:title" content={APP_NAME} />
+      <meta data-react-helmet="true" property="og:description" content={description} />
+      <meta data-react-helmet="true" property="twitter:card" content="summary_large_image" />
+      <meta data-react-helmet="true" property="twitter:url" content="https://teh-eyes.vercel.app/" />
+      <meta data-react-helmet="true" property="twitter:title" content={APP_NAME} />
+      <meta data-react-helmet="true" property="twitter:description" content={description} />
+
+
+      <meta property="og:url" content="https://teh-eyes.vercel.app/" />
       <meta property="og:site_name" content={APP_NAME} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
