@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 
 import { WalletBalanceModel } from "src/types/dtos";
 import { WalletBalanceInterface } from "src/interface/WalletBalanceInterface";
+import useAppConfigurations from "./useAppConfigurations";
 
 type Props = {
     connected: boolean;
@@ -14,6 +15,7 @@ export default function useAccountBalance({ address, connected, chainId, chainNa
 
     const [ assets, setAssets ] = useState<WalletBalanceModel[]>(WalletBalanceInterface.DEFAULT_BALANCE);
     const [ processing, setProcessing ] = useState<boolean>(false);
+    const { provider } = useAppConfigurations();
 
     useEffect(() => {
 
@@ -31,7 +33,7 @@ export default function useAccountBalance({ address, connected, chainId, chainNa
             }
 
             setProcessing(true);
-            const accountBalance = new WalletBalanceInterface(address, chainId, chainName);
+            const accountBalance = new WalletBalanceInterface(address, chainId, chainName, provider);
 
             const eth_prom = accountBalance.getEthBalance();
             const caw_prom = accountBalance.getCawBalance();
@@ -63,7 +65,7 @@ export default function useAccountBalance({ address, connected, chainId, chainNa
             setAssets(() => WalletBalanceInterface.DEFAULT_BALANCE);
             setProcessing(false);
         }
-    }, [ address, chainId, chainName ]);
+    }, [ address, chainId, chainName, provider ]);
 
 
     useEffect(() => {

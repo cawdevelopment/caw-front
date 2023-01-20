@@ -1,6 +1,6 @@
 import {
     MintableCAW_CONTRACT, CawName_CONTRACT, CawActions_CONTRACT,
-    CawNameURI_CONTRACT, CawNameMinter_CONTRACT, AHuntersDream_CONTRACT
+    CawNameURI_CONTRACT, CawNameMinter_CONTRACT, AHuntersDream_CONTRACT, DEFAULT_JSON_RPC_URL
 } from 'src/utils/constants'
 import { CAW_ABI, CAW_NAMES_ABI, MINTABLE_CAW_ABI, CAW_NAME_MINTER_ABI } from 'src/config';
 
@@ -12,7 +12,7 @@ export function AppEnvSettings() {
     const ALCHEMY_API_KEY = String(process.env.ALCHEMY_API_KEY);
 
     const ENVIRONMENT = String(process.env.ENVIRONMENT || '').toLowerCase();
-    const JSON_RPC_URL = String(process.env.JSON_RPC_URL || 'https://rpc.builder0x69.io').toLowerCase();
+    const JSON_RPC_URL = String(process.env.JSON_RPC_URL || DEFAULT_JSON_RPC_URL);
 
     return {
         keys: {

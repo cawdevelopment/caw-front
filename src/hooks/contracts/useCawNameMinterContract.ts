@@ -26,17 +26,28 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
     const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
 
     useEffect(() => {
-        const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY , provider});
+        const { contract } = getContract({ provider, address, abi, network, apiKey: INFURA_API_KEY });
         setContract(contract);
     }, [ address, abi, network, provider, INFURA_API_KEY ]);
 
 
-    const getCostOfName = async (userName: string) => {
+    const _getSignedContract = () => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
-        const cost = await contract.costOfName(userName);
+        if (!allowMainnet)
+            throw new Error((t('errors.mainnet_not_allowed')));
+
+        if (!signer || isSignerError || loadingSigner)
+            throw new Error((t('errors.signer_not_found')));
+
+        return contract.connect(signer);
+    }
+
+    const getCostOfName = async (userName: string) => {
+
+        const cost = await _getSignedContract().costOfName(userName);
         const cawUSD = await getCawPriceInUsd();
         const ethUSD = await getEthPriceInUsd();
 
@@ -53,45 +64,21 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
     }
 
     const getIdByUserName = async (userName: string): Promise<number> => {
-
-        if (!contract)
-            throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        const id = await contract.idByUsername(userName);
+        const id = await _getSignedContract().idByUsername(userName);
         const index = parseInt(id.toString());
         return index;
     }
 
     const isValidUsername = async (userName: string): Promise<boolean> => {
-
-        if (!contract)
-            throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        const result = await contract.isValidUsername(userName);
+        const result = await _getSignedContract().isValidUsername(userName);
         return Boolean(result);
     }
-
-    const _getSignerContract = () => {
-
-        if (!contract)
-            throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        if (!allowMainnet)
-            throw new Error((t('errors.mainnet_not_allowed')));
-
-        if (!signer || isSignerError || loadingSigner)
-            throw new Error((t('errors.signer_not_found')));
-
-        return contract.connect(signer);
-    }
-
 
     const mint = async (username: string) => {
         
         try {
             onBeforeSend?.();
-            const contractWithSigner = _getSignerContract();
-            const tx = await contractWithSigner.mint(username);
+            const tx = await _getSignedContract().mint(username);
             onTxSent?.(tx);
 
             const receipt = await tx.wait();

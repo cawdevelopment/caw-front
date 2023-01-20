@@ -8,10 +8,11 @@ import { WagmiConfig, createClient, configureChains, goerli } from "wagmi";
 import { infuraProvider } from "wagmi/providers/infura";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
+import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 import { DAppProvider } from 'src/context/DAppConnectContext'
 import ErrorBoundary from "@components/ErrorBoundary";
-import { APP_NAME } from "@utils/constants";
+import { APP_NAME, DEFAULT_JSON_RPC_URL } from "@utils/constants";
 import theme from 'src/theme'
 
 
@@ -19,17 +20,17 @@ import theme from 'src/theme'
 const { chains, provider } = configureChains(
   [ goerli ],
   [
-    infuraProvider({ apiKey: process.env.INFURA_API_KEY || '', priority: 1, }),
-    alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY || '', priority: 2 }),
-    // jsonRpcProvider({ priority: 3, rpc: () => ({ http: process.env.JSON_RPC_URL || '' }) }),  //<<<< New RPC Provider
-    publicProvider({ priority: 4 }),
+    publicProvider({ priority: 1 }),
+    infuraProvider({ apiKey: process.env.INFURA_API_KEY || '', priority: 2, }),
+    alchemyProvider({ apiKey: process.env.ALCHEMY_API_KEY || '', priority: 3 }),
+    jsonRpcProvider({ priority: 4, rpc: () => ({ http: process.env.JSON_RPC_URL || DEFAULT_JSON_RPC_URL }) }),  //<<<< New RPC Provider
   ]
 );
 
 const { connectors } = getDefaultWallets({ appName: APP_NAME, chains });
 
 const wagmiClient = createClient({
-  autoConnect: true,
+  autoConnect: true,  
   connectors,
   provider,
 });

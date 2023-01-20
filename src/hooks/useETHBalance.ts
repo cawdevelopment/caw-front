@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { WalletBalanceInterface } from "src/interface/WalletBalanceInterface";
+import useAppConfigurations from "./useAppConfigurations";
 
 type Props = {
     account: string;
@@ -13,6 +14,7 @@ export default function useETHBalance({ account, chainId, chainName, onSuccess, 
 
     const [ balance, setBalance ] = useState<number>(0);
     const [ fetchingETH, setFetchingETH ] = useState<boolean>(false);
+    const { provider } = useAppConfigurations();
 
     const getEthBalance = useCallback(async () => {
 
@@ -30,7 +32,7 @@ export default function useETHBalance({ account, chainId, chainName, onSuccess, 
 
         try {
             setFetchingETH(true);
-            const accountBalance = new WalletBalanceInterface(account, chainId, chainName);
+            const accountBalance = new WalletBalanceInterface(account, chainId, chainName, provider);
             const bal = await accountBalance.getEthBalance();
             setBalance(() => bal);
             onSuccess && onSuccess(bal, null);
@@ -43,7 +45,7 @@ export default function useETHBalance({ account, chainId, chainName, onSuccess, 
         finally {
             setFetchingETH(false);
         }
-    }, [ account, chainId, chainName, onError, onSuccess ]);
+    }, [ account, chainId, chainName, provider, onError, onSuccess ]);
 
 
     useEffect(() => {
