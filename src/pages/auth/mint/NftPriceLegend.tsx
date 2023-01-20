@@ -1,7 +1,9 @@
 import { Text, useColorModeValue, Link, useDisclosure } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import { useTranslation } from "react-i18next";
 
-import { ProtocolCostModal } from "src/components/contract/modals/ProtocolCost";
+const ProtocolCostModal = dynamic(() => import("src/components/contract/modals/ProtocolCostModal"), { ssr: false });
+
 export default function NftPriceLegend() {
 
     const { isOpen, onOpen, onClose } = useDisclosure();

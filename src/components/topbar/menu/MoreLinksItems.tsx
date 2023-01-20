@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from '@chakra-ui/react';
+import dynamic from "next/dynamic";
 
-import { UsefulLinksModal } from "src/components/contract/modals/UsefulLinksModal";
 import MenuItem from "./MenuItem";
+
+const UsefulLinksModal = dynamic(() => import("src/components/contract/modals/UsefulLinksModal"), { ssr: false });
 
 type Props = {
     iconColor: string;

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import {
-    TableContainer, Table, Thead, Tr, Th, Tbody, Td, Modal, ModalContent,
-    ModalOverlay, ModalHeader, ModalCloseButton, ModalBody, ModalFooter, Tooltip, TableCaption
+    TableContainer, Table, Thead, Tr, Th, Tbody, Td,
+    Tooltip, TableCaption
 } from "@chakra-ui/react";
 
 import { actionCostAtMcap, NftCostAtMcap, getCurrentMCap, NFT_COST, ACTION_COST } from "src/utils/manifestoHelper";
@@ -162,37 +162,5 @@ export default function ProtocolCost() {
                 </Tbody>
             </Table>
         </TableContainer>
-    );
-}
-
-type ProtocolCostModalProps = {
-    isOpen: boolean;
-    onClose: () => void;
-}
-
-export function ProtocolCostModal({ isOpen, onClose }: ProtocolCostModalProps) {
-
-    const { t } = useTranslation();
-    return (
-        <Modal
-            isCentered
-            onClose={onClose}
-            isOpen={isOpen}
-            size="6xl"
-            scrollBehavior="inside"
-        >
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>
-                    <br />
-                    {t('calc.title')}
-                </ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    <ProtocolCost />
-                </ModalBody>
-                <ModalFooter />
-            </ModalContent>
-        </Modal>
     );
 }

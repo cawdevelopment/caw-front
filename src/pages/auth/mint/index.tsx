@@ -1,17 +1,19 @@
 'use client';
-import { Container, useToast } from "@chakra-ui/react";
 import { useState, createContext, useContext } from "react";
+import { Container, useToast } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
 import { useTranslation, } from "react-i18next";
 import { useRouter } from 'next/router'
+import dynamic from "next/dynamic";
 
-import { BlockChainOperationInProgressModal } from "@components/dialogs/OperationInProgress";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { useCawNameMinterContract, useAccountBalance } from "src/hooks";
 import { getBlockChainErrMsg } from "src/hooks/contracts/helper";
 import { PATH_AUTH } from "src/routes/paths";
 import FormStepper from "./FormStepper";
+
+const BlockChainOperationInProgressModal = dynamic(() => import("src/components/dialogs/BlockChainOperationInProgressModal"), { ssr: false });
 
 RegisterPage.getLayout = function getLayout(page: React.ReactElement) {
     return <Layout variant="logoOnly">{page}</Layout>;
@@ -78,6 +80,7 @@ export default function RegisterPage() {
         },
         onCompleted: () => {
             setProcessing(false);
+            setTxSent(true);
         }
     });
 

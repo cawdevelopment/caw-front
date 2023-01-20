@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { useTranslation } from "react-i18next";
+import dynamic from "next/dynamic";
 import {
     Box, useColorModeValue, Drawer, DrawerContent, useDisclosure, Show, chakra, DrawerOverlay,
     DrawerCloseButton, DrawerHeader, DrawerBody, DrawerFooter, Flex
@@ -8,12 +9,13 @@ import {
 import ColorModeToggle from "src/components/settings/ToogleMode";
 import Logo from "src/components/Logo";
 
-import TopBar from "../topbar";
 import { LinkItems } from "./menu";
 import NavbarAccount from "../contract/wallet/NavbarAccount";
 import MobileNav from "./MobileNav";
 import SidebarContent from "./SidebarContent";
 import NavItem from "./NavItem";
+
+const TopBar = dynamic(() => import("../topbar"), { ssr: false, loading: () => <p>loading...</p> });
 
 export const DASHBOARD_WIDTH = 280;
 export default function SimpleSidebar({ children }: { children: ReactNode; }) {
