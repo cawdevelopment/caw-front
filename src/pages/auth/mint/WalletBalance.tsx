@@ -41,7 +41,7 @@ export default function WalletBalanceCard({ width }: { width: number }) {
         address: address || '',
         connected: connected,
         chainId: chain?.id || 0,
-        chainName: chain?.name || '',
+        chainName: chain?.name || ''
     });
 
     const sortedByAmount = assets.sort((a, b) => b.amount - a.amount);
@@ -65,11 +65,9 @@ export default function WalletBalanceCard({ width }: { width: number }) {
                     {t('minting_page.caw_balance_req_lb')}
                 </Text>
                 <Box p={5}>
-                    <NextLink href={PATH_DASHBOARD.swap.mcaw} passHref>
-                        <Link color={'blue.400'}>
+                    <Link as={NextLink} href={PATH_DASHBOARD.swap.mcaw} color={'blue.400'}>
                             <b>{t('labels.getmcaw')}</b>
-                        </Link>
-                    </NextLink>                    
+                    </Link>
                 </Box>
             </Stack>
         </Box>

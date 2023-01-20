@@ -1,9 +1,11 @@
 import { Box, Heading, HStack, Input, InputGroup, InputRightElement, StackDivider, useColorModeValue } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import dynamic from "next/dynamic";
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import WallPost from 'src/sections/wall';
 import Iconify from "src/components/icons/Iconify";
+
+const WallPost = dynamic(() => import("src/sections/wall"), { ssr: false });
 
 HomePage.getLayout = function getLayout(page: React.ReactElement) {
   return <Layout variant="dashboard" >{page}</Layout>;
