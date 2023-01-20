@@ -82,8 +82,6 @@ export default function useMintableCAWContract() {
         if (!signer || isSignerError || loadingSigner)
             throw new Error((t('errors.signer_not_found')));
 
-
-        console.info('Using signer : contract.signer', contract.signer ? true : false);
         return contract.connect(signer);
     }
 

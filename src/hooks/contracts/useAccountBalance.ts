@@ -2,33 +2,38 @@ import { useEffect, useState, useCallback } from "react";
 
 import { WalletBalanceModel } from "src/types/dtos";
 import { WalletBalanceInterface } from "src/interface/WalletBalanceInterface";
-import useAppConfigurations from "./useAppConfigurations";
+import useAppConfigurations from "../useAppConfigurations";
 
 type Props = {
     connected: boolean;
     address: string;
     chainId: number;
     chainName: string;
+    // onBalanceChange?: (balance: WalletBalanceModel[]) => void;
 }
 
 export default function useAccountBalance({ address, connected, chainId, chainName }: Props) {
 
-    const [ assets, setAssets ] = useState<WalletBalanceModel[]>(WalletBalanceInterface.DEFAULT_BALANCE);
+    const [ assets, setAssets ] = useState<WalletBalanceModel[]>(WalletBalanceInterface.getInitialtBalance());
     const [ processing, setProcessing ] = useState<boolean>(false);
     const { provider } = useAppConfigurations();
 
     useEffect(() => {
 
         if (!connected || !address)
-            setAssets(() => WalletBalanceInterface.DEFAULT_BALANCE);
+            setAssets(() => WalletBalanceInterface.getInitialtBalance());
 
     }, [ connected, address ]);
+
+    // useEffect(() => {
+    //     onBalanceChange?.(assets);
+    // }, [ assets, onBalanceChange ]);
 
     const fetchBalance = useCallback(async () => {
         try {
 
             if (!address || !chainId || !chainName) {
-                setAssets(() => WalletBalanceInterface.DEFAULT_BALANCE);
+                setAssets(() => WalletBalanceInterface.getInitialtBalance());
                 return;
             }
 
@@ -44,25 +49,25 @@ export default function useAccountBalance({ address, connected, chainId, chainNa
             setAssets((prev) => prev.map(asset => {
 
                 if (asset.symbol === 'ETH') {
-                    asset.amount = eth;
+                    return { ...asset, amount: eth }
                 }
 
                 if (asset.symbol === 'CAW') {
-                    asset.amount = caw;
+                    return { ...asset, amount: caw }
                 }
 
                 if (asset.symbol === 'mCAW') {
-                    asset.amount = mcaw;
+                    return { ...asset, amount: mcaw }
                 }
 
-                return asset;
+                return { ...asset };
             }));
 
             setProcessing(false);
         }
         catch (error) {
             console.log('Error: ', error);
-            setAssets(() => WalletBalanceInterface.DEFAULT_BALANCE);
+            setAssets(() => WalletBalanceInterface.getInitialtBalance());
             setProcessing(false);
         }
     }, [ address, chainId, chainName, provider ]);
