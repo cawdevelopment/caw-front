@@ -9,15 +9,15 @@ type ContractParams = {
     network: string;
     apiKey: string;
     abi: ethers.ContractInterface;
-    provider?: Provider | null;
+    provider: Provider | null;
 }
 
 export function getContract(params: ContractParams) {
 
-    const { address, abi, network, apiKey, provider :providerArg} = params;
+    const { address, abi, network, apiKey, provider: providerArg } = params;
     const _network = ethers.providers.getNetwork(network);
-    
-    const provider =providerArg || new ethers.providers.InfuraProvider(_network, apiKey);
+
+    const provider = providerArg || new ethers.providers.InfuraProvider(_network, apiKey);
     const contract = new ethers.Contract(address, abi, provider);
     return { contract, provider };
 }

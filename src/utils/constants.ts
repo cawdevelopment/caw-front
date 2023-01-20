@@ -14,3 +14,5 @@ export const CawActions_CONTRACT = '0x6B22437861eCC2Ea93fEcB742EA3BD5E1d3C7307';
 export const CawNameURI_CONTRACT: Address = '0x27108Da237A5200fBcb3fc62eE08Ee07D84a1331';
 export const CawNameMinter_CONTRACT: Address = '0x56F0d5DA1Bc735e03d6A4cd988784ED498FD9Ee3';
 export const AHuntersDream_CONTRACT: Address = '0xf3b9569F82B18aEf890De263B84189bd33EBe452';
+
+export const DEFAULT_JSON_RPC_URL = 'https://rpc.builder0x69.io';

@@ -1,4 +1,6 @@
 import { ethers } from "ethers";
+import type { Provider } from "@wagmi/core";
+
 import { WalletBalanceModel } from "src/types/dtos";
 import { AppEnvSettings } from 'src/config/siteSettings';
 import { getContract } from "../hooks/contracts/helper";
@@ -31,7 +33,8 @@ export class WalletBalanceInterface {
     cawContract: ethers.Contract;
     mCawContract: ethers.Contract;
 
-    constructor(account: string, chainId: number, chainName: string) {
+
+    constructor(account: string, chainId: number, chainName: string, providerArg: Provider | null) {
 
         this.account = account;
         this.chainId = chainId;
@@ -39,11 +42,12 @@ export class WalletBalanceInterface {
 
         const _s = AppEnvSettings();
         if (chainId === 1)
-            this.provider = new ethers.providers.JsonRpcProvider(_s.jsonRpcUrl);
+            this.provider = providerArg ? providerArg : new ethers.providers.JsonRpcProvider(_s.jsonRpcUrl);
         else
-            this.provider = ethers.getDefaultProvider({ chainId: this.chainId, name: this.chainName.toLowerCase() });
+            this.provider = providerArg ? providerArg : ethers.getDefaultProvider({ chainId: this.chainId, name: this.chainName.toLowerCase() });
 
         this.cawContract = getContract({
+            provider: providerArg,
             address: _s.contracts.CAW.address,
             abi: _s.contracts.CAW.abi,
             apiKey: _s.keys.INFURA_API_KEY,
@@ -51,6 +55,7 @@ export class WalletBalanceInterface {
         }).contract;
 
         this.mCawContract = getContract({
+            provider: providerArg,
             address: _s.contracts.MINTABLE_CAW.address,
             abi: _s.contracts.MINTABLE_CAW.abi,
             apiKey: _s.keys.INFURA_API_KEY,
