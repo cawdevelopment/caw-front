@@ -20,7 +20,7 @@ export default function WallPost() {
         setTimeout(() => {
             setData(posts);
             setLoading(false);
-        }, 100);
+        }, 50);
 
     }, []);
 

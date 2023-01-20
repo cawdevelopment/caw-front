@@ -30,14 +30,14 @@ export default function SwapMCAWForm() {
 
     const { initialized, mint, approve } = useMintableCAWContract();
 
-    const [{ cawUSD, ethUSD }, setPrices] = useState({ cawUSD: 0, ethUSD: 0 });
-    const [input, setInput] = useState(0)
-    const [minting, setMinting] = useState(false)
-    const [approving, setApproving] = useState(false);
+    const [ { cawUSD, ethUSD }, setPrices ] = useState({ cawUSD: 0, ethUSD: 0 });
+    const [ input, setInput ] = useState(0)
+    const [ minting, setMinting ] = useState(false)
+    const [ approving, setApproving ] = useState(false);
 
-    const [error, setError] = useState<string | null>(null);
-    const [txMintHash, setMintTxHash] = useState<string | null>(null);
-    const [txApproveHash, setApproveTxHash] = useState<string | null>(null);
+    const [ error, setError ] = useState<string | null>(null);
+    const [ txMintHash, setMintTxHash ] = useState<string | null>(null);
+    const [ txApproveHash, setApproveTxHash ] = useState<string | null>(null);
 
 
     useEffect(() => {
@@ -210,7 +210,7 @@ export default function SwapMCAWForm() {
                                 )}
                                 {txMintHash && (
                                     <Link href={mintExplorerTxUrl} isExternal>
-                                        <Text color="blue.500" as="a">
+                                        <Text color="blue.500" as="p">
                                             {`TX ${shortenAddress(txMintHash)} Etherscan`}
                                         </Text>
                                     </Link>
@@ -239,7 +239,7 @@ export default function SwapMCAWForm() {
                                 )}
                                 {txApproveHash && (
                                     <Link href={approveExplorerTxUrl} isExternal>
-                                        <Text color="blue.500" as="a">
+                                        <Text color="blue.500" as="p">
                                             {`TX ${shortenAddress(txApproveHash)} Etherscan`}
                                         </Text>
                                     </Link>

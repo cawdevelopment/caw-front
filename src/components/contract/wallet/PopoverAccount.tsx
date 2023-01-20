@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useTranslation } from "react-i18next";
 import {
     Box, Text, HStack, VStack, Popover, PopoverTrigger, PopoverFooter, PopoverContent, PopoverArrow, PopoverHeader, PopoverCloseButton, PopoverBody,
-    Button, Divider, ButtonGroup, Avatar, AvatarBadge, chakra, Tooltip, Spacer, Flex, useColorModeValue, useDisclosure, Show
+    Button, Divider, ButtonGroup, Avatar, AvatarBadge, chakra, Tooltip, Spacer, Flex, useColorModeValue, useDisclosure, Show, useToast, useColorMode
 } from '@chakra-ui/react';
 
 import { useDappProvider } from "src/context/DAppConnectContext";
@@ -67,6 +67,8 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
     const contentWrapper = useRef<HTMLDivElement>(null);
     const popoverBordercolor = useColorModeValue('gray.300', 'gray.600');
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const toast = useToast();
+    const { colorMode } = useColorMode();
 
 
     const sideScroll = (element: HTMLDivElement | null, speed: number, distance: number, step: number) => {
@@ -97,6 +99,17 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
         changeCawAccount(cawAccount, true);
     }
 
+    const handleViewAll = () => {
+        toast.closeAll();
+        toast({
+            description: t('new_post.yettodone_desc'),
+            status: 'info',
+            variant: colorMode === 'dark' ? "solid" : 'subtle',
+            position: 'bottom',
+            duration: 9000,
+            isClosable: true,
+        });
+    }
     return (
         <Popover
             initialFocusRef={initialFocusRef as any}
@@ -148,7 +161,12 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
                                 <b>{t('labels.accounts')}</b>
                             </Text>
                             <Spacer />
-                            <Button size="xs" colorScheme="white" variant="ghost">
+                            <Button
+                                size="xs"
+                                colorScheme="white"
+                                variant="ghost"
+                                onClick={handleViewAll}
+                            >
                                 {t('labels.viewall')}
                             </Button>
                         </Flex>

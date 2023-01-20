@@ -4,7 +4,7 @@ export const MILLION = 1000000;
 export const BILLION = MILLION * 1000;
 export const CONTRACT_ERR_NOT_INIT = 'Contract not initialized, please try again in a few seconds';
 export const APP_NAME = 'CAW Social';
-export const APP_DESCRIPTION = 'The Future of Decentralized Social Media | A Decentralized Social Clearing House that allows you to post and share your thoughts and ideas with the world and get rewarded for it.';
+export const APP_DESCRIPTION = 'CAW is a fully decentralized - censorship-resistant on-chain messaging protocol built on top of the Ethereum network for the Future of Decentralized Social Media';
 export const DEFAULT_OG = 'https://teh-eyes.vercel.app/logo.jpeg';
 
 //* CAW CONTRACTS

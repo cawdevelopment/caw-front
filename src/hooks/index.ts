@@ -14,8 +14,8 @@ import useAppConfigurations from './useAppConfigurations'
 import useCawNameMinterContract from './contracts/useCawNameMinterContract';
 import useCawNamesContract from './contracts/useCawNamesContract';
 import useMintableCAWContract from './contracts/useMintableCAWContract';
-import useETHBalance from './useETHBalance';
-import useAccountBalance from './useAccountBalance';
+import useETHBalance from './contracts/useETHBalance';
+import useAccountBalance from './contracts/useAccountBalance';
 
 export {
     useLocalStorage,

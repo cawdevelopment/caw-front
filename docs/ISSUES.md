@@ -21,3 +21,19 @@ If you find your issue already exists, make relevant comments and add your react
 
 ## Contributing Fixes
 If you are interested in fixing issues and contributing directly to the code base, please see the document (How to Contribute)[CONTRIBUTING.md].
+
+Include the following information with each issue:
+Description :
+Page : 
+Browser :
+Wallet :
+OS :
+Device :
+Steps to reproduce :
+Expected result :
+Actual result :
+Screenshot :
+Severity :
+Expected Behavior
+
+

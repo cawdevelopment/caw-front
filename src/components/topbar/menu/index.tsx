@@ -11,11 +11,11 @@ import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 import PopoverWrapper from "src/components/wrappers/PopoverWrapper";
 import { WalletButton } from 'src/components/contract/wallet/Wallet';
 
+import MenuItem from "./MenuItem";
 import QuickMintUserNameItem from "./QuickMintUserNameItem";
 import BuyCawItem from "./BuyCawItem";
 import MoreLinksItems from "./MoreLinksItems";
 import CalculatorItem from "./CalculatorItem";
-import MenuItem from "./MenuItem";
 
 type Props = {
     textColor: string;

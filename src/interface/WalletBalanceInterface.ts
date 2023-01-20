@@ -4,8 +4,9 @@ import type { Provider } from "@wagmi/core";
 import { WalletBalanceModel } from "src/types/dtos";
 import { AppEnvSettings } from 'src/config/siteSettings';
 import { getContract } from "../hooks/contracts/helper";
+import { deepCopy } from "ethers/lib/utils.js";
 
-export const defaultBalance: WalletBalanceModel[] = [
+const DEFAULT_BALANCE: WalletBalanceModel[] = [
     {
         symbol: 'ETH',
         name: 'Ethereum',
@@ -32,6 +33,7 @@ export class WalletBalanceInterface {
     provider: ethers.providers.BaseProvider;
     cawContract: ethers.Contract;
     mCawContract: ethers.Contract;
+    initialBalance: WalletBalanceModel[];
 
 
     constructor(account: string, chainId: number, chainName: string, providerArg: Provider | null) {
@@ -39,6 +41,7 @@ export class WalletBalanceInterface {
         this.account = account;
         this.chainId = chainId;
         this.chainName = (chainName || '').toLowerCase();
+        this.initialBalance = WalletBalanceInterface.getInitialtBalance();
 
         const _s = AppEnvSettings();
         if (chainId === 1)
@@ -63,7 +66,9 @@ export class WalletBalanceInterface {
         }).contract;
     }
 
-    static DEFAULT_BALANCE = defaultBalance;
+    static getInitialtBalance(): WalletBalanceModel[] {
+        return DEFAULT_BALANCE.map((item) => deepCopy(item));
+    }
 
     async getEthBalance() {
         try {
@@ -107,20 +112,21 @@ export class WalletBalanceInterface {
         const mcaw_prom = this.getMintableCawBalance();
         const [ eth, caw, mcaw ] = await Promise.all([ eth_prom, caw_prom, mcaw_prom ]);
 
-        return defaultBalance.map((asset) => {
+        return this.initialBalance.map((asset) => {
 
             if (asset.symbol === 'ETH') {
-                asset.amount = eth;
+                return { ...asset, amount: eth }
             }
 
             if (asset.symbol === 'CAW') {
-                asset.amount = caw;
+                return { ...asset, amount: caw }
             }
 
             if (asset.symbol === 'mCAW') {
-                asset.amount = mcaw;
+                return { ...asset, amount: mcaw }
             }
 
+            return asset;
         });
     }
 }

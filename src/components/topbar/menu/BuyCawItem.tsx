@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useDisclosure } from '@chakra-ui/react';
+import dynamic from "next/dynamic";
 
-import BuyCawModal from "src/components/contract/modals/BuyCawModal";
 import MenuItem from "./MenuItem";
+
+const BuyCawModal = dynamic(() => import("src/components/contract/modals/BuyCawModal"), { ssr: false });
 
 type Props = {
     iconColor: string;

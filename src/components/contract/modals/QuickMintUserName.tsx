@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import NextLink from "next/link";
 import { useDebounce } from "use-debounce";
+import dynamic from "next/dynamic";
 import {
     Box, Button, Input, Link, Text, Stack, HStack, useDisclosure, Modal, ModalBody,
     ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,
@@ -11,12 +12,13 @@ import { useCawNameMinterContract } from "src/hooks";
 import AlertDialog from "src/components/dialogs/AlertDialog";
 import AlertMessage from "src/components/AlertMessage";
 import WrapperFadeAnimation from "@components/animate/WrapperFade";
-import { BlockChainOperationInProgressModal } from "@components/dialogs/OperationInProgress";
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { getBlockChainErrMsg, getExplorerUrl } from "src/hooks/contracts/helper";
 import { sentenceCase, shortenAddress } from "src/utils/helper";
 import { isValidUsername as validateUserNameLocally } from "src/utils/manifestoHelper";
 import { PATH_AUTH } from "src/routes/paths";
+
+const BlockChainOperationInProgressModal = dynamic(() => import("@components/dialogs/BlockChainOperationInProgressModal"), { ssr: false });
 
 function MintNFTNameForm() {
 
