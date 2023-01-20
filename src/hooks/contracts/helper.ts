@@ -1,23 +1,32 @@
 import { ethers } from "ethers";
+import type { Provider } from "@wagmi/core";
 import detectEthereumProvider from '@metamask/detect-provider'
+
+import { AppEnvSettings } from "src/config/siteSettings";
 
 type ContractParams = {
     address: string;
     network: string;
     apiKey: string;
     abi: ethers.ContractInterface;
+    provider: Provider | null;
 }
 
 export function getContract(params: ContractParams) {
 
-    const { address, abi, network, apiKey, } = params;
+    const { address, abi, network, apiKey, provider: providerArg } = params;
     const _network = ethers.providers.getNetwork(network);
-    const provider = new ethers.providers.InfuraProvider(_network, apiKey);
+
+    const provider = providerArg || new ethers.providers.InfuraProvider(_network, apiKey);
     const contract = new ethers.Contract(address, abi, provider);
     return { contract, provider };
 }
 
-export const getSignerContract = async (contract: ethers.Contract, walletAddress: string) => {
+/**
+ * @deprecated use useSigner() instead, contract.connect(signer)
+ */
+export const getSignerContract_ = async (contract: ethers.Contract, walletAddress: string) => {
+
 
     //* RPC Provider
     // const provider = new ethers.providers.JsonRpcProvider("API_URL", 1);
@@ -34,15 +43,21 @@ export const getSignerContract = async (contract: ethers.Contract, walletAddress
         return contractWithSigner;
     }
     else {
-        const autoProvider = await detectEthereumProvider({ mustBeMetaMask: false, silent: true });
+        const autoProvider = await detectEthereumProvider({ mustBeMetaMask: false, silent: false });
+
         if (autoProvider) {
             const provider = new ethers.providers.Web3Provider(autoProvider as any);
             const signer = provider.getSigner(walletAddress)
             const contractWithSigner = contract.connect(signer);
             return contractWithSigner;
+        } else {
+
+            const s = AppEnvSettings();
+            const prv = new ethers.providers.JsonRpcProvider(s.jsonRpcUrl);
+            const signer = new ethers.Wallet(s.keys.INFURA_API_KEY, prv);
+            const contractWithSigner = contract.connect(signer);
+            return contractWithSigner;
         }
-        else
-            throw new Error('No provider found');
     }
 }
 

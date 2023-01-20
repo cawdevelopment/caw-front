@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { BigNumber, ethers } from "ethers";
+import { useSigner } from "wagmi";
 
 import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
 import { CawUserName } from 'src/types/dtos';
-import { getContract, getSignerContract } from "./helper";
+import { getContract } from "./helper";
 
 
 //* Contract name :  CawName
@@ -13,47 +14,42 @@ export default function useCawNamesContract() {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
-    const { allowMainnet, keys: { INFURA_API_KEY }, network, contracts: { CAW_NAME } } = useAppConfigurations();
+    const { allowMainnet, provider, keys: { INFURA_API_KEY }, network, contracts: { CAW_NAME } } = useAppConfigurations();
     const { address, abi } = CAW_NAME;
 
+    const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
+
     useEffect(() => {
-        const { contract } = getContract({ address, abi, network, apiKey: INFURA_API_KEY });
+        const { contract } = getContract({ provider, address, abi, network, apiKey: INFURA_API_KEY });
         setContract(contract);
-    }, [ address, abi, network, INFURA_API_KEY ]);
+    }, [ address, abi, network, INFURA_API_KEY, provider ]);
 
 
-    const _getSignerContract = (walletAddress: string) => {
+    const signedContract = () => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        if (!window || !window.ethereum)
-            throw new Error((t('errors.install_wallet')));
 
         if (!allowMainnet)
             throw new Error((t('errors.mainnet_not_allowed')));
 
-        return getSignerContract(contract, walletAddress);
+        if (!signer || isSignerError || loadingSigner)
+            throw new Error((t('errors.signer_not_found')));
+
+        return contract.connect(signer);
     }
 
     const getTokenURI = async (tokenId: number) => {
 
-        if (!contract)
-            throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        const data = await contract.tokenURI(tokenId);
+        const data = await signedContract().tokenURI(tokenId);
         const json = JSON.parse(atob(data.split(',')[ 1 ]));
         const { name, description, image } = json || {};
-
         return { name, description, image };
     }
 
     const getTokens = async (address: string, fetchAvatar: boolean): Promise<CawUserName[]> => {
 
-        if (!contract)
-            throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        const tokens = await contract.tokens(address);
+        const tokens = await signedContract().tokens(address);
 
         const tokensArray: CawUserName[] = tokens.map((token: any) => {
 
@@ -66,7 +62,6 @@ export default function useCawNamesContract() {
 
             return _u;
         });
-
 
         if (fetchAvatar) {
             const ids = tokensArray.map((t: CawUserName) => t.id);
@@ -83,10 +78,7 @@ export default function useCawNamesContract() {
 
     const mint = async (sender: string, userWalletAddress: string, userName: string, newId: number) => {
 
-        if (!contract)
-            throw new Error(CONTRACT_ERR_NOT_INIT);
-
-        const contractWithSigner = await _getSignerContract(userWalletAddress);
+        const contractWithSigner = signedContract();
         const tx = await contractWithSigner.mint(sender, userName, newId);
         const receipt = await tx.wait();
 

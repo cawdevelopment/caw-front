@@ -2,11 +2,13 @@
 import { Container, useToast } from "@chakra-ui/react";
 import { useState, createContext, useContext } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { useTranslation, } from "react-i18next";
+import { useRouter } from 'next/router'
 
+import { BlockChainOperationInProgressModal } from "@components/dialogs/OperationInProgress";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
-import { useCawNameMinterContract } from "src/hooks";
+import { useCawNameMinterContract, useAccountBalance } from "src/hooks";
 import { getBlockChainErrMsg } from "src/hooks/contracts/helper";
 import { PATH_AUTH } from "src/routes/paths";
 import FormStepper from "./FormStepper";
@@ -23,8 +25,7 @@ export const MintingPageContext = createContext({
     userName: '',
     termsAccepted: false,
     isValid: false,
-    isLoading: false,
-    minting: false,
+    processing: false,
     message: '',
     onChainValidated: false,
     costVerified: false,
@@ -44,11 +45,48 @@ export function useMintingPageContext() {
 
 export default function RegisterPage() {
 
-    const { t } = useTranslation();
-    const { mint, isLoading, minting } = useCawNameMinterContract();
-    const { address, connected } = useDappProvider();
+    const { t } = useTranslation();    
+    const { address, chain, connected } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
+    const [ processing, setProcessing ] = useState(false);
+    const [ txSent, setTxSent ] = useState(false);
     const toast = useToast();
+    const router = useRouter();
+
+    const { assets, processing: fetchingBalance } = useAccountBalance({
+        address: address || '',
+        connected: connected,
+        chainId: chain?.id || 0,
+        chainName: chain?.name || '',
+    });
+
+    const { mint } = useCawNameMinterContract({
+        onBeforeSend: () => {
+            setProcessing(true);
+        },
+        onTxSent: (tx) => {
+            setTxSent(true);
+        },
+        onTxConfirmed: (tx) => {
+            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', tx?.transactionHash || 'xxx');
+            router.push(url);
+        },
+        onError: (err) => {
+            setProcessing(false);
+            const { message, code } = getBlockChainErrMsg(err);
+            setError(message ? message + ' : ' + code : 'Something went wrong');
+        },
+        onCompleted: () => {
+            setProcessing(false);
+        }
+    });
+
+    const handleCloseModal = () => {
+        setProcessing(false);
+        setError(null);
+        setTxSent(false);
+        toast.closeAll();
+    }
 
     const methods = useForm({
         defaultValues: {
@@ -63,12 +101,15 @@ export default function RegisterPage() {
             costCAW: 0,
             swapAmount: 0,
         }
-    });
+    });    
 
     const { termsAccepted, userName, message, onChainValidated, costVerified, costCAW, costETH, costUSD, swapAmount, isValid } = methods.watch();
 
     const onSubmit = async (data: any) => {
         try {
+
+            toast.closeAll();
+
             if (!address || !connected) {
                 toast({ title: 'Wallet not connected', status: 'error', isClosable: true, });
                 return;
@@ -90,14 +131,22 @@ export default function RegisterPage() {
                 return;
             }
 
-            const { receipt } = await mint(userName, address);
+            if (fetchingBalance) {
+                toast({ title: 'Fetching balance', status: 'error', isClosable: true, });
+                return;
+            }
 
-            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', receipt?.transactionHash || 'xxx');
+            const mCAW = assets?.find((a: any) => a.symbol === 'mCAW')?.amount || 0;
 
-            // window.open(url, '_blank');
-            window.location.assign(url);
+            if (costCAW > mCAW) {
+                toast({ title: t('errors.InsufficientmCAW'), status: 'error', isClosable: true, });
+                return;
+            }
+
+            mint(userName);            
         }
         catch (error: any) {
+            setProcessing(false);
             const { message, code } = getBlockChainErrMsg(error);
             setError(message ? message + ' : ' + code : 'Something went wrong');
         }
@@ -115,8 +164,7 @@ export default function RegisterPage() {
                         userName,
                         termsAccepted,
                         isValid,
-                        isLoading,
-                        minting,
+                        processing,
                         message,
                         onChainValidated,
                         costVerified,
@@ -129,17 +177,24 @@ export default function RegisterPage() {
                         onSubmit,
                     }}
                 >
-                    <FormProvider {...methods} >
-                        <form onSubmit={methods.handleSubmit(onSubmit)}>
+                    <FormProvider {...methods}>
+                        <form
+                            onSubmit={methods.handleSubmit(onSubmit)}
+                        >
                             <FormStepper
-                                isLoading={isLoading}
-                                minting={minting}
+                                processing={processing}
                                 termsAccepted={termsAccepted}
                                 userName={userName}
                                 error={error}
                                 isValid={isValid}
                             />
                         </form>
+                        <BlockChainOperationInProgressModal
+                            processing={processing}
+                            txSent={txSent}
+                            message={t("minting_page.minting_ntf")}
+                            onClose={handleCloseModal}
+                        />
                     </FormProvider>
                 </MintingPageContext.Provider>
             </Container>

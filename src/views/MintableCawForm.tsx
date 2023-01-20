@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import {
-    Container, Divider, Text, Button, useColorModeValue, Input, FormControl, FormErrorMessage, FormHelperText, Spacer, HStack,
+    Container, Divider, Text, Button, useColorModeValue, Input, FormControl,
+    FormErrorMessage, FormHelperText, Spacer, HStack,
     VStack, Center, InputLeftAddon, InputGroup, InputRightAddon, useDisclosure, Link, Show, Hide
 } from "@chakra-ui/react";
 
@@ -13,7 +14,7 @@ import NavbarAccount from 'src/components/contract/wallet/NavbarAccount';
 
 import { MILLION } from 'src/utils/constants';
 import { fDecimal, kFormatter } from 'src/utils/formatNumber';
-import { sentenceCase, shortenAddress } from "src/utils/helper";
+import { sentenceCase, shortenAddress, } from "src/utils/helper";
 import { useETHBalance, useMintableCAWContract } from "src/hooks";
 import { getBlockChainErrMsg, getCawPriceInUsd, getEthPriceInUsd, getExplorerUrl } from "src/hooks/contracts/helper";
 
@@ -25,11 +26,7 @@ export default function SwapMCAWForm() {
     const bg = useColorModeValue("gray.50", "gray.800");
     const brColor = useColorModeValue("gray.400", "gray.50");
     const colorText = useColorModeValue("gray.900", "gray.50");
-    const { balance, fetchingETH } = useETHBalance({
-        account: address,
-        chainId: chain?.id || 0,
-        chainName: chain?.name || '',
-    });
+    const { balance, fetchingETH, } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
 
     const { initialized, mint, approve } = useMintableCAWContract();
 
@@ -44,7 +41,7 @@ export default function SwapMCAWForm() {
 
 
     useEffect(() => {
-        setInput(MILLION);
+        setInput(MILLION * 10);
 
         let isMounted = true;
 
@@ -130,7 +127,7 @@ export default function SwapMCAWForm() {
             p={5}
             bg={bg}
             w="full"
-            h={"container.sm"}
+            minH={"container.sm"}
             border={"1px solid"}
             borderColor={brColor}
             borderRadius={"lg"}
@@ -146,7 +143,7 @@ export default function SwapMCAWForm() {
                         <Image src={`/assets/tokens/eth.png`} alt='ETH' width={24} height={24} />
                         <Text as="b">ETH</Text>
                         <Spacer />
-                        <Text as="b">{t('labels.balance')} : {fetchingETH ? '---' : kFormatter(balance)}</Text>
+                        <Text as="b">{t('labels.balance')} : {fetchingETH ? '...' : balance > 1 ? kFormatter(balance) : balance.toFixed(4)}</Text>
                     </HStack>
                     <Spacer h={10} />
                     <VStack spacing={4}>
@@ -270,7 +267,12 @@ export default function SwapMCAWForm() {
                             </VStack>
                         </Center>
                         :
-                        <VStack pt={10}>
+                        <VStack
+                            pt={10}
+                            justifyContent="center"
+                            alignItems="center"
+                            textAlign={"center"}
+                        >
                             <Divider />
                             <NavbarAccount displaMode="carousel" showFooter={false} displayAddressMode="full" />
                         </VStack>

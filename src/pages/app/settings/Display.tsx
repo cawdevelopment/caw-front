@@ -20,9 +20,8 @@ export default function DisplaySettings() {
                 justifyContent="space-around"
                 alignItems="baseline"
                 spacing={5}
-                sx={{ width: '100%' }}
             >
-                <Stack spacing={1} sx={{ width: '-webkit-fill-available' }} >
+                <Stack spacing={1} width='100%'>
                     <div>
                         <Text as="b">
                             {t('labels.mode')}

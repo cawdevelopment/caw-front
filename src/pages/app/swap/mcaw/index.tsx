@@ -58,21 +58,23 @@ export default function SwapMintableCAW() {
                     rowGap={2}
                     mt={5}
                 >
-                    <NextLink href={PATH_AUTH.mint} passHref rel="noopener noreferrer">
-                        <Link color={'blue.400'}>
-                            <b>{t('home.btn_mint')}</b>
-                        </Link>
-                    </NextLink>
-                    <NextLink href={PATH_DASHBOARD.app.home} passHref>
-                        <Link color={'blue.400'}>
-                            <b>{t('labels.dashboard')}</b>
-                        </Link>
-                    </NextLink>
-                    <NextLink href={PATH_AUTH.connect} passHref rel="noopener noreferrer">
-                        <Link color={'blue.400'}>
-                            {t('minting_page.already_minted')}
-                        </Link>
-                    </NextLink>
+                    <Link
+                        as={NextLink}
+                        href={PATH_AUTH.mint}
+                        color={'blue.400'}
+                        rel="noopener noreferrer"
+                    >
+                        <b>{t('home.btn_mint')}</b>
+                    </Link>
+
+                    <Link
+                        as={NextLink}
+                        href={PATH_DASHBOARD.app.home}
+                        color={'blue.400'}
+                        rel="noopener noreferrer"
+                    >
+                        <b>{t('labels.dashboard')}</b>
+                    </Link>
                 </Flex>
             </Container>
         </PageWrapper>

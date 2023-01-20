@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, useToast } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import BoxMask from "./BoxMask";
@@ -7,12 +7,26 @@ import BoxMask from "./BoxMask";
 export default function SettingFullscreen() {
 
     const { t } = useTranslation();
+    const toast = useToast();
     const [ fullscreen, setFullscreen ] = useState(false);
 
     const toggleFullScreen = () => {
+
+        if (!document.fullscreenEnabled) {
+
+            toast({
+                title: t('errors.fullscreen_not_supported'),
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+            return;
+        }
+
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
             setFullscreen(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } else if (document.exitFullscreen) {
             document.exitFullscreen();
             setFullscreen(false);

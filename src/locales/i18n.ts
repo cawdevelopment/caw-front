@@ -6,6 +6,7 @@ import { initReactI18next } from 'react-i18next';
 import enLocales from './en.json';
 import deLocales from './de.json';
 import esLocales from './es.json';
+import plLocales from './pl.json';
 
 let lng = 'en';
 
@@ -20,7 +21,8 @@ i18n
     resources: {
       en: { translations: enLocales },
       es: { translations: esLocales },
-      de: { translations: deLocales }
+      de: { translations: deLocales },
+      pl: { translations: plLocales }
     },
     lng,
     fallbackLng: 'en',

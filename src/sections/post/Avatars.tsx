@@ -64,7 +64,7 @@ const Avatars = () => {
                         <StoryStyledAvatar
                             src={acc?.avatar || ''}
                             alt={acc?.userName || ''}
-                            onClick={() => changeCawAccount(acc)}
+                            onClick={() => changeCawAccount(acc, true)}
                         />
                     </Tooltip>
                 </motion.li>

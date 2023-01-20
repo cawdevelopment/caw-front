@@ -30,15 +30,12 @@ export default function NftPrice({ watch }: Props) {
             return;
 
         const interval = setInterval(() => {
-            console.log("updating nft price");
             execute();
         }, 60000);
 
         return () => clearInterval(interval);
     }, [ price, watch, execute ]);
 
-
-    console.log("getting price");
     const cawCost = status === 'success' ? NftCostInUsdByLength(characterNums, price || 0) : -1;
 
     return (

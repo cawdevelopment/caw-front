@@ -1,11 +1,14 @@
 import { usePathname } from "next/navigation";
-import { Flex, FlexProps, Link, Text, useColorModeValue, useToken } from '@chakra-ui/react';
+import NextLink from 'next/link'
+import { Flex, FlexProps, Text, useColorModeValue, useToken } from '@chakra-ui/react';
+
 import Iconify from 'src/components/icons/Iconify';
 
 export interface NavItemProps extends FlexProps {
     icon: string;
     name: string;
     link: string;
+
 }
 
 export default function NavItem({ icon, link, name, ...rest }: NavItemProps) {
@@ -20,7 +23,11 @@ export default function NavItem({ icon, link, name, ...rest }: NavItemProps) {
     const textColorSelected = useColorModeValue('gray.600', 'caw.800');
 
     return (
-        <Link href={link} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+        <NextLink
+            passHref
+            href={link}
+            style={{ textDecoration: 'none' }}
+        >
             <Flex
                 id={"nav-item-" + name}
                 align="center"
@@ -37,13 +44,13 @@ export default function NavItem({ icon, link, name, ...rest }: NavItemProps) {
                 {...rest}
             >
                 <Iconify icon={icon} width={24} height={24} color={selected ? iconColor : undefined} />
-                <Text
+                <Text                    
                     color={selected ? textColorSelected : textColor}
                     fontWeight={selected ? 'bold' : 'normal'}
                 >
                     {name}
                 </Text>
             </Flex>
-        </Link >
+        </NextLink >
     );
 }

@@ -1,6 +1,6 @@
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
-import { Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer, Stack } from "@chakra-ui/react";
+import { Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer, Stack, CircularProgress } from "@chakra-ui/react";
 
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { WalletBalanceModel } from "src/types/dtos";
@@ -49,7 +49,13 @@ export default function WalletBalanceCard({ width }: { width: number }) {
     return (
         <Box width={width <= 0 ? 'full' : width} maxWidth={"container.md"}  >
             <Heading size="md" mb={2}>
-                {fetchingBalance ? t('minting_page.upding_balance') : t('minting_page.main_balance')}
+                {fetchingBalance ?
+                    <HStack>
+                        <CircularProgress isIndeterminate color='caw.500' size="1.5rem" />
+                        <Text>{t('minting_page.fetching_balance')}</Text>
+                    </HStack>
+                    : <span>{t('minting_page.main_balance')}</span>
+                }
             </Heading>
             <Spacer h={10} />
             {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} />)}
