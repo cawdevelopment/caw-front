@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Stack, Text, Checkbox, Link, chakra } from "@chakra-ui/react";
+import { Stack, Text, Checkbox, Link, chakra, useColorModeValue } from "@chakra-ui/react";
 
 import { useMintingPageContext } from ".";
 
@@ -20,6 +20,7 @@ export default function UserAcceptance() {
     const [ checkedItems, setCheckedItems ] = useState(warnings.map(c => termsAccepted));
     const allChecked = checkedItems.every(Boolean);
     const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
+    const bgCheckBox = useColorModeValue('gray.600', 'gray.300');
 
     const handleCheckAll = (e: any) => {
 
@@ -53,6 +54,7 @@ export default function UserAcceptance() {
                 {t('minting_page.user_acceptance_title')}
             </Text>
             <Checkbox
+                borderColor={bgCheckBox}
                 isChecked={allChecked}
                 isIndeterminate={isIndeterminate}
                 onChange={handleCheckAll}
@@ -62,7 +64,8 @@ export default function UserAcceptance() {
             <Stack pl={6} mt={1} spacing={1}>
                 {warnings.map((caption, index) => (
                     <Checkbox
-                        key={index}
+                        key={caption}
+                        borderColor={bgCheckBox}
                         isChecked={checkedItems[ index ]}
                         onChange={handleCheck(index)}
                     >
