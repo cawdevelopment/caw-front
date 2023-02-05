@@ -1,11 +1,11 @@
 import { m } from 'framer-motion';
 import NextLink from 'next/link';
-import { useTranslation } from "react-i18next";
 import { Box, Button, Text, Heading, Container, useColorModeValue } from '@chakra-ui/react';
 
+import { useTranslation } from 'src/hooks';
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { MotionLazyContainer, varBounce } from 'src/components/animate';
-import { SeverErrorIllustration } from 'src/assets';
+import SeverErrorIllustration from 'src/assets/illustration_500';
 
 Page500.getLayout = function getLayout(page: React.ReactElement) {
   return <Layout variant="landing">{page}</Layout>;

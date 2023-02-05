@@ -1,6 +1,6 @@
-import { ReactElement, ReactNode, lazy, Suspense } from "react";
-import { AppProps } from "next/app";
-import { NextPage } from "next";
+import { type ReactElement, type ReactNode, lazy, Suspense } from "react";
+import { type AppProps } from "next/app";
+import { NextPage } from "next/types/index";
 
 import "src/styles/globals.css";
 import "@rainbow-me/rainbowkit/styles.css";

@@ -1,5 +1,4 @@
-import React from "react";
-import { CircularProgress, CircularProgressProps, CircularProgressLabel } from "@chakra-ui/react";
+import { CircularProgress, type CircularProgressProps, CircularProgressLabel } from "@chakra-ui/react";
 
 interface ProgressProps extends CircularProgressProps {
     text: string;

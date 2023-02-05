@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import { Box, SystemStyleObject, Text, useColorModeValue } from '@chakra-ui/react';
+import { type ReactNode } from "react";
+import { Box, type SystemStyleObject, Text, useColorModeValue } from '@chakra-ui/react';
 
 export type BlockProps = {
     title?: string;

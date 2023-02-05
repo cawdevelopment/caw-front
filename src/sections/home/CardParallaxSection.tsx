@@ -1,5 +1,4 @@
 
-import React from "react";
 import { Box, chakra, Flex, Heading, Stack, VStack, Text, useBreakpointValue, Spacer, useColorModeValue, Tag, TagLabel } from "@chakra-ui/react";
 import { m, AnimatePresence } from "framer-motion";
 

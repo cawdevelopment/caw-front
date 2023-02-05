@@ -1,4 +1,4 @@
-import React from "react";
+import { useRef } from "react";
 import {
     Button, AlertDialog, AlertDialogBody, AlertDialogFooter, AlertDialogHeader, AlertDialogContent,
     AlertDialogOverlay, AlertDialogCloseButton
@@ -19,7 +19,7 @@ type Props = {
 export default function AlertDialogConfirm(props: Props) {
 
     const { isOpen, title, body = `Are you sure? You can't undo this action afterwards.`, cancelText = 'Cancel', cancelColorScheme, confirmText = 'Confirm', confirmColorScheme = 'red', onClose } = props;
-    const cancelRef = React.useRef<HTMLDivElement>();
+    const cancelRef = useRef<HTMLDivElement>();
 
     const handleConfirm = () => {
         onClose();

@@ -1,3 +1,6 @@
+import { useTranslation } from "react-i18next/";
+import { useToast } from "@chakra-ui/react";
+
 // * Generics
 import useLocale from './useLocale'
 import { useLocalStorage } from "./useLocalStorage";
@@ -17,6 +20,7 @@ import useMintableCAWContract from './contracts/useMintableCAWContract';
 import useETHBalance from './contracts/useETHBalance';
 import useAccountBalance from './contracts/useAccountBalance';
 
+
 export {
     useLocalStorage,
     useLocale,
@@ -30,5 +34,7 @@ export {
     useCawNamesContract,
     useMintableCAWContract,
     useETHBalance,
-    useAccountBalance
+    useAccountBalance,
+    useTranslation,
+    useToast
 }

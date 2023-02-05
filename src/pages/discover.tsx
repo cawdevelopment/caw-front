@@ -1,4 +1,3 @@
-import React from "react";
 import { Container } from "@chakra-ui/react";
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
