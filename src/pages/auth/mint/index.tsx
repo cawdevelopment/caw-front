@@ -1,16 +1,15 @@
-'use client';
 import { useState, createContext, useContext } from "react";
-import { Container, useToast } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useTranslation, } from "react-i18next";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import dynamic from "next/dynamic";
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
-import { useCawNameMinterContract, useMintableCAWContract } from "src/hooks";
+import { useCawNameMinterContract, useMintableCAWContract, useETHBalance, useTranslation, useToast } from "src/hooks";
 import { getBlockChainErrMsg } from "src/hooks/contracts/helper";
 import { PATH_AUTH } from "src/routes/paths";
+
 import FormStepper from "./FormStepper";
 
 const BlockChainOperationInProgressModal = dynamic(() => import("src/components/dialogs/BlockChainOperationInProgressModal"), { ssr: false });
@@ -50,7 +49,7 @@ export function useMintingPageContext() {
 export default function RegisterPage() {
 
     const { t } = useTranslation();    
-    const { address, connected } = useDappProvider();
+    const { address, connected, chain } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
     const [ processing, setProcessing ] = useState(false);
     const [ mintingCawName, setMintingCawName ] = useState(false);
@@ -58,7 +57,7 @@ export default function RegisterPage() {
     const [ txSent, setTxSent ] = useState(false);
     const toast = useToast();
     const router = useRouter();
-
+    const { balance } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
 
     const { initialized: CAWNamesMinterContractInitialized, mint: mintCAWUsername } = useCawNameMinterContract({
         onBeforeSend: () => {
@@ -180,6 +179,11 @@ export default function RegisterPage() {
 
             if (!isValid) {
                 toast({ title: errorMessage, status: 'error', isClosable: true, });
+                return;
+            }
+
+            if (balance <= 0) {
+                toast({ title: 'Insufficient ETH balance to pay for transaction, please top up your wallet and try again', status: 'error', isClosable: true, });
                 return;
             }
 

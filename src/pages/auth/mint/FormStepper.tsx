@@ -8,13 +8,13 @@ import { PATH_DASHBOARD } from "src/routes/paths";
 import { MotionContainer, WrapperFadeAnimation } from "src/components/animate";
 import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
+import AlertDialogConfirm from "src/components/dialogs/AlertDialog";
+import { sentenceCase } from "src/utils/helper";
 
 import { useMintingPageContext } from '.';
 import { animation } from '../connect';
 import NftPriceLegend from "./NftPriceLegend";
 import Steps from "./Steps";
-import AlertDialogConfirm from "@components/dialogs/AlertDialog";
-import { sentenceCase } from "@utils/helper";
 
 const maxSteps = 4;
 function getProgress(step: number) {
@@ -167,17 +167,9 @@ export default function FormStepper(props: Props) {
                         <Flex
                             direction={{ base: "column", md: "row" }}
                             alignItems="center"
-                            justifyContent="space-between"
+                            justifyContent="center"
                             rowGap={2}
                         >
-                            <Link
-                                as={NextLink}
-                                href={PATH_DASHBOARD.swap.mcaw}
-                                color={'blue.400'}
-                                rel="noopener noreferrer"
-                            >
-                                <b>{t('labels.getmcaw')}</b>
-                            </Link>
                             <Link
                                 as={NextLink}
                                 href={PATH_DASHBOARD.app.home}
@@ -193,18 +185,18 @@ export default function FormStepper(props: Props) {
             </div>
             <AlertDialogConfirm
                 isOpen={isOpen}
-                onClose={onClose}
                 title={sentenceCase(t("verbs.confirm"))}
                 cancelText={sentenceCase(t("verbs.cancel"))}
                 confirmText={sentenceCase(t("verbs.mint"))}
                 confirmColorScheme="green"
+                onClose={onClose}
+                onConfirm={handleMint}
                 body={<p>
                     {t("minting_page.confirm_mnt").replace("{0}", "").replace("?", "")} <b>{userName}</b>
                     <br />
                     <br />
                     <p>{t("minting_page.confirmation_req")}</p>
                 </p>}
-                onConfirm={handleMint}
             />
         </MotionContainer>
     );

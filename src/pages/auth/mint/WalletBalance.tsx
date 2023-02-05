@@ -1,9 +1,7 @@
-import React, { useCallback, useMemo } from "react";
-import NextLink from 'next/link';
-import { useTranslation } from "react-i18next";
+import { memo, useCallback, useMemo } from "react";
 import {
     Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer,
-    Stack, CircularProgress, IconButton
+    Stack, CircularProgress, IconButton, chakra
 } from "@chakra-ui/react";
 import Iconify from "src/components/icons/Iconify";
 
@@ -11,8 +9,7 @@ import { useDappProvider } from "src/context/DAppConnectContext";
 import { WalletBalanceModel } from "src/types/dtos";
 import { fDecimal, kFormatter } from "src/utils/formatNumber";
 import { BILLION } from 'src/utils/constants';
-import { PATH_DASHBOARD } from "src/routes/paths";
-import { useAccountBalance } from "src/hooks";
+import { useAccountBalance, useTranslation } from "src/hooks";
 import { useMintingPageContext } from ".";
 
 type AssetItemProps = {
@@ -93,18 +90,37 @@ function WalletBalanceCard({ width }: { width: number }) {
             {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} hidden={hideBalance} />)}
             <Spacer h={10} />
             <Stack direction={{ base: 'column', md: 'column' }} spacing={2} align="center" justify="center" >
-                <Text fontSize="sm" color="gray.500">
-                    {t('minting_page.caw_balance_req_lb')}
-                </Text>
-                <Box p={5}>
-                    <Link as={NextLink} href={PATH_DASHBOARD.swap.mcaw} color={'blue.400'}>
-                            <b>{t('labels.getmcaw')}</b>
+                <chakra.div
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"baseline"}
+                    textAlign={"center"}
+                >
+                    {`${t('swap_page.goerli_msg_1')} Goerli testnet ${t('swap_page.goerli_msg_2')}`}
+                </chakra.div>
+                <Stack id="stack-goerli" direction={{ base: 'column', md: 'column' }} spacing={2} p={1} alignItems="center">
+                    <Text fontSize='xl' textAlign="center">
+                        {t('swap_page.get_goerli')}
+                    </Text>
+                    <Link
+                        isExternal
+                        color={'blue.400'}
+                        href="https://goerlifaucet.com/"
+                        target="_blank">
+                        Goerli Faucet
                     </Link>
-                </Box>
+                    <Link
+                        isExternal
+                        color={'blue.400'}
+                        href="https://faucets.chain.link/"
+                        target="_blank">
+                        Faucets Chain
+                    </Link>
+                </Stack>
             </Stack>
         </Box>
     );
 }
 
 
-export default React.memo(WalletBalanceCard);
+export default memo(WalletBalanceCard);
