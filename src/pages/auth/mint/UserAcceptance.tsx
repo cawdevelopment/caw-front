@@ -16,7 +16,7 @@ export const warnings = [
 export default function UserAcceptance() {
 
     const { t } = useTranslation();
-    const { termsAccepted, onSetValue } = useMintingPageContext();
+    const { termsAccepted, setValue } = useMintingPageContext();
     const [ checkedItems, setCheckedItems ] = useState(warnings.map(c => termsAccepted));
     const allChecked = checkedItems.every(Boolean);
     const isIndeterminate = checkedItems.some(Boolean) && !allChecked;
@@ -29,7 +29,7 @@ export default function UserAcceptance() {
             const newCheckedItems = prev.map(() => e.target.checked);
             const newAllChecked = newCheckedItems.every(Boolean);
 
-            onSetValue('termsAccepted', newAllChecked);
+            setValue('termsAccepted', newAllChecked);
 
             return newCheckedItems;
         });
@@ -42,7 +42,7 @@ export default function UserAcceptance() {
             const newCheckedItems = prev.map((c, i) => i === index ? e.target.checked : c);
             const newAllChecked = newCheckedItems.every(Boolean);
 
-            onSetValue('termsAccepted', newAllChecked);
+            setValue('termsAccepted', newAllChecked);
 
             return newCheckedItems;
         });

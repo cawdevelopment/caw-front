@@ -25,13 +25,16 @@ export default function useCawNamesContract() {
     }, [ address, abi, network, INFURA_API_KEY, provider ]);
 
 
-    const signedContract = () => {
+    const signedContract = (reqSigner: boolean) => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
         if (!allowMainnet)
             throw new Error((t('errors.mainnet_not_allowed')));
+
+        if (!reqSigner)
+            return contract;
 
         if (!signer || isSignerError || loadingSigner)
             throw new Error((t('errors.signer_not_found')));
@@ -41,7 +44,7 @@ export default function useCawNamesContract() {
 
     const getTokenURI = async (tokenId: number) => {
 
-        const data = await signedContract().tokenURI(tokenId);
+        const data = await signedContract(false).tokenURI(tokenId);
         const json = JSON.parse(atob(data.split(',')[ 1 ]));
         const { name, description, image } = json || {};
         return { name, description, image };
@@ -49,7 +52,7 @@ export default function useCawNamesContract() {
 
     const getTokens = async (address: string, fetchAvatar: boolean): Promise<CawUserName[]> => {
 
-        const tokens = await signedContract().tokens(address);
+        const tokens = await signedContract(false).tokens(address);
 
         const tokensArray: CawUserName[] = tokens.map((token: any) => {
 
@@ -78,7 +81,7 @@ export default function useCawNamesContract() {
 
     const mint = async (sender: string, userWalletAddress: string, userName: string, newId: number) => {
 
-        const contractWithSigner = signedContract();
+        const contractWithSigner = signedContract(true);
         const tx = await contractWithSigner.mint(sender, userName, newId);
         const receipt = await tx.wait();
 

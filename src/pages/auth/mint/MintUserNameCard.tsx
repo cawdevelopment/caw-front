@@ -1,21 +1,21 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Stack, FormControl, FormLabel, Input, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { useTranslation } from "react-i18next";
-import debounce from 'lodash.debounce';
 
-import { useMintingPageContext } from ".";
-import useCawNameMinterContract from "src/hooks/contracts/useCawNameMinterContract";
+import { useDebounceEffect, useCawNameMinterContract } from "src/hooks";
 import { isValidUsername as validateUserNameLocally } from "src/utils/manifestoHelper";
-import MintingCost from "./MintingCost";
 import { WrapperFadeAnimation } from "src/components/animate";
 import AlertMessage from "src/components/AlertMessage";
+
+import { useMintingPageContext } from ".";
+import MintingCost from "./MintingCost";
 
 export default function MintUserNameCard({ width }: { width: number }) {
 
     const { t } = useTranslation();
-    const { userName, isValid, message, onSetValue } = useMintingPageContext();
-    const { getCostOfName, isValidUsername, getIdByUserName } = useCawNameMinterContract();
+    const { userName, isValid, message, setValue, setManyValues } = useMintingPageContext();
+    const { initialized, getCostOfName, isValidUsername, getIdByUserName } = useCawNameMinterContract();
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -24,84 +24,109 @@ export default function MintUserNameCard({ width }: { width: number }) {
             inputRef.current.focus();
             inputRef.current.value = userName;
         }
+
     }, [ userName ]);
 
     const checkUsername = useCallback((async (userName: string) => {
         try {
 
             if (!(validateUserNameLocally(userName))) {
-                onSetValue('isValid', false);
-                onSetValue('message', userName ? t('minting_page.username_invalid') : '');
-                onSetValue('onChainValidated', false);
+                setManyValues([
+                    { key: 'isValid', value: false },
+                    { key: 'message', value: userName ? t('minting_page.username_invalid') : '' },
+                    { key: 'onChainValidated', value: false }
+                ]);
                 return;
             }
+
+            if (!initialized)
+                return;
 
             const [isValid, id] = await Promise.all([isValidUsername(userName), getIdByUserName(userName)]);
 
             if (id > 0) {
-                onSetValue('isValid', false);
-                onSetValue('message', `${userName} : ${t('minting_page.username_already_taken')}`);
-                onSetValue('onChainValidated', true);
+                setManyValues([
+                    { key: 'isValid', value: false },
+                    { key: 'message', value: `${userName} : ${t('minting_page.username_already_taken')}` },
+                    { key: 'onChainValidated', value: true }
+                ]);
                 return;
             }
 
             if (!isValid) {
-                onSetValue('isValid', false);
-                onSetValue('message', t('minting_page.username_invalid'));
-                onSetValue('onChainValidated', true);
+                setManyValues([
+                    { key: 'isValid', value: false },
+                    { key: 'message', value: t('minting_page.username_invalid') },
+                    { key: 'onChainValidated', value: true }
+                ]);
                 return;
             }
 
-            onSetValue('isValid', true);
-            onSetValue('message', `${userName} : ${t('minting_page.username_available')}`);
-            onSetValue('onChainValidated', true);
+            setManyValues([
+                { key: 'isValid', value: true },
+                { key: 'message', value: `${userName} : ${t('minting_page.username_available')}` },
+                { key: 'onChainValidated', value: true }
+            ]);
         }
         catch (error: any) {
             console.log("check username: ", error);
-            onSetValue('isValid', false);
-            onSetValue('message', error?.message || 'An error occured');
-            onSetValue('onChainValidated', true);
+            setManyValues([
+                { key: 'isValid', value: false },
+                { key: 'message', value: error?.message || 'An error occured' },
+                { key: 'onChainValidated', value: true }
+            ]);
         }
-    }), [ t, isValidUsername, getIdByUserName, onSetValue ]);
+    }), [ t, initialized, isValidUsername, getIdByUserName, setManyValues ]);
 
     const getCost = useCallback((async (userName: string) => {
+
         try {
 
             if (!validateUserNameLocally(userName)) {
-                onSetValue('costVerified', false);
-                onSetValue('costUSD', 0);
-                onSetValue('costETH', 0);
-                onSetValue('costCAW', 0);
+                setManyValues([
+                    { key: 'costVerified', value: false },
+                    { key: 'costUSD', value: 0 },
+                    { key: 'costETH', value: 0 },
+                    { key: 'costCAW', value: 0 }
+                ]);
                 return;
             }
 
+            if (!initialized)
+                return;
+
             const cost = await getCostOfName(userName);
-
-            onSetValue('costUSD', cost.constInUsd);
-            onSetValue('costETH', cost.costInEth);
-            onSetValue('costCAW', cost.cost);
-            onSetValue('costVerified', true);
-
-        } catch (error: any) {
-            console.log("get cost: ", error);
-            onSetValue('message', error?.message || 'An error occured');
-            onSetValue('costVerified', false);
-            onSetValue('costUSD', 0);
-            onSetValue('costETH', 0);
-            onSetValue('costCAW', 0);
+            setManyValues([
+                { key: 'costUSD', value: cost.constInUsd },
+                { key: 'costETH', value: cost.costInEth },
+                { key: 'costCAW', value: cost.cost },
+                { key: 'costVerified', value: true }
+            ]);
         }
-    }), [ getCostOfName, onSetValue ]);
+        catch (error: any) {
+            console.log("get cost: ", error);
+            setManyValues([
+                { key: 'message', value: error?.message || 'An error occured' },
+                { key: 'costVerified', value: false },
+                { key: 'costUSD', value: 0 },
+                { key: 'costETH', value: 0 },
+                { key: 'costCAW', value: 0 }
+            ]);
+        }
+    }), [ initialized, getCostOfName, setManyValues ]);
 
+    const handleCheckUsername = useCallback(() => {
 
-    const changeHandler = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-        checkUsername(event.target.value);
-        getCost(event.target.value);
-        onSetValue('userName', event.target.value);
-    }, [ onSetValue, checkUsername, getCost ]);
+        checkUsername(userName);
+        getCost(userName);
 
-    const debouncedChangeHandler = useMemo(() => debounce(changeHandler, 300), [ changeHandler ]);
+    }, [ userName, checkUsername, getCost ]);
 
-    useEffect(() => () => { debouncedChangeHandler.cancel(); }, [ debouncedChangeHandler ]);
+    useDebounceEffect(handleCheckUsername, 40, [ userName ]);
+
+    const handleSetUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValue('userName', (e.target.value || '').toLowerCase());
+    }
 
     return (
         <Stack spacing={4} width={width <= 0 ? 'full' : width}>
@@ -113,7 +138,8 @@ export default function MintUserNameCard({ width }: { width: number }) {
                         size='lg'
                         variant='filled'
                         type="text"
-                        onChange={debouncedChangeHandler} 
+                        onChange={handleSetUsername}
+                        style={{ textTransform: 'lowercase' }}
                     />
                     <InputRightElement alignItems={"center"} children={userName ? (isValid ? <CheckIcon color='green.500' /> : <CloseIcon color='red.500' />) : null} />
                 </InputGroup>

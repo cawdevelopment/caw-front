@@ -220,8 +220,11 @@
     "user_acceptance_warn_5": "Power given to me, with great power comes great responsibility",
     "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users",
     "confirm_mnt": "Are you sure you want to mint the name : {0}?",
-    "longerResponse": "Reconnect if the transaction confirmation takes too long to appear in your wallet.",
-    "minting_ntf": "Minting your NFT-Username"
+    "longerResponse": "Reconnect your wallet if it takes too long to confirm the transaction",
+    "minting_ntf": "Minting your NFT-Username",
+    "minting_mcaw": "Minting mCAW",
+    "approve_mcaw": "Approving mCAW",
+    "confirmation_req": "Three confirmations are required in your wallet."
   },
   "minted_page": {
     "title": "Your NFT-Username is minted"

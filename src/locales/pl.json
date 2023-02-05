@@ -211,8 +211,11 @@
     "user_acceptance_warn_4": "Odchodzimy od emaili i numeru telefonu jako możliwości identyfikacji użytkownika",
     "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.",
     "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?",
-    "longerResponse": "Odpowiedź jest zbyt długa Podłącz ponownie portfel, jeśli komunikat potwierdzający nie pojawi się",
-    "minting_ntf": "Mennica Nazwa użytkownika NFT"
+    "longerResponse": "Odpowiedź jest zbyt długaPodłącz ponownie portfel, jeśli komunikat potwierdzający nie pojawi się",
+    "minting_ntf": "Mennica Nazwa użytkownika NFT",
+    "minting_mcaw": "Minting mCAW",
+    "approve_mcaw": "Approving mCAW",
+    "confirmation_req": "Three confirmations are required in your wallet."
   },
   "minted_page": {
     "title": "Sukces! Twoje NFT zostało zmintowane"

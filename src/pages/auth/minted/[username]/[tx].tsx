@@ -110,10 +110,11 @@ export default function MintedUserNamePage() {
                 setLoading(false);
             }
             catch (error: any) {
+                console.error("error : ", error);
                 if (!active)
                     return;
 
-                setError('Could not fetch image : ' + (error?.message || '') + ', however you can still check your NFT on the block explorer and OpenSea');
+                setError('Could not fetch image, however you can still check your NFT on the block explorer and OpenSea, or try refreshing the page.');
                 setLoading(false);
             }
         }

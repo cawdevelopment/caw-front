@@ -1,4 +1,4 @@
-import { CircularProgressProps } from "@chakra-ui/react";
+import { CircularProgressProps, Text, Code } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import OperationInProgressModal from "./OperationInProgress";
@@ -18,7 +18,7 @@ export default function BlockChainOperationInProgressModal({ processing, txSent,
       isOpen={processing}
       title={txSent ? t('wallet.txSubmitted') : t('wallet.waitingConfirm')}
       message={message}
-      footer={txSent ? t('wallet.waitConfirmedTx') : t('wallet.confirmTxInWallet')}
+      footer={txSent ? <Text>{t('wallet.waitConfirmedTx')}</Text> : <Code colorScheme={"red"}> {t('wallet.confirmTxInWallet')}</Code>}
       circularProps={circularProps}
       onClose={onClose} />
   );
