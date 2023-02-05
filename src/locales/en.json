@@ -221,7 +221,10 @@
     "user_acceptance_warn_4": "We are moving off emails and phone as a way to identify users",
     "confirm_mnt": "Are you sure you want to mint the name : {0}?",
     "longerResponse": "Reconnect your wallet if it takes too long to confirm the transaction",
-    "minting_ntf": "Minting your NFT-Username"
+    "minting_ntf": "Minting your NFT-Username",
+    "minting_mcaw": "Minting mCAW",
+    "approve_mcaw": "Approving mCAW",
+    "confirmation_req": "Three confirmations are required in your wallet."
   },
   "minted_page": {
     "title": "Your NFT-Username is minted"
