@@ -26,7 +26,9 @@
     "confirm": "confirmar",
     "swap": "intercambiar",
     "get": "obtener",
-    "go": "ir"
+    "go": "ir",
+    "choose": "elegir",
+    "connect": "conectar"
   },
   "buttons": {
     "go_home": "Inicio",
@@ -98,7 +100,8 @@
     "enter_amount": "Introduzca la cantidad",
     "viewall": "Ver todo",
     "manage_accounts": "Administrar cuentas",
-    "connectedto": "Conectado con",
+    "connectedto": "Conectado como",
+    "connectas": "Conectar como",
     "unknownChain": "Red desconocida",
     "accounts": "Cuentas",
     "options": "Opciones",
@@ -229,6 +232,10 @@
     "get_goerli": "Solicitar Goerli ETH gratuitamente de una faucet, por ejemplo : ",
     "approve_req_msg": "Una vez que acuñado, debe que aprobar la transacción para transferir sus tokens CAW, de lo contrario sus fondos quedarán bloqueados en el contrato.",
     "alert_cf_mint": "¿Desea acuñar {$0} mCAW?"
+  },
+  "private_profile_page": {
+    "accounts": "Cuentas",
+    "accounts_subtitle": "Nombres de usuario asociados a esta dirección"
   },
   "calc": {
     "title": "Costo y quemas en diferente Capitalización de Mercado",

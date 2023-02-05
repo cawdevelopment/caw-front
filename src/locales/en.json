@@ -35,7 +35,9 @@
     "confirm": "confirm",
     "swap": "swap",
     "get": "get",
-    "go": "go"
+    "go": "go",
+    "choose": "select",
+    "connect": "connect"
   },
   "buttons": {
     "go_home": "Home",
@@ -72,6 +74,7 @@
     "wallet": "Wallet",
     "network": "Network",
     "disconnect": "Disconnect",
+    "connect": "Connect",
     "search_caw": "Search CAW",
     "add_photo": "Add a Photo",
     "add_gif": "Add an animated GIF",
@@ -96,7 +99,7 @@
     "minting": "Minting...",
     "minted": "Minted",
     "minted_success": "You have successfully minted an NFT",
-    "approving": "Approving...",
+    "approving": "approving...",
     "approved": "Approved",
     "block_explorer": "Block Explorer",
     "check_nft_on": "Check out your NFT on",
@@ -105,7 +108,8 @@
     "enter_amount": "Enter an amount",
     "viewall": "View all",
     "manage_accounts": "Manage your accounts",
-    "connectedto": "Connected to",
+    "connectedto": "Connected as",
+    "connectas": "Connect as",
     "unknownChain": "Unknown Chain",
     "accounts": "Accounts",
     "options": "Options",
@@ -213,7 +217,7 @@
     "user_acceptance_title": "Before continuing, you should know and accept the following",
     "user_acceptance_mchk_1": "This is a",
     "user_acceptance_mchk_dapp": "decentralized application",
-    "user_acceptance_mchk_2": ", therefore, I agree to that",
+    "user_acceptance_mchk_2": ", therefore, I agree to :",
     "user_acceptance_warn_1": "I am responsible for my own funds",
     "user_acceptance_warn_2": "I am responsible for my username and its actions",
     "user_acceptance_warn_3": "I will not be able to change my username later",
@@ -236,6 +240,10 @@
     "get_goerli": "Retrieve some free-of-charge Goerli ETH from a faucet, i.g. : ",
     "approve_req_msg": "Once you mint, you will need to approve the transaction to transfer your CAW tokens, otherwise your funds will be locked in the contract.",
     "alert_cf_mint": "Do you want to mint {$0} mCAW?"
+  },
+  "private_profile_page": {
+    "accounts": "My Accounts",
+    "accounts_subtitle": "Minted usernames associated with this wallet"
   },
   "calc": {
     "title": "Cost and burns at different MC's",
