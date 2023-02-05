@@ -33,6 +33,7 @@
     "mint": "mint",
     "cancel": "cancel",
     "confirm": "confirm",
+    "continue": "continue",
     "swap": "swap",
     "get": "get",
     "go": "go",
@@ -64,7 +65,9 @@
     "mainnet_not_allowed": "Mainnet not allowed during alpha testing, please switch to an allowed network",
     "signer_not_found": "Signer not found, check if your wallet is connected",
     "fullscreen_not_supported": "Fullscreen not supported by your browser",
-    "InsufficientmCAW": "Insufficient mCAW balance to mint this NFT, please get some mCAW"
+    "insufficientmCAW": "Insufficient mCAW balance to mint this NFT, please get some mCAW",
+    "insufficientETH": "Insufficient ETH balance to pay for transaction, please top up your wallet and try again",
+    "mobileBrowserNotSupported": "It looks like you are using a mobile device. If so, please open this website in the in-app browser of your wallet to use this feature."
   },
   "labels": {
     "under_dev": "Under development",

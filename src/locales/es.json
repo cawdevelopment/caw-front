@@ -24,6 +24,7 @@
     "mint": "acuñar",
     "cancel": "cancelar",
     "confirm": "confirmar",
+    "continue": "continuar",
     "swap": "intercambiar",
     "get": "obtener",
     "go": "ir",
@@ -55,7 +56,9 @@
     "mainnet_not_allowed": "No se permite el uso de la red principal durante la etapa de prueba, por favor, cambie a la red de pruebas.",
     "signer_not_found": "Firmante no encontrado, verifique si la billetera está conectada.",
     "fullscreen_not_supported": "Su navegador no es compatible con la pantalla completa.",
-    "InsufficientmCAW": "Balance de mCAW insuficiente para acuñar este NFT, por favor, obtenga más mCAW."
+    "insufficientmCAW": "Balance de mCAW insuficiente para acuñar este NFT, por favor, obtenga más mCAW.",
+    "insufficientETH": "Balance de ETH insuficiente para cubrir los costos de la transacción, por favor agregue ETH a su monedero e inténtelo de nuevo.",
+    "mobileBrowserNotSupported": "Parece que está utilizando un dispositivo móvil. Si es así, abre este sitio web en el navegador in-app de tu monedero para utilizar esta función."
   },
   "labels": {
     "awating_cnn": "Awaiting connection...",

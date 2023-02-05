@@ -28,3 +28,8 @@ export const getAppVersion = () => {
     const { name, version } = packageJson
     return name + '/' + version
 }
+
+export const isMobileDevice = () => {
+    const math = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    return math;
+}

@@ -1,14 +1,18 @@
 import {
     Box, Button, ButtonProps, HStack, Menu, MenuButton, MenuButtonProps, MenuItem,
-    MenuList, MenuListProps, useColorMode
+    MenuList, MenuListProps, useColorMode, useDisclosure
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
-import { useDisconnect } from 'wagmi'
-import Image from 'next/image'
+import { useDisconnect } from 'wagmi';
+import Image from 'next/image';
+import dynamic from "next/dynamic";
 
 import Iconify from "src/components/icons/Iconify";
 import { useDappProvider } from "src/context/DAppConnectContext";
+import { isMobileDevice, sentenceCase } from "src/utils/helper";
+
+const AlertDialogConfirm = dynamic(() => import("src/components/dialogs/AlertDialog"), { ssr: false });
 
 function NetworkIcon() {
 
@@ -56,17 +60,45 @@ export function WalletButton(props: WalletButtonProps) {
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
     const { chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useDappProvider();
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const { connectButtonLabel, menuButtonProps = { padding: 0.5 },
         menuButtonvariant = 'ghost', iconColor,
         menuListProps = { shadow: "md" },
         buttonProps = { variant: "ghost" } } = props;
 
+
+    const handleOpenAccountModal = () => {
+
+        if ((isMobileDevice())) {
+            if (!isOpen) {
+                onOpen();
+                return;
+            }
+        }
+
+        openConnectModal();
+    }
+
+    if (isOpen) {
+        return (
+            <AlertDialogConfirm
+                isOpen={isOpen}
+                title=''
+                cancelText={sentenceCase(t("verbs.cancel"))}
+                confirmText={sentenceCase(t("verbs.continue"))}
+                confirmColorScheme="blue"
+                onClose={onClose}
+                onConfirm={openConnectModal}
+                body={<p> <b>{t('errors.mobileBrowserNotSupported')}</b></p>}
+            />
+        );
+    }
+
     if (status === 'disconnected') {
         return (
             <Button
                 {...buttonProps}
-                onClick={openConnectModal}
+                onClick={handleOpenAccountModal}
             >
                 {connectButtonLabel || t('labels.wallet')}
             </Button>
@@ -77,7 +109,7 @@ export function WalletButton(props: WalletButtonProps) {
         return (
             <Button
                 {...buttonProps}
-                onClick={openConnectModal}
+                onClick={handleOpenAccountModal}
             >
                 {t('buttons.btn_connecting')}
             </Button>
@@ -119,7 +151,7 @@ export function WalletButton(props: WalletButtonProps) {
                 </MenuItem>
                 <MenuItem
                     value='network'
-                    onClick={chain?.name ? openChainModal : openConnectModal}
+                    onClick={chain?.name ? openChainModal : handleOpenAccountModal}
                     icon={<NetworkIcon />}
                 >
 

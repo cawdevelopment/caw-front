@@ -24,6 +24,7 @@
     "mint": "mintuj",
     "cancel": "anuluj",
     "confirm": "potwierdź",
+    "continue": "continue",
     "swap": "wymień",
     "get": "uzyskaj",
     "go": "idź",
@@ -55,7 +56,9 @@
     "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć.",
     "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony.",
     "fullscreen_not_supported": "Twoja przeglądarka nie obsługuje trybu pełnoekranowego.",
-    "InsufficientmCAW": "Niewystarczające saldo mCAW do wykonania tego NFT, proszę zdobyć trochę mCAW."
+    "insufficientmCAW": "Niewystarczające saldo mCAW do wykonania tego NFT, proszę zdobyć trochę mCAW.",
+    "insufficientETH": "Insufficient ETH balance to pay for transaction, please top up your wallet and try again",
+    "mobileBrowserNotSupported": "It looks like you are using a mobile device. If so, please open this website in the in-app browser of your wallet to use this feature."
   },
   "labels": {
     "under_dev": "W przygotowaniu",
