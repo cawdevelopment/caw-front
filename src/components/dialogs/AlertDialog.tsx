@@ -7,7 +7,7 @@ import {
 type Props = {
     isOpen: boolean;
     title: string;
-    body: string;
+    body: string | React.ReactNode;
     cancelText?: string;
     cancelColorScheme?: string;
     confirmText?: string;
