@@ -183,7 +183,7 @@ export default function RegisterPage() {
             }
 
             if (balance <= 0) {
-                toast({ title: 'Insufficient ETH balance to pay for transaction, please top up your wallet and try again', status: 'error', isClosable: true, });
+                toast({ title: t('errors.insufficientETH'), status: 'error', isClosable: true, });
                 return;
             }
 

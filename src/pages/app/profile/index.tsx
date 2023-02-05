@@ -55,9 +55,12 @@ export default function UserProfilePage() {
                 title={t('private_profile_page.accounts')}
                 subtitle={`${t('private_profile_page.accounts_subtitle')} : (${cawAccounts.length}) `}
             >
-                <Wrap>
+                <Wrap id="profiles-wrapper" justify={"space-between"}>
                     {cawAccounts.map((acc) => (
-                        <WrapItem key={acc.userName}>
+                        <WrapItem
+                            key={acc.userName}
+                            id={acc.userName}
+                        >
                             <NftUsernameCard
                                 avatar={acc.avatar}
                                 userId={acc.id}

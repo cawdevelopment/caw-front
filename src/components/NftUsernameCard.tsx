@@ -58,15 +58,15 @@ function NftUsernameCard({ userId, avatar, username, onConnect }: Props) {
     >
       <Flex
         id={`card-${username}`}
-        p={50}
+        p={{ base: 4, md: 2 }}
         w="full"
         alignItems="center"
         justifyContent="center"
       >
         <Box
+          id={`flex-box-${username}`}
           bg={useColorModeValue('white', 'gray.800')}
-          maxW="sm"
-          // minW="sm"
+          maxW={80}
           borderWidth="1px"
           rounded="lg"
           shadow="lg"
@@ -126,7 +126,7 @@ function NftUsernameCard({ userId, avatar, username, onConnect }: Props) {
             id={`image-${username}`}
             src={avatar}
             alt={`Picture of ${username}`}
-            roundedTop="lg"
+            roundedTop="lg"            
           />
 
           <Box p="6">
@@ -137,9 +137,10 @@ function NftUsernameCard({ userId, avatar, username, onConnect }: Props) {
               <Box
                 fontSize="xl"
                 fontWeight="semibold"
-                as="h4"
+                // as="h4"
                 lineHeight="tight"
-                isTruncated>
+                isTruncated
+              >
                 <Text
                   maxWidth={230}
                   noOfLines={1}
