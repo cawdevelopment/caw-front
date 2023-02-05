@@ -57,7 +57,7 @@ export default function CardParallaxSection() {
                     <m.div
                         initial={{ opacity: 0, y: -100 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 4 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
                     >
                         <chakra.div
                             id="title-and-text-about-caw-manifesto"
@@ -138,7 +138,7 @@ export default function CardParallaxSection() {
                 <AnimatePresence>
                     {isMd && (
                         <m.div
-                            initial={{ rotate: -15, scale: 1.2 }}
+                            initial={{ rotate: 0, scale: 1.2 }}
                             animate={{ rotate: 0, scale: 1 }}
                             transition={{ duration: 4 }}
                         >

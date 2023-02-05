@@ -41,8 +41,8 @@ function MintNFTNameForm() {
         onTxSent: () => {
             setTxSent(true);
         },
-        onTxConfirmed: (tx) => {
-            setTxMintHash(tx.transactionHash);
+        onTxConfirmed: (tx, receipt) => {
+            setTxMintHash(receipt.transactionHash || null);
         },
         onError: (err) => {
             const { message, code } = getBlockChainErrMsg(err);

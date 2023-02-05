@@ -28,6 +28,15 @@ export default function SwapMCAWForm() {
     const colorText = useColorModeValue("gray.900", "gray.50");
     const { balance, fetchingETH, } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
 
+    const [ { cawUSD, ethUSD }, setPrices ] = useState({ cawUSD: 0, ethUSD: 0 });
+    const [ input, setInput ] = useState(0)
+    const [ minting, setMinting ] = useState(false)
+    const [ approving, setApproving ] = useState(false);
+
+    const [ error, setError ] = useState<string | null>(null);
+    const [ txMintHash, setMintTxHash ] = useState<string | null>(null);
+    const [ txApproveHash, setApproveTxHash ] = useState<string | null>(null);
+
     const { initialized, mint, approve } = useMintableCAWContract({
 
         onBeforeSend: (method) => {
@@ -37,13 +46,13 @@ export default function SwapMCAWForm() {
         onTxConfirmed: ({ method, tx }) => {
 
             if (method === 'mint') {
-                setMintTxHash(tx.hash);
+                setMintTxHash(tx?.hash || null);
                 setMinting(false);
                 handleApprove();
             }
 
             if (method === 'approve') {
-                setApproveTxHash(tx.hash);
+                setApproveTxHash(tx?.hash || null);
                 setApproving(false);
             }
         },
@@ -53,15 +62,6 @@ export default function SwapMCAWForm() {
             setError(message ? message + ' : ' + code : 'Something went wrong');
         },
     });
-
-    const [ { cawUSD, ethUSD }, setPrices ] = useState({ cawUSD: 0, ethUSD: 0 });
-    const [ input, setInput ] = useState(0)
-    const [ minting, setMinting ] = useState(false)
-    const [ approving, setApproving ] = useState(false);
-
-    const [ error, setError ] = useState<string | null>(null);
-    const [ txMintHash, setMintTxHash ] = useState<string | null>(null);
-    const [ txApproveHash, setApproveTxHash ] = useState<string | null>(null);
 
 
     useEffect(() => {
