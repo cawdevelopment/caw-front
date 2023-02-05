@@ -11,7 +11,7 @@ Please take a look at each section :
 * [Javascript](JS.md)
 
 
-Don't forget to setup your IDE with `eslint` and `prettier`.
+Don't forget to setup your IDE with `eslint`
 
 Please add any other guidelines you think are essential or even improve the ones we have.
 
@@ -60,7 +60,7 @@ Explore the contracts [here](https://github.com/cawdevelopment/CawUsernames)
 Some hooks are used to interact with CAW-Protocol. They are located in `hooks/contracts/` folder. Please use them to read and write data from/to the blockchain.
 - **useCawNameMinterContract** `Mintable CAW` Cost of name, validate and mint a name 
 - **useCawNamesContract** `CAW NAME ` NFT contract, get account usernames, username uri, balance, actions, etc.
-- **useMintableCAWContract** Mint mCAW to mint an username, and burn CAW to release an username, approve and transfer mCAW.
+- **useMintableCAWContract** Mint mCAW to mint a username, burn CAW to release a username, approve and transfer mCAW.
 - **useAccountBalance** Get primary account balance so as to use the platform (CAW, mCAW, ETH)
 - **useETHBalance** Get ETH balance of the connected account
 - **useAppConfigurations** Site settings, such as api keys, contract addresses, etc. usually set in the .env file

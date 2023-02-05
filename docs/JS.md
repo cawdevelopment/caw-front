@@ -5,7 +5,7 @@ A collection of notes about Javascript and Typescript.
 Please code in typescript, and use the `.ts` extension for files, and `.tsx` for react components.
 
 ## General
-- We use Prettier as a code formatter to keep the code style consistent.
+- We use the default vs-code formatter to keep the code style consistent.
 - Type your variables and functions, and use the `strict` compiler option.
 - Avoid using `any` as much as possible.
 - Use `const` for variables that are not going to be reassigned.

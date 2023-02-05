@@ -3,7 +3,6 @@
 
 ## General
 - **Use Typescript** for react components.
-- **Use Prettier** as a code formatter to keep the code style consistent.
 - **Use the `strict` compiler option** to avoid type coercion.
 - **Use `null` instead of `undefined`** to avoid type coercion.
 - Always format your code before committing it.
