@@ -19,8 +19,11 @@ for more examples or discussion.
 
 ## Format
  ```hs
-    <scope> is optional
-    <type>(<scope>): <subject>
+    <issue #x | feature #x> is optional
+    <type>(issue #x | feature #x): <subject>
     summary : feat: short description of the commit
     description : Include a longer description of the commit if necessary. 
+
+    i.e.
+      fix (issue #1): short title of the commit      
  ```

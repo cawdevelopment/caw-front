@@ -212,8 +212,12 @@
     "user_acceptance_warn_3": "No podré cambiar mi nombre de usuario después",
     "user_acceptance_warn_4": "Estamos dejando de utilizar el correo electrónico y el teléfono para identificar a los usuarios.",
     "user_acceptance_warn_5": "El poder que se me ha dado, con un gran poder viene una gran responsabilidad",
+    "confirm_mnt": "¿Estás seguro de acuñar el nombre de usuario: {0}?",
     "longerResponse": "Reconecte su billetera si esta tarda demasiado en confirmar la transacción.",
-    "minting_ntf": "Acuñando usuario NFT"
+    "minting_ntf": "Acuñando usuario NFT",
+    "minting_mcaw": "Acuñando mCAW",
+    "approve_mcaw": "Aprobando mCAW",
+    "confirmation_req": "Se requieren tres confirmaciones en su cartera."
   },
   "minted_page": {
     "title": "¡Felicidades! Tu NFT ha sido acuñado"

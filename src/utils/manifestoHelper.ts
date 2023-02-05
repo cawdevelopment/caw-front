@@ -19,7 +19,8 @@ export const ACTION_COST: any = {
     RECAW: 4000,
 }
 
-export const TOTAL_CAW_SUPPLY = 666666666666666;
+// export const TOTAL_CAW_SUPPLY = 666666666666666;
+export const TOTAL_CAW_SUPPLY = 555555555555555;
 
 export function NtfCostInCaw(username: string) {
 
@@ -82,6 +83,7 @@ export const actionCostAtMcap = (action: CAW_ACTION, marketCap: number[]) => {
 
     const costInCaw = ACTION_COST[ action ];
     const costAtMcap: any = {};
+
 
     for (let i = 0; i < marketCap.length; i++) {
 

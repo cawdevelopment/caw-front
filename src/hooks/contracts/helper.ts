@@ -141,3 +141,33 @@ export const getBlockChainErrMsg = (error: any) => {
 
     return { message, code };
 }
+
+
+export function mapContractReceipt(data: any) {
+
+    const { blockHash, blockNumber, contractAddress, cumulativeGasUsed, from, gasUsed, logs, logsBloom,
+        status, to, transactionHash, transactionIndex, byzantium, confirmations, events, effectiveGasPrice, type,
+    } = data || {};
+
+    const receipt: ethers.ContractReceipt = {
+        type,
+        blockHash,
+        blockNumber,
+        contractAddress,
+        cumulativeGasUsed,
+        from,
+        gasUsed,
+        logs,
+        logsBloom,
+        status,
+        to,
+        transactionHash,
+        transactionIndex,
+        byzantium,
+        confirmations,
+        events: events || [],
+        effectiveGasPrice
+    };
+
+    return receipt;
+}

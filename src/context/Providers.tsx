@@ -46,7 +46,7 @@ const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
     <b
       style={{ color: "red" }}
     >
-      Connect a wallet that supports testnets, like Rainbow Wallet or MetaMask for writing on the blockchain.
+      Connect a wallet that supports testnets, like Coinbase, Rainbow Wallet, or MetaMask.
     </b>
   </Text>
 );

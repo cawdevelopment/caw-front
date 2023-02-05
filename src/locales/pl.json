@@ -137,24 +137,24 @@
     "ethereum_title": "Wspierany przez Ethereum",
     "ethereum_label": "Kontrakt zbudowany na jednym z najbardziej przełomowym i skalowalnym ekosystemie na świecie.",
     "community_title": "Prowadzony przez społeczność",
-    "community_label": "CAW jest projektem bez projektanta i to w gestii społeczności CAW jest nadać kształ.",
+    "community_label": "CAW jest projektem bez projektanta i to w gestii społeczności CAW jest nadać kształt.",
     "social_eco": "Ekonomaia Socialna",
     "social_eco_label_1": "Zostań nagrodzonym",
-    "social_eco_label_2": "podcas interakcji",
+    "social_eco_label_2": "podczas interakcji",
     "social_eco_label_3": "Tecnologia finansowa bazująca na bezpiecznie rozproszonym rejestrze.",
     "social_eco_label_4": "Aktywne palenie i nagrody dla wszystkich stackujących CAW."
   },
   "maintenance_page": {
     "title": "Strona chwilowo w konserwacji",
-    "description": "Pracujemy ciężko nad toą stroną! Sprawdź później."
+    "description": "Pracujemy ciężko nad tą stroną! Sprawdź później."
   },
   "500_page": {
     "title": "Wewnętrzny błąd serwera",
-    "description": "Sertwer napotkał wewnętrzny błąd lub błędną konfigurację i nie był zdolny ukończyć twojego żądania."
+    "description": "Sertwer napotkał wewnętrzny błąd lub błędną konfigurację i nie był zdolny ukończyć Twojego żądania."
   },
   "404_page": {
     "title": "Strona nie istnieje",
-    "description": "Strona której poszukujesz mogła zostać usunięta, jej nazwa zmieniona lub jest tymczasowo nie dostępna."
+    "description": "Strona której poszukujesz mogła zostać usunięta, jej nazwa zmieniona lub jest tymczasowo niedostępna."
   },
   "app_home": {
     "page_title": "Aktywność Społeczności",
@@ -183,7 +183,7 @@
     "nft_state_a": "NFT to z języka angielskiego Non-Fungible Token, czyli niewymienialny token, który jest unikatową cyfrową jednostką danych oparta na architekturze blockchain która pozwala na bezpieczny transfer praw własności zasobów cyfrowych.",
     "nft_state_ai": "Posiadanie NFT nazwy użytkownika pozwala na dostęp do połączonego konta.",
     "already_minted": "Masz już CAW-NFT?",
-    "username_already_taken": "ta nazwa użytkownika jest zajta",
+    "username_already_taken": "ta nazwa użytkownika jest zajęta",
     "username_invalid": "Nazwa użytkownika musi składać się ze znaków alfanumeryczych (A-Z, 0-9), małych liter, bez spacji i znaków specjalnych.",
     "username_available": "ta nazwa użytkownika jest dostępna",
     "username_label": "Twoja nazwa użytkownika to",
@@ -195,7 +195,7 @@
     "label_cost_exp": "tym wyższy",
     "label_cost_willbe": "jej koszt.",
     "wizard_step1_lb1": "Cała aktywność użytkownika, socialna oraz finansowa przepływa przez Twoją NFT nazwę użykownika",
-    "wizard_step1_lb2": "Pojedńczy portfel może posiadać wiele nazwy użytkownika",
+    "wizard_step1_lb2": "Pojedńczy portfel może posiadać wiele nazw użytkownika",
     "wizard_step1_lb3": "Możesz zmintować tyle, na ile możesz sobie pozwolić",
     "fetching_balance": "Aktualizuje saldo...",
     "main_balance": "Saldo główne",
@@ -206,13 +206,16 @@
     "user_acceptance_mchk_dapp": "zdecentralizowana aplikacja",
     "user_acceptance_mchk_2": ", dlatego zgadam się na to:",
     "user_acceptance_warn_1": "Odpowiadam za moje fundusze",
-    "user_acceptance_warn_2": "Odpowiadam za moją nazwę użytkownika oraz czynności z nią powiązane",
+    "user_acceptance_warn_2": "Odpowiadam za moją nazwę użytkownika oraz czynności z nią związane",
     "user_acceptance_warn_3": "Jestem świadomy, że nie będą mógł zmienić mojej nazwy użytkownika później",
     "user_acceptance_warn_4": "Odchodzimy od emaili i numeru telefonu jako możliwości identyfikacji użytkownika",
     "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.",
     "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?",
     "longerResponse": "Odpowiedź jest zbyt długaPodłącz ponownie portfel, jeśli komunikat potwierdzający nie pojawi się",
-    "minting_ntf": "Mennica Nazwa użytkownika NFT"
+    "minting_ntf": "Mennica Nazwa użytkownika NFT",
+    "minting_mcaw": "Minting mCAW",
+    "approve_mcaw": "Approving mCAW",
+    "confirmation_req": "Three confirmations are required in your wallet."
   },
   "minted_page": {
     "title": "Sukces! Twoje NFT zostało zmintowane"
@@ -220,9 +223,9 @@
   "swap_page": {
     "title": "Mintowalne CAW",
     "goerli_msg_1": "Musisz skonfigurować",
-    "goerli_msg_2": "w swoim portfelu przez zmintowaniem mCAW",
+    "goerli_msg_2": "w swoim portfelu przed zmintowaniem mCAW",
     "get_goerli": "Zdobądz trochę Goerli ETH nieodpłatnie na przykład z faucet, itp. ",
-    "approve_req_msg": "Gdy mintujesz, musisz zatwierdzić transakcję aby transferować Twoje tokeny CAW, albo Twoje fundusze zostaną zablokowane w kontrakcie.",
+    "approve_req_msg": "Gdy mintujesz, musisz zatwierdzić transakcję aby przesyłać Twoje tokeny CAW, albo Twoje fundusze zostaną zablokowane w kontrakcie.",
     "alert_cf_mint": "Czy jesteś pewien, że chcesz zmintować {$0} mCAW?"
   },
   "calc": {
