@@ -9,6 +9,7 @@ import { actionCostAtMcap, NftCostAtMcap, getCurrentMCap, NFT_COST, ACTION_COST 
 import { kFormatter, fCurrency } from "src/utils/formatNumber";
 import { uuidv4 } from "src/utils/helper";
 
+const pThreshold = 0.009;
 export default function ProtocolCost() {
 
     const { t } = useTranslation();
@@ -46,20 +47,14 @@ export default function ProtocolCost() {
                 const length = Number(key);
                 const _cost = NftCostAtMcap(length, mCaps);
 
-                const _tmc = Number(_cost[ `${_mctd}` ]);
-                const _50mln = Number(_cost[ `50000000` ]);
-                const _1bln = Number(_cost[ '1000000000' ]);
-                const _10bln = Number(_cost[ '10000000000' ]);
-
                 const _row: any = {};
                 _row.id = uuidv4();
-                // _row.action = `Mint ${length >= 8 ? '+' : ''}${key} Character${length > 1 ? 's' : ''} username`;
                 _row.action = t('calc.mint_action').replace('{0}', length >= 8 ? '+' : '').replace('{1}', key).replace('{2}', length > 1 ? 's' : '');
                 _row.distribution = `${kFormatter(NFT_COST[ key ])} CAW`;
-                _row.TMC = _tmc > 1 ? kFormatter(_tmc) : _tmc.toFixed(4);
-                _row[ '50 mln' ] = _50mln > 1 ? kFormatter(_50mln) : _50mln.toFixed(4);
-                _row[ '1 bln' ] = _1bln > 1 ? kFormatter(_1bln) : _1bln.toFixed(4);
-                _row[ '10 bln' ] = _10bln > 1 ? kFormatter(_10bln) : _10bln.toFixed(4);
+                _row.TMC = _cost[ `${_mctd}` ];
+                _row[ '50 mln' ] = _cost[ `50000000` ];
+                _row[ '1 bln' ] = _cost[ '1000000000' ];
+                _row[ '10 bln' ] = _cost[ '10000000000' ];
 
                 return _row;
             });
@@ -73,20 +68,20 @@ export default function ProtocolCost() {
                 id: uuidv4(),
                 action: t('calc.follow_acc'),
                 distribution: `${kFormatter(ACTION_COST.FOLLOW_ACC)} CAW ${t('calc.follow_acc_burn')}`,
-                TMC: _fCost[ `${_mctd}` ] > 1 ? kFormatter(_fCost[ `${_mctd}` ]) : _fCost[ `${_mctd}` ].toFixed(4),
-                '50 mln': _fCost[ '50000000' ] > 1 ? kFormatter(_fCost[ '50000000' ]) : _fCost[ '50000000' ].toFixed(4),
-                '1 bln': _fCost[ '1000000000' ] > 1 ? kFormatter(_fCost[ '1000000000' ]) : _fCost[ '1000000000' ].toFixed(4),
-                '10 bln': _fCost[ '10000000000' ] > 1 ? kFormatter(_fCost[ '10000000000' ]) : _fCost[ '10000000000' ].toFixed(4),
+                TMC: _fCost[ `${_mctd}` ],
+                '50 mln': _fCost[ '50000000' ],
+                '1 bln': _fCost[ '1000000000' ],
+                '10 bln': _fCost[ '10000000000' ],
             };
 
             const _scRow: any = {
                 id: uuidv4(),
                 action: t('calc.send_caw'),
                 distribution: `${kFormatter(ACTION_COST.SEND_CAW)} CAW ${t('calc.send_caw_burn')}`,
-                TMC: _scCost[ `${_mctd}` ] > 1 ? kFormatter(_scCost[ `${_mctd}` ]) : _scCost[ `${_mctd}` ].toFixed(4),
-                '50 mln': _scCost[ '50000000' ] > 1 ? kFormatter(_scCost[ '50000000' ]) : _scCost[ '50000000' ].toFixed(4),
-                '1 bln': _scCost[ '1000000000' ] > 1 ? kFormatter(_scCost[ '1000000000' ]) : _scCost[ '1000000000' ].toFixed(4),
-                '10 bln': _scCost[ '10000000000' ] > 1 ? kFormatter(_scCost[ '10000000000' ]) : _scCost[ '10000000000' ].toFixed(4),
+                TMC: _scCost[ `${_mctd}` ],
+                '50 mln': _scCost[ '50000000' ],
+                '1 bln': _scCost[ '1000000000' ],
+                '10 bln': _scCost[ '10000000000' ],
             }
 
 
@@ -94,20 +89,20 @@ export default function ProtocolCost() {
                 id: uuidv4(),
                 action: t('calc.like_caw'),
                 distribution: `${kFormatter(ACTION_COST.LIKECAW)} CAW ${t('calc.like_caw_burn')}`,
-                TMC: _lCost[ `${_mctd}` ] > 1 ? kFormatter(_lCost[ `${_mctd}` ]) : _lCost[ `${_mctd}` ].toFixed(4),
-                '50 mln': _lCost[ '50000000' ] > 1 ? kFormatter(_lCost[ '50000000' ]) : _lCost[ '50000000' ].toFixed(4),
-                '1 bln': _lCost[ '1000000000' ] > 1 ? kFormatter(_lCost[ '1000000000' ]) : _lCost[ '1000000000' ].toFixed(4),
-                '10 bln': _lCost[ '10000000000' ] > 1 ? kFormatter(_lCost[ '10000000000' ]) : _lCost[ '10000000000' ].toFixed(4),
+                TMC: _lCost[ `${_mctd}` ],
+                '50 mln': _lCost[ '50000000' ],
+                '1 bln': _lCost[ '1000000000' ],
+                '10 bln': _lCost[ '10000000000' ],
             }
 
             const _rcRow: any = {
                 id: uuidv4(),
                 action: 'ReCAW',
                 distribution: `${kFormatter(ACTION_COST.RECAW)} CAW ${t('calc.recaw_burn')}`,
-                TMC: _rcCost[ `${_mctd}` ] > 1 ? kFormatter(_rcCost[ `${_mctd}` ]) : _rcCost[ `${_mctd}` ].toFixed(4),
-                '50 mln': _rcCost[ '50000000' ] > 1 ? kFormatter(_rcCost[ '50000000' ]) : _rcCost[ '50000000' ].toFixed(4),
-                '1 bln': _rcCost[ '1000000000' ] > 1 ? kFormatter(_rcCost[ '1000000000' ]) : _rcCost[ '1000000000' ].toFixed(4),
-                '10 bln': _rcCost[ '10000000000' ] > 1 ? kFormatter(_rcCost[ '10000000000' ]) : _rcCost[ '10000000000' ].toFixed(4),
+                TMC: _rcCost[ `${_mctd}` ],
+                '50 mln': _rcCost[ '50000000' ],
+                '1 bln': _rcCost[ '1000000000' ],
+                '10 bln': _rcCost[ '10000000000' ],
             }
 
 
@@ -149,16 +144,45 @@ export default function ProtocolCost() {
                     </Tr>
                 </Thead>
                 <Tbody>
-                    {rows.map((row, i) => (
+                    {rows.map((row, i) => {
+
+                        const mct = Number(row.TMC || 0);
+                        const mc50m = Number(row[ '50 mln' ] || 0);
+                        const mc1b = Number(row[ '1 bln' ] || 0);
+                        const mc10b = Number(row[ '10 bln' ] || 0);
+
+                        const mctF = mct <= pThreshold ? 'na' : mct > 1 ? kFormatter(row.TMC) : mct.toFixed(4);
+                        const mc50mF = mc50m <= pThreshold ? 'na' : mc50m > 1 ? kFormatter(row[ '50 mln' ]) : mc50m.toFixed(4);
+                        const mc1bF = mc1b <= pThreshold ? 'na' : mc1b > 1 ? kFormatter(row[ '1 bln' ]) : mc1b.toFixed(4);
+                        const mc10bF = mc10b <= pThreshold ? 'na' : mc10b > 1 ? kFormatter(row[ '10 bln' ]) : mc10b.toFixed(4);
+
+                        return (
                         <Tr key={row.id}>
                             <Td>{row.action}</Td>
                             <Td>{row.distribution}</Td>
-                            <Td isNumeric>{row.TMC}</Td>
-                            <Td isNumeric>{row[ '50 mln' ]}</Td>
-                            <Td isNumeric>{row[ '1 bln' ]}</Td>
-                            <Td isNumeric>{row[ '10 bln' ]}</Td>
+                                <Td isNumeric>
+                                    <Tooltip label={fCurrency(mct)} isDisabled={mct <= 1000} >
+                                        {mctF}
+                                    </Tooltip>
+                                </Td>
+                                <Td isNumeric>
+                                    <Tooltip label={fCurrency(mc50m)} isDisabled={mc50m <= 1000} >
+                                        {mc50mF}
+                                    </Tooltip>
+                                </Td>
+                                <Td isNumeric>
+                                    <Tooltip label={fCurrency(mc1b)} isDisabled={mc1b <= 1000} >
+                                        {mc1bF}
+                                    </Tooltip>
+                                </Td>
+                                <Td isNumeric>
+                                    <Tooltip label={fCurrency(mc10b)} isDisabled={mc10b <= 1000} >
+                                        {mc10bF}
+                                    </Tooltip>
+                                </Td>
                         </Tr>
-                    ))}
+                        )
+                    })}
                 </Tbody>
             </Table>
         </TableContainer>
