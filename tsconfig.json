@@ -7,20 +7,20 @@
       "dom.iterable",
       "esnext"
     ],
-    "paths": {
-      "@components*": [
-        "src/components*"
-      ],
-      "@utils*": [
-        "src/utils*"
-      ],
-      "@lib*": [
-        "src/lib*"
-      ],
-      "@tpes*": [
-        "src/types*"
-      ]
-    },
+    // "paths": {
+    //   "@components*": [
+    //     "src/components*"
+    //   ],
+    //   "@utils*": [
+    //     "src/utils*"
+    //   ],
+    //   "@lib*": [
+    //     "src/lib*"
+    //   ],
+    //   "@tpes*": [
+    //     "src/types*"
+    //   ]
+    // },
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
