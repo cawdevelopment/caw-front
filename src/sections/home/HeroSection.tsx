@@ -1,4 +1,4 @@
-import React from "react";
+import { type ReactNode, forwardRef } from "react";
 import { chakra, Box, Stack, styled, useColorMode, Text, Spacer, useMediaQuery, useToken, Image, HStack, Center, useColorModeValue, Button, Show, Hide } from "@chakra-ui/react";
 import { m } from "framer-motion";
 import NextLink from 'next/link';
@@ -18,10 +18,10 @@ export const DecentralizedTextStyle = styled('span', {
 });
 
 type ContentAlignPops = {
-    children: React.ReactNode;
+    children: ReactNode;
 }
 
-export const ContentAlign = React.forwardRef(({ children }: ContentAlignPops, ref: any) => (
+export const ContentAlign = forwardRef(({ children }: ContentAlignPops, ref: any) => (
     <>
         <Show above='md'>
             {children}

@@ -1,10 +1,10 @@
-import React from 'react';
-import { SystemProps, Text, useColorModeValue } from '@chakra-ui/react';
+import { Text, useColorModeValue } from '@chakra-ui/react';
 
+import { TextAlign } from 'src/components/Interface.Props';
 import HashTagRender, { ActionTagEvent } from "./tag-parser";
 
 type Props = {
-    align?: SystemProps[ "textAlign" ];
+    align?: TextAlign;
     htStyle?: React.CSSProperties;
     mtStyle?: React.CSSProperties;
     urlStyle?: React.CSSProperties;

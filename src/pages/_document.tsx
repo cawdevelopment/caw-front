@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ColorModeScript } from '@chakra-ui/react'
 
-import { MetaTags } from "@components/wrappers/Page";
+import { MetaTags } from "src/components/wrappers/Page";
 import { APP_DESCRIPTION, APP_NAME } from 'src/utils/constants'
 import theme from '../theme';
 

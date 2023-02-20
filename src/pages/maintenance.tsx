@@ -1,9 +1,9 @@
 import NextLink from 'next/link';
-import { useTranslation } from "react-i18next";
 import { Button, Heading, Text, Container, useColorModeValue } from '@chakra-ui/react';
 
+import { useTranslation } from 'src/hooks';
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import { MaintenanceIllustration } from 'src/assets';
+import MaintenanceIllustration from 'src/assets/illustration_maintenance';
 
 Maintenance.getLayout = function getLayout(page: React.ReactElement) {
   return <Layout variant="landing">{page}</Layout>;

@@ -1,15 +1,35 @@
 import { ethers, utils } from "ethers";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSigner } from "wagmi";
+import { Address, useSigner, useWaitForTransaction } from "wagmi";
 
 import useAppConfigurations from 'src/hooks/useAppConfigurations';
 import { CONTRACT_ERR_NOT_INIT } from 'src/utils/constants';
-import { getContract } from "./helper";
+import { getContract, mapContractReceipt } from "./helper";
 
 //* Contract name :  MintableCAW
 //* Swap ETH to mCAW
-export default function useMintableCAWContract() {
+type Method = 'mint' | 'approve' | 'transfer' | 'transferFrom';
+
+type txConfirmedArgs = {
+    method: Method;
+    tx: ethers.ContractTransaction | undefined;
+    receipt: ethers.ContractReceipt
+}
+type txSentArgs = {
+    method: Method;
+    tx: ethers.ContractTransaction;
+}
+
+type Props = {
+    onBeforeSend?: (method: Method) => void;
+    onTxSent?: (agrs: txSentArgs) => void;
+    onTxConfirmed?: (agrs: txConfirmedArgs) => void;
+    onError?: (method: Method, error: Error) => void;
+    onCompleted?: (method: Method) => void;
+}
+
+export default function useMintableCAWContract(props: Props) {
 
     const { t } = useTranslation();
     const [ contract, setContract ] = useState<ethers.Contract | null>(null);
@@ -18,58 +38,34 @@ export default function useMintableCAWContract() {
     const { address: spenderAddress } = CAW_NAME_MINTER;
 
     const { data: signer, isError: isSignerError, isLoading: loadingSigner } = useSigner();
+    const [ operation, setOperation ] = useState<{
+        tx: ethers.ContractTransaction,
+        method: Method
+    } | undefined>(undefined);
 
     useEffect(() => {
         const { contract } = getContract({ provider, address, abi, network, apiKey: INFURA_API_KEY });
         setContract(contract);
     }, [ address, abi, network, INFURA_API_KEY, provider ]);
 
+    //!~> workaround for metamask mobile
+    //! UI pitfall: when authenticated with metamask on mobile but navigating to the app from a browser.
+    //! Watch for the tx confirmation and update the UI accordingly.
+    useWaitForTransaction({
+        hash: operation?.tx.hash as Address | undefined,
+        onSuccess: (data: any) => {
+            props.onTxConfirmed?.({
+                method: operation?.method as Method,
+                tx: operation?.tx,
+                receipt: mapContractReceipt(data),
+            });
 
-    // const [ mintArgs, setMintArgs ] = useState<any[] | undefined>(undefined);
-
-    // const { config, isLoading } = usePrepareContractWrite({
-    //     address: address,
-    //     abi: abi,
-    //     functionName: 'mint',
-    //     args: mintArgs,
-    // });
-
-    // const { data: mintData, isLoading: isMintLoading, isSuccess: isMintStarted, write } = useContractWrite({
-    //     ...config,
-    //     onError(error: any) {
-    //         console.error('useContractWrite.Error', error)
-    //     },
-    //     onMutate({ args, overrides }) {
-    //         console.log('useContractWrite.Mutate', { args, overrides })
-    //     },
-    //     onSuccess(data) {
-    //         console.log('useContractWrite.Success', data)
-    //     },
-    //     onSettled(data, error) {
-    //         console.log('useContractWrite.Settled', data, error)
-    //         setMintArgs(undefined);
-    //     }
-    // });
-
-    // useEffect(() => {
-
-    //     try {
-
-    //         if (!mintArgs)
-    //             return;
-
-    //         console.log('Minting using args', mintArgs);
-    //         write?.();
-    //     }
-    //     catch (error: any) {
-    //         console.error("minting error : ", error);
-    //         throw new Error(error);
-    //     }
-
-    // }, [ mintArgs, write ]);
-
-
-    // const { isSuccess: txSuccess, error: txError } = useWaitForTransaction({ confirmations: 1, hash: mintData?.hash });
+            props.onCompleted?.(operation?.method as Method);
+        },
+        onError: (error: Error) => {
+            props.onError?.(operation?.method as Method, error);
+        }
+    });
 
     const signedContract = () => {
 
@@ -104,27 +100,87 @@ export default function useMintableCAWContract() {
     }
 
     const mint = async (userAddress: string, amount: number) => {
-        const tx = await signedContract().mint(userAddress, utils.parseEther(amount.toString()));
-        const receipt = await tx.wait();
-        return { tx, receipt };
+        try {
+            const parsedAmount = utils.parseEther(amount.toString());
+
+            props.onBeforeSend?.('mint');
+            const tx = await signedContract().mint(userAddress, parsedAmount);
+
+            setOperation({ tx, method: 'mint' });
+            props.onTxSent?.({ method: 'mint', tx });
+
+            const receipt = await tx.wait();
+
+            return { tx, receipt };
+        }
+        catch (error: any) {
+            props.onError?.('mint', error);
+        }
+        finally {
+            props.onCompleted?.('mint');
+        }
     }
 
-    const approve = async (userAddress: string, amount: number) => {        
-        const tx = await signedContract().approve(spenderAddress, utils.parseEther(amount.toString()));
-        const receipt = await tx.wait();
-        return { tx, receipt };
+    const approve = async (userAddress: string, amount: number) => {  
+        try {
+            const parsedAmount = utils.parseEther(amount.toString());
+
+            props.onBeforeSend?.('approve');
+            const tx = await signedContract().approve(spenderAddress, parsedAmount);
+            setOperation({ tx, method: 'approve' });
+            props.onTxSent?.({ method: 'approve', tx });
+
+            const receipt = await tx.wait();
+
+            return { tx, receipt };
+        }
+        catch (error: any) {
+            props.onError?.('approve', error);
+        }
+        finally {
+            props.onCompleted?.('approve');
+        }
     }
 
     const transfer = async (to: string, amount: number) => {    
-        const tx = await signedContract().transfer(to, utils.parseEther(amount.toString()));
-        const receipt = await tx.wait();
-        return { tx, receipt };
+
+        try {
+            props.onBeforeSend?.('transfer');
+            const tx = await signedContract().transfer(to, utils.parseEther(amount.toString()));
+            setOperation({ tx, method: 'transfer' });
+            props.onTxSent?.({ method: 'transfer', tx });
+
+            const receipt = await tx.wait();
+
+            return { tx, receipt };
+        }
+        catch (error: any) {
+            props.onError?.('transfer', error);
+        }
+        finally {
+            props.onCompleted?.('transfer');
+        }
     }
 
     const transferFrom = async (from: string, to: string, amount: number) => {        
-        const tx = await signedContract().transferFrom(from, to, utils.parseEther(amount.toString()));
-        const receipt = await tx.wait();
-        return { tx, receipt };
+
+        try {
+
+            props.onBeforeSend?.('transferFrom');
+            const tx = await signedContract().transferFrom(from, to, utils.parseEther(amount.toString()));
+            setOperation({ tx, method: 'transferFrom' });
+            props.onTxSent?.({ method: 'transferFrom', tx });
+
+            const receipt = await tx.wait();
+
+            return { tx, receipt };
+        }
+        catch (error: any) {
+            props.onError?.('transferFrom', error);
+        }
+        finally {
+            props.onCompleted?.('transferFrom');
+        }
     }
 
     return {

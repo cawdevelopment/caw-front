@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
@@ -51,7 +51,7 @@ function MediumMenu() {
             ? setScroll(true)
             : setScroll(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
 
         if (window)
             window.addEventListener?.('scroll', changeScroll);
@@ -128,7 +128,7 @@ function MobileMenu() {
     const { t } = useTranslation();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const bg = useColorModeValue('gray.100', 'gray.900');
-    const ref = React.useRef<any>();
+    const ref = useRef<any>();
 
     useEffect(() => {
 

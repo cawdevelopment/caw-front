@@ -1,15 +1,23 @@
-import NextLink from 'next/link';
-import { useTranslation } from "react-i18next";
-import { Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer, Stack, CircularProgress } from "@chakra-ui/react";
+import { memo, useCallback, useMemo } from "react";
+import {
+    Avatar, Box, HStack, VStack, Text, Divider, Heading, Link, useColorModeValue, Spacer,
+    Stack, CircularProgress, IconButton, chakra
+} from "@chakra-ui/react";
+import Iconify from "src/components/icons/Iconify";
 
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { WalletBalanceModel } from "src/types/dtos";
 import { fDecimal, kFormatter } from "src/utils/formatNumber";
 import { BILLION } from 'src/utils/constants';
-import { PATH_DASHBOARD } from "src/routes/paths";
-import { useAccountBalance } from "src/hooks";
+import { useAccountBalance, useTranslation } from "src/hooks";
+import { useMintingPageContext } from ".";
 
-function AssetItem({ balance }: { balance: WalletBalanceModel }) {
+type AssetItemProps = {
+    balance: WalletBalanceModel;
+    hidden?: boolean;
+}
+
+function AssetItem({ balance, hidden }: AssetItemProps) {
 
     const { symbol, name, amount } = balance;
     const symbolForeColor = useColorModeValue('gray.500', 'gray.400');
@@ -25,7 +33,13 @@ function AssetItem({ balance }: { balance: WalletBalanceModel }) {
                     </Text>
                 </Text>
                 <VStack alignItems={"flex-end"}>
-                    <Text lineHeight={1} wordBreak="break-all" >{`${fDecimal(amount)} ${amount >= BILLION ? ` | ${kFormatter(amount)}` : ''}`}</Text>
+                    <Text lineHeight={1} wordBreak="break-all" >
+                        {
+                            hidden ?
+                                '******' :
+                                `${fDecimal(amount)} ${amount >= BILLION ? ` | ${kFormatter(amount)}` : ''}`
+                        }
+                    </Text>
                 </VStack>
             </HStack>
             <Divider />
@@ -33,9 +47,10 @@ function AssetItem({ balance }: { balance: WalletBalanceModel }) {
     );
 }
 
-export default function WalletBalanceCard({ width }: { width: number }) {
+function WalletBalanceCard({ width }: { width: number }) {
 
     const { t } = useTranslation();
+    const { hideBalance, setValue } = useMintingPageContext();
     const { address, chain, connected } = useDappProvider();
     const { assets, processing: fetchingBalance } = useAccountBalance({
         address: address || '',
@@ -44,7 +59,11 @@ export default function WalletBalanceCard({ width }: { width: number }) {
         chainName: chain?.name || ''
     });
 
-    const sortedByAmount = assets.sort((a, b) => b.amount - a.amount);
+    const handleShowBalance = useCallback(() => {
+        setValue("hideBalance", !hideBalance);
+    }, [ hideBalance, setValue ]);
+
+    const sortedByAmount = useMemo(() => assets.sort((a, b) => b.amount - a.amount), [ assets ]);
 
     return (
         <Box width={width <= 0 ? 'full' : width} maxWidth={"container.md"}  >
@@ -53,24 +72,55 @@ export default function WalletBalanceCard({ width }: { width: number }) {
                     <HStack>
                         <CircularProgress isIndeterminate color='caw.500' size="1.5rem" />
                         <Text>{t('minting_page.fetching_balance')}</Text>
-                    </HStack>
-                    : <span>{t('minting_page.main_balance')}</span>
+                    </HStack>                    
+                    : <HStack>
+                        <span>{t('minting_page.main_balance')}</span>
+                        <Spacer />
+                        <IconButton
+                            aria-label="More post options"
+                            icon={<Iconify icon={hideBalance ? "eva:eye-off-fill" : "eva:eye-fill"} />}
+                            variant="ghost"
+                            onClick={handleShowBalance}
+                            w="fit-content"
+                        />
+                    </HStack> 
                 }
             </Heading>
             <Spacer h={10} />
-            {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} />)}
+            {sortedByAmount.map(asset => <AssetItem key={asset.symbol} balance={asset} hidden={hideBalance} />)}
             <Spacer h={10} />
             <Stack direction={{ base: 'column', md: 'column' }} spacing={2} align="center" justify="center" >
-                <Text fontSize="sm" color="gray.500">
-                    {t('minting_page.caw_balance_req_lb')}
-                </Text>
-                <Box p={5}>
-                    <Link as={NextLink} href={PATH_DASHBOARD.swap.mcaw} color={'blue.400'}>
-                            <b>{t('labels.getmcaw')}</b>
+                <chakra.div
+                    display={"flex"}
+                    justifyContent={"center"}
+                    alignItems={"baseline"}
+                    textAlign={"center"}
+                >
+                    {`${t('swap_page.goerli_msg_1')} Goerli testnet ${t('swap_page.goerli_msg_2')}`}
+                </chakra.div>
+                <Stack id="stack-goerli" direction={{ base: 'column', md: 'column' }} spacing={2} p={1} alignItems="center">
+                    <Text fontSize='xl' textAlign="center">
+                        {t('swap_page.get_goerli')}
+                    </Text>
+                    <Link
+                        isExternal
+                        color={'blue.400'}
+                        href="https://goerlifaucet.com/"
+                        target="_blank">
+                        Goerli Faucet
                     </Link>
-                </Box>
+                    <Link
+                        isExternal
+                        color={'blue.400'}
+                        href="https://faucets.chain.link/"
+                        target="_blank">
+                        Faucets Chain
+                    </Link>
+                </Stack>
             </Stack>
         </Box>
     );
 }
 
+
+export default memo(WalletBalanceCard);

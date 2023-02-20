@@ -28,8 +28,6 @@ export default function SwapMCAWForm() {
     const colorText = useColorModeValue("gray.900", "gray.50");
     const { balance, fetchingETH, } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
 
-    const { initialized, mint, approve } = useMintableCAWContract();
-
     const [ { cawUSD, ethUSD }, setPrices ] = useState({ cawUSD: 0, ethUSD: 0 });
     const [ input, setInput ] = useState(0)
     const [ minting, setMinting ] = useState(false)
@@ -38,6 +36,32 @@ export default function SwapMCAWForm() {
     const [ error, setError ] = useState<string | null>(null);
     const [ txMintHash, setMintTxHash ] = useState<string | null>(null);
     const [ txApproveHash, setApproveTxHash ] = useState<string | null>(null);
+
+    const { initialized, mint, approve } = useMintableCAWContract({
+
+        onBeforeSend: (method) => {
+            setError(null);
+            setMinting(true);
+        },
+        onTxConfirmed: ({ method, tx }) => {
+
+            if (method === 'mint') {
+                setMintTxHash(tx?.hash || null);
+                setMinting(false);
+                handleApprove();
+            }
+
+            if (method === 'approve') {
+                setApproveTxHash(tx?.hash || null);
+                setApproving(false);
+            }
+        },
+        onError: (method, error) => {
+            setMinting(false);
+            const { code, message } = getBlockChainErrMsg(error);
+            setError(message ? message + ' : ' + code : 'Something went wrong');
+        },
+    });
 
 
     useEffect(() => {
@@ -64,7 +88,7 @@ export default function SwapMCAWForm() {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(Number(e.target.value));
 
-    const handleSubmit = async () => {
+    const handleSubmit = () => {
         try {
             if (!initialized) {
                 setError('Contract not initialized');
@@ -76,13 +100,7 @@ export default function SwapMCAWForm() {
                 return;
             }
 
-            setError(null);
-            setMinting(true);
-            const { tx } = await mint(address, input);
-
-            setMintTxHash(tx.hash);
-            setMinting(false);
-            handleApprove();
+            mint(address, input);
         }
         catch (error: any) {
             setMinting(false);
@@ -91,7 +109,7 @@ export default function SwapMCAWForm() {
         }
     }
 
-    const handleApprove = async () => {
+    const handleApprove = () => {
         try {
 
             if (!initialized) {
@@ -101,9 +119,7 @@ export default function SwapMCAWForm() {
 
             setError(null);
             setApproving(true);
-            const { tx } = await approve(address, input);
-            setApproveTxHash(tx.hash);
-            setApproving(false);
+            approve(address, input);
         } catch (error: any) {
             const { code, message } = getBlockChainErrMsg(error);
             setApproving(false);

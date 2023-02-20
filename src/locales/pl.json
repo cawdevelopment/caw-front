@@ -24,9 +24,12 @@
     "mint": "mintuj",
     "cancel": "anuluj",
     "confirm": "potwierdź",
+    "continue": "continue",
     "swap": "wymień",
     "get": "uzyskaj",
-    "go": "idź"
+    "go": "idź",
+    "choose": "wybierz",
+    "connect": "podłącz"
   },
   "buttons": {
     "go_home": "Strona główna",
@@ -53,7 +56,9 @@
     "mainnet_not_allowed": "Podczas alpha testingu, mainnet nie jest dozwolony, zmień proszę sieć.",
     "signer_not_found": "Nie znaleziono podpisującego, sprawdź czy portfel jest podłączony.",
     "fullscreen_not_supported": "Twoja przeglądarka nie obsługuje trybu pełnoekranowego.",
-    "InsufficientmCAW": "Niewystarczające saldo mCAW do wykonania tego NFT, proszę zdobyć trochę mCAW."
+    "insufficientmCAW": "Niewystarczające saldo mCAW do wykonania tego NFT, proszę zdobyć trochę mCAW.",
+    "insufficientETH": "Insufficient ETH balance to pay for transaction, please top up your wallet and try again",
+    "mobileBrowserNotSupported": "It looks like you are using a mobile device. If so, please open this website in the in-app browser of your wallet to use this feature."
   },
   "labels": {
     "under_dev": "W przygotowaniu",
@@ -97,6 +102,7 @@
     "viewall": "Zobacz całość",
     "manage_accounts": "Edytuj konto",
     "connectedto": "Podłącz do",
+    "connectas": "Podłącz jako",
     "unknownChain": "Nieznana sieć",
     "accounts": "Konta",
     "options": "Opcje",
@@ -212,7 +218,10 @@
     "user_acceptance_warn_5": "Z wielką mocą wiąże się wielka odpowiedzialność.",
     "confirm_mnt": "Czy jesteś pewien, że chcesz zmintować nazwę : {0}?",
     "longerResponse": "Odpowiedź jest zbyt długaPodłącz ponownie portfel, jeśli komunikat potwierdzający nie pojawi się",
-    "minting_ntf": "Mennica Nazwa użytkownika NFT"
+    "minting_ntf": "Mennica Nazwa użytkownika NFT",
+    "minting_mcaw": "Minting mCAW",
+    "approve_mcaw": "Approving mCAW",
+    "confirmation_req": "Three confirmations are required in your wallet."
   },
   "minted_page": {
     "title": "Sukces! Twoje NFT zostało zmintowane"
@@ -224,6 +233,10 @@
     "get_goerli": "Zdobądz trochę Goerli ETH nieodpłatnie na przykład z faucet, itp. ",
     "approve_req_msg": "Gdy mintujesz, musisz zatwierdzić transakcję aby przesyłać Twoje tokeny CAW, albo Twoje fundusze zostaną zablokowane w kontrakcie.",
     "alert_cf_mint": "Czy jesteś pewien, że chcesz zmintować {$0} mCAW?"
+  },
+  "private_profile_page": {
+    "accounts": "My Accounts",
+    "accounts_subtitle": "Minted usernames associated with this wallet"
   },
   "calc": {
     "title": "Koszty i palenia są zależne od poziomu kapitalizacji rynkowej (ang. Market Cap)",

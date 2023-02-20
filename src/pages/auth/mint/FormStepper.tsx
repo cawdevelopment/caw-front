@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import NextLink from 'next/link';
-import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup } from "@chakra-ui/react";
+import { Box, Button, Stack, Text, Flex, useColorModeValue, Link, Spacer, Progress, ButtonGroup, useDisclosure } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { m } from "framer-motion";
 
@@ -8,6 +8,8 @@ import { PATH_DASHBOARD } from "src/routes/paths";
 import { MotionContainer, WrapperFadeAnimation } from "src/components/animate";
 import { useDappProvider } from "src/context/DAppConnectContext";
 import AlertMessage from "src/components/AlertMessage";
+import AlertDialogConfirm from "src/components/dialogs/AlertDialog";
+import { sentenceCase } from "src/utils/helper";
 
 import { useMintingPageContext } from '.';
 import { animation } from '../connect';
@@ -29,7 +31,8 @@ type Props = {
 
 export default function FormStepper(props: Props) {
 
-    const { termsAccepted, processing, isValid, userName, error } = useMintingPageContext();
+    const { termsAccepted, processing, isValid, userName, error, submit } = useMintingPageContext();
+    const { isOpen, onClose, onOpen } = useDisclosure();
     const bg = useColorModeValue('gray.50', 'gray.800');
     const boxBg = useColorModeValue('white', 'gray.700');
     const [ step, setStep ] = useState(1);
@@ -56,6 +59,11 @@ export default function FormStepper(props: Props) {
         setProgress(getProgress(newStep));
     }, [ step ]);
 
+
+    const handleMint = useCallback(() => {
+        onClose();
+        submit();
+    }, [ onClose, submit ]);
     return (
         <MotionContainer>
             <div>
@@ -140,13 +148,14 @@ export default function FormStepper(props: Props) {
                                     )}
                                     {step === maxSteps && (
                                         <Button
-                                            type="submit"
+                                            type="button"
                                             w="8rem"
-                                            colorScheme="green"
+                                            colorScheme="blue"
                                             variant="solid"
                                             isLoading={processing}
                                             loadingText={t('labels.minting')}
                                             disabled={processing ? true : (!connected || !termsAccepted || !isValid || !userName)}
+                                            onClick={onOpen}
                                         >
                                             {t('buttons.btn_mint')}
                                         </Button>
@@ -158,17 +167,9 @@ export default function FormStepper(props: Props) {
                         <Flex
                             direction={{ base: "column", md: "row" }}
                             alignItems="center"
-                            justifyContent="space-between"
+                            justifyContent="center"
                             rowGap={2}
                         >
-                            <Link
-                                as={NextLink}
-                                href={PATH_DASHBOARD.swap.mcaw}
-                                color={'blue.400'}
-                                rel="noopener noreferrer"
-                            >
-                                <b>{t('labels.getmcaw')}</b>
-                            </Link>
                             <Link
                                 as={NextLink}
                                 href={PATH_DASHBOARD.app.home}
@@ -182,6 +183,21 @@ export default function FormStepper(props: Props) {
                     </Stack>
                 </Flex>
             </div>
+            <AlertDialogConfirm
+                isOpen={isOpen}
+                title={sentenceCase(t("verbs.confirm"))}
+                cancelText={sentenceCase(t("verbs.cancel"))}
+                confirmText={sentenceCase(t("verbs.mint"))}
+                confirmColorScheme="green"
+                onClose={onClose}
+                onConfirm={handleMint}
+                body={<p>
+                    {t("minting_page.confirm_mnt").replace("{0}", "").replace("?", "")} <b>{userName}</b>
+                    <br />
+                    <br />
+                    <p>{t("minting_page.confirmation_req")}</p>
+                </p>}
+            />
         </MotionContainer>
     );
 }

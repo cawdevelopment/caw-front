@@ -95,7 +95,6 @@ export default function TopBar() {
             {showNewPostButton && (
                 <ItemWrapper padding="0.0rem" minW="0.0rem">
                     <Button
-                        leftIcon={<Iconify icon="la:crow" color={iconColor} />}
                         _hover={{ bg: hoverColor }}
                         variant={"ghost"}
                     >

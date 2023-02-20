@@ -6,7 +6,7 @@ import {
 type Props = {
   title: string;
   message: string;
-  footer: string;
+  footer: string | React.ReactNode;
   isOpen: boolean;
   circularProps?: CircularProgressProps;
   onClose: () => void;
@@ -46,11 +46,7 @@ export default function OperationInProgressModal(props: Props) {
         <ModalFooter
           justifyContent={'center'}
         >
-          <Text
-            colorScheme={'blue'}
-          >
-            {footer}
-          </Text>
+          {footer}
         </ModalFooter>
       </ModalContent>
     </Modal>

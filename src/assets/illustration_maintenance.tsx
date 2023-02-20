@@ -1,4 +1,4 @@
-import { Box, BoxProps, useToken } from "@chakra-ui/react";
+import { Box, type BoxProps, useToken } from "@chakra-ui/react";
 
 export default function MaintenanceIllustration({ ...other }: BoxProps) {
 

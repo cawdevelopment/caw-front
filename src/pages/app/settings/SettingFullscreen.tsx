@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Box, HStack, useToast } from "@chakra-ui/react";
+import { Box, HStack } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
+import { useToast } from 'src/hooks';
 import BoxMask from "./BoxMask";
 
 export default function SettingFullscreen() {

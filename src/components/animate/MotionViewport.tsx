@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import { m, MotionProps } from 'framer-motion';
-import { Box, BoxProps, useMediaQuery, useToken } from '@chakra-ui/react';
+import { type ReactNode } from 'react';
+import { m, type MotionProps } from 'framer-motion';
+import { Box, type BoxProps, useMediaQuery, useToken } from '@chakra-ui/react';
 import { varContainer } from '.';
 
 

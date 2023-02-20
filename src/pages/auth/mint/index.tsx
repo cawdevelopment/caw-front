@@ -1,16 +1,15 @@
-'use client';
 import { useState, createContext, useContext } from "react";
-import { Container, useToast } from "@chakra-ui/react";
+import { Container } from "@chakra-ui/react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useTranslation, } from "react-i18next";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import dynamic from "next/dynamic";
 
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
 import { useDappProvider } from "src/context/DAppConnectContext";
-import { useCawNameMinterContract, useAccountBalance } from "src/hooks";
+import { useCawNameMinterContract, useMintableCAWContract, useETHBalance, useTranslation, useToast } from "src/hooks";
 import { getBlockChainErrMsg } from "src/hooks/contracts/helper";
 import { PATH_AUTH } from "src/routes/paths";
+
 import FormStepper from "./FormStepper";
 
 const BlockChainOperationInProgressModal = dynamic(() => import("src/components/dialogs/BlockChainOperationInProgressModal"), { ssr: false });
@@ -20,7 +19,7 @@ RegisterPage.getLayout = function getLayout(page: React.ReactElement) {
 };
 
 
-type FormValue = 'userName' | 'termsAccepted' | 'isValid' | 'message' | 'onChainValidated' | 'costVerified' | 'costUSD' | 'costETH' | 'costCAW' | 'swapAmount';
+export type FormValue = 'userName' | 'termsAccepted' | 'isValid' | 'message' | 'onChainValidated' | 'costVerified' | 'costUSD' | 'costETH' | 'costCAW' | 'swapAmount' | 'hideBalance';
 
 // * Create context for the form
 export const MintingPageContext = createContext({
@@ -36,8 +35,10 @@ export const MintingPageContext = createContext({
     costCAW: 0,
     swapAmount: 0,
     error: '',
-    onSetValue: (key: FormValue, value: any) => { },
-    onSubmit: (data: any) => { }
+    hideBalance: false,
+    setValue: (key: FormValue, value: any) => { },
+    setManyValues: (values: { key: FormValue, value: any }[]) => { },
+    submit: () => { }
 });
 
 //* Create a  hook to access the context
@@ -48,39 +49,80 @@ export function useMintingPageContext() {
 export default function RegisterPage() {
 
     const { t } = useTranslation();    
-    const { address, chain, connected } = useDappProvider();
+    const { address, connected, chain } = useDappProvider();
     const [ error, setError ] = useState<string | null>(null);
     const [ processing, setProcessing ] = useState(false);
+    const [ mintingCawName, setMintingCawName ] = useState(false);
+    const [ breakPoint, setBreakPoint ] = useState<string>('');
     const [ txSent, setTxSent ] = useState(false);
     const toast = useToast();
     const router = useRouter();
+    const { balance } = useETHBalance({ account: address, chainId: chain?.id || 0, chainName: chain?.name || '' });
 
-    const { assets, processing: fetchingBalance } = useAccountBalance({
-        address: address || '',
-        connected: connected,
-        chainId: chain?.id || 0,
-        chainName: chain?.name || '',
+    const { initialized: CAWNamesMinterContractInitialized, mint: mintCAWUsername } = useCawNameMinterContract({
+        onBeforeSend: () => {
+            setTxSent(false);
+            setProcessing(true);
+            setMintingCawName(true);
+            setBreakPoint(t("minting_page.minting_ntf"));
+        },
+        onTxSent: () => {
+            setTxSent(true);
+            setMintingCawName(true);
+        },
+        onTxConfirmed: (tx, rcpt) => {
+            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', rcpt?.transactionHash || 'xxx');
+            router.push(url);
+        },
+        onError: (err) => {
+            setProcessing(false);
+            setMintingCawName(false);
+            const { message, code } = getBlockChainErrMsg(err);
+            setError(message ? message + ' : ' + code : 'Something went wrong');
+        },
+        onCompleted: () => {
+            setProcessing(false);
+            setMintingCawName(false);
+            setTxSent(true);
+        }
     });
 
-    const { mint } = useCawNameMinterContract({
-        onBeforeSend: () => {
+    const { initialized: mCAWContractInitialized, mint: mintMCAW, approve: aproveMCAW } = useMintableCAWContract({
+        onBeforeSend: (method) => {
+            setMintingCawName(false);
             setProcessing(true);
+            switch (method) {
+                case 'mint':
+                    setBreakPoint(t("minting_page.minting_mcaw"));
+                    break;
+                case 'approve':
+                    setBreakPoint(t("minting_page.approve_mcaw"));
+                    break;
+                default:
+                    setBreakPoint(method.toLowerCase());
+            }
         },
-        onTxSent: (tx) => {
+        onTxSent: ({ }) => {
             setTxSent(true);
         },
-        onTxConfirmed: (tx) => {
-            const url = PATH_AUTH.minted.replace('[username]', userName).replace('[tx]', tx?.transactionHash || 'xxx');
-            router.push(url);
+        onTxConfirmed: ({ method }) => {
+
+            setTxSent(false);
+            if (method === 'mint')
+                aproveMCAW(address, costCAW);
+
+            if (method === 'approve' && !mintingCawName)
+                mintCAWUsername(userName);
         },
         onError: (err) => {
             setProcessing(false);
             const { message, code } = getBlockChainErrMsg(err);
             setError(message ? message + ' : ' + code : 'Something went wrong');
         },
-        onCompleted: () => {
-            setProcessing(false);
-            setTxSent(true);
+        onCompleted: (method) => {
+
+            if (method === 'approve' && !mintingCawName)
+                mintCAWUsername(userName);
         }
     });
 
@@ -103,15 +145,21 @@ export default function RegisterPage() {
             costETH: 0,
             costCAW: 0,
             swapAmount: 0,
+            hideBalance: false,
         }
     });    
 
-    const { termsAccepted, userName, message, onChainValidated, costVerified, costCAW, costETH, costUSD, swapAmount, isValid } = methods.watch();
+    const { termsAccepted, userName, message, onChainValidated, costVerified, costCAW, costETH, costUSD, swapAmount, isValid, hideBalance } = methods.watch();
 
-    const onSubmit = async (data: any) => {
+    const onSubmit = (data: any) => {
         try {
 
             toast.closeAll();
+
+            if (!CAWNamesMinterContractInitialized || !mCAWContractInitialized) {
+                toast({ title: 'Contracts not initialized', status: 'error', isClosable: true, });
+                return;
+            }
 
             if (!address || !connected) {
                 toast({ title: 'Wallet not connected', status: 'error', isClosable: true, });
@@ -134,19 +182,13 @@ export default function RegisterPage() {
                 return;
             }
 
-            if (fetchingBalance) {
-                toast({ title: 'Fetching balance', status: 'error', isClosable: true, });
+            if (balance <= 0) {
+                toast({ title: t('errors.insufficientETH'), status: 'error', isClosable: true, });
                 return;
             }
 
-            const mCAW = assets?.find((a: any) => a.symbol === 'mCAW')?.amount || 0;
-
-            if (costCAW > mCAW) {
-                toast({ title: t('errors.InsufficientmCAW'), status: 'error', isClosable: true, });
-                return;
-            }
-
-            mint(userName);            
+            //* trigger mint mCAW and it will run the other contracts in order.
+            mintMCAW(address, costCAW);
         }
         catch (error: any) {
             setProcessing(false);
@@ -157,6 +199,23 @@ export default function RegisterPage() {
 
     const handleValueChange = (key: FormValue, value: any) => {
         methods.setValue(key, value);
+    }
+
+    const handleSetManyValues = (values: { key: FormValue, value: any }[]) => {
+
+        //* Merge current values with new values
+        const newValues = values.reduce((acc, { key, value }) => ({
+            ...acc,
+            [ key ]: value
+        }), methods.getValues());
+
+        //* Set new values
+        methods.reset(newValues);
+    }
+
+    const handleSubmit = () => {
+        // methods.handleSubmit(onSubmit)(methods.getValues() as any);
+        methods.handleSubmit(onSubmit)();
     }
 
     return (
@@ -176,26 +235,24 @@ export default function RegisterPage() {
                         costUSD,
                         error: error || '',
                         swapAmount,
-                        onSetValue: handleValueChange,
-                        onSubmit,
+                        hideBalance,
+                        setValue: handleValueChange,
+                        setManyValues: handleSetManyValues,
+                        submit: handleSubmit,
                     }}
                 >
                     <FormProvider {...methods}>
-                        <form
-                            onSubmit={methods.handleSubmit(onSubmit)}
-                        >
                             <FormStepper
                                 processing={processing}
                                 termsAccepted={termsAccepted}
                                 userName={userName}
                                 error={error}
                                 isValid={isValid}
-                            />
-                        </form>
+                        />
                         <BlockChainOperationInProgressModal
                             processing={processing}
                             txSent={txSent}
-                            message={t("minting_page.minting_ntf")}
+                            message={breakPoint}
                             onClose={handleCloseModal}
                         />
                     </FormProvider>
