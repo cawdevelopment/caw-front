@@ -6,13 +6,11 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
 import { useDisconnect } from 'wagmi';
 import Image from 'next/image';
-import dynamic from "next/dynamic";
 
 import Iconify from "src/components/icons/Iconify";
 import { useDappProvider } from "src/context/DAppConnectContext";
-import { isMetaMaskBrowser, isMobileDevice, sentenceCase } from "src/utils/helper";
-
-const AlertDialogConfirm = dynamic(() => import("src/components/dialogs/AlertDialog"), { ssr: false });
+import { isInWalletBrowser, isMobileDevice } from "src/utils/helper";
+import { BrowserMessageModal } from "./BrowserMessageModal";
 
 function NetworkIcon() {
 
@@ -62,69 +60,47 @@ export function WalletButton(props: WalletButtonProps) {
     const { chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useDappProvider();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { connectButtonLabel, menuButtonProps = { padding: 0.5 },
-        menuButtonvariant = 'ghost', iconColor,
-        menuListProps = { shadow: "md" },
-        buttonProps = { variant: "ghost" } } = props;
-
+        menuButtonvariant = 'ghost', iconColor, menuListProps = { shadow: "md" }, buttonProps = { variant: "ghost" } } = props;
 
     const handleOpenAccountModal = () => {
 
-        if ((isMobileDevice())) {
 
-                const userAgent = navigator.userAgent;
-                alert("the user-agent is: " + userAgent);
-                alert(userAgent);
+        if ((isMobileDevice()) && !isInWalletBrowser()) {
 
-                if (isMetaMaskBrowser()) {
-                    alert("isMetaMaskBrowser");
-
-                    window.open(`https://metamask.app.link/dapp/${window.location.host}`);
-                    return;
-                }
-
-                if (!isOpen) {
+            if (!isOpen) {
                 onOpen();
                 return;
-                }
             }
+        }
 
         openConnectModal();
     }
 
-    if (isOpen) {
-        return (
-            <AlertDialogConfirm
-                isOpen={isOpen}
-                title=''
-                cancelText={sentenceCase(t("verbs.cancel"))}
-                confirmText={sentenceCase(t("verbs.continue"))}
-                confirmColorScheme="blue"
-                onClose={onClose}
-                onConfirm={openConnectModal}
-                body={<p> <b>{t('errors.mobileBrowserNotSupported')}</b></p>}
-            />
-        );
-    }
-
     if (status === 'disconnected') {
         return (
-            <Button
-                {...buttonProps}
-                onClick={handleOpenAccountModal}
-            >
-                {connectButtonLabel || t('labels.wallet')}
-            </Button>
+            <>
+                <Button
+                    {...buttonProps}
+                    onClick={handleOpenAccountModal}
+                >
+                    {connectButtonLabel || t('labels.wallet')}
+                </Button>
+                <BrowserMessageModal isOpen={isOpen} onClose={onClose} openConnectModal={openConnectModal} />
+            </>
         );
     }
 
     if (status === 'connecting' || status === 'reconnecting') {
         return (
-            <Button
-                {...buttonProps}
-                onClick={handleOpenAccountModal}
-            >
-                {t('buttons.btn_connecting')}
-            </Button>
+            <>
+                <Button
+                    {...buttonProps}
+                    onClick={handleOpenAccountModal}
+                >
+                    {t('buttons.btn_connecting')}
+                </Button>
+                <BrowserMessageModal isOpen={isOpen} onClose={onClose} openConnectModal={openConnectModal} />
+            </>
         );
     }
 
@@ -142,7 +118,7 @@ export function WalletButton(props: WalletButtonProps) {
     return (
         <Menu>
             <MenuButton
-                {...menuButtonProps}                
+                {...menuButtonProps}
                 as={Button}
                 variant={menuButtonvariant}
                 leftIcon={<Iconify icon="ph:wallet-fill" color={iconColor} />}
@@ -184,7 +160,7 @@ export function WalletButton(props: WalletButtonProps) {
 
 export default function WalletOptions(props: WalletButtonProps = {}) {
 
-    const { colorMode } = useColorMode();    
+    const { colorMode } = useColorMode();
     const defaultHover = colorMode === 'light' ? 'gray.200' : 'whiteAlpha.200';
     const defaultBorderColor = colorMode === 'light' ? 'gray.300' : 'gray.600';
     const { hoverColor } = props;
