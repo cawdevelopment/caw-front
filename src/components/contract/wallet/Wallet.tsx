@@ -10,7 +10,7 @@ import dynamic from "next/dynamic";
 
 import Iconify from "src/components/icons/Iconify";
 import { useDappProvider } from "src/context/DAppConnectContext";
-import { isMobileDevice, sentenceCase } from "src/utils/helper";
+import { isMetaMaskBrowser, isMobileDevice, sentenceCase } from "src/utils/helper";
 
 const AlertDialogConfirm = dynamic(() => import("src/components/dialogs/AlertDialog"), { ssr: false });
 
@@ -70,14 +70,23 @@ export function WalletButton(props: WalletButtonProps) {
     const handleOpenAccountModal = () => {
 
         if ((isMobileDevice())) {
-            const userAgent = navigator.userAgent;
-            alert("the user-agent is: " + userAgent);
-            alert(userAgent);
-            if (!isOpen) {
+
+                const userAgent = navigator.userAgent;
+                alert("the user-agent is: " + userAgent);
+                alert(userAgent);
+
+                if (isMetaMaskBrowser()) {
+                    alert("isMetaMaskBrowser");
+
+                    window.open(`https://metamask.app.link/dapp/${window.location.host}`);
+                    return;
+                }
+
+                if (!isOpen) {
                 onOpen();
                 return;
+                }
             }
-        }
 
         openConnectModal();
     }

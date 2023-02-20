@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import dynamic from "next/dynamic";
 
 import { useDappProvider } from 'src/context/DAppConnectContext';
-import { isMobileDevice, sentenceCase } from "src/utils/helper";
+import { isMobileDevice, isMetaMaskBrowser, sentenceCase } from "src/utils/helper";
 
 const AlertDialogConfirm = dynamic(() => import("src/components/dialogs/AlertDialog"), { ssr: false });
 
@@ -20,6 +20,14 @@ const ConnectWalletButton = () => {
       const userAgent = navigator.userAgent;
       alert("the user-agent is: " + userAgent);
       alert(userAgent);
+
+      if (isMetaMaskBrowser()) {
+        alert("isMetaMaskBrowser");
+
+        window.open(`https://metamask.app.link/dapp/${window.location.host}`);
+        return;
+      }
+
       if (!isOpen) {
         onOpen();
         return;
