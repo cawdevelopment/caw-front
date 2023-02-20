@@ -33,3 +33,13 @@ export const isMobileDevice = () => {
     const math = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     return math;
 }
+
+export const isMetaMaskBrowser = () => {
+
+    const ethereum = window.ethereum;
+    if (ethereum && ethereum.isMetaMask)
+        return true;
+
+    const math = /MetaMask/i.test(navigator.userAgent);
+    return math;
+}

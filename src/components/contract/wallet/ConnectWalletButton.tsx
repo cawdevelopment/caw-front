@@ -16,6 +16,10 @@ const ConnectWalletButton = () => {
   const handleOpenAccountModal = () => {
 
     if ((isMobileDevice())) {
+
+      const userAgent = navigator.userAgent;
+      alert("the user-agent is: " + userAgent);
+      alert(userAgent);
       if (!isOpen) {
         onOpen();
         return;
