@@ -15,8 +15,9 @@ body:
           required: true
 
   - type: textarea
+    id: description
     attributes:
-      label: Current Behavior
+      label: What happened?
       description: A concise description of what you're experiencing.
     validations:
       required: false
@@ -36,6 +37,7 @@ body:
       required: false
 
   - type: dropdown
+    id: platform
     attributes:
       label: What platform(s) does this occur on?
       multiple: true
@@ -46,6 +48,7 @@ body:
       required: true
 
   - type: dropdown
+    id: wallet
     attributes:
       label: Which wallet(s) does this occur on?
       multiple: true
@@ -59,6 +62,7 @@ body:
       required: true      
 
   - type: dropdown  
+    id: browsers
     attributes:
       label: What browser(s) does this occur on?
       multiple: true
@@ -74,6 +78,7 @@ body:
       required: true
 
   - type: dropdown
+    id: os
     attributes:
       label: "Operating System(s)"
       multiple: true
@@ -87,6 +92,7 @@ body:
       required: true              
 
   - type: dropdown
+    id: severity
     attributes:
       label: "Severity"
       multiple: true
