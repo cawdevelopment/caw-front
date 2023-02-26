@@ -41,7 +41,7 @@ export const LinkItems: Array<LinkItemProps> = [
     {
         name: 'sidebar_menu.profile',
         icon: 'carbon:user-filled',
-        link: PATH_DASHBOARD.app.userProfile
+        link: PATH_DASHBOARD.app.accounts
     },
     {
         name: 'sidebar_menu.more',
