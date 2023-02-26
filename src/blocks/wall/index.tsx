@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import { Box } from "@chakra-ui/react";
 
 import { posts } from 'src/utils/mock/wallposts'
-import NewPost from 'src/sections/post/NewPost';
-import Post from 'src/sections/post';
+import NewPost from 'src/blocks/post/NewPost';
+import Post from 'src/blocks/post';
 import { PostDto } from 'src/types/community-feed';
 
 export default function WallPost() {
