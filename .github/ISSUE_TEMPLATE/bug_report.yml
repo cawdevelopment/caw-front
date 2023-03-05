@@ -1,6 +1,6 @@
 name: "Issue Report"
 description: "Report a bug and the steps to reproduce it"
-labels: "needs review"
+labels: ["needs review","bug"]
 body:
   - type: markdown
     attributes:

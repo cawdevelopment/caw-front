@@ -1,11 +1,9 @@
 import { Button, Image, Box, HStack, VStack, Text, Icon, useDisclosure } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import dynamic from "next/dynamic";
 
 import { useDappProvider } from 'src/context/DAppConnectContext';
-import { isMobileDevice, sentenceCase } from "src/utils/helper";
-
-const AlertDialogConfirm = dynamic(() => import("src/components/dialogs/AlertDialog"), { ssr: false });
+import { isInWalletBrowser, isMobileDevice } from "src/utils/helper";
+import { BrowserMessageModal } from "./BrowserMessageModal";
 
 const ConnectWalletButton = () => {
 
@@ -15,7 +13,8 @@ const ConnectWalletButton = () => {
 
   const handleOpenAccountModal = () => {
 
-    if ((isMobileDevice())) {
+    if ((isMobileDevice()) && !isInWalletBrowser()) {
+
       if (!isOpen) {
         onOpen();
         return;
@@ -25,21 +24,6 @@ const ConnectWalletButton = () => {
     openConnectModal();
   }
 
-
-  if (isOpen) {
-    return (
-      <AlertDialogConfirm
-        isOpen={isOpen}
-        title=''
-        cancelText={sentenceCase(t("verbs.cancel"))}
-        confirmText={sentenceCase(t("verbs.continue"))}
-        confirmColorScheme="blue"
-        onClose={onClose}
-        onConfirm={openConnectModal}
-        body={<p> <b>{t('errors.mobileBrowserNotSupported')}</b></p>}
-      />
-    );
-  }
 
   if (status === 'disconnected') {
     return (
@@ -67,18 +51,22 @@ const ConnectWalletButton = () => {
             {t('wallet.signIn')}
           </Text>
         </VStack>
+        <BrowserMessageModal isOpen={isOpen} onClose={onClose} openConnectModal={openConnectModal} />
       </HStack>
     );
   }
 
   if (status === 'connecting' || status === 'reconnecting') {
     return (
-      <Button
-        variant="ghost"
-        onClick={handleOpenAccountModal}
-      >
-        {t('wallet.awating_cnn')}
-      </Button>
+      <>
+        <Button
+          variant="ghost"
+          onClick={handleOpenAccountModal}
+        >
+          {t('wallet.awating_cnn')}
+        </Button>
+        <BrowserMessageModal isOpen={isOpen} onClose={onClose} openConnectModal={openConnectModal} />
+      </>
     );
   }
 

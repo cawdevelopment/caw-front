@@ -14,6 +14,15 @@ const nextConfig = {
     CAW_NAME_MINTER_CONTRACT: process.env.CAW_NAME_MINTER_CONTRACT,
     MINTABLE_CAW_CONTRACT: process.env.MINTABLE_CAW_CONTRACT,
   },
+  async redirects() {
+    return [
+      {
+        source: '/app',
+        destination: '/app/home',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 // module.exports = nextConfig

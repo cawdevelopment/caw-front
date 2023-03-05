@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 
 import Iconify from "src/components/icons/Iconify";
-import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
+import { PATH_AUTH } from "src/routes/paths";
 import PopoverWrapper from "src/components/wrappers/PopoverWrapper";
 import { WalletButton } from 'src/components/contract/wallet/Wallet';
 
@@ -114,7 +114,7 @@ export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Prop
                                 />
                                 <CalculatorItem useIcon={showIcon} iconColor={itemIconColor} />
                             </Hide>
-                            <MenuItem
+                            {/* <MenuItem
                                 useIcon={showIcon}
                                 iconColor={itemIconColor}
                                 useLink={true}
@@ -122,7 +122,7 @@ export default function TopBarMenu({ textColor, iconColor, itemIconColor }: Prop
                                 icon="ri:exchange-fill"
                                 label={t('menu.getmCaw')}
                                 isExternal={false}
-                            />
+                            /> */}
                             <MenuItem
                                 useIcon={showIcon}
                                 iconColor={itemIconColor}

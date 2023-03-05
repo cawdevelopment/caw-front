@@ -57,9 +57,6 @@ Regarding the code, we invite you to read this project's [CONTRIBUTING](docs/CON
  - [BetterComments](https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments)
  - [GitLents](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
  - [ENV](https://marketplace.visualstudio.com/items?itemName=IronGeek.vscode-env)
- - [Material Icons theme](https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme)
- - [AYU Theme](https://marketplace.visualstudio.com/items?itemName=teabyii.ayu)
- - [One Dark Pro theme](https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme)
 
 ## Built with
  - [TypeScript](https://www.typescriptlang.org/)

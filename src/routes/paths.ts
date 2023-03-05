@@ -31,7 +31,7 @@ export const PATH_DASHBOARD = {
         bookmarks: path(ROOTS_DASHBOARD, '/bookmarks'),
         notifications: path(ROOTS_DASHBOARD, '/notifications'),
         lists: path(ROOTS_DASHBOARD, '/lists'),
-        userProfile: path(ROOTS_DASHBOARD, '/profile'),
+        accounts: path(ROOTS_DASHBOARD, '/accounts'),
         settings: path(ROOTS_DASHBOARD, '/settings'),
         chakra_test: path(ROOTS_DASHBOARD, '/chakra_test'),
     },

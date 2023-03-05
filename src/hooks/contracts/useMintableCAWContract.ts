@@ -184,7 +184,7 @@ export default function useMintableCAWContract(props: Props) {
     }
 
     return {
-        initialized: !!contract,
+        initialized: !!contract && !!signer,
         getDecimals,
         getSymbol,
         getName,

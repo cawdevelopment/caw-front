@@ -53,16 +53,13 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
     }, [ address, abi, network, provider, INFURA_API_KEY ]);
 
 
-    const _getSignedContract = (reqSigner: boolean) => {
+    const _getSignedContract = () => {
 
         if (!contract)
             throw new Error(CONTRACT_ERR_NOT_INIT);
 
         if (!allowMainnet)
             throw new Error((t('errors.mainnet_not_allowed')));
-
-        if (!reqSigner)
-            return contract;
 
         if (!signer || isSignerError || loadingSigner)
             throw new Error((t('errors.signer_not_found')));
@@ -72,7 +69,7 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
 
     const getCostOfName = async (userName: string) => {
 
-        const cost = await _getSignedContract(false).costOfName(userName);
+        const cost = await _getSignedContract().costOfName(userName);
         const cawUSD = await getCawPriceInUsd();
         const ethUSD = await getEthPriceInUsd();
 
@@ -89,13 +86,13 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
     }
 
     const getIdByUserName = async (userName: string): Promise<number> => {
-        const id = await _getSignedContract(false).idByUsername(userName);
+        const id = await _getSignedContract().idByUsername(userName);
         const index = parseInt(id.toString());
         return index;
     }
 
     const isValidUsername = async (userName: string): Promise<boolean> => {
-        const result = await _getSignedContract(false).isValidUsername(userName);
+        const result = await _getSignedContract().isValidUsername(userName);
         return Boolean(result);
     }
 
@@ -103,7 +100,7 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
         
         try {
             onBeforeSend?.();
-            const tx = await _getSignedContract(true).mint(username);
+            const tx = await _getSignedContract().mint(username);
             onTxSent?.(tx);
             setOperation({ tx, method: 'mint' });
 
@@ -123,7 +120,7 @@ export default function useCawNameMinterContract({ onBeforeSend, onTxSent, onErr
     }
     
     return {
-        initialized: !!contract,
+        initialized: !!contract && !!signer,
         getCostOfName,
         getIdByUserName,
         isValidUsername,
