@@ -3,7 +3,18 @@ import type { ReactNode } from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 
 //Web3
-import { RainbowKitProvider, getDefaultWallets, lightTheme, DisclaimerComponent } from "@rainbow-me/rainbowkit";
+import {
+  RainbowKitProvider, lightTheme, DisclaimerComponent, connectorsForWallets
+} from "@rainbow-me/rainbowkit";
+
+import {
+  rainbowWallet,
+  metaMaskWallet,
+  coinbaseWallet,
+  walletConnectWallet,
+  injectedWallet,
+} from '@rainbow-me/rainbowkit/wallets';
+
 import { WagmiConfig, createClient, configureChains, goerli } from "wagmi";
 import { infuraProvider } from "wagmi/providers/infura";
 import { alchemyProvider } from "wagmi/providers/alchemy";
@@ -11,8 +22,8 @@ import { publicProvider } from "wagmi/providers/public";
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc";
 
 import { DAppProvider } from 'src/context/DAppConnectContext'
-import ErrorBoundary from "@components/ErrorBoundary";
-import { APP_NAME, DEFAULT_JSON_RPC_URL } from "@utils/constants";
+import ErrorBoundary from "src/components/ErrorBoundary";
+import { APP_NAME, DEFAULT_JSON_RPC_URL } from "src/utils/constants";
 import theme from 'src/theme'
 
 
@@ -27,7 +38,23 @@ const { chains, provider } = configureChains(
   ]
 );
 
-const { connectors } = getDefaultWallets({ appName: APP_NAME, chains });
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Recommended',
+    wallets: [
+      coinbaseWallet({ chains, appName: APP_NAME }),
+      rainbowWallet({ chains, shimDisconnect: true }),
+      metaMaskWallet({ chains, shimDisconnect: true }),
+    ],
+  },
+  {
+    groupName: 'Others',
+    wallets: [
+      walletConnectWallet({ chains }),
+      injectedWallet({ chains, shimDisconnect: true })
+    ],
+  },
+]);
 
 const wagmiClient = createClient({
   autoConnect: true,  
@@ -46,7 +73,7 @@ const Disclaimer: DisclaimerComponent = ({ Text, Link }) => (
     <b
       style={{ color: "red" }}
     >
-      Connect a wallet that supports testnets, like Rainbow Wallet or MetaMask for writing on the blockchain.
+      Connect a wallet that supports testnets, like Coinbase, Rainbow Wallet, or MetaMask.
     </b>
   </Text>
 );

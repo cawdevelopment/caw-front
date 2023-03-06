@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Center, Flex, Spacer, useColorModeValue } from '@chakra-ui/react';
 
 import LanguagePopover from "src/components/settings/LanguagePopover";
@@ -20,7 +20,7 @@ export default function LogoOnlyLayout({ children }: Props) {
             ? setScroll(true)
             : setScroll(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
 
         if (window)
             window.addEventListener?.('scroll', changeScroll);

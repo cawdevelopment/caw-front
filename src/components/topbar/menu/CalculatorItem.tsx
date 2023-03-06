@@ -1,7 +1,9 @@
 import { useDisclosure } from '@chakra-ui/react';
+import dynamic from "next/dynamic";
 
-import { ProtocolCostModal } from "src/components/contract/modals/ProtocolCost";
 import MenuItem from "./MenuItem";
+
+const ProtocolCostModal = dynamic(() => import("src/components/contract/modals/ProtocolCostModal"), { ssr: false });
 
 type Props = {
     iconColor: string;

@@ -14,6 +14,23 @@ const nextConfig = {
     CAW_NAME_MINTER_CONTRACT: process.env.CAW_NAME_MINTER_CONTRACT,
     MINTABLE_CAW_CONTRACT: process.env.MINTABLE_CAW_CONTRACT,
   },
+  async redirects() {
+    return [
+      {
+        source: '/app',
+        destination: '/app/home',
+        permanent: true,
+      },
+    ]
+  },
 }
 
-module.exports = nextConfig
+// module.exports = nextConfig
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: true,
+});
+
+module.exports = withBundleAnalyzer(nextConfig);

@@ -2,12 +2,11 @@ import {
   Modal, ModalOverlay, ModalContent, ModalBody, ModalCloseButton, ModalFooter,
   Heading, Text, CircularProgress, CircularProgressProps, VStack
 } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
 
 type Props = {
   title: string;
   message: string;
-  footer: string;
+  footer: string | React.ReactNode;
   isOpen: boolean;
   circularProps?: CircularProgressProps;
   onClose: () => void;
@@ -47,35 +46,9 @@ export default function OperationInProgressModal(props: Props) {
         <ModalFooter
           justifyContent={'center'}
         >
-          <Text
-            colorScheme={'blue'}
-          >
-            {footer}
-          </Text>
+          {footer}
         </ModalFooter>
       </ModalContent>
     </Modal>
-  );
-}
-
-type BCOProps = {
-  message: string;
-  processing: boolean;
-  txSent: boolean;
-  circularProps?: CircularProgressProps;
-  onClose: () => void;
-}
-
-export function BlockChainOperationInProgressModal({ processing, txSent, onClose, message, circularProps }: BCOProps) {
-  const { t } = useTranslation();
-  return (
-    <OperationInProgressModal
-      isOpen={processing}
-      title={txSent ? t('wallet.txSubmitted') : t('wallet.waitingConfirm')}
-      message={message}
-      footer={txSent ? t('wallet.waitConfirmedTx') : t('wallet.confirmTxInWallet')}
-      circularProps={circularProps}
-      onClose={onClose}
-    />
   );
 }

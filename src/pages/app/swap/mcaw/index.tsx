@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 
 import Block from "src/components/Block";
 import PageWrapper, { Layout } from 'src/components/wrappers/Page';
-import SwapMCAWForm from 'src/views/MintableCawForm';
+import SwapMCAWForm from 'src/blocks/MintableCawForm';
 import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
 
 SwapMintableCAW.getLayout = function getLayout(page: React.ReactElement) {

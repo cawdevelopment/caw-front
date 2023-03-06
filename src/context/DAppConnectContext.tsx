@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
+import { type ReactNode, createContext, useCallback, useContext, useEffect, useState } from 'react';
 import { useAccount } from "wagmi";
 import { ConnectButton, } from "@rainbow-me/rainbowkit";
 
@@ -110,7 +110,7 @@ const DAppProvider = ({ children }: Props) => {
     const handleFetchUserNames = useCallback(async () => {
         try {
 
-            if (!address)
+            if (!address || !isConnected)
                 return;
 
             if (getTokenFetched)
@@ -123,7 +123,7 @@ const DAppProvider = ({ children }: Props) => {
         catch (error) {
             console.error("effect getting usernames :", error);
         }
-    }, [ address, getTokenFetched, getTokens ]);
+    }, [ isConnected, address, getTokenFetched, getTokens ]);
 
 
 

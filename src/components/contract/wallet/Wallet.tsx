@@ -1,14 +1,16 @@
 import {
     Box, Button, ButtonProps, HStack, Menu, MenuButton, MenuButtonProps, MenuItem,
-    MenuList, MenuListProps, useColorMode
+    MenuList, MenuListProps, useColorMode, useDisclosure
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useTranslation } from "react-i18next";
-import { useDisconnect } from 'wagmi'
-import Image from 'next/image'
+import { useDisconnect } from 'wagmi';
+import Image from 'next/image';
 
 import Iconify from "src/components/icons/Iconify";
 import { useDappProvider } from "src/context/DAppConnectContext";
+import { isInWalletBrowser, isMobileDevice } from "src/utils/helper";
+import { BrowserMessageModal } from "./BrowserMessageModal";
 
 function NetworkIcon() {
 
@@ -56,31 +58,49 @@ export function WalletButton(props: WalletButtonProps) {
     const { t } = useTranslation();
     const { disconnect } = useDisconnect();
     const { chain, status, openChainModal, openConnectModal, openAccountModal, shortenAddress } = useDappProvider();
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const { connectButtonLabel, menuButtonProps = { padding: 0.5 },
-        menuButtonvariant = 'ghost', iconColor,
-        menuListProps = { shadow: "md" },
-        buttonProps = { variant: "ghost" } } = props;
+        menuButtonvariant = 'ghost', iconColor, menuListProps = { shadow: "md" }, buttonProps = { variant: "ghost" } } = props;
+
+    const handleOpenAccountModal = () => {
+
+
+        if ((isMobileDevice()) && !isInWalletBrowser()) {
+
+            if (!isOpen) {
+                onOpen();
+                return;
+            }
+        }
+
+        openConnectModal();
+    }
 
     if (status === 'disconnected') {
         return (
-            <Button
-                {...buttonProps}
-                onClick={openConnectModal}
-            >
-                {connectButtonLabel || t('labels.wallet')}
-            </Button>
+            <>
+                <Button
+                    {...buttonProps}
+                    onClick={handleOpenAccountModal}
+                >
+                    {connectButtonLabel || t('labels.wallet')}
+                </Button>
+                <BrowserMessageModal isOpen={isOpen} onClose={onClose} openConnectModal={openConnectModal} />
+            </>
         );
     }
 
     if (status === 'connecting' || status === 'reconnecting') {
         return (
-            <Button
-                {...buttonProps}
-                onClick={openConnectModal}
-            >
-                {t('buttons.btn_connecting')}
-            </Button>
+            <>
+                <Button
+                    {...buttonProps}
+                    onClick={handleOpenAccountModal}
+                >
+                    {t('buttons.btn_connecting')}
+                </Button>
+                <BrowserMessageModal isOpen={isOpen} onClose={onClose} openConnectModal={openConnectModal} />
+            </>
         );
     }
 
@@ -98,7 +118,7 @@ export function WalletButton(props: WalletButtonProps) {
     return (
         <Menu>
             <MenuButton
-                {...menuButtonProps}                
+                {...menuButtonProps}
                 as={Button}
                 variant={menuButtonvariant}
                 leftIcon={<Iconify icon="ph:wallet-fill" color={iconColor} />}
@@ -119,7 +139,7 @@ export function WalletButton(props: WalletButtonProps) {
                 </MenuItem>
                 <MenuItem
                     value='network'
-                    onClick={chain?.name ? openChainModal : openConnectModal}
+                    onClick={chain?.name ? openChainModal : handleOpenAccountModal}
                     icon={<NetworkIcon />}
                 >
 
@@ -140,7 +160,7 @@ export function WalletButton(props: WalletButtonProps) {
 
 export default function WalletOptions(props: WalletButtonProps = {}) {
 
-    const { colorMode } = useColorMode();    
+    const { colorMode } = useColorMode();
     const defaultHover = colorMode === 'light' ? 'gray.200' : 'whiteAlpha.200';
     const defaultBorderColor = colorMode === 'light' ? 'gray.300' : 'gray.600';
     const { hoverColor } = props;

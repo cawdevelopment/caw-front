@@ -1,4 +1,5 @@
-import { Text, As } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
+import type { As } from "@chakra-ui/react";
 
 import { useMintingPageContext } from ".";
 import { fDecimal } from "src/utils/formatNumber";

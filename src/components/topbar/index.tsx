@@ -3,16 +3,17 @@ import {
     Center, useDisclosure, VStack, useToken
 } from '@chakra-ui/react';
 import { usePathname } from 'next/navigation';
+import dynamic from "next/dynamic";
 
 import CawPrice from 'src/components/contract/stats/CawPrice';
 import EthPrice from 'src/components/contract/stats/EthPrice';
 import Wallet from 'src/components/contract/wallet/Wallet';
 import Iconify from "src/components/icons/Iconify";
-import { ProtocolCostModal } from "src/components/contract/modals/ProtocolCost";
 import LanguagePopover from 'src/components/settings/LanguagePopover';
-
 import { PATH_DASHBOARD } from "src/routes/paths";
 import TopBarMenuButton from "./menu";
+
+const ProtocolCostModal = dynamic(() => import("src/components/contract/modals/ProtocolCostModal"), { ssr: false });
 
 function ItemWrapper({ children, padding, minW = "6rem" }: { children: React.ReactNode, padding?: string, minW?: string }) {
 
@@ -94,7 +95,6 @@ export default function TopBar() {
             {showNewPostButton && (
                 <ItemWrapper padding="0.0rem" minW="0.0rem">
                     <Button
-                        leftIcon={<Iconify icon="la:crow" color={iconColor} />}
                         _hover={{ bg: hoverColor }}
                         variant={"ghost"}
                     >

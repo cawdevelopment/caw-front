@@ -1,12 +1,17 @@
-import { useTranslation } from "react-i18next";
 import { Container, Spacer } from "@chakra-ui/react";
 
+import { useTranslation } from 'src/hooks';
 import PageWrapper, { Layout } from "src/components/wrappers/Page"
 import { MotionLazyContainer } from "src/components/animate";
-import HeroSection from "src/sections/home/HeroSection";
-import PoweredSection from "src/sections/home/PoweredSection";
-import EconomySection from "src/sections/home/EconomySection";
-import CardParallaxSection from "src/sections/home/CardParallaxSection";
+import HeroSection from "src/blocks/home/HeroSection";
+import PoweredSection from "src/blocks/home/PoweredSection";
+import EconomySection from "src/blocks/home/EconomySection";
+import CardParallaxSection from "src/blocks/home/CardParallaxSection";
+
+// const HeroSection = lazy(() => import('src/sections/home/HeroSection'));
+// const PoweredSection = lazy(() => import('src/sections/home/PoweredSection'));
+// const EconomySection = lazy(() => import('src/sections/home/EconomySection'));
+// const CardParallaxSection = lazy(() => import('src/sections/home/CardParallaxSection'));
 
 HomePage.getLayout = function getLayout(page: React.ReactElement) {
   return <Layout variant="landing" >{page}</Layout>;

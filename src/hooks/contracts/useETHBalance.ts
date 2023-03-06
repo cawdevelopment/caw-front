@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { WalletBalanceInterface } from "src/interface/WalletBalanceInterface";
-import useAppConfigurations from "./useAppConfigurations";
+import useAppConfigurations from "../useAppConfigurations";
 
 type Props = {
     account: string;

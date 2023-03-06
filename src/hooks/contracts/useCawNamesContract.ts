@@ -87,7 +87,7 @@ export default function useCawNamesContract() {
 
 
     return {
-        initialized: !!contract,
+        initialized: !!contract && !!signer,
         read: {
             getTokenURI,
             getTokens

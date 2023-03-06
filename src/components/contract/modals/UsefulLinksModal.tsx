@@ -39,7 +39,7 @@ const links = [
 ];
 
 
-export function UsefulLinksModal({ isOpen, onClose }: Props) {
+export default function UsefulLinksModal({ isOpen, onClose }: Props) {
 
     const { t } = useTranslation();
     return (

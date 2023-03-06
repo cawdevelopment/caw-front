@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import { motion } from 'framer-motion';
 import { useTranslation } from "react-i18next";
+import NextLink from 'next/link';
 import {
-    Box, Text, HStack, VStack, Popover, PopoverTrigger, PopoverFooter, PopoverContent, PopoverArrow, PopoverHeader, PopoverCloseButton, PopoverBody,
-    Button, Divider, ButtonGroup, Avatar, AvatarBadge, chakra, Tooltip, Spacer, Flex, useColorModeValue, useDisclosure, Show
+    Box, Text, HStack, VStack, Popover, PopoverTrigger, PopoverFooter, PopoverContent, PopoverArrow, PopoverHeader, PopoverCloseButton, PopoverBody, 
+    Button, Divider, ButtonGroup, Avatar, AvatarBadge, chakra, Tooltip, Spacer, Flex, useColorModeValue, useDisclosure, Show, Link
 } from '@chakra-ui/react';
 
 import { useDappProvider } from "src/context/DAppConnectContext";
@@ -11,6 +12,7 @@ import StoryStyledAvatar from "src/components/avatar/StoryStyledAvatar";
 import Iconify from "src/components/icons/Iconify";
 import PopoverWrapperInModal from "src/components/wrappers/PopoverWrapper";
 
+import { PATH_DASHBOARD } from "src/routes/paths";
 import { fDecimal } from "src/utils/formatNumber";
 import { CawUserName } from "src/types/dtos";
 import { useETHBalance } from "src/hooks";
@@ -148,9 +150,16 @@ export default function PopoverAccount({ displaMode, showFooter }: PopoverAccoun
                                 <b>{t('labels.accounts')}</b>
                             </Text>
                             <Spacer />
-                            <Button size="xs" colorScheme="white" variant="ghost">
+                            <Link
+                                as={NextLink}
+                                href={PATH_DASHBOARD.app.accounts}
+                                rel="noopener noreferrer"
+                                size="xs"
+                                colorScheme="white"
+                                variant="ghost"
+                            >
                                 {t('labels.viewall')}
-                            </Button>
+                            </Link>
                         </Flex>
                         <chakra.div
                             id="container"

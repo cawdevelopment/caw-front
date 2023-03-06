@@ -1,54 +1,106 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 import NextLink from "next/link";
 import { useDebounce } from "use-debounce";
+import dynamic from "next/dynamic";
 import {
-    Box, Button, Input, Link, Text, Stack, HStack, useDisclosure, Modal, ModalBody,
+    Box, Input, Button, Link, Text, Stack, HStack, useDisclosure, Modal, ModalBody,
     ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay,
 } from "@chakra-ui/react";
 
-import { useCawNameMinterContract } from "src/hooks";
-import AlertDialog from "src/components/dialogs/AlertDialog";
+import { useCawNameMinterContract, useMintableCAWContract, useTranslation } from "src/hooks";
 import AlertMessage from "src/components/AlertMessage";
-import WrapperFadeAnimation from "@components/animate/WrapperFade";
-import { BlockChainOperationInProgressModal } from "@components/dialogs/OperationInProgress";
+import WrapperFadeAnimation from "src/components/animate/WrapperFade";
 import { useDappProvider } from "src/context/DAppConnectContext";
 import { getBlockChainErrMsg, getExplorerUrl } from "src/hooks/contracts/helper";
 import { sentenceCase, shortenAddress } from "src/utils/helper";
 import { isValidUsername as validateUserNameLocally } from "src/utils/manifestoHelper";
 import { PATH_AUTH } from "src/routes/paths";
 
+const BlockChainOperationInProgressModal = dynamic(() => import("src/components/dialogs/BlockChainOperationInProgressModal"), { ssr: false });
+const AlertDialogConfirm = dynamic(() => import("src/components/dialogs/AlertDialog"), { ssr: false });
+
 function MintNFTNameForm() {
 
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { t } = useTranslation();
     const { address, connected, chain } = useDappProvider();
-    const [ value, setValue ] = React.useState();
-    const [ debouncedValue ] = useDebounce(value, 500);
+    const [ value, setValue ] = useState();
+    const [ costCAW, setCostCAW ] = useState(0);
+    const [ debouncedValue ] = useDebounce(value, 200);
     const [ txMintHash, setTxMintHash ] = useState<string | null>(null);
     const [ error, setError ] = useState<string | null>(null);
     const [ processing, setProcessing ] = useState(false);
     const [ isValid, setIsValid ] = useState(false);
     const [ existing, setExisting ] = useState(false);
+
+    const [ mintingCawName, setMintingCawName ] = useState(false);
+    const [ breakPoint, setBreakPoint ] = useState<string>('');
     const [ txSent, setTxSent ] = useState(false);
 
-    const { mint, getIdByUserName } = useCawNameMinterContract({
+    const { initialized: CAWNamesMinterContractInitialized, getIdByUserName, getCostOfName, mint: mintCAWUsername } = useCawNameMinterContract({
         onBeforeSend: () => {
+            setTxSent(false);
             setProcessing(true);
+            setMintingCawName(true);
+            setBreakPoint(t("minting_page.minting_ntf"));
         },
         onTxSent: () => {
             setTxSent(true);
+            setMintingCawName(true);
         },
-        onTxConfirmed: (tx) => {
-            setTxMintHash(tx.transactionHash);
+        onTxConfirmed: (tx, rcpt) => {
+            setTxMintHash(rcpt.transactionHash || null);
         },
         onError: (err) => {
+            setProcessing(false);
+            setMintingCawName(false);
             const { message, code } = getBlockChainErrMsg(err);
-            setError(message ? message + " : " + code : "Something went wrong");
+            setError(message ? message + ' : ' + code : 'Something went wrong');
         },
         onCompleted: () => {
             setProcessing(false);
+            setMintingCawName(false);
+            setTxSent(true);
+        }
+    });
+
+    const { initialized: mCAWContractInitialized, mint: mintMCAW, approve: aproveMCAW } = useMintableCAWContract({
+        onBeforeSend: (method) => {
+            setMintingCawName(false);
+            setProcessing(true);
+            switch (method) {
+                case 'mint':
+                    setBreakPoint(t("minting_page.minting_mcaw"));
+                    break;
+                case 'approve':
+                    setBreakPoint(t("minting_page.approve_mcaw"));
+                    break;
+                default:
+                    setBreakPoint(method.toLowerCase());
+            }
         },
+        onTxSent: ({ }) => {
+            setTxSent(true);
+        },
+        onTxConfirmed: ({ method }) => {
+
+            setTxSent(false);
+            if (method === 'mint')
+                aproveMCAW(address, costCAW);
+
+            if (method === 'approve' && !mintingCawName && debouncedValue)
+                mintCAWUsername(debouncedValue);
+        },
+        onError: (err) => {
+            setProcessing(false);
+            const { message, code } = getBlockChainErrMsg(err);
+            setError(message ? message + ' : ' + code : 'Something went wrong');
+        },
+        onCompleted: (method) => {
+
+            if (method === 'approve' && !mintingCawName && debouncedValue)
+                mintCAWUsername(debouncedValue);
+        }
     });
 
     const [ userNameError, setUserNameError ] = useState<string | null>(null);
@@ -71,49 +123,52 @@ function MintNFTNameForm() {
         setIsValid(valid);
 
         if (isMounted && !valid)
-            setUserNameError(
-                valid ? null : `${value} : ${t("minting_page.username_already_taken")}`
-            );
+            setUserNameError(valid ? null : `${value} : ${t("minting_page.username_already_taken")}`);
 
         const checkExisting = async () => {
             try {
                 const id = await getIdByUserName(value);
+
                 if (isMounted) {
+
                     const existing = id !== 0;
                     setExisting(existing);
+
                     if (existing) {
                         setIsValid(false);
-                        setUserNameError(
-                            `${value} : ${t("minting_page.username_already_taken")}`
-                        );
-                    } else {
+                        setUserNameError(`${value} : ${t("minting_page.username_already_taken")}`);
+                    }
+                    else {
                         setUserNameError(null);
-                        setUserNameError(
-                            `${value} : ${t("minting_page.username_available")}`
-                        );
+                        setUserNameError(`${value} : ${t("minting_page.username_available")}`);
                     }
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 const { message, code } = getBlockChainErrMsg(error);
-                setUserNameError(
-                    message ? message + " : " + code : "Something went wrong"
-                );
+                setUserNameError(message ? message + " : " + code : "Something went wrong");
             }
         };
 
-        if (valid) checkExisting();
+        if (valid && !txMintHash)
+            checkExisting();
 
         return () => {
             isMounted = false;
         };
-    }, [ value, getIdByUserName, t ]);
+    }, [ value, txMintHash, t, , getIdByUserName ]);
 
-    const handleMint = () => {
+    const handleMint = async () => {
         try {
             if (!address || !debouncedValue || !connected)
                 throw new Error("No address");
 
-            mint(debouncedValue);
+            if (!mCAWContractInitialized || !CAWNamesMinterContractInitialized)
+                throw new Error("Contracts not initialized, please try again later");
+
+            const costInfo = await getCostOfName(debouncedValue);
+            setCostCAW(costInfo.cost);
+            mintMCAW(address, costInfo.cost);
         } catch (error) {
             setProcessing(false);
             const { code, message } = getBlockChainErrMsg(error);
@@ -128,6 +183,9 @@ function MintNFTNameForm() {
         setUserNameError(null);
         setExisting(false);
         setIsValid(false);
+        setCostCAW(0);
+        setMintingCawName(false);
+        setBreakPoint('');
     };
 
     const mintExplorerTxUrl = getExplorerUrl({
@@ -183,23 +241,25 @@ function MintNFTNameForm() {
                         {t("minting_page.longerResponse")} <br />
                     </Text>
                 </WrapperFadeAnimation>
-                <AlertDialog
+                <AlertDialogConfirm
                     isOpen={isOpen}
                     title={sentenceCase(t("verbs.confirm"))}
                     cancelText={sentenceCase(t("verbs.cancel"))}
                     confirmText={sentenceCase(t("verbs.mint"))}
-                    confirmColorScheme="blue"
-                    body={t("minting_page.confirm_mnt").replace(
-                        "{0}",
-                        debouncedValue || ""
-                    )}
+                    confirmColorScheme="green"
                     onClose={onClose}
                     onConfirm={handleMint}
+                    body={<p>
+                        {t("minting_page.confirm_mnt").replace("{0}", "").replace("?", "")} <b>{debouncedValue}</b>
+                        <br />
+                        <br />
+                        <p>{t("minting_page.confirmation_req")}</p>
+                    </p>}
                 />
                 <BlockChainOperationInProgressModal
                     processing={processing}
                     txSent={txSent}
-                    message={t("minting_page.minting_ntf")}
+                    message={breakPoint}
                     onClose={handleCloseModalBlockChainOperation}
                 />
                 {error && !Boolean(txMintHash) && (

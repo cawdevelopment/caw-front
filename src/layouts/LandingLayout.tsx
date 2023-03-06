@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import NextLink from 'next/link';
 import { useTranslation } from "react-i18next";
+import dynamic from "next/dynamic";
 import {
     Button as CrkButton, Box, Spacer, useColorModeValue, Tooltip, Text, Flex, Center, Link,
     Stack, useDisclosure, HStack, IconButton, Show, Hide, Divider
@@ -11,9 +12,10 @@ import Logo from 'src/components/Logo';
 import Button from 'src/components/buttons/Button';
 import LanguagePopover from "src/components/settings/LanguagePopover";
 import ColorModeToggle from "src/components/settings/ToogleMode";
-import PopoverWrapperInModal from "src/components/wrappers/PopoverWrapper";
 import Iconify from "src/components/icons/Iconify";
 import { PATH_AUTH, PATH_DASHBOARD } from "src/routes/paths";
+
+const PopoverWrapperInModal = dynamic(() => import("src/components/wrappers/PopoverWrapper"), { ssr: false });
 
 type Props = {
     children?: React.ReactNode;
@@ -49,7 +51,7 @@ function MediumMenu() {
             ? setScroll(true)
             : setScroll(false);
 
-    React.useEffect(() => {
+    useEffect(() => {
 
         if (window)
             window.addEventListener?.('scroll', changeScroll);
@@ -126,7 +128,7 @@ function MobileMenu() {
     const { t } = useTranslation();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const bg = useColorModeValue('gray.100', 'gray.900');
-    const ref = React.useRef<any>();
+    const ref = useRef<any>();
 
     useEffect(() => {
 

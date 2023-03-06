@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, useToast, Tooltip, useColorModeValue, useToken, useColorMode } from "@chakra-ui/react";
+import { Box, Button, Divider, HStack, IconButton, Progress, Stack, Textarea, Tooltip, useColorModeValue, useToken, useColorMode } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
 import { MotionContainer } from "src/components/animate";
 import MyAvatar from 'src/components/contract/avatars/MyAvatar';
 import CircularProgress from 'src/components/CircularProgress';
 import Iconify from 'src/components/icons/Iconify';
+import { useToast } from 'src/hooks';
 
 export const MAX_CHARECTERS = 420;
 
